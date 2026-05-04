@@ -1,0 +1,8 @@
+//
+// Created by PC on 2026/4/30.
+//
+
+#ifndef SPIRELIKE_LOGGER_HPP
+#define SPIRELIKE_LOGGER_HPP
+
+#endif //SPIRELIKE_LOGGER_HPP

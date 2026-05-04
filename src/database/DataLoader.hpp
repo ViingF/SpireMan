@@ -1,0 +1,8 @@
+//
+// Created by PC on 2026/4/30.
+//
+
+#ifndef SPIRELIKE_DATALOADER_HPP
+#define SPIRELIKE_DATALOADER_HPP
+
+#endif //SPIRELIKE_DATALOADER_HPP

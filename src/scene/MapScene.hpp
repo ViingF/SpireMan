@@ -1,0 +1,8 @@
+//
+// Created by PC on 2026/4/28.
+//
+
+#ifndef SPIRELIKE_MAPSCENE_HPP
+#define SPIRELIKE_MAPSCENE_HPP
+
+#endif //SPIRELIKE_MAPSCENE_HPP

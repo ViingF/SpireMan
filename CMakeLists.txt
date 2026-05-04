@@ -1,0 +1,42 @@
+cmake_minimum_required(VERSION 4.1)
+project(SpireLike)
+
+set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+set(SFML_DIR "D:/SFML-3.0.2/lib/cmake/SFML")
+
+find_package(SFML 3 REQUIRED COMPONENTS Graphics Window System)
+
+add_executable(SpireLike src/main.cpp
+        src/core/Scene.hpp
+        src/core/Game.hpp
+        src/core/Game.cpp
+        src/core/ResourceManager.hpp
+        src/core/ResourceManager.cpp
+        src/scene/MenuScene.cpp
+        src/scene/MenuScene.hpp
+        src/scene/MapScene.cpp
+        src/scene/MapScene.hpp
+        src/scene/EndScene.hpp
+        src/scene/EndScene.cpp
+        src/core/SceneTransition.hpp
+        src/core/GameContext.hpp
+        src/core/Logger.hpp
+        src/core/Logger.cpp
+        src/database/DataLoader.cpp
+        src/database/DataLoader.hpp
+        src/database/CardDatabase.cpp
+        src/database/CardDatabase.hpp
+        src/database/EnemyDatabase.cpp
+        src/database/EnemyDatabase.hpp
+        src/database/RelicDatabase.cpp
+        src/database/RelicDatabase.hpp
+        src/config/Constants.hpp
+        src/config/Paths.hpp)
+
+target_link_libraries(SpireLike
+        SFML::Graphics
+        SFML::Window
+        SFML::System
+)

@@ -1,0 +1,8 @@
+//
+// Created by PC on 2026/4/28.
+//
+
+#ifndef SPIRELIKE_MENUSCENE_HPP
+#define SPIRELIKE_MENUSCENE_HPP
+
+#endif //SPIRELIKE_MENUSCENE_HPP

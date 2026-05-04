@@ -1,0 +1,8 @@
+//
+// Created by PC on 2026/4/30.
+//
+
+#ifndef SPIRELIKE_GAMECONTEXT_HPP
+#define SPIRELIKE_GAMECONTEXT_HPP
+
+#endif //SPIRELIKE_GAMECONTEXT_HPP
