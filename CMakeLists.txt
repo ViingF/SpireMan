@@ -33,10 +33,15 @@ add_executable(SpireLike src/main.cpp
         src/database/RelicDatabase.cpp
         src/database/RelicDatabase.hpp
         src/config/Constants.hpp
-        src/config/Paths.hpp)
+        src/config/Paths.hpp
+        src/model/Types.hpp
+        src/system/CombatSystem.cpp
+        src/system/CombatSystem.hpp)
 
 target_link_libraries(SpireLike
         SFML::Graphics
         SFML::Window
         SFML::System
 )
+
+target_include_directories(SpireLike PRIVATE src)

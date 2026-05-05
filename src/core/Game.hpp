@@ -1,8 +1,29 @@
-//
-// Created by PC on 2026/4/28.
-//
+#include <SFML/Graphics.hpp>
 
-#ifndef SPIRELIKE_GAME_HPP
-#define SPIRELIKE_GAME_HPP
+#include "ResourceManager.hpp"
+#include "Scene.hpp"
+#include "database/CardDatabase.hpp"
+#include "database/EnemyDatabase.hpp"
 
-#endif //SPIRELIKE_GAME_HPP
+using namespace sf;
+class Game {
+public:
+    Game();
+    void run();
+
+private:
+    void startNewRun();
+    void processEvents();
+    void update(float dt);
+    void render();
+    void switchSceneIfNeeded();
+
+private:
+    CardDatabase cardDatabase;
+    EnemyDatabase enemyDatabase;
+
+    RenderWindow window;
+    ResourceManager resources;
+    RunState runState;
+    std::unique_ptr<Scene> currentScene;
+};
