@@ -1,3 +1,65 @@
-//
-// Created by PC on 2026/4/28.
-//
+#include "scene/MenuScene.hpp"
+
+#include <iostream>
+
+MenuScene::MenuScene(GameContext& context)
+    :   Scene(context),
+
+        startButton(
+          sf::Vector2f(76.f, 820.f),
+          sf::Vector2f(400.f, 100.f),
+          "Start"
+      ),
+
+        quitButton(
+          sf::Vector2f(76.f, 960.f),
+          sf::Vector2f(400.f, 100.f),
+          "Quit"
+      ) ,
+        background(context.resources.getTexture(
+            "title"
+        )) {
+}
+
+void MenuScene::handleEvent(
+    const sf::Event& event,
+    const sf::RenderWindow& window
+)
+{
+    startButton.handleEvent(event, window);
+    quitButton.handleEvent(event, window);
+
+    if (startButton.wasClicked())
+    {
+        transition.target = SceneType::CharacterSelect;
+
+        startButton.reset();
+    }
+
+    if (quitButton.wasClicked())
+    {
+        const_cast<sf::RenderWindow&>(window).close();
+
+        quitButton.reset();
+    }
+}
+
+void MenuScene::update(float dt)
+{
+
+}
+
+void MenuScene::draw(sf::RenderWindow& window)
+{
+    window.clear();
+
+    window.draw(background);
+
+    startButton.draw(window);
+    quitButton.draw(window);
+}
+
+SceneTransition MenuScene::getTransition() const
+{
+    return transition;
+}

@@ -25,9 +25,9 @@ enum class ErrorCode {
 };
 
 using CardId = int;
-using EnemyId = int;
 using RelicId = int;
 using TargetId = int;
+using EnemyId = int;
 constexpr TargetId NoTarget = -1;
 
 enum class BattleResult {
@@ -39,6 +39,7 @@ enum class BattleResult {
 enum class SceneType {
     None,
     Menu,
+    CharacterSelect,
     Map,
     Combat,
     Reward,
@@ -80,94 +81,15 @@ enum class CombatPhase {
 
 using CardId = int;
 using CardInstanceId = int;
-struct CardInstance {
-    CardInstanceId instanceId;
-    CardId cardId;
-};
+
 struct CardEffect {
     EffectType type;
     int value;
 };
 
-struct CardDef {
-    CardId id;
-    std::string name;
-    CardType type;
-    int cost;
-    TargetType target;
-    std::vector<CardEffect> effects;
-    std::string description;
-};
-struct Player {
-    int maxHp = 70;
-    int hp = 70;
-    int block = 0;
-
-    int strength = 0;
-    int vulnerable = 0;
-    int weak = 0;
-};
-
-struct EnemyIntent {
-    EnemyIntentType type;
-    int value;
-};
-
-struct Enemy {
-    EnemyId id;
-    std::string name;
-
-    int maxHp;
-    int hp;
-    int block;
-
-    int strength = 0;
-    int vulnerable = 0;
-    int weak = 0;
-
-    EnemyIntent intent;
-    std::vector<EnemyIntent> movePattern;
-};
-
-struct EnemyDef {
-    EnemyId id;
-    std::string name;
-    int maxHp;
-    std::vector<EnemyIntent> movePattern;
-};
-
-struct CombatDeck {
-    std::vector<CardInstance> drawPile;
-    std::vector<CardInstance> hand;
-    std::vector<CardInstance> discardPile;
-    std::vector<CardInstance> exhaustPile;
-};
 struct RunPlayerState {
     int maxHp;
     int hp;
-};
-
-struct RunState {
-    RunPlayerState player {70, 70};
-    std::vector<CardInstance> masterDeck;
-
-    int floor = 0;
-    int gold = 0;
-
-    std::vector<RelicId> relics;
-
-    std::mt19937 rng;
-
-    EnemyId currentEnemyId = 0;
-    CardInstanceId nextCardInstanceId = 1;
-
-    bool active = false;
-};
-
-struct SceneTransition {
-    SceneType target = SceneType::None;
-    BattleResult battleResult = BattleResult::Ongoing;
-    EnemyId enemyId = 0;
 };
 
 #endif //SPIRELIKE_TYPES_HPP

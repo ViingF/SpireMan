@@ -4,6 +4,7 @@
 #include <random>
 #include <unordered_map>
 
+#include "model/Enemy.hpp"
 #include "model/Types.hpp"
 
 class EnemyDatabase {

@@ -1,17 +1,16 @@
 
-#ifndef SPIRELIKE_MENUSCENE_HPP
-#define SPIRELIKE_MENUSCENE_HPP
-
+#ifndef SPIRELIKE_COMBATSCENE_HPP
+#define SPIRELIKE_COMBATSCENE_HPP
 #include "core/Scene.hpp"
-#include "core/GameContext.hpp"
-#include "core/SceneTransition.hpp"
+#include "system/CombatSystem.hpp"
 #include "ui/Button.hpp"
 
-#include <SFML/Graphics.hpp>
-
-class MenuScene : public Scene {
+class CombatScene : public Scene {
 public:
-    explicit MenuScene(GameContext& context);
+    CombatScene(
+        GameContext& context,
+        const EnemyDef& enemyDef
+    );
 
     void handleEvent(
         const sf::Event& event,
@@ -19,18 +18,13 @@ public:
     ) override;
 
     void update(float dt) override;
-
     void draw(sf::RenderWindow& window) override;
 
     SceneTransition getTransition() const override;
 
 private:
-    Button startButton;
-    Button quitButton;
-
+    CombatSystem combatSystem_;
+    Button endTurnButton;
     SceneTransition transition;
-    Sprite background;
-
 };
-
-#endif //SPIRELIKE_MENUSCENE_HPP
+#endif //SPIRELIKE_COMBATSCENE_HPP

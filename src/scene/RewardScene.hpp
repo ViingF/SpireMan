@@ -1,19 +1,22 @@
 
-#ifndef SPIRELIKE_ENDSCENE_HPP
-#define SPIRELIKE_ENDSCENE_HPP
+#ifndef SPIRELIKE_REWARDSCENE_HPP
+#define SPIRELIKE_REWARDSCENE_HPP
 
-#pragma once
 
 #include "core/Scene.hpp"
 #include "core/GameContext.hpp"
 #include "core/SceneTransition.hpp"
+
 #include "ui/Button.hpp"
+
+#include "model/CardDef.hpp"
+#include "model/CardInstance.hpp"
 
 #include <SFML/Graphics.hpp>
 
-class EndScene : public Scene {
+class RewardScene : public Scene {
 public:
-    EndScene(GameContext& context, BattleResult result);
+    explicit RewardScene(GameContext& context);
 
     void handleEvent(
         const sf::Event& event,
@@ -27,12 +30,18 @@ public:
     SceneTransition getTransition() const override;
 
 private:
-    BattleResult result;
+    void chooseCard(CardId cardId);
 
-    Button menuButton;
-    Button quitButton;
+private:
+    Button cardButton1;
+    Button cardButton2;
+    Button cardButton3;
+
+    CardId rewardCard1 = 1;
+    CardId rewardCard2 = 2;
+    CardId rewardCard3 = 3;
 
     SceneTransition transition;
 };
 
-#endif //SPIRELIKE_ENDSCENE_HPP
+#endif //SPIRELIKE_REWARDSCENE_HPP

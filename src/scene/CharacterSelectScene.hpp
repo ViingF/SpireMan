@@ -1,17 +1,20 @@
 
-#ifndef SPIRELIKE_MENUSCENE_HPP
-#define SPIRELIKE_MENUSCENE_HPP
+#ifndef SPIRELIKE_CHARACTERSELECTSCENE_HPP
+#define SPIRELIKE_CHARACTERSELECTSCENE_HPP
 
 #include "core/Scene.hpp"
 #include "core/GameContext.hpp"
 #include "core/SceneTransition.hpp"
+
 #include "ui/Button.hpp"
 
 #include <SFML/Graphics.hpp>
 
-class MenuScene : public Scene {
+class CharacterSelectScene : public Scene {
 public:
-    explicit MenuScene(GameContext& context);
+    explicit CharacterSelectScene(
+        GameContext& context
+    );
 
     void handleEvent(
         const sf::Event& event,
@@ -25,12 +28,11 @@ public:
     SceneTransition getTransition() const override;
 
 private:
-    Button startButton;
-    Button quitButton;
+    Button ironcladButton;
+
+    Button backButton;
 
     SceneTransition transition;
-    Sprite background;
-
 };
 
-#endif //SPIRELIKE_MENUSCENE_HPP
+#endif //SPIRELIKE_CHARACTERSELECTSCENE_HPP

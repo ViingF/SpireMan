@@ -4,6 +4,7 @@
 #include "ResourceManager.hpp"
 #include "database/CardDatabase.hpp"
 #include "database/EnemyDatabase.hpp"
+#include "model/RunState.hpp"
 
 struct GameContext {
     ResourceManager& resources;

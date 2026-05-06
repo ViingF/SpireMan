@@ -6,6 +6,7 @@
 #include <SFML/Graphics.hpp>
 #include <vector>
 
+#include "model/CardDef.hpp"
 #include "model/Types.hpp"
 
 class CardDatabase {

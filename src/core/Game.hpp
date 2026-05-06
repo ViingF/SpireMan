@@ -4,6 +4,7 @@
 #include "Scene.hpp"
 #include "database/CardDatabase.hpp"
 #include "database/EnemyDatabase.hpp"
+#include "model/RunState.hpp"
 
 using namespace sf;
 class Game {
@@ -26,4 +27,5 @@ private:
     ResourceManager resources;
     RunState runState;
     std::unique_ptr<Scene> currentScene;
+    GameContext gameContext;
 };

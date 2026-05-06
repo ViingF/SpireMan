@@ -36,7 +36,21 @@ add_executable(SpireLike src/main.cpp
         src/config/Paths.hpp
         src/model/Types.hpp
         src/system/CombatSystem.cpp
-        src/system/CombatSystem.hpp)
+        src/system/CombatSystem.hpp
+        src/ui/Button.cpp
+        src/ui/Button.hpp
+        src/scene/RewardScene.cpp
+        src/scene/RewardScene.hpp
+        src/scene/CombatScene.cpp
+        src/scene/CombatScene.hpp
+        src/model/CardDef.hpp
+        src/model/CardInstance.hpp
+        src/model/RunState.hpp
+        src/model/CombatDeck.hpp
+        src/model/Player.hpp
+        src/model/Enemy.hpp
+        src/scene/CharacterSelectScene.cpp
+        src/scene/CharacterSelectScene.hpp)
 
 target_link_libraries(SpireLike
         SFML::Graphics

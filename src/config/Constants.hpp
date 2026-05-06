@@ -1,8 +1,7 @@
-//
-// Created by PC on 2026/4/30.
-//
 
 #ifndef SPIRELIKE_CONSTANTS_HPP
 #define SPIRELIKE_CONSTANTS_HPP
+
+const int MAX_FLOOR=3;
 
 #endif //SPIRELIKE_CONSTANTS_HPP

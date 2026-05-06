@@ -1,0 +1,15 @@
+
+#ifndef SPIRELIKE_CARDDEF_HPP
+#define SPIRELIKE_CARDDEF_HPP
+
+#include "Types.hpp"
+struct CardDef {
+    CardId id;
+    std::string name;
+    CardType type;
+    int cost;
+    TargetType target;
+    std::vector<CardEffect> effects;
+    std::string description;
+};
+#endif //SPIRELIKE_CARDDEF_HPP
