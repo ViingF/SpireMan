@@ -34,7 +34,6 @@ void CharacterSelectScene::handleEvent(
         window
     );
 
-    // 选择角色
     if (ironcladButton.wasClicked())
     {
         transition.target =
@@ -43,7 +42,6 @@ void CharacterSelectScene::handleEvent(
         ironcladButton.reset();
     }
 
-    // 返回菜单
     if (backButton.wasClicked())
     {
         transition.target =

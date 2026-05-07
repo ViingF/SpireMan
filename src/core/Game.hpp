@@ -1,9 +1,12 @@
+#pragma once
+
 #include <SFML/Graphics.hpp>
 
 #include "ResourceManager.hpp"
 #include "Scene.hpp"
 #include "database/CardDatabase.hpp"
 #include "database/EnemyDatabase.hpp"
+#include "database/EventDatabase.hpp"
 #include "model/RunState.hpp"
 
 using namespace sf;
@@ -22,8 +25,9 @@ private:
 private:
     CardDatabase cardDatabase;
     EnemyDatabase enemyDatabase;
+    EventDatabase eventDatabase;
 
-    RenderWindow window;
+    sf::RenderWindow window;
     ResourceManager resources;
     RunState runState;
     std::unique_ptr<Scene> currentScene;

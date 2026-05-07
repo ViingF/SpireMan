@@ -1,7 +1,7 @@
 #include "scene/RewardScene.hpp"
 
 #include "config/Constants.hpp"
-
+#include "system/MapSystem.hpp"
 RewardScene::RewardScene(
     GameContext& context
 )
@@ -80,38 +80,34 @@ SceneTransition RewardScene::getTransition() const
     return transition;
 }
 
-void RewardScene::chooseCard(
-    CardId cardId
-)
+void RewardScene::chooseCard(CardId cardId)
 {
-    if (!context.cards.exists(cardId))
-    {
+    if (!context.cards.exists(cardId)) {
         return;
     }
 
-    CardInstance card;
+    CardInstance newCard;
+    newCard.instanceId = context.runState.nextCardInstanceId;
+    newCard.cardId = cardId;
 
-    card.instanceId =
-        context.runState.nextCardInstanceId++;
+    context.runState.nextCardInstanceId += 1;
+    context.runState.masterDeck.push_back(newCard);
 
-    card.cardId = cardId;
+    MapSystem mapSystem;
 
-    context.runState.masterDeck.push_back(card);
+    if (!context.runState.mapNodes.empty()) {
+        mapSystem.completeSelectedNode(context.runState);
 
-    if (
-        context.runState.floor >=
-        MAX_FLOOR
-    )
-    {
-        transition.target =
-            SceneType::End;
+        if (mapSystem.isRouteFinished(context.runState)) {
+            transition.target = SceneType::End;
+            transition.battleResult = BattleResult::Victory;
+        } else {
+            transition.target = SceneType::Map;
+        }
 
-        transition.battleResult =
-            BattleResult::Victory;
+        return;
     }
-    else
-    {
-        transition.target =
-            SceneType::Map;
-    }
+
+    transition.target = SceneType::Map;
 }
+

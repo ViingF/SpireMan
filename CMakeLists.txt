@@ -50,7 +50,17 @@ add_executable(SpireLike src/main.cpp
         src/model/Player.hpp
         src/model/Enemy.hpp
         src/scene/CharacterSelectScene.cpp
-        src/scene/CharacterSelectScene.hpp)
+        src/scene/CharacterSelectScene.hpp
+        src/model/EventDef.hpp
+        src/model/MapNode.hpp
+        src/database/EventDatabase.cpp
+        src/database/EventDatabase.hpp
+        src/system/MapSystem.cpp
+        src/system/MapSystem.hpp
+        src/system/EventSystem.cpp
+        src/system/EventSystem.hpp
+        src/scene/EventScene.cpp
+        src/scene/EventScene.hpp)
 
 target_link_libraries(SpireLike
         SFML::Graphics

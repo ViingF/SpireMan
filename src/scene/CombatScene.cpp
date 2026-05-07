@@ -10,7 +10,11 @@ CombatScene::CombatScene(
           sf::Vector2f(1550.f, 850.f),
           sf::Vector2f(250.f, 100.f),
           "End Turn"
-      )
+      ),
+    winButton(sf::Vector2f(155.f, 850.f),
+    sf::Vector2f(250.f, 200.f),
+    "win"
+          )
 {
     combatSystem_.startCombat(
         context.runState,
@@ -33,12 +37,19 @@ void CombatScene::handleEvent(
     }
 
     endTurnButton.handleEvent(event, window);
+    winButton.handleEvent(event, window);
+
 
     if (endTurnButton.wasClicked())
     {
         combatSystem_.endPlayerTurn();
 
         endTurnButton.reset();
+    }
+    if (winButton.wasClicked()) {
+        transition.target = SceneType::Reward;
+        transition.battleResult = BattleResult::Victory;
+        winButton.reset();
     }
 }
 
@@ -80,6 +91,7 @@ void CombatScene::draw(
     );
 
     endTurnButton.draw(window);
+    winButton.draw(window);
 
 }
 

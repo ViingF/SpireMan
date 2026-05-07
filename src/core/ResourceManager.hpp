@@ -1,6 +1,7 @@
 
 #ifndef SPIRELIKE_RESOURCEMANAGER_HPP
 #define SPIRELIKE_RESOURCEMANAGER_HPP
+#include <map>
 #include <string>
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
@@ -18,5 +19,8 @@ public:
     SoundBuffer& getSoundBuffer(const std::string& id);
     bool hasTexture(const std::string& id) const;
     bool hasFont(const std::string& id) const;
+private:
+    std::map<std::string, sf::Texture> textureMap;
+    map<std::string, sf::Font> fontMap;
 };
 #endif //SPIRELIKE_RESOURCEMANAGER_HPP

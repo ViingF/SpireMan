@@ -3,9 +3,8 @@
 #define SPIRELIKE_MAPSCENE_HPP
 
 #include "core/Scene.hpp"
-#include "core/GameContext.hpp"
 #include "core/SceneTransition.hpp"
-#include "ui/Button.hpp"
+#include "system/MapSystem.hpp"
 
 #include <SFML/Graphics.hpp>
 
@@ -25,9 +24,13 @@ public:
     SceneTransition getTransition() const override;
 
 private:
-    Button combatButton;
-    Button backButton;
+    sf::Vector2f getNodePosition(int index, int total) const;
+    int getNodeIndexAtPosition(sf::Vector2f mousePos) const;
 
-    SceneTransition transition;
+    void enterNode(int nodeIndex);
+
+private:
+    MapSystem mapSystem_;
+    SceneTransition transition_;
 };
 #endif //SPIRELIKE_MAPSCENE_HPP

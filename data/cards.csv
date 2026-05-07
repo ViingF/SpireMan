@@ -1,0 +1,4 @@
+id,name,type,cost,target,effect1,value1,effect2,value2,description
+1,Strike,Attack,1,Enemy,DealDamage,6,,,Deal 6 damage.
+2,Defend,Skill,1,Self,GainBlock,5,,,Gain 5 block.
+3,Bash,Attack,2,Enemy,DealDamage,8,ApplyVulnerable,2,Deal 8 damage and apply 2 Vulnerable

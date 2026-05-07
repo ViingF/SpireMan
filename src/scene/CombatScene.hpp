@@ -26,5 +26,6 @@ private:
     CombatSystem combatSystem_;
     Button endTurnButton;
     SceneTransition transition;
+    Button winButton;
 };
 #endif //SPIRELIKE_COMBATSCENE_HPP

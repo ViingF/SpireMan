@@ -23,7 +23,7 @@ public:
     virtual SceneTransition getTransition() const=0;
 
 protected:
-    GameContext& context;
+    GameContext context;
 
 };
 

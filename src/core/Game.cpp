@@ -10,6 +10,9 @@
 #include "scene/MenuScene.hpp"
 #include "scene/RewardScene.hpp"
 #include "scene/CharacterSelectScene.hpp"
+#include "../scene/EventScene.hpp"
+#include "../system/MapSystem.hpp"
+
 
 #define WINDOWRESOULUTION {1920,1080}
 using namespace sf;
@@ -26,13 +29,20 @@ Game::Game()
           resources,
           runState,
           cardDatabase,
-          enemyDatabase
+          enemyDatabase,
+          eventDatabase
       }
 {
     resources.loadTexture(
     "title",
     "assets/images/title.png"
 );
+    resources.loadFont("zh-B","assets/fonts/NotoSansCJKtc-Bold.otf");
+    resources.loadFont("zh-M","assets/fonts/NotoSansCJKtc-Medium.otf");
+    resources.loadFont("zh-R","assets/fonts/NotoSansCJKtc-Regular.otf");
+    eventDatabase.loadFromCsv("data/events.csv");
+    enemyDatabase.loadFromCsv("data/enemies.csv");
+    cardDatabase.loadFromCsv("data/cards.csv");
 
 }
 
@@ -118,6 +128,17 @@ void Game::switchSceneIfNeeded()
                 );
             break;
         }
+        case SceneType::Event:
+            if (!eventDatabase.exists(transition.eventId)) {
+                currentScene = std::make_unique<MapScene>(gameContext);
+                break;
+            }
+
+            currentScene = std::make_unique<EventScene>(
+                gameContext,
+                transition.eventId
+            );
+            break;
 
         case SceneType::Map:
         {
@@ -203,7 +224,6 @@ void Game::switchSceneIfNeeded()
 void Game::startNewRun()
 {
     runState = RunState{};
-
     runState.active = true;
 
     runState.player.maxHp = 70;
@@ -211,44 +231,38 @@ void Game::startNewRun()
 
     runState.floor = 0;
     runState.gold = 0;
-
     runState.relics.clear();
 
     runState.currentEnemyId = 0;
-
     runState.nextCardInstanceId = 1;
 
     std::random_device rd;
-
-    runState.rng.seed(
-        rd()
-    );
+    runState.rng = std::mt19937(rd());
 
     runState.masterDeck.clear();
 
-    for (int i = 0; i < 5; ++i)
-    {
-        CardInstance card;
+    runState.masterDeck.push_back({runState.nextCardInstanceId++, 1});
+    runState.masterDeck.push_back({runState.nextCardInstanceId++, 1});
+    runState.masterDeck.push_back({runState.nextCardInstanceId++, 1});
+    runState.masterDeck.push_back({runState.nextCardInstanceId++, 1});
+    runState.masterDeck.push_back({runState.nextCardInstanceId++, 2});
+    runState.masterDeck.push_back({runState.nextCardInstanceId++, 2});
+    runState.masterDeck.push_back({runState.nextCardInstanceId++, 2});
+    runState.masterDeck.push_back({runState.nextCardInstanceId++, 2});
+    runState.masterDeck.push_back({runState.nextCardInstanceId++, 3});
 
-        card.instanceId =
-            runState.nextCardInstanceId++;
+    MapSystem mapSystem;
+    mapSystem.generateSingleRoute(runState, eventDatabase);
 
-        card.cardId = 1; // Strike
+    GameContext context {
+        resources,
+        runState,
+        cardDatabase,
+        enemyDatabase,
+        eventDatabase
+    };
 
-        runState.masterDeck.push_back(card);
-    }
-
-    // 5 Defend
-    for (int i = 0; i < 5; ++i)
-    {
-        CardInstance card;
-
-        card.instanceId =
-            runState.nextCardInstanceId++;
-
-        card.cardId = 2;
-
-        runState.masterDeck.push_back(card);
-    }
+    currentScene = std::make_unique<MapScene>(context);
 }
+
 

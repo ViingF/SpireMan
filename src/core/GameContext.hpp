@@ -4,6 +4,7 @@
 #include "ResourceManager.hpp"
 #include "database/CardDatabase.hpp"
 #include "database/EnemyDatabase.hpp"
+#include "database/EventDatabase.hpp"
 #include "model/RunState.hpp"
 
 struct GameContext {
@@ -11,6 +12,7 @@ struct GameContext {
     RunState& runState;
     CardDatabase& cards;
     EnemyDatabase& enemies;
+    EventDatabase& events;
 };
 
 #endif //SPIRELIKE_GAMECONTEXT_HPP

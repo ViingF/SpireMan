@@ -1,0 +1,46 @@
+
+#ifndef SPIRELIKE_EVENTSCENE_HPP
+#define SPIRELIKE_EVENTSCENE_HPP
+
+#include "../core/Scene.hpp"
+#include "../core/SceneTransition.hpp"
+#include "../system/EventSystem.hpp"
+#include "../system/MapSystem.hpp"
+
+#include <SFML/Graphics.hpp>
+
+#include <string>
+#include <vector>
+
+class EventScene : public Scene {
+public:
+    EventScene(GameContext& context, EventId eventId);
+
+    void handleEvent(
+        const sf::Event& event,
+        const sf::RenderWindow& window
+    ) override;
+
+    void update(float dt) override;
+
+    void draw(sf::RenderWindow& window) override;
+
+    SceneTransition getTransition() const override;
+
+private:
+    sf::FloatRect getChoiceRect(int index) const;
+
+    void choose(int choiceIndex);
+
+private:
+    EventId eventId_ = 0;
+
+    EventSystem eventSystem_;
+    MapSystem mapSystem_;
+
+    SceneTransition transition_;
+
+    bool resolved_ = false;
+    std::string resultMessage_;
+};
+#endif //SPIRELIKE_EVENTSCENE_HPP

@@ -3,5 +3,7 @@
 #define SPIRELIKE_CONSTANTS_HPP
 
 const int MAX_FLOOR=3;
+constexpr int MAP_ROUTE_LENGTH = 6;
+constexpr int MAP_EVENT_CHANCE_PERCENT = 35;
 
 #endif //SPIRELIKE_CONSTANTS_HPP

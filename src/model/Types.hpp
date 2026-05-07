@@ -28,6 +28,8 @@ using CardId = int;
 using RelicId = int;
 using TargetId = int;
 using EnemyId = int;
+using EventId = int;
+using CardInstanceId = int;
 constexpr TargetId NoTarget = -1;
 
 enum class BattleResult {
@@ -43,6 +45,7 @@ enum class SceneType {
     Map,
     Combat,
     Reward,
+    Event,
     End
 };
 
@@ -79,9 +82,6 @@ enum class CombatPhase {
     Finished
 };
 
-using CardId = int;
-using CardInstanceId = int;
-
 struct CardEffect {
     EffectType type;
     int value;
@@ -90,6 +90,26 @@ struct CardEffect {
 struct RunPlayerState {
     int maxHp;
     int hp;
+};
+
+enum class EventEffectType {
+    None,
+    GainGold,
+    LoseHp,
+    HealHp,
+    GainMaxHp,
+    StartCombat
+};
+
+enum class MapNodeType {
+    Combat,
+    Event
+};
+
+enum class MapNodeState {
+    Locked,
+    Available,
+    Completed
 };
 
 #endif //SPIRELIKE_TYPES_HPP
