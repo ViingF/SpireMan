@@ -6,11 +6,13 @@ EndScene::EndScene(GameContext& context, BattleResult result)
       menuButton(
           sf::Vector2f(760.f, 520.f),
           sf::Vector2f(400.f, 100.f),
+          context.resources.getFont("zh-R"),
           "Menu"
       ),
       quitButton(
           sf::Vector2f(760.f, 660.f),
           sf::Vector2f(400.f, 100.f),
+          context.resources.getFont("zh-R"),
           "Quit"
       )
 {

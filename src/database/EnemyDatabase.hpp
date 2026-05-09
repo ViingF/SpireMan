@@ -18,6 +18,9 @@ public:
         int floor,
         std::mt19937& rng
     ) const;
+    std::vector<EnemyId> getAllBossIds() const;
+    EnemyId chooseRandomBossId(std::mt19937& rng) const;
+
 
 private:
     std::unordered_map<EnemyId, EnemyDef> enemies;

@@ -1,4 +1,3 @@
-
 #ifndef SPIRELIKE_MAPSCENE_HPP
 #define SPIRELIKE_MAPSCENE_HPP
 
@@ -25,12 +24,29 @@ public:
 
 private:
     sf::Vector2f getNodePosition(int index, int total) const;
+    float getNodeDisplaySize(const MapNode& node,int total) const;
+
     int getNodeIndexAtPosition(sf::Vector2f mousePos) const;
 
+    sf::Sprite makeNodeSprite(
+        const MapNode& node,
+        int total
+    ) const;
+
     void enterNode(int nodeIndex);
+    bool isBossNode(const MapNode& node, int total) const;
+
+    std::string getNodeTextureId(
+        const MapNode& node,
+        int total
+    ) const;
+
+
 
 private:
     MapSystem mapSystem_;
     SceneTransition transition_;
+
 };
-#endif //SPIRELIKE_MAPSCENE_HPP
+
+#endif // SPIRELIKE_MAPSCENE_HPP

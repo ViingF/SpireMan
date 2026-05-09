@@ -1,11 +1,11 @@
-event_id,title,description,choice_index,choice_text,choice_description,effects
-1,Ancient Fountain,You find a quiet fountain in the dark. The water glows faintly.,0,Drink,Heal 12 HP.,HealHp:12
-1,Ancient Fountain,You find a quiet fountain in the dark. The water glows faintly.,1,Take the crystal,Gain 5 Max HP but lose 6 HP.,GainMaxHp:5;LoseHp:6
-1,Ancient Fountain,You find a quiet fountain in the dark. The water glows faintly.,2,Leave,Nothing happens.,None:0
-2,Abandoned Cart,An abandoned merchant cart blocks the road. Some coins remain inside.,0,Search carefully,Gain 25 Gold.,GainGold:25
-2,Abandoned Cart,An abandoned merchant cart blocks the road. Some coins remain inside.,1,Break it open,Gain 45 Gold but lose 8 HP.,GainGold:45;LoseHp:8
-2,Abandoned Cart,An abandoned merchant cart blocks the road. Some coins remain inside.,2,Ignore it,Nothing happens.,None:0
-3,Sudden Ambush,The path becomes silent. A shadow moves behind you.,0,Fight,Start a combat.,StartCombat:0
-3,Sudden Ambush,The path becomes silent. A shadow moves behind you.,1,Run through,Lose 10 HP and escape.,LoseHp:10
-4,Old Shrine,"You see a shrine, broken and silent.",0,Pray,Gain 30 Gold.,GainGold:30
-5,Strange Voice,A voice says "come closer".,0,Accept,Lose 5 HP.,LoseHp:5
+event_id,title,description,choice_index,choice_text,choice_description,effects,backgroundTextureId
+1,Ancient Fountain,You find a quiet fountain in the dark. The water glows faintly.,0,Drink,Heal 12 HP.,HealHp:12,fishing
+1,Ancient Fountain,You find a quiet fountain in the dark. The water glows faintly.,1,Take the crystal,Gain 5 Max HP but lose 6 HP.,GainMaxHp:5;LoseHp:6,fishing
+1,Ancient Fountain,You find a quiet fountain in the dark. The water glows faintly.,2,Leave,Nothing happens.,None:0,fishing
+2,Abandoned Cart,An abandoned merchant cart blocks the road. Some coins remain inside.,0,Search carefully,Gain 25 Gold.,GainGold:25,goldenWing
+2,Abandoned Cart,An abandoned merchant cart blocks the road. Some coins remain inside.,1,Break it open,Gain 45 Gold but lose 8 HP.,GainGold:45;LoseHp:8,goldenWing
+2,Abandoned Cart,An abandoned merchant cart blocks the road. Some coins remain inside.,2,Ignore it,Nothing happens.,None:0,goldenWing
+3,Sudden Ambush,The path becomes silent. A shadow moves behind you.,0,Fight,Start a combat.,StartCombat:0,goopPuddle
+3,Sudden Ambush,The path becomes silent. A shadow moves behind you.,1,Run through,Lose 10 HP and escape.,LoseHp:10,goopPuddle
+4,Old Shrine,"You see a shrine, broken and silent.",0,Pray,Gain 30 Gold.,GainGold:30,liarsGame
+5,Strange Voice,A voice says "come closer".,0,Accept,Lose 5 HP.,LoseHp:5,shiningLight

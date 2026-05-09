@@ -10,18 +10,21 @@ RewardScene::RewardScene(
       cardButton1(
           sf::Vector2f(300.f, 400.f),
           sf::Vector2f(300.f, 500.f),
+          context.resources.getFont("zh-R"),
           "Strike"
       ),
 
       cardButton2(
           sf::Vector2f(810.f, 400.f),
           sf::Vector2f(300.f, 500.f),
+          context.resources.getFont("zh-R"),
           "Defend"
       ),
 
       cardButton3(
           sf::Vector2f(1320.f, 400.f),
           sf::Vector2f(300.f, 500.f),
+          context.resources.getFont("zh-R"),
           "Bash"
       )
 {

@@ -9,10 +9,12 @@ CombatScene::CombatScene(
       endTurnButton(
           sf::Vector2f(1550.f, 850.f),
           sf::Vector2f(250.f, 100.f),
+          context.resources.getFont("zh-R"),
           "End Turn"
       ),
     winButton(sf::Vector2f(155.f, 850.f),
     sf::Vector2f(250.f, 200.f),
+    context.resources.getFont("zh-R"),
     "win"
           )
 {

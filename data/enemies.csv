@@ -1,3 +1,5 @@
-id,name,maxHp,moves
-1,Slime,35,Attack:6;Attack:6;Block:5
-2,Cultist,45,Block:8;Attack:12;Attack:12
+id,name,maxHp,textureId,movePattern,isBoss,mapTextureId
+1,Slime,30,kaka,Attack:6;Block:4,0,
+2,Goblin,45,rat,Attack:8;Attack:5;Block:6,0,
+100,Fire Lord,260,slime,Attack:18;Buff:4;Attack:24,1,slimemap
+101,gg,300,guardian,Attack:10;Buff:4;Attack:44,1,guardianmap

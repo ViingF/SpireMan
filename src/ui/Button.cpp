@@ -3,14 +3,21 @@
 
 
 Button::Button(
-    sf::Vector2f position,
-    sf::Vector2f size,
-    const std::string& text
-)
-{
+        sf::Vector2f position,
+        sf::Vector2f size,
+        sf::Font& font,
+        const std::string& text):content(font,text) {
     shape.setPosition(position);
+    sf::FloatRect bounds = content.getLocalBounds();
+    content.setOrigin({
+        bounds.position + bounds.size / 2.f
+    });
+    sf::Vector2f buttonCenter = {
+        position.x + size.x / 2.f,
+        position.y + size.y / 2.f
+    };
+    content.setPosition(buttonCenter);
     shape.setSize(size);
-
     shape.setFillColor(
         sf::Color(80, 80, 120)
     );
@@ -52,6 +59,7 @@ void Button::draw(
 ) const
 {
     window.draw(shape);
+    window.draw(content);
 }
 
 bool Button::wasClicked() const
@@ -62,4 +70,9 @@ bool Button::wasClicked() const
 void Button::reset()
 {
     clicked = false;
+}
+
+void Button::setTexture(const sf::Texture &texture) {
+    shape.setFillColor(sf::Color::White);
+    shape.setTexture(&texture);
 }

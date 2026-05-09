@@ -23,6 +23,7 @@ struct EventDef {
     std::string title;
     std::string description;
     std::vector<EventChoiceDef> choices;
+    std::string backgroundTextureId;
 };
 
 #endif //SPIRELIKE_EVENTDEF_HPP

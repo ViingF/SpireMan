@@ -29,6 +29,9 @@ public:
 
 private:
     Button ironcladButton;
+    RectangleShape ironcladPortrait;
+
+    RectangleShape lockedButtons[3];
 
     Button backButton;
 

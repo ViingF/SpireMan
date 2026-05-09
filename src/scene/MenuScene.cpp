@@ -9,12 +9,14 @@ MenuScene::MenuScene(GameContext& context)
         startButton(
           sf::Vector2f(76.f, 820.f),
           sf::Vector2f(400.f, 100.f),
+          context.resources.getFont("zh-R"),
           "Start"
       ),
 
         quitButton(
           sf::Vector2f(76.f, 960.f),
           sf::Vector2f(400.f, 100.f),
+          context.resources.getFont("zh-R"),
           "Quit"
       ) ,
         background(context.resources.getTexture(
@@ -41,6 +43,7 @@ void MenuScene::handleEvent(
 
     if (startButton.wasClicked())
     {
+
         transition.target = SceneType::CharacterSelect;
 
         startButton.reset();

@@ -177,7 +177,7 @@ ErrorCode EventDatabase::loadFromCsv(const std::string& path)
 
         std::vector<std::string> columns = parseCsvLine(line);
 
-        if (columns.size() < 7) {
+        if (columns.size() < 8) {
             return ErrorCode::DATA_FORMAT_ERROR;
         }
 
@@ -196,6 +196,7 @@ ErrorCode EventDatabase::loadFromCsv(const std::string& path)
         const std::string& choiceText = columns[4];
         const std::string& choiceDescription = columns[5];
         const std::string& effectsText = columns[6];
+        const std::string& backgroundTextureId = columns[7];
 
         if (eventId <= 0 || choiceIndex < 0) {
             return ErrorCode::DATA_FORMAT_ERROR;
@@ -207,6 +208,11 @@ ErrorCode EventDatabase::loadFromCsv(const std::string& path)
         eventDef.title = title;
         eventDef.description = description;
 
+        if (eventDef.backgroundTextureId.empty()) {
+            eventDef.backgroundTextureId = backgroundTextureId;
+        } else if (eventDef.backgroundTextureId != backgroundTextureId) {
+            return ErrorCode::DATA_FORMAT_ERROR;
+        }
         if (
             static_cast<int>(eventDef.choices.size())
             <= choiceIndex
@@ -229,6 +235,7 @@ ErrorCode EventDatabase::loadFromCsv(const std::string& path)
             eventDef.id <= 0 ||
             eventDef.title.empty() ||
             eventDef.description.empty() ||
+            eventDef.backgroundTextureId.empty() ||
             eventDef.choices.empty()
         ) {
             return ErrorCode::DATA_FORMAT_ERROR;

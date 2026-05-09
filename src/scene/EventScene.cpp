@@ -15,14 +15,7 @@ sf::Text makeText(
     unsigned int size
 )
 {
-#if SFML_VERSION_MAJOR >= 3
     sf::Text text(font, content, size);
-#else
-    sf::Text text;
-    text.setFont(font);
-    text.setString(content);
-    text.setCharacterSize(size);
-#endif
     return text;
 }
 
@@ -31,7 +24,6 @@ bool readLeftClickPosition(
     sf::Vector2i& pixelPosition
 )
 {
-#if SFML_VERSION_MAJOR >= 3
     if (const auto* mouse =
             event.getIf<sf::Event::MouseButtonPressed>()) {
         if (mouse->button == sf::Mouse::Button::Left) {
@@ -39,17 +31,6 @@ bool readLeftClickPosition(
             return true;
         }
     }
-#else
-    if (event.type == sf::Event::MouseButtonPressed &&
-        event.mouseButton.button == sf::Mouse::Left) {
-        pixelPosition = sf::Vector2i(
-            event.mouseButton.x,
-            event.mouseButton.y
-        );
-        return true;
-    }
-#endif
-
     return false;
 }
 
@@ -86,17 +67,19 @@ std::vector<std::string> wrapText(
     return lines;
 }
 
-void drawWrappedText(
-    sf::RenderWindow& window,
-    const sf::Font& font,
-    const std::string& text,
-    unsigned int size,
-    sf::Vector2f position,
-    float lineSpacing,
-    sf::Color color
-)
+    void drawWrappedText(
+        sf::RenderWindow& window,
+        const sf::Font& font,
+        const std::string& text,
+        unsigned int size,
+        sf::Vector2f position,
+        float lineSpacing,
+        sf::Color color,
+        std::size_t maxCharsPerLine
+    )
 {
-    std::vector<std::string> lines = wrapText(text, 70);
+    std::vector<std::string> lines =
+        wrapText(text, maxCharsPerLine);
 
     for (std::size_t i = 0; i < lines.size(); ++i) {
         sf::Text lineText = makeText(font, lines[i], size);
@@ -107,6 +90,92 @@ void drawWrappedText(
         ));
         window.draw(lineText);
     }
+}
+
+
+    sf::Vector2f getViewTopLeft(const sf::RenderWindow& window)
+{
+    const sf::View& view = window.getView();
+    const sf::Vector2f center = view.getCenter();
+    const sf::Vector2f size = view.getSize();
+
+    return sf::Vector2f(
+        center.x - size.x * 0.5f,
+        center.y - size.y * 0.5f
+    );
+}
+
+sf::Vector2f getViewSize(const sf::RenderWindow& window)
+{
+    return window.getView().getSize();
+}
+
+void drawTextureCover(
+    sf::RenderWindow& window,
+    sf::Texture& texture
+)
+{
+    sf::Sprite sprite(texture);
+
+    const sf::Vector2f viewTopLeft = getViewTopLeft(window);
+    const sf::Vector2u textureSize = texture.getSize();
+
+    if (textureSize.x == 0 || textureSize.y == 0) {
+        return;
+    }
+
+    const float targetWidth = 1080.0f;
+    const float targetHeight = 1080.0f;
+
+    const float scaleX =
+        targetWidth / static_cast<float>(textureSize.x);
+
+    const float scaleY =
+        targetHeight / static_cast<float>(textureSize.y);
+
+    sprite.setScale(sf::Vector2f(scaleX, scaleY));
+
+    sprite.setPosition(viewTopLeft);
+
+    window.draw(sprite);
+}
+
+void drawDarkOverlay(sf::RenderWindow& window)
+{
+    sf::RectangleShape overlay(getViewSize(window));
+    overlay.setPosition(getViewTopLeft(window));
+    overlay.setFillColor(sf::Color(0, 0, 0, 120));
+    window.draw(overlay);
+}
+
+void drawFallbackBackground(sf::RenderWindow& window)
+{
+    sf::RectangleShape background(getViewSize(window));
+    background.setPosition(getViewTopLeft(window));
+    background.setFillColor(sf::Color(28, 25, 35));
+    window.draw(background);
+}
+
+void drawEventBackground(
+    sf::RenderWindow& window,
+    ResourceManager& resources,
+    const EventDef& eventDef
+)
+{
+    if (
+        !eventDef.backgroundTextureId.empty() &&
+        resources.hasTexture(eventDef.backgroundTextureId)
+    ) {
+        drawTextureCover(
+            window,
+            resources.getTexture(eventDef.backgroundTextureId)
+        );
+
+        drawDarkOverlay(window);
+        return;
+    }
+
+    drawFallbackBackground(window);
 }
 
 }
@@ -150,36 +219,70 @@ void EventScene::update(float)
 
 void EventScene::draw(sf::RenderWindow& window)
 {
-    sf::RectangleShape background(sf::Vector2f(1920.0f, 1080.0f));
-    background.setFillColor(sf::Color(28, 25, 35));
-    window.draw(background);
-
     const sf::Font& font = context.resources.getFont("zh-R");
     const EventDef& eventDef = context.events.get(eventId_);
 
-    sf::Text title = makeText(font, eventDef.title, 52);
+    drawEventBackground(
+        window,
+        context.resources,
+        eventDef
+    );
+
+    const sf::View& view = window.getView();
+    const sf::Vector2f viewCenter = view.getCenter();
+    const sf::Vector2f viewSize = view.getSize();
+
+    const sf::Vector2f viewTopLeft(
+        viewCenter.x - viewSize.x * 0.5f,
+        viewCenter.y - viewSize.y * 0.5f
+    );
+
+    sf::RectangleShape topBar(sf::Vector2f(viewSize.x, 86.0f));
+    topBar.setPosition(viewTopLeft);
+    topBar.setFillColor(sf::Color(0, 0, 0, 135));
+    window.draw(topBar);
+
+    std::ostringstream status;
+    status << "Event"
+           << "    HP: " << context.runState.player.hp
+           << " / " << context.runState.player.maxHp
+           << "    Gold: " << context.runState.gold
+           << "    Floor: " << context.runState.floor;
+
+    sf::Text statusText = makeText(font, status.str(), 28);
+    statusText.setFillColor(sf::Color(245, 240, 220));
+    statusText.setPosition(sf::Vector2f(
+        viewTopLeft.x + 60.0f,
+        viewTopLeft.y + 28.0f
+    ));
+    window.draw(statusText);
+
+    const float panelX = 1030.0f;
+    const float panelY = 120.0f;
+    const float panelWidth = 850.0f;
+    const float panelHeight = 900.0f;
+
+    sf::RectangleShape panel(sf::Vector2f(panelWidth, panelHeight));
+    panel.setPosition(sf::Vector2f(panelX, panelY));
+    panel.setFillColor(sf::Color(0, 0, 0, 125));
+    panel.setOutlineThickness(2.0f);
+    panel.setOutlineColor(sf::Color(230, 220, 180, 120));
+    window.draw(panel);
+
+    sf::Text title = makeText(font, eventDef.title, 46);
     title.setFillColor(sf::Color::White);
-    title.setPosition(sf::Vector2f(120.0f, 80.0f));
+    title.setPosition(sf::Vector2f(panelX + 40.0f, panelY + 35.0f));
     window.draw(title);
-
-    std::ostringstream stateText;
-    stateText << "HP: " << context.runState.player.hp
-              << " / " << context.runState.player.maxHp
-              << "    Gold: " << context.runState.gold;
-
-    sf::Text playerState = makeText(font, stateText.str(), 28);
-    playerState.setFillColor(sf::Color(220, 220, 220));
-    playerState.setPosition(sf::Vector2f(120.0f, 150.0f));
-    window.draw(playerState);
 
     drawWrappedText(
         window,
         font,
         eventDef.description,
-        32,
-        sf::Vector2f(120.0f, 250.0f),
-        42.0f,
-        sf::Color(230, 230, 230)
+        28,
+        sf::Vector2f(panelX + 40.0f, panelY + 115.0f),
+        38.0f,
+        sf::Color(230, 230, 230),
+        34
     );
 
     for (int i = 0; i < static_cast<int>(eventDef.choices.size()); ++i) {
@@ -187,43 +290,44 @@ void EventScene::draw(sf::RenderWindow& window)
 
         sf::RectangleShape button(rect.size);
         button.setPosition(rect.position);
-        button.setFillColor(sf::Color(70, 70, 95));
+        button.setFillColor(sf::Color(70, 70, 95, 220));
         button.setOutlineThickness(3.0f);
         button.setOutlineColor(sf::Color(210, 210, 230));
         window.draw(button);
 
         const EventChoiceDef& choice = eventDef.choices[i];
 
-        sf::Text choiceText = makeText(font, choice.text, 30);
+        sf::Text choiceText = makeText(font, choice.text, 28);
         choiceText.setFillColor(sf::Color::White);
         choiceText.setPosition(sf::Vector2f(
             rect.position.x + 24.0f,
-            rect.position.y + 16.0f
+            rect.position.y + 14.0f
         ));
         window.draw(choiceText);
 
-        sf::Text descText = makeText(font, choice.description, 22);
+        sf::Text descText = makeText(font, choice.description, 21);
         descText.setFillColor(sf::Color(215, 215, 215));
         descText.setPosition(sf::Vector2f(
             rect.position.x + 24.0f,
-            rect.position.y + 58.0f
+            rect.position.y + 56.0f
         ));
         window.draw(descText);
     }
-
 
     if (!resultMessage_.empty()) {
         drawWrappedText(
             window,
             font,
             resultMessage_,
-            26,
-            sf::Vector2f(120.0f, 900.0f),
-            34.0f,
-            sf::Color(240, 220, 160)
+            24,
+            sf::Vector2f(panelX + 40.0f, panelY + 780.0f),
+            32.0f,
+            sf::Color(240, 220, 160),
+            36
         );
     }
 }
+
 
 SceneTransition EventScene::getTransition() const
 {
@@ -232,9 +336,9 @@ SceneTransition EventScene::getTransition() const
 
 sf::FloatRect EventScene::getChoiceRect(int index) const
 {
-    const float x = 120.0f;
-    const float y = 470.0f + static_cast<float>(index) * 130.0f;
-    const float width = 1180.0f;
+    const float x = 1080.0f;
+    const float y = 610.0f + static_cast<float>(index) * 125.0f;
+    const float width = 760.0f;
     const float height = 96.0f;
 
     return sf::FloatRect{
@@ -242,6 +346,7 @@ sf::FloatRect EventScene::getChoiceRect(int index) const
         sf::Vector2f(width, height)
     };
 }
+
 
 
 

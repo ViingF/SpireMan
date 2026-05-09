@@ -6,17 +6,26 @@ CharacterSelectScene::CharacterSelectScene(
     : Scene(context),
 
       ironcladButton(
-          sf::Vector2f(500.f, 600.f),
-          sf::Vector2f(90.f, 90.f),
-          "Ironclad"
+          sf::Vector2f(500.f, 800.f),
+          sf::Vector2f(120.f, 120.f),
+          context.resources.getFont("zh-R"),
+          ""
       ),
 
       backButton(
-          sf::Vector2f(760.f, 600.f),
-          sf::Vector2f(90.f, 90.f),
+          sf::Vector2f(1700.f, 800.f),
+          sf::Vector2f(120.f, 120.f),
+          context.resources.getFont("zh-R"),
           "Back"
-      )
-{
+      ) {
+    ironcladButton.setTexture(context.resources.getTexture("ironcladButton"));
+    ironcladPortrait.setTexture(&context.resources.getTexture("ironcladPortrait"));
+    ironcladPortrait.setSize({1920,1080});
+    for (int i = 0; i < 3; i++) {
+        lockedButtons[i].setTexture(&context.resources.getTexture("lockedButton"));
+        lockedButtons[i].setSize({120.f,120.f});
+        lockedButtons[i].setPosition({700.f+i*200.f,800.f});
+    }
 }
 
 void CharacterSelectScene::handleEvent(
@@ -64,9 +73,11 @@ void CharacterSelectScene::draw(
     window.clear(
         sf::Color(25, 25, 35)
     );
-
+    window.draw(ironcladPortrait);
+    for (int i = 0; i < 3; i++) {
+        window.draw(lockedButtons[i]);
+    }
     ironcladButton.draw(window);
-
     backButton.draw(window);
 }
 

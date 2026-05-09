@@ -13,6 +13,9 @@ struct EnemyDef {
     std::string name;
     int maxHp;
     std::vector<EnemyIntent> movePattern;
+    std::string textureId;
+    bool isBoss = false;
+    std::string mapTextureId;
 };
 struct Enemy {
     EnemyId id;

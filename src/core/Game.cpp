@@ -31,10 +31,29 @@ Game::Game()
           eventDatabase
       }
 {
-    resources.loadTexture(
-    "title",
-    "assets/images/title.png"
-);
+    window.setFramerateLimit(60);
+    resources.loadTexture("title","assets/images/title.png");
+    resources.loadTexture("mapTop","assets/images/mapTop.png");
+    resources.loadTexture("mapBot","assets/images/mapBot.png");
+    resources.loadTexture("monster","assets/images/monster.png");
+    resources.loadTexture("monsterOutline","assets/images/monsterOutline.png");
+    resources.loadTexture("event","assets/images/event.png");
+    resources.loadTexture("eventOutline","assets/images/eventOutline.png");
+    resources.loadTexture("ironcladButton","assets/images/ironcladButton.png");
+    resources.loadTexture("ironcladPortrait","assets/images/ironcladPortrait.jpg");
+    resources.loadTexture("lockedButton","assets/images/lockedButton.png");
+    resources.loadTexture("fishing","assets/images/fishing.jpg");
+    resources.loadTexture("goldenWing","assets/images/goldenWing.jpg");
+    resources.loadTexture("goopPuddle","assets/images/goopPuddle.jpg");
+    resources.loadTexture("liarsGame","assets/images/liarsGame.jpg");
+    resources.loadTexture("shiningLight","assets/images/shiningLight.jpg");
+    resources.loadTexture("kaka","assets/images/kaka.png");
+    resources.loadTexture("rat","assets/images/rat.png");
+    resources.loadTexture("slime","assets/images/slime.png");
+    resources.loadTexture("slimemap","assets/images/slimemap.png");
+    resources.loadTexture("guardian","assets/images/guardian.png");
+    resources.loadTexture("guardianmap","assets/images/guardianmap.png");
+
     resources.loadFont("zh-B","assets/fonts/NotoSansCJKtc-Bold.otf");
     resources.loadFont("zh-M","assets/fonts/NotoSansCJKtc-Medium.otf");
     resources.loadFont("zh-R","assets/fonts/NotoSansCJKtc-Regular.otf");
@@ -140,11 +159,6 @@ void Game::switchSceneIfNeeded()
 
         case SceneType::Map:
         {
-            if (!runState.active)
-            {
-                startNewRun();
-            }
-
             currentScene =
                 std::make_unique<MapScene>(
                     gameContext
@@ -206,6 +220,7 @@ void Game::switchSceneIfNeeded()
 
         case SceneType::CharacterSelect:
         {
+            startNewRun();
             currentScene =
                 std::make_unique<CharacterSelectScene>(
                     gameContext

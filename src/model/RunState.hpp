@@ -27,6 +27,7 @@ struct RunState {
     std::vector<MapNode> mapNodes;
     int currentMapNodeIndex = -1;
     int selectedMapNodeIndex = -1;
+    EnemyId bossEnemyId = 0;
 };
 
 #endif //SPIRELIKE_RUNSTATE_HPP
