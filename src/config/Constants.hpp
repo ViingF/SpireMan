@@ -5,5 +5,6 @@
 const int MAX_FLOOR=3;
 constexpr int MAP_ROUTE_LENGTH = 6;
 constexpr int MAP_EVENT_CHANCE_PERCENT = 35;
+#define WINDOWSOULUTION {1920,1080}
 
 #endif //SPIRELIKE_CONSTANTS_HPP

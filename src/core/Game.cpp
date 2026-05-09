@@ -13,8 +13,6 @@
 #include "../scene/EventScene.hpp"
 #include "../system/MapSystem.hpp"
 
-
-#define WINDOWRESOULUTION {1920,1080}
 using namespace sf;
 using namespace std;
 

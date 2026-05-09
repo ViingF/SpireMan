@@ -1,6 +1,7 @@
 #include "scene/MenuScene.hpp"
 
-#include <iostream>
+
+#include "config/Constants.hpp"
 
 MenuScene::MenuScene(GameContext& context)
     :   Scene(context),
@@ -19,6 +20,15 @@ MenuScene::MenuScene(GameContext& context)
         background(context.resources.getTexture(
             "title"
         )) {
+    Vector2u size = context.resources.getTexture(
+            "title"
+        ).getSize();
+    float targetWidth = 1920;
+    float targetHeight = 1080;
+    float scaleX = targetWidth / size.x;
+    float scaleY = targetHeight / size.y;
+
+    background.setScale({scaleX, scaleY});
 }
 
 void MenuScene::handleEvent(
