@@ -60,7 +60,11 @@ add_executable(SpireLike src/main.cpp
         src/system/EventSystem.cpp
         src/system/EventSystem.hpp
         src/scene/EventScene.cpp
-        src/scene/EventScene.hpp)
+        src/scene/EventScene.hpp
+        src/scene/CampfireScene.cpp
+        src/scene/CampfireScene.hpp
+        src/scene/ShopScene.cpp
+        src/scene/ShopScene.hpp)
 
 target_link_libraries(SpireLike
         SFML::Graphics

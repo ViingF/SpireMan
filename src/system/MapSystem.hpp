@@ -1,4 +1,3 @@
-
 #ifndef SPIRELIKE_MAPSYSTEM_HPP
 #define SPIRELIKE_MAPSYSTEM_HPP
 
@@ -7,7 +6,7 @@
 
 class MapSystem {
 public:
-    void generateSingleRoute(
+    void generateRouteMap(
         RunState& runState,
         const EventDatabase& eventDatabase
     ) const;
@@ -20,4 +19,5 @@ public:
 
     bool isRouteFinished(const RunState& runState) const;
 };
-#endif //SPIRELIKE_MAPSYSTEM_HPP
+
+#endif // SPIRELIKE_MAPSYSTEM_HPP

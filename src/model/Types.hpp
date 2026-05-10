@@ -46,6 +46,8 @@ enum class SceneType {
     Combat,
     Reward,
     Event,
+    Campfire,
+    Shop,
     End
 };
 
@@ -103,7 +105,9 @@ enum class EventEffectType {
 
 enum class MapNodeType {
     Combat,
-    Event
+    Campfire,
+    Event,
+    Shop
 };
 
 enum class MapNodeState {

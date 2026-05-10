@@ -40,6 +40,8 @@ private:
         const MapNode& node,
         int total
     ) const;
+    int getLayerNodeCount(int layer) const;
+    int getMaxLayer() const;
 
 
 

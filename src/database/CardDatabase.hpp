@@ -15,6 +15,7 @@ public:
     const CardDef& get(CardId id) const;
     bool exists(CardId id) const;
     std::vector<CardId> getAllCardIds() const;
+    CardId chooseRandomCardId(std::mt19937& rng) const;
 
 private:
     std::unordered_map<CardId, CardDef> cards;

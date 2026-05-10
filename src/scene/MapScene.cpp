@@ -190,10 +190,11 @@ MapScene::MapScene(GameContext& context)
     : Scene(context)
 {
     if (context.runState.mapNodes.empty()) {
-        mapSystem_.generateSingleRoute(
-            context.runState,
-            context.events
-        );
+        mapSystem_.generateRouteMap(
+    context.runState,
+    context.events
+);
+
 
         context.runState.bossEnemyId =
             context.enemies.chooseRandomBossId(
@@ -279,19 +280,32 @@ void MapScene::draw(sf::RenderWindow& window)
     const int total =
         static_cast<int>(context.runState.mapNodes.size());
 
-    for (int i = 0; i + 1 < total; ++i) {
-        const sf::Vector2f a = getNodePosition(i, total);
-        const sf::Vector2f b = getNodePosition(i + 1, total);
+    for (const MapNode& node : context.runState.mapNodes) {
+        const sf::Vector2f from =
+            getNodePosition(node.index, total);
 
-        sf::Color lineColor(70, 70, 80, 150);
+        for (int nextIndex : node.nextIndices) {
+            if (
+                nextIndex < 0 ||
+                nextIndex >= static_cast<int>(context.runState.mapNodes.size())
+            ) {
+                continue;
+            }
 
-        if (context.runState.mapNodes[i].state ==
-            MapNodeState::Completed) {
-            lineColor = sf::Color(220, 210, 170, 210);
+            const sf::Vector2f to =
+                getNodePosition(nextIndex, total);
+
+            sf::Color lineColor(170, 170, 100, 150);
+            lineColor.a=50;
+
+            if (node.state == MapNodeState::Completed) {
+                lineColor = sf::Color(220, 210, 170, 220);
+            }
+
+            drawLine(window, from, to, lineColor);
         }
-
-        drawLine(window, a, b, lineColor);
     }
+
 
     for (const MapNode& node : context.runState.mapNodes) {
         sf::Sprite sprite = makeNodeSprite(node, total);
@@ -304,25 +318,44 @@ SceneTransition MapScene::getTransition() const
     return transition_;
 }
 
-sf::Vector2f MapScene::getNodePosition(int index, int total) const
+int MapScene::getLayerNodeCount(int layer) const
 {
-    const float centerX = 960.0f;
+    int count = 0;
 
-    const float bottomY = 870.0f;
-    const float topY = 190.0f;
-
-    if (total <= 1) {
-        return sf::Vector2f(centerX, bottomY);
+    for (const MapNode& node : context.runState.mapNodes) {
+        if (node.layer == layer) {
+            ++count;
+        }
     }
 
-    const float step =
-        (bottomY - topY) / static_cast<float>(total - 1);
-
-    return sf::Vector2f(
-        centerX,
-        bottomY - step * static_cast<float>(index)
-    );
+    return count;
 }
+
+int MapScene::getMaxLayer() const
+{
+    int maxLayer = 0;
+
+    for (const MapNode& node : context.runState.mapNodes) {
+        maxLayer = std::max(maxLayer, node.layer);
+    }
+
+    return maxLayer;
+}
+
+sf::Vector2f MapScene::getNodePosition(int index, int) const
+{
+    if (
+        index < 0 ||
+        index >= static_cast<int>(context.runState.mapNodes.size())
+    ) {
+        return sf::Vector2f(960.0f, 540.0f);
+    }
+
+    const MapNode& node = context.runState.mapNodes[index];
+
+    return sf::Vector2f(node.mapX, node.mapY);
+}
+
 
 
 float MapScene::getNodeDisplaySize(
@@ -330,29 +363,15 @@ float MapScene::getNodeDisplaySize(
     int total
 ) const
 {
-    const float maxSize = 118.0f;
-    const float minSize = 64.0f;
-
-    if (total <= 1) {
-        return maxSize;
-    }
-
-    const float bottomY = 870.0f;
-    const float topY = 190.0f;
-
-    const float step =
-        (bottomY - topY) / static_cast<float>(total - 1);
-
-    float size = step * 0.78f;
-
-    size = std::clamp(size, minSize, maxSize);
+    float size = 110.0f;
 
     if (isBossNode(node, total)) {
-        size *= 2.3f;
+        size = 350.0f;
     }
 
     return size;
 }
+
 
 
 sf::Sprite MapScene::makeNodeSprite(
@@ -409,6 +428,7 @@ int MapScene::getNodeIndexAtPosition(sf::Vector2f mousePos) const
     return -1;
 }
 
+
 void MapScene::enterNode(int nodeIndex)
 {
     ErrorCode error =
@@ -429,11 +449,21 @@ void MapScene::enterNode(int nodeIndex)
         return;
     }
 
+    if (node.type == MapNodeType::Campfire) {
+        transition_.target = SceneType::Campfire;
+        transition_.mapNodeIndex = node.index;
+        return;
+    }
+
+    if (node.type == MapNodeType::Shop) {
+        transition_.target = SceneType::Shop;
+        transition_.mapNodeIndex = node.index;
+        return;
+    }
+
     EnemyId enemyId = 0;
 
-    const bool finalNode =
-        node.index ==
-        static_cast<int>(context.runState.mapNodes.size()) - 1;
+    const bool finalNode = node.nextIndices.empty();
 
     if (finalNode && context.runState.bossEnemyId > 0) {
         enemyId = context.runState.bossEnemyId;
@@ -444,23 +474,23 @@ void MapScene::enterNode(int nodeIndex)
         );
     }
 
-
     context.runState.currentEnemyId = enemyId;
 
     transition_.target = SceneType::Combat;
     transition_.enemyId = enemyId;
     transition_.mapNodeIndex = node.index;
+
 }
 bool MapScene::isBossNode(
     const MapNode& node,
-    int total
+    int
 ) const
 {
-    return total > 0 &&
-           node.index == total - 1 &&
-           node.type == MapNodeType::Combat &&
+    return node.type == MapNodeType::Combat &&
+           node.nextIndices.empty() &&
            context.runState.bossEnemyId > 0;
 }
+
 
 std::string MapScene::getNodeTextureId(
     const MapNode& node,
@@ -491,6 +521,14 @@ std::string MapScene::getNodeTextureId(
             return "eventOutline";
         }
 
+        if (node.type == MapNodeType::Campfire) {
+            return "campfireOutline";
+        }
+
+        if (node.type == MapNodeType::Shop) {
+            return "shopOutline";
+        }
+
         return "monsterOutline";
     }
 
@@ -498,6 +536,15 @@ std::string MapScene::getNodeTextureId(
         return "event";
     }
 
+    if (node.type == MapNodeType::Campfire) {
+        return "campfire";
+    }
+
+    if (node.type == MapNodeType::Shop) {
+        return "shop";
+    }
+
     return "monster";
 }
+
 

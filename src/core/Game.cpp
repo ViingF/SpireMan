@@ -12,6 +12,8 @@
 #include "scene/CharacterSelectScene.hpp"
 #include "../scene/EventScene.hpp"
 #include "../system/MapSystem.hpp"
+#include "scene/CampfireScene.hpp"
+#include "scene/ShopScene.hpp"
 
 using namespace sf;
 using namespace std;
@@ -53,6 +55,12 @@ Game::Game()
     resources.loadTexture("slimemap","assets/images/slimemap.png");
     resources.loadTexture("guardian","assets/images/guardian.png");
     resources.loadTexture("guardianmap","assets/images/guardianmap.png");
+    resources.loadTexture("campfire","assets/images/rest.png");
+    resources.loadTexture("campfireOutline","assets/images/restOutline.png");
+    resources.loadTexture("shop","assets/images/shop.png");
+    resources.loadTexture("shopOutline","assets/images/shopOutline.png");
+
+
 
     resources.loadFont("zh-B","assets/fonts/NotoSansCJKtc-Bold.otf");
     resources.loadFont("zh-M","assets/fonts/NotoSansCJKtc-Medium.otf");
@@ -227,6 +235,21 @@ void Game::switchSceneIfNeeded()
                 );
             break;
         }
+        case SceneType::Campfire:
+            currentScene =
+                 std::make_unique<CampfireScene>(
+                     gameContext
+                 );
+            break;
+
+        case SceneType::Shop:
+            currentScene =
+                 std::make_unique<ShopScene>(
+                     gameContext
+                 );
+            break;
+
+
 
 
         default:
@@ -243,7 +266,7 @@ void Game::startNewRun()
     runState.player.hp = 70;
 
     runState.floor = 0;
-    runState.gold = 0;
+    runState.gold = 99;
     runState.relics.clear();
 
     runState.currentEnemyId = 0;
@@ -265,7 +288,7 @@ void Game::startNewRun()
     runState.masterDeck.push_back({runState.nextCardInstanceId++, 3});
 
     MapSystem mapSystem;
-    mapSystem.generateSingleRoute(runState, eventDatabase);
+    mapSystem.generateRouteMap(runState, eventDatabase);
 
     GameContext context {
         resources,

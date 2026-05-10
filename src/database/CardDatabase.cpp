@@ -208,3 +208,19 @@ std::vector<CardId> CardDatabase::getAllCardIds() const
 
     return ids;
 }
+
+CardId CardDatabase::chooseRandomCardId(std::mt19937& rng) const
+{
+    std::vector<CardId> ids = getAllCardIds();
+
+    if (ids.empty()) {
+        return 0;
+    }
+
+    std::uniform_int_distribution<std::size_t> dist(
+        0,
+        ids.size() - 1
+    );
+
+    return ids[dist(rng)];
+}
