@@ -13,9 +13,9 @@ struct RunState {
     RunPlayerState player {70, 70};
     std::vector<CardInstance> masterDeck;
 
-    int act = 1;          // 当前大层：1 / 2 / 3
-    int floor = 0;        // 全局楼层数
-    int floorInAct = 0;   // 当前大层内的楼层数
+    int act = 1;
+    int floor = 0;
+    int floorInAct = 0;
 
     int gold = 0;
 
