@@ -190,27 +190,17 @@ MapScene::MapScene(GameContext& context)
     : Scene(context)
 {
     if (context.runState.mapNodes.empty()) {
-        mapSystem_.generateRouteMap(
-    context.runState,
-    context.events
-);
-
-
-        context.runState.bossEnemyId =
-            context.enemies.chooseRandomBossId(
-                context.runState.rng
-            );
+        mapSystem_.startAct(
+            context.runState,
+            context.runState.act,
+            context.events,
+            context.enemies
+        );
     } else {
         mapSystem_.refreshNodeStates(context.runState);
-
-        if (context.runState.bossEnemyId == 0) {
-            context.runState.bossEnemyId =
-                context.enemies.chooseRandomBossId(
-                    context.runState.rng
-                );
-        }
     }
 }
+
 
 void MapScene::handleEvent(
     const sf::Event& event,
@@ -266,7 +256,10 @@ void MapScene::draw(sf::RenderWindow& window)
            << "    HP: " << context.runState.player.hp
            << " / " << context.runState.player.maxHp
            << "    Gold: " << context.runState.gold
-           << "    Floor: " << context.runState.floor
+            << "    Act: " << context.runState.act
+            << "    Floor: " << context.runState.floorInAct
+    << "    Total Floor: " << context.runState.floor
+
            << "    Click the highlighted icon to continue";
 
     sf::Text statusText = makeText(font, status.str(), 28);
@@ -441,6 +434,8 @@ void MapScene::enterNode(int nodeIndex)
     MapNode& node = context.runState.mapNodes[nodeIndex];
 
     context.runState.floor += 1;
+    context.runState.floorInAct += 1;
+
 
     if (node.type == MapNodeType::Event) {
         transition_.target = SceneType::Event;
@@ -468,10 +463,11 @@ void MapScene::enterNode(int nodeIndex)
     if (finalNode && context.runState.bossEnemyId > 0) {
         enemyId = context.runState.bossEnemyId;
     } else {
-        enemyId = context.enemies.chooseEnemyIdByFloor(
-            context.runState.floor,
-            context.runState.rng
-        );
+        enemyId = context.enemies.chooseEnemyIdByAct(
+    context.runState.act,
+    context.runState.rng
+);
+
     }
 
     context.runState.currentEnemyId = enemyId;
@@ -544,7 +540,7 @@ std::string MapScene::getNodeTextureId(
         return "shop";
     }
 
-    return "monster";
+     return "monster";
 }
 
 

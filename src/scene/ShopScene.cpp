@@ -107,7 +107,7 @@ ShopScene::ShopScene(GameContext& context)
 {
     for (int i = 0; i < SHOP_CARD_COUNT; ++i) {
         CardId cardId =
-            context.cards.chooseRandomCardId(context.runState.rng);
+            context.cards.chooseRandomRewardCardId(context.runState.rng);
 
         if (cardId != 0) {
             cardOffers_.push_back(cardId);
@@ -330,8 +330,11 @@ void ShopScene::buyCard(int index)
     const CardId cardId = cardOffers_[index];
 
     CardInstance temp;
+    temp.instanceId = context.runState.nextCardInstanceId++;
     temp.cardId = cardId;
+
     context.runState.masterDeck.push_back(temp);
+
 
     sold_[index] = true;
     message_ = "Card purchased.";

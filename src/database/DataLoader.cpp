@@ -42,20 +42,45 @@ std::vector<std::string> DataLoader::splitLine(
 )
 {
     std::vector<std::string> result;
+    std::string current;
+    bool inQuotes = false;
 
-    std::stringstream ss(line);
-
-    std::string item;
-
-    while (std::getline(ss, item, delimiter))
+    for (std::size_t i = 0; i < line.size(); ++i)
     {
-        result.push_back(
-            trim(item)
-        );
+        char c = line[i];
+
+        if (c == '"')
+        {
+            if (
+                inQuotes &&
+                i + 1 < line.size() &&
+                line[i + 1] == '"'
+            )
+            {
+                current += '"';
+                ++i;
+            }
+            else
+            {
+                inQuotes = !inQuotes;
+            }
+        }
+        else if (c == delimiter && !inQuotes)
+        {
+            result.push_back(trim(current));
+            current.clear();
+        }
+        else
+        {
+            current += c;
+        }
     }
+
+    result.push_back(trim(current));
 
     return result;
 }
+
 
 std::string DataLoader::trim(
     const std::string& text

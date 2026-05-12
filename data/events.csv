@@ -1,11 +1,24 @@
 event_id,title,description,choice_index,choice_text,choice_description,effects,backgroundTextureId
-1,Ancient Fountain,You find a quiet fountain in the dark. The water glows faintly.,0,Drink,Heal 12 HP.,HealHp:12,fishing
-1,Ancient Fountain,You find a quiet fountain in the dark. The water glows faintly.,1,Take the crystal,Gain 5 Max HP but lose 6 HP.,GainMaxHp:5;LoseHp:6,fishing
-1,Ancient Fountain,You find a quiet fountain in the dark. The water glows faintly.,2,Leave,Nothing happens.,None:0,fishing
-2,Abandoned Cart,An abandoned merchant cart blocks the road. Some coins remain inside.,0,Search carefully,Gain 25 Gold.,GainGold:25,goldenWing
-2,Abandoned Cart,An abandoned merchant cart blocks the road. Some coins remain inside.,1,Break it open,Gain 45 Gold but lose 8 HP.,GainGold:45;LoseHp:8,goldenWing
-2,Abandoned Cart,An abandoned merchant cart blocks the road. Some coins remain inside.,2,Ignore it,Nothing happens.,None:0,goldenWing
-3,Sudden Ambush,The path becomes silent. A shadow moves behind you.,0,Fight,Start a combat.,StartCombat:0,goopPuddle
-3,Sudden Ambush,The path becomes silent. A shadow moves behind you.,1,Run through,Lose 10 HP and escape.,LoseHp:10,goopPuddle
-4,Old Shrine,"You see a shrine, broken and silent.",0,Pray,Gain 30 Gold.,GainGold:30,liarsGame
-5,Strange Voice,A voice says "come closer".,0,Accept,Lose 5 HP.,LoseHp:5,shiningLight
+1,Back to Basics,A pale light shines down on a small and quiet room. A wooden table has only a single deck of cards.,0,Remove a card,Remove 1 card from your deck.,RemoveCard:1,BackToBasics
+1,Back to Basics,A pale light shines down on a small and quiet room. A wooden table has only a single deck of cards.,1,Leave,Nothing happens.,None:0,BackToBasics
+2,The Cleric,"A blue-robed Cleric approaches you, offering services for a price.",0,Let him heal you,"Pay 35 Gold, heal 20 HP.",LoseGold:35;HealHp:20,Cleric
+2,The Cleric,"A blue-robed Cleric approaches you, offering services for a price.",1,Have him purge you,"Pay 50 Gold, remove a card.",LoseGold:50;RemoveCard:1,Cleric
+2,The Cleric,"A blue-robed Cleric approaches you, offering services for a price.",2,Leave,Nothing happens.,None:0,Cleric
+3,Golden Idol,A solid gold idol sits on a pedestal. It looks extremely valuable.,0,Take it,"Obtain Golden Idol relic, lose 20 HP.",GainRelic:Golden Idol;LoseHp:20,GoldenIdol
+3,Golden Idol,A solid gold idol sits on a pedestal. It looks extremely valuable.,1,Leave it,Nothing happens.,None:0,GoldenIdol
+4,World of Goop,A pool of iridescent goop bubbles on the floor. It smells oddly enticing.,0,Dive in,"Lose 11 HP, gain 75 Gold.",LoseHp:11;GainGold:75,GoopPuddle
+4,World of Goop,A pool of iridescent goop bubbles on the floor. It smells oddly enticing.,1,Ignore it,Nothing happens.,None:0,GoopPuddle
+5,The Woman in Blue,A mysterious woman in blue offers you a choice of gifts.,0,Choose a Potion,Obtain a random Potion.,GainPotion:1,LadyInBlue
+5,The Woman in Blue,A mysterious woman in blue offers you a choice of gifts.,1,Choose a Card,Add a random card to your deck.,AddCard:1,LadyInBlue
+5,The Woman in Blue,A mysterious woman in blue offers you a choice of gifts.,2,Leave,Nothing happens.,None:0,LadyInBlue
+6,The Library,You find a dusty library. Rows of books stretch into darkness.,0,Read a book,Add a random card to your deck.,AddCard:1,Library
+6,The Library,You find a dusty library. Rows of books stretch into darkness.,1,Rest here,Heal 20 HP.,HealHp:20,Library
+6,The Library,You find a dusty library. Rows of books stretch into darkness.,2,Leave,Nothing happens.,None:0,Library
+7,The Cursed Tome,A heavy tome pulses with dark energy. The pages whisper to you.,0,Read it,Lose 21 HP. Gain Necronomicon and a Curse.,LoseHp:21;GainGold:100;Curse:1001,CursedTome
+7,The Cursed Tome,A heavy tome pulses with dark energy. The pages whisper to you.,1,Leave,Nothing happens.,None:0,CursedTome
+8,Moai Head,A stone Moai head stands silently. Its mouth gapes open like a doorway.,0,Enter the head,"Lose 8 HP, gain 5 Max HP.",LoseHp:8;GainMaxHp:5,MoaiHead
+8,Moai Head,A stone Moai head stands silently. Its mouth gapes open like a doorway.,1,Leave,Nothing happens.,None:0,MoaiHead
+9,The Mausoleum,A dark mausoleum houses an ornate coffin. Something glimmers inside.,0,Open the coffin,"Gain a random Relic, gain a Curse.",GainGold:100;Curse:1002,Mausoleum
+9,The Mausoleum,A dark mausoleum houses an ornate coffin. Something glimmers inside.,1,Leave,Nothing happens.,None:0,Mausoleum
+10,The Nest,A disgusting nest filled with rotten eggs. Something sharp glints inside.,0,Search the nest,"Lose 6 HP, add Ritual Dagger to your deck.",LoseHp:6;AddCard:Ritual Dagger,TheNest
+10,The Nest,A disgusting nest filled with rotten eggs. Something sharp glints inside.,1,Leave,Nothing happens.,None:0,TheNest

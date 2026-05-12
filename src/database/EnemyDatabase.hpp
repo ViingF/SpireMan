@@ -20,6 +20,9 @@ public:
     ) const;
     std::vector<EnemyId> getAllBossIds() const;
     EnemyId chooseRandomBossId(std::mt19937& rng) const;
+    EnemyId chooseEnemyIdByAct(int act,std::mt19937& rng) const;
+
+    EnemyId chooseRandomBossIdByAct(int act,std::mt19937& rng) const;
 
 
 private:

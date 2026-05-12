@@ -1,4 +1,7 @@
-id,name,type,cost,target,effect1,value1,effect2,value2,description
-1,Strike,Attack,1,Enemy,DealDamage,6,,,Deal 6 damage.
-2,Defend,Skill,1,Self,GainBlock,5,,,Gain 5 block.
-3,Bash,Attack,2,Enemy,DealDamage,8,ApplyVulnerable,2,Deal 8 damage and apply 2 Vulnerable
+id,name,type,cost,target,effect1,value1,effect2,value2,description,textureid
+1,Strike,Attack,1,Enemy,DealDamage,6,None,0,Deal 6 damage.,Strike
+2,Defend,Skill,1,Self,GainBlock,5,None,0,Gain 5 block.,Defend
+3,Bash,Attack,2,Enemy,DealDamage,8,ApplyVulnerable,2,Deal 8 damage and apply 2 Vulnerable,Bash
+103,Ritual Dagger,Attack,1,Enemy,DealDamage,15,RitualDagger,3,"Deal 15 damage. If Fatal,permanently increase this card's damage by 3 this run.",RitualDagger
+1001,Necronomicurse,Curse,-1,Self,DealDamage,1,None,0,"Unplayable. At the end of your turn, if this card is in your hand, lose 1 HP",Necronomicurse
+1002,Writhe,Curse,-1,Self,ApplyWeak,1,None,0,"Unplayable. Whenever you draw this card, gain 1 Weak",Writhe

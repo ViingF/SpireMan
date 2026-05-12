@@ -10,6 +10,128 @@
 
 namespace {
 
+    struct MapNodeTypeCounter {
+    int shop = 0;
+    int event = 0;
+    int campfire = 0;
+};
+
+bool hasEventAvailable(const EventDatabase& eventDatabase)
+{
+    return !eventDatabase.getAllEventIds().empty();
+}
+
+bool canPlaceNodeType(
+    MapNodeType type,
+    const MapNodeTypeCounter& counter,
+    const EventDatabase& eventDatabase
+)
+{
+    switch (type) {
+    case MapNodeType::Shop:
+        return counter.shop < MAP_MAX_SHOP_COUNT;
+
+    case MapNodeType::Event:
+        return counter.event < MAP_MAX_EVENT_COUNT &&
+               hasEventAvailable(eventDatabase);
+
+    case MapNodeType::Campfire:
+        return counter.campfire < MAP_MAX_CAMPFIRE_COUNT;
+
+    case MapNodeType::Combat:
+        return true;
+    }
+
+    return true;
+}
+
+void increaseNodeTypeCounter(
+    MapNodeType type,
+    MapNodeTypeCounter& counter
+)
+{
+    switch (type) {
+    case MapNodeType::Shop:
+        counter.shop += 1;
+        break;
+
+    case MapNodeType::Event:
+        counter.event += 1;
+        break;
+
+    case MapNodeType::Campfire:
+        counter.campfire += 1;
+        break;
+
+    case MapNodeType::Combat:
+        break;
+    }
+}
+
+MapNodeType chooseMiddleNodeTypeWithLimit(
+    RunState& runState,
+    const EventDatabase& eventDatabase,
+    const MapNodeTypeCounter& counter
+)
+{
+    std::uniform_int_distribution<int> percentDist(1, 100);
+    const int roll = percentDist(runState.rng);
+
+    MapNodeType requestedType = MapNodeType::Combat;
+
+    if (roll <= MAP_SHOP_CHANCE_PERCENT) {
+        requestedType = MapNodeType::Shop;
+    }
+    else if (
+        roll <=
+        MAP_SHOP_CHANCE_PERCENT +
+        MAP_CAMPFIRE_CHANCE_PERCENT
+    ) {
+        requestedType = MapNodeType::Campfire;
+    }
+    else if (
+        roll <=
+        MAP_SHOP_CHANCE_PERCENT +
+        MAP_CAMPFIRE_CHANCE_PERCENT +
+        MAP_EVENT_CHANCE_PERCENT
+    ) {
+        requestedType = MapNodeType::Event;
+    }
+
+    if (
+        canPlaceNodeType(
+            requestedType,
+            counter,
+            eventDatabase
+        )
+    ) {
+        return requestedType;
+    }
+
+    return MapNodeType::Combat;
+}
+
+void assignNodeType(
+    MapNode& node,
+    MapNodeType type,
+    RunState& runState,
+    const EventDatabase& eventDatabase,
+    MapNodeTypeCounter& counter
+)
+{
+    node.type = type;
+
+    if (node.type == MapNodeType::Event) {
+        node.eventId =
+            eventDatabase.chooseRandomEventId(runState.rng);
+    } else {
+        node.eventId = 0;
+    }
+
+    increaseNodeTypeCounter(node.type, counter);
+}
+
+
     float clampFloat(float value, float minValue, float maxValue)
     {
         return std::max(minValue, std::min(value, maxValue));
@@ -180,7 +302,7 @@ void MapSystem::generateRouteMap(
     runState.currentMapNodeIndex = -1;
     runState.selectedMapNodeIndex = -1;
 
-    constexpr int layerCount = MAP_ROUTE_LENGTH;
+    const int layerCount = getRouteLengthByAct(runState.act);
 
     constexpr float centerX = 960.0f;
 
@@ -199,6 +321,8 @@ void MapSystem::generateRouteMap(
     layers.resize(layerCount);
 
     int nextNodeIndex = 0;
+    MapNodeTypeCounter nodeTypeCounter;
+
 
     for (int layer = 0; layer < layerCount; ++layer) {
         int count = 1;
@@ -206,9 +330,12 @@ void MapSystem::generateRouteMap(
         const bool firstLayer = layer == 0;
         const bool lastLayer = layer == layerCount - 1;
 
-        if (!firstLayer && !lastLayer) {
+        const bool preBossLayer = layer == layerCount - 2;
+
+        if (!firstLayer && !lastLayer && !preBossLayer) {
             count = middleNodeCountDist(runState.rng);
         }
+
 
         const float t = layerCount <= 1
             ? 0.0f
@@ -229,32 +356,52 @@ void MapSystem::generateRouteMap(
             node.state = MapNodeState::Locked;
 
             if (firstLayer || lastLayer) {
-                node.type = MapNodeType::Combat;
-            } else if (layer == layerCount - 2) {
-                node.type = MapNodeType::Campfire;
-            } else {
-                node.type = MapNodeType::Combat;
-
-                const int shopRoll = percentDist(runState.rng);
-
-                if (shopRoll <= MAP_SHOP_CHANCE_PERCENT) {
-                    node.type = MapNodeType::Shop;
-                } else if (percentDist(runState.rng)<MAP_CAMPFIRE_CHANCE_PERCENT) {
-                    node.type = MapNodeType::Campfire;
-                } else {
-                    const int eventRoll = percentDist(runState.rng);
-
-                    const bool makeEvent =
-                        eventRoll <= MAP_EVENT_CHANCE_PERCENT &&
-                        !eventDatabase.getAllEventIds().empty();
-
-                    if (makeEvent) {
-                        node.type = MapNodeType::Event;
-                        node.eventId =
-                            eventDatabase.chooseRandomEventId(runState.rng);
-                    }
-                }
+                assignNodeType(
+                    node,
+                    MapNodeType::Combat,
+                    runState,
+                    eventDatabase,
+                    nodeTypeCounter
+                );
             }
+            else if (preBossLayer) {
+                MapNodeType type = MapNodeType::Campfire;
+
+                if (
+                    !canPlaceNodeType(
+                        MapNodeType::Campfire,
+                        nodeTypeCounter,
+                        eventDatabase
+                    )
+                ) {
+                    type = MapNodeType::Combat;
+                }
+
+                assignNodeType(
+                    node,
+                    type,
+                    runState,
+                    eventDatabase,
+                    nodeTypeCounter
+                );
+            }
+            else {
+                const MapNodeType type =
+                    chooseMiddleNodeTypeWithLimit(
+                        runState,
+                        eventDatabase,
+                        nodeTypeCounter
+                    );
+
+                assignNodeType(
+                    node,
+                    type,
+                    runState,
+                    eventDatabase,
+                    nodeTypeCounter
+                );
+            }
+
 
 
             float x = centerX;
@@ -553,3 +700,52 @@ bool MapSystem::isRouteFinished(const RunState& runState) const
 
     return currentNode.nextIndices.empty();
 }
+
+void MapSystem::startAct(
+    RunState& runState,
+    int act,
+    const EventDatabase& eventDatabase,
+    const EnemyDatabase& enemyDatabase
+) const
+{
+    runState.act = std::clamp(act, 1, MAX_ACT);
+    runState.floorInAct = 0;
+
+    runState.mapNodes.clear();
+    runState.currentMapNodeIndex = -1;
+    runState.selectedMapNodeIndex = -1;
+    runState.currentEnemyId = 0;
+
+    runState.bossEnemyId =
+        enemyDatabase.chooseRandomBossIdByAct(
+            runState.act,
+            runState.rng
+        );
+
+    generateRouteMap(runState, eventDatabase);
+}
+
+bool MapSystem::advanceToNextActIfPossible(
+    RunState& runState,
+    const EventDatabase& eventDatabase,
+    const EnemyDatabase& enemyDatabase
+) const
+{
+    if (!isRouteFinished(runState)) {
+        return false;
+    }
+
+    if (runState.act >= MAX_ACT) {
+        return false;
+    }
+
+    startAct(
+        runState,
+        runState.act + 1,
+        eventDatabase,
+        enemyDatabase
+    );
+
+    return true;
+}
+

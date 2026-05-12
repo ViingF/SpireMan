@@ -94,14 +94,19 @@ ErrorCode EnemyDatabase::loadFromCsv(const std::string& path)
         return code;
     }
 
+    // 至少需要表头 + 一行数据
     if (rows.size() <= 1) {
         return ErrorCode::DATA_FORMAT_ERROR;
     }
 
+    constexpr int kMaxAct = 3;
+
     for (std::size_t i = 1; i < rows.size(); ++i) {
         const auto& row = rows[i];
 
-        if (row.size() < 5) {
+        // 新表结构要求 8 列：
+        // id,name,maxHp,textureId,movePattern,isBoss,mapTextureId,act
+        if (row.size() < 8) {
             return ErrorCode::DATA_FORMAT_ERROR;
         }
 
@@ -118,15 +123,12 @@ ErrorCode EnemyDatabase::loadFromCsv(const std::string& path)
             enemy.maxHp = std::stoi(row[2]);
             enemy.textureId = row[3];
             enemy.movePattern = parseMovePattern(row[4]);
+            enemy.isBoss = parseBossFlag(row[5]);
+            enemy.mapTextureId = row[6];
+            enemy.act = std::stoi(row[7]);
 
-            if (row.size() >= 6) {
-                enemy.isBoss = parseBossFlag(row[5]);
-            }
-
-            if (row.size() >= 7) {
-                enemy.mapTextureId = row[6];
-            }
-
+            // Boss 在地图上需要图标。
+            // 如果 CSV 没填 mapTextureId，就默认使用战斗贴图 textureId。
             if (enemy.isBoss && enemy.mapTextureId.empty()) {
                 enemy.mapTextureId = enemy.textureId;
             }
@@ -136,7 +138,9 @@ ErrorCode EnemyDatabase::loadFromCsv(const std::string& path)
                 enemy.name.empty() ||
                 enemy.maxHp <= 0 ||
                 enemy.textureId.empty() ||
-                enemy.movePattern.empty()
+                enemy.movePattern.empty() ||
+                enemy.act <= 0 ||
+                enemy.act > kMaxAct
             ) {
                 return ErrorCode::DATA_FORMAT_ERROR;
             }
@@ -156,6 +160,7 @@ ErrorCode EnemyDatabase::loadFromCsv(const std::string& path)
 
     return ErrorCode::OK;
 }
+
 
 const EnemyDef& EnemyDatabase::get(EnemyId id) const
 {
@@ -227,6 +232,70 @@ EnemyId EnemyDatabase::chooseRandomBossId(std::mt19937& rng) const
 
     if (ids.empty()) {
         return 0;
+    }
+
+    std::uniform_int_distribution<std::size_t> dist(
+        0,
+        ids.size() - 1
+    );
+
+    return ids[dist(rng)];
+}
+
+EnemyId EnemyDatabase::chooseEnemyIdByAct(
+    int act,
+    std::mt19937& rng
+) const
+{
+    std::vector<EnemyId> ids;
+
+    for (const auto& pair : enemies) {
+        const EnemyDef& enemy = pair.second;
+
+        if (!enemy.isBoss && enemy.act == act) {
+            ids.push_back(pair.first);
+        }
+    }
+
+    if (ids.empty()) {
+        for (const auto& pair : enemies) {
+            const EnemyDef& enemy = pair.second;
+
+            if (!enemy.isBoss) {
+                ids.push_back(pair.first);
+            }
+        }
+    }
+
+    if (ids.empty()) {
+        throw std::runtime_error("No normal enemy found");
+    }
+
+    std::uniform_int_distribution<std::size_t> dist(
+        0,
+        ids.size() - 1
+    );
+
+    return ids[dist(rng)];
+}
+
+EnemyId EnemyDatabase::chooseRandomBossIdByAct(
+    int act,
+    std::mt19937& rng
+) const
+{
+    std::vector<EnemyId> ids;
+
+    for (const auto& pair : enemies) {
+        const EnemyDef& enemy = pair.second;
+
+        if (enemy.isBoss && enemy.act == act) {
+            ids.push_back(pair.first);
+        }
+    }
+
+    if (ids.empty()) {
+        return chooseRandomBossId(rng);
     }
 
     std::uniform_int_distribution<std::size_t> dist(

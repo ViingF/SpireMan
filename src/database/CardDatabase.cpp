@@ -3,6 +3,66 @@
 
 #include <stdexcept>
 
+namespace {
+
+    bool isNoEffect(const std::string& text)
+    {
+        return text.empty()
+            || text == "None"
+            || text == "none";
+    }
+
+    bool parseEffectType(
+        const std::string& text,
+        EffectType& type
+    )
+    {
+        if (text == "DealDamage") {
+            type = EffectType::DealDamage;
+            return true;
+        }
+
+        if (text == "GainBlock") {
+            type = EffectType::GainBlock;
+            return true;
+        }
+
+        if (text == "DrawCards") {
+            type = EffectType::DrawCards;
+            return true;
+        }
+
+        if (text == "GainEnergy") {
+            type = EffectType::GainEnergy;
+            return true;
+        }
+
+        if (text == "ApplyVulnerable") {
+            type = EffectType::ApplyVulnerable;
+            return true;
+        }
+
+        if (text == "ApplyWeak") {
+            type = EffectType::ApplyWeak;
+            return true;
+        }
+
+        if (text == "GainStrength") {
+            type = EffectType::GainStrength;
+            return true;
+        }
+
+        if (text == "RitualDagger" || text == "ritualdagger") {
+            type = EffectType::RitualDagger;
+            return true;
+        }
+
+        return false;
+    }
+
+}
+
+
 ErrorCode CardDatabase::loadFromCsv(
     const std::string& path
 )
@@ -46,16 +106,16 @@ ErrorCode CardDatabase::loadFromCsv(
 
             card.name = row[1];
 
-            if (row[2] == "Attack")
-            {
+            if (row[2] == "Attack") {
                 card.type = CardType::Attack;
             }
-            else if (row[2] == "Skill")
-            {
+            else if (row[2] == "Skill") {
                 card.type = CardType::Skill;
             }
-            else
-            {
+            else if (row[2] == "Curse") {
+                card.type = CardType::Curse;
+            }
+            else {
                 return ErrorCode::INVALID_ENUM_VALUE;
             }
 
@@ -78,87 +138,38 @@ ErrorCode CardDatabase::loadFromCsv(
                 return ErrorCode::INVALID_ENUM_VALUE;
             }
 
-            CardEffect effect1;
+            if (!isNoEffect(row[5]))
+            {
+                CardEffect effect1;
 
-            if (row[5] == "DealDamage")
-            {
-                effect1.type = EffectType::DealDamage;
-            }
-            else if (row[5] == "GainBlock")
-            {
-                effect1.type = EffectType::GainBlock;
-            }
-            else if (row[5] == "DrawCards")
-            {
-                effect1.type = EffectType::DrawCards;
-            }
-            else if (row[5] == "GainEnergy")
-            {
-                effect1.type = EffectType::GainEnergy;
-            }
-            else if (row[5] == "ApplyVulnerable")
-            {
-                effect1.type = EffectType::ApplyVulnerable;
-            }
-            else if (row[5] == "ApplyWeak")
-            {
-                effect1.type = EffectType::ApplyWeak;
-            }
-            else if (row[5] == "GainStrength")
-            {
-                effect1.type = EffectType::GainStrength;
-            }
-            else
-            {
-                return ErrorCode::INVALID_ENUM_VALUE;
-            }
-
-            effect1.value = std::stoi(row[6]);
-
-            card.effects.push_back(effect1);
-
-
-            if (!row[7].empty())
-            {
-                CardEffect effect2;
-
-                if (row[7] == "DealDamage")
-                {
-                    effect2.type = EffectType::DealDamage;
-                }
-                else if (row[7] == "GainBlock")
-                {
-                    effect2.type = EffectType::GainBlock;
-                }
-                else if (row[7] == "DrawCards")
-                {
-                    effect2.type = EffectType::DrawCards;
-                }
-                else if (row[7] == "GainEnergy")
-                {
-                    effect2.type = EffectType::GainEnergy;
-                }
-                else if (row[7] == "ApplyVulnerable")
-                {
-                    effect2.type = EffectType::ApplyVulnerable;
-                }
-                else if (row[7] == "ApplyWeak")
-                {
-                    effect2.type = EffectType::ApplyWeak;
-                }
-                else if (row[7] == "GainStrength")
-                {
-                    effect2.type = EffectType::GainStrength;
-                }
-                else
+                if (!parseEffectType(row[5], effect1.type))
                 {
                     return ErrorCode::INVALID_ENUM_VALUE;
                 }
 
-                effect2.value = std::stoi(row[8]);
+                effect1.value = row[6].empty()
+                    ? 0
+                    : std::stoi(row[6]);
+
+                card.effects.push_back(effect1);
+            }
+
+            if (!isNoEffect(row[7]))
+            {
+                CardEffect effect2;
+
+                if (!parseEffectType(row[7], effect2.type))
+                {
+                    return ErrorCode::INVALID_ENUM_VALUE;
+                }
+
+                effect2.value = row[8].empty()
+                    ? 0
+                    : std::stoi(row[8]);
 
                 card.effects.push_back(effect2);
             }
+
 
 
             card.description = row[9];
@@ -212,6 +223,50 @@ std::vector<CardId> CardDatabase::getAllCardIds() const
 CardId CardDatabase::chooseRandomCardId(std::mt19937& rng) const
 {
     std::vector<CardId> ids = getAllCardIds();
+
+    if (ids.empty()) {
+        return 0;
+    }
+
+    std::uniform_int_distribution<std::size_t> dist(
+        0,
+        ids.size() - 1
+    );
+
+    return ids[dist(rng)];
+}
+
+std::vector<CardId> CardDatabase::getCardIdsByType(CardType type) const
+{
+    std::vector<CardId> ids;
+
+    for (const auto& pair : cards) {
+        if (pair.second.type == type) {
+            ids.push_back(pair.first);
+        }
+    }
+
+    return ids;
+}
+
+std::vector<CardId> CardDatabase::getRewardCardIds() const
+{
+    std::vector<CardId> ids;
+
+    for (const auto& pair : cards) {
+        const CardDef& card = pair.second;
+
+        if (card.type != CardType::Curse) {
+            ids.push_back(pair.first);
+        }
+    }
+
+    return ids;
+}
+
+CardId CardDatabase::chooseRandomRewardCardId(std::mt19937& rng) const
+{
+    std::vector<CardId> ids = getRewardCardIds();
 
     if (ids.empty()) {
         return 0;

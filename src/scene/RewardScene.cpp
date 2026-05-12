@@ -102,11 +102,20 @@ void RewardScene::chooseCard(CardId cardId)
         mapSystem.completeSelectedNode(context.runState);
 
         if (mapSystem.isRouteFinished(context.runState)) {
-            transition.target = SceneType::End;
-            transition.battleResult = BattleResult::Victory;
+            if (mapSystem.advanceToNextActIfPossible(
+                    context.runState,
+                    context.events,
+                    context.enemies
+                )) {
+                transition.target = SceneType::Map;
+                } else {
+                    transition.target = SceneType::End;
+                    transition.battleResult = BattleResult::Victory;
+                }
         } else {
             transition.target = SceneType::Map;
         }
+
 
         return;
     }

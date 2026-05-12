@@ -16,7 +16,9 @@ struct EnemyDef {
     std::string textureId;
     bool isBoss = false;
     std::string mapTextureId;
+    int act = 1;
 };
+
 struct Enemy {
     EnemyId id;
     std::string name;

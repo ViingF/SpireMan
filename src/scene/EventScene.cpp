@@ -358,7 +358,8 @@ void EventScene::choose(int choiceIndex)
         eventSystem_.resolveChoice(
             context.runState,
             eventDef,
-            choiceIndex
+            choiceIndex,
+            context.cards
         );
 
     if (result.error != ErrorCode::OK) {
@@ -372,6 +373,11 @@ void EventScene::choose(int choiceIndex)
     if (result.playerDead) {
         transition_.target = SceneType::End;
         transition_.battleResult = BattleResult::Defeat;
+        return;
+    }
+
+    if (result.requiresCardRemove) {
+        transition_.target = SceneType::CardRemove;
         return;
     }
 
@@ -391,9 +397,18 @@ void EventScene::choose(int choiceIndex)
     mapSystem_.completeSelectedNode(context.runState);
 
     if (mapSystem_.isRouteFinished(context.runState)) {
-        transition_.target = SceneType::End;
-        transition_.battleResult = BattleResult::Victory;
+        if (mapSystem_.advanceToNextActIfPossible(
+                context.runState,
+                context.events,
+                context.enemies
+            )) {
+            transition_.target = SceneType::Map;
+            } else {
+                transition_.target = SceneType::End;
+                transition_.battleResult = BattleResult::Victory;
+            }
     } else {
         transition_.target = SceneType::Map;
     }
+
 }

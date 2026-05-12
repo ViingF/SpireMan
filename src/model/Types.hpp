@@ -48,14 +48,17 @@ enum class SceneType {
     Event,
     Campfire,
     Shop,
+    CardRemove,
     End
 };
 
 
 enum class CardType {
     Attack,
-    Skill
+    Skill,
+    Curse
 };
+
 
 enum class TargetType {
     Enemy,
@@ -70,6 +73,7 @@ enum class EffectType {
     GainEnergy,
     ApplyVulnerable,
     ApplyWeak,
+    RitualDagger,
     GainStrength
 };
 
@@ -97,9 +101,13 @@ struct RunPlayerState {
 enum class EventEffectType {
     None,
     GainGold,
+    LoseGold,
     LoseHp,
     HealHp,
     GainMaxHp,
+    RemoveCard,
+    AddCard,
+    Curse,
     StartCombat
 };
 

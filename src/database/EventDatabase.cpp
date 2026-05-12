@@ -89,6 +89,10 @@ EventEffectType parseEventEffectType(const std::string& text)
         return EventEffectType::GainGold;
     }
 
+    if (text == "LoseGold") {
+        return EventEffectType::LoseGold;
+    }
+
     if (text == "LoseHp") {
         return EventEffectType::LoseHp;
     }
@@ -101,12 +105,26 @@ EventEffectType parseEventEffectType(const std::string& text)
         return EventEffectType::GainMaxHp;
     }
 
+    if (text == "RemoveCard") {
+        return EventEffectType::RemoveCard;
+    }
+
+    if (text == "AddCard") {
+        return EventEffectType::AddCard;
+    }
+
+    if (text == "Curse") {
+        return EventEffectType::Curse;
+    }
+
     if (text == "StartCombat") {
         return EventEffectType::StartCombat;
     }
 
     return EventEffectType::None;
 }
+
+
 std::vector<EventEffect> parseEffects(const std::string& text)
 {
     std::vector<EventEffect> effects;

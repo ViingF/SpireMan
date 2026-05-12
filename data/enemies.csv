@@ -1,5 +1,17 @@
-id,name,maxHp,textureId,movePattern,isBoss,mapTextureId
-1,Slime,30,kaka,Attack:6;Block:4,0,
-2,Goblin,45,rat,Attack:8;Attack:5;Block:6,0,
-100,Fire Lord,260,slime,Attack:18;Buff:4;Attack:24,1,slimemap
-101,gg,300,guardian,Attack:10;Buff:4;Attack:44,1,guardianmap
+id,name,maxHp,textureId,movePattern,isBoss,mapTextureId,act
+1,Slime,30,Kaka,Attack:6;Block:4,0,,1
+2,Goblin,45,Rat,Attack:8;Attack:5;Block:6,0,,1
+100,Fire Lord,260,Slime,Attack:18;Buff:4;Attack:24,1,SlimeMap,1
+101,gg,300,Guardian,Attack:10;Buff:4;Attack:44,1,GuardianMap,1
+201,Cultist,56,Cultist,Attack:12;Buff:3;Attack:12,0,,2
+202,Shelled Parasite,68,Shelled Parasite,Block:9;Attack:14;Attack:10,0,,2
+203,Sneaky Gremlin,50,SneakyGremlin,Attack:8;Attack:8;Block:6;Attack:10,0,,2
+204,Spheric Guardian,74,Spheric Guardian,Block:12;Attack:16;Block:8,0,,2
+211,The Collector,240,TheCollector,Attack:18;Buff:3;Block:12;Attack:18,1,CollectorMap,2
+212,Automaton,260,Automaton,Block:15;Attack:22;Buff:4;Attack:22,1,AutomatonMap,2
+301,Darkling,52,Darkling,Attack:10;Attack:10;Buff:2,0,,3
+302,Orb Walker,74,OrbWalker,Attack:16;Attack:16,0,,3
+303,Maw,60,Maw,Attack:14;Attack:14;Buff:3,0,,3
+304,Spire Growth,80,SpireGrowth,Attack:16;Block:12;Attack:16,0,,3
+311,Time Eater,456,TimeEater,Block:20;Attack:24;Buff:3;Attack:28,1,TimeEaterMap,3
+312,Awakened One,540,AwakenedOne,Attack:18;Block:16;Attack:18;Buff:3;Attack:20,1,AwakenedOneMap,3
