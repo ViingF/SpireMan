@@ -4,6 +4,7 @@
 #include "core/Scene.hpp"
 #include "system/CombatSystem.hpp"
 #include "ui/Button.hpp"
+#include "ui/CardPileOverlay.hpp"
 
 class CombatScene : public Scene {
 public:
@@ -27,5 +28,9 @@ private:
     Button endTurnButton;
     SceneTransition transition;
     Button winButton;
+    Button drawPileButton_;
+    Button discardPileButton_;
+    CardPileOverlay pileOverlay_;
+
 };
 #endif //SPIRELIKE_COMBATSCENE_HPP

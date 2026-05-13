@@ -31,6 +31,7 @@ private:
     sf::FloatRect getChoiceRect(int index) const;
 
     void choose(int choiceIndex);
+    bool canChoose(const EventChoiceDef& choice) const;
 
 private:
     EventId eventId_ = 0;

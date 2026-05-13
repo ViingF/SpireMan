@@ -30,6 +30,25 @@ private:
 
     void buyCard(int index);
     void leaveShop();
+    sf::FloatRect getRemoveCardRect() const;
+
+    sf::FloatRect getDeckCardRect(int visibleIndex) const;
+    sf::FloatRect getRemovePrevPageRect() const;
+    sf::FloatRect getRemoveNextPageRect() const;
+    sf::FloatRect getCancelRemoveRect() const;
+
+    int getRemoveCost() const;
+    int getRemoveCardsPerPage() const;
+    int getRemovePageCount() const;
+    void clampRemovePage();
+
+    void startRemoveCard();
+    void removeCardByDeckIndex(int deckIndex);
+    void drawRemoveCardOverlay(
+        sf::RenderWindow& window,
+        const sf::Font& font
+    );
+
 
 private:
     MapSystem mapSystem_;
@@ -39,6 +58,11 @@ private:
     std::vector<bool> sold_;
 
     std::string message_;
+
+    bool removingCard_ = false;
+    int removePage_ = 0;
+    int shopRemoveCount_ = 0;
+
 };
 
 #endif // SPIRELIKE_SHOPSCENE_HPP

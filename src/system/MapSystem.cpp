@@ -111,26 +111,6 @@ MapNodeType chooseMiddleNodeTypeWithLimit(
     return MapNodeType::Combat;
 }
 
-void assignNodeType(
-    MapNode& node,
-    MapNodeType type,
-    RunState& runState,
-    const EventDatabase& eventDatabase,
-    MapNodeTypeCounter& counter
-)
-{
-    node.type = type;
-
-    if (node.type == MapNodeType::Event) {
-        node.eventId =
-            eventDatabase.chooseRandomEventId(runState.rng);
-    } else {
-        node.eventId = 0;
-    }
-
-    increaseNodeTypeCounter(node.type, counter);
-}
-
 
     float clampFloat(float value, float minValue, float maxValue)
     {
@@ -289,6 +269,81 @@ MapNodeType chooseMiddleNodeType(
     }
 
     return MapNodeType::Combat;
+}
+
+    int getEventDrawCount(
+    const RunState& runState,
+    EventId eventId
+)
+{
+    auto it = runState.eventDrawCounts.find(eventId);
+
+    if (it == runState.eventDrawCounts.end()) {
+        return 0;
+    }
+
+    return it->second;
+}
+
+    EventId chooseLeastDrawnEventId(
+        RunState& runState,
+        const EventDatabase& eventDatabase
+    )
+{
+    std::vector<EventId> ids = eventDatabase.getAllEventIds();
+
+    if (ids.empty()) {
+        return 0;
+    }
+
+    std::vector<EventId> candidates;
+    int minCount = 0;
+    bool hasMinCount = false;
+
+    for (EventId id : ids) {
+        const int count = getEventDrawCount(runState, id);
+
+        if (!hasMinCount || count < minCount) {
+            minCount = count;
+            candidates.clear();
+            candidates.push_back(id);
+            hasMinCount = true;
+        } else if (count == minCount) {
+            candidates.push_back(id);
+        }
+    }
+
+    std::uniform_int_distribution<int> dist(
+        0,
+        static_cast<int>(candidates.size()) - 1
+    );
+
+    const EventId chosenId = candidates[dist(runState.rng)];
+
+    runState.eventDrawCounts[chosenId] += 1;
+
+    return chosenId;
+}
+
+    void assignNodeType(
+        MapNode& node,
+        MapNodeType type,
+        RunState& runState,
+        const EventDatabase& eventDatabase,
+        MapNodeTypeCounter& counter
+    )
+{
+    node.type = type;
+
+    if (node.type == MapNodeType::Event) {
+        node.eventId =
+            chooseLeastDrawnEventId(runState, eventDatabase);
+    } else {
+        node.eventId = 0;
+    }
+
+
+    increaseNodeTypeCounter(node.type, counter);
 }
 
 }

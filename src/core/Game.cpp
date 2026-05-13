@@ -355,8 +355,6 @@ void Game::startNewRun()
         enemyDatabase
     );
 
-    mapSystem.generateRouteMap(runState, eventDatabase);
-
     currentScene = std::make_unique<MapScene>(gameContext);
 
 }

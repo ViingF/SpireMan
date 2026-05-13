@@ -16,7 +16,20 @@ CombatScene::CombatScene(
     sf::Vector2f(250.f, 200.f),
     context.resources.getFont("zh-R"),
     "win"
-          )
+          ),
+    drawPileButton_(
+    sf::Vector2f(1550.f, 650.f),
+    sf::Vector2f(250.f, 70.f),
+    context.resources.getFont("zh-R"),
+    "Draw Pile"
+),
+
+    discardPileButton_(
+    sf::Vector2f(1550.f, 735.f),
+    sf::Vector2f(250.f, 70.f),
+    context.resources.getFont("zh-R"),
+    "Discard"
+)
 {
     combatSystem_.startCombat(
         context.runState,
@@ -38,22 +51,52 @@ void CombatScene::handleEvent(
         return;
     }
 
+    if (pileOverlay_.handleEvent(event, window)) {
+        return;
+    }
+
     endTurnButton.handleEvent(event, window);
     winButton.handleEvent(event, window);
+    drawPileButton_.handleEvent(event, window);
+    discardPileButton_.handleEvent(event, window);
 
+    if (drawPileButton_.wasClicked()) {
+        const CombatDeck& deck = combatSystem_.getDeck();
+
+        pileOverlay_.open(
+            "Draw Pile",
+            &deck.drawPile
+        );
+
+        drawPileButton_.reset();
+        return;
+    }
+
+    if (discardPileButton_.wasClicked()) {
+        const CombatDeck& deck = combatSystem_.getDeck();
+
+        pileOverlay_.open(
+            "Discard Pile",
+            &deck.discardPile
+        );
+
+        discardPileButton_.reset();
+        return;
+    }
 
     if (endTurnButton.wasClicked())
     {
         combatSystem_.endPlayerTurn();
-
         endTurnButton.reset();
     }
+
     if (winButton.wasClicked()) {
         transition.target = SceneType::Reward;
         transition.battleResult = BattleResult::Victory;
         winButton.reset();
     }
 }
+
 
 void CombatScene::update(float dt)
 {
@@ -94,6 +137,14 @@ void CombatScene::draw(
 
     endTurnButton.draw(window);
     winButton.draw(window);
+    drawPileButton_.draw(window);
+    discardPileButton_.draw(window);
+    pileOverlay_.draw(
+        window,
+        context.resources.getFont("zh-R"),
+        context.cards
+    );
+
 
 }
 

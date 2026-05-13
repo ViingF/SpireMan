@@ -27,6 +27,9 @@ constexpr int ACT1_ROUTE_LENGTH = 9;
 constexpr int ACT2_ROUTE_LENGTH = 10;
 constexpr int ACT3_ROUTE_LENGTH = 11;
 
+constexpr int SHOP_REMOVE_BASE_COST = 50;
+
+
 inline int getRouteLengthByAct(int act)
 {
     if (act == 1) {

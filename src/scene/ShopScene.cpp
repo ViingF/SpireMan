@@ -134,6 +134,46 @@ void ShopScene::handleEvent(
     const sf::Vector2f mousePos =
         window.mapPixelToCoords(pixelPosition);
 
+    if (removingCard_) {
+        if (getCancelRemoveRect().contains(mousePos)) {
+            removingCard_ = false;
+            message_ = "Card removal cancelled.";
+            return;
+        }
+
+        if (getRemovePrevPageRect().contains(mousePos)) {
+            removePage_ -= 1;
+            clampRemovePage();
+            return;
+        }
+
+        if (getRemoveNextPageRect().contains(mousePos)) {
+            removePage_ += 1;
+            clampRemovePage();
+            return;
+        }
+
+        const int cardsPerPage = getRemoveCardsPerPage();
+        const int startIndex = removePage_ * cardsPerPage;
+        const int deckSize =
+            static_cast<int>(context.runState.masterDeck.size());
+
+        for (int i = 0; i < cardsPerPage; ++i) {
+            const int deckIndex = startIndex + i;
+
+            if (deckIndex >= deckSize) {
+                break;
+            }
+
+            if (getDeckCardRect(i).contains(mousePos)) {
+                removeCardByDeckIndex(deckIndex);
+                return;
+            }
+        }
+
+        return;
+    }
+
     for (int i = 0; i < static_cast<int>(cardOffers_.size()); ++i) {
         if (getCardRect(i).contains(mousePos)) {
             buyCard(i);
@@ -141,10 +181,16 @@ void ShopScene::handleEvent(
         }
     }
 
+    if (getRemoveCardRect().contains(mousePos)) {
+        startRemoveCard();
+        return;
+    }
+
     if (getLeaveRect().contains(mousePos)) {
         leaveShop();
     }
 }
+
 
 void ShopScene::update(float)
 {
@@ -260,9 +306,31 @@ void ShopScene::draw(sf::RenderWindow& window)
     if (!message_.empty()) {
         sf::Text messageText = makeText(font, message_, 24);
         messageText.setFillColor(sf::Color(240, 220, 160));
-        messageText.setPosition(sf::Vector2f(panelX + 40.0f, 720.0f));
+        messageText.setPosition(sf::Vector2f(panelX + 40.0f, 640.0f));
         window.draw(messageText);
     }
+
+    const sf::FloatRect removeRect = getRemoveCardRect();
+
+    sf::RectangleShape removeButton(removeRect.size);
+    removeButton.setPosition(removeRect.position);
+    removeButton.setFillColor(sf::Color(90, 65, 120, 230));
+    removeButton.setOutlineThickness(3.0f);
+    removeButton.setOutlineColor(sf::Color(220, 200, 255));
+    window.draw(removeButton);
+
+    std::ostringstream removeTextStream;
+    removeTextStream << "Remove Card: "
+                     << getRemoveCost()
+                     << " Gold";
+
+    sf::Text removeText = makeText(font, removeTextStream.str(), 28);
+    removeText.setFillColor(sf::Color::White);
+    removeText.setPosition(sf::Vector2f(
+        removeRect.position.x + 70.0f,
+        removeRect.position.y + 22.0f
+    ));
+    window.draw(removeText);
 
     const sf::FloatRect leaveRect = getLeaveRect();
 
@@ -280,6 +348,10 @@ void ShopScene::draw(sf::RenderWindow& window)
         leaveRect.position.y + 25.0f
     ));
     window.draw(leaveText);
+    if (removingCard_) {
+        drawRemoveCardOverlay(window, font);
+    }
+
 }
 
 SceneTransition ShopScene::getTransition() const
@@ -351,3 +423,333 @@ void ShopScene::leaveShop()
         transition_.target = SceneType::Map;
     }
 }
+
+sf::FloatRect ShopScene::getRemoveCardRect() const
+{
+    return sf::FloatRect{
+        sf::Vector2f(1180.0f, 710.0f),
+        sf::Vector2f(420.0f, 80.0f)
+    };
+}
+
+int ShopScene::getRemoveCost() const
+{
+    return SHOP_REMOVE_BASE_COST * (shopRemoveCount_ + 1);
+}
+
+void ShopScene::startRemoveCard()
+{
+    if (context.runState.masterDeck.empty()) {
+        message_ = "There are no cards to remove.";
+        return;
+    }
+
+    const int cost = getRemoveCost();
+
+    if (context.runState.gold < cost) {
+        std::ostringstream text;
+        text << "Not enough gold. Need "
+             << cost
+             << " gold.";
+
+        message_ = text.str();
+        return;
+    }
+
+    removingCard_ = true;
+    removePage_ = 0;
+    message_ = "Choose a card to remove.";
+}
+
+void ShopScene::removeCardByDeckIndex(int deckIndex)
+{
+    if (
+        deckIndex < 0 ||
+        deckIndex >= static_cast<int>(context.runState.masterDeck.size())
+    ) {
+        return;
+    }
+
+    const int cost = getRemoveCost();
+
+    if (context.runState.gold < cost) {
+        std::ostringstream text;
+        text << "Not enough gold. Need "
+             << cost
+             << " gold.";
+
+        message_ = text.str();
+        removingCard_ = false;
+        return;
+    }
+
+    std::string removedName = "a card";
+
+    const CardId cardId =
+        context.runState.masterDeck[deckIndex].cardId;
+
+    if (context.cards.exists(cardId)) {
+        removedName = context.cards.get(cardId).name;
+    }
+
+    context.runState.gold -= cost;
+
+    context.runState.masterDeck.erase(
+        context.runState.masterDeck.begin() + deckIndex
+    );
+
+    shopRemoveCount_ += 1;
+    removingCard_ = false;
+
+    clampRemovePage();
+
+    std::ostringstream text;
+    text << "Removed "
+         << removedName
+         << " for "
+         << cost
+         << " gold.";
+
+    if (!context.runState.masterDeck.empty()) {
+        text << " Next removal costs "
+             << getRemoveCost()
+             << " gold.";
+    }
+
+    message_ = text.str();
+}
+
+int ShopScene::getRemoveCardsPerPage() const
+{
+    return 15;
+}
+
+int ShopScene::getRemovePageCount() const
+{
+    const int deckSize =
+        static_cast<int>(context.runState.masterDeck.size());
+
+    if (deckSize <= 0) {
+        return 1;
+    }
+
+    const int cardsPerPage = getRemoveCardsPerPage();
+
+    return (deckSize + cardsPerPage - 1) / cardsPerPage;
+}
+
+void ShopScene::clampRemovePage()
+{
+    const int pageCount = getRemovePageCount();
+
+    if (removePage_ < 0) {
+        removePage_ = 0;
+    }
+
+    if (removePage_ >= pageCount) {
+        removePage_ = pageCount - 1;
+    }
+}
+
+sf::FloatRect ShopScene::getDeckCardRect(int visibleIndex) const
+{
+    constexpr int columns = 5;
+
+    const int row = visibleIndex / columns;
+    const int column = visibleIndex % columns;
+
+    const float cardWidth = 300.0f;
+    const float cardHeight = 190.0f;
+    const float gapX = 40.0f;
+    const float gapY = 34.0f;
+
+    const float startX = 110.0f;
+    const float startY = 245.0f;
+
+    return sf::FloatRect{
+        sf::Vector2f(
+            startX + static_cast<float>(column) * (cardWidth + gapX),
+            startY + static_cast<float>(row) * (cardHeight + gapY)
+        ),
+        sf::Vector2f(cardWidth, cardHeight)
+    };
+}
+
+sf::FloatRect ShopScene::getRemovePrevPageRect() const
+{
+    return sf::FloatRect{
+        sf::Vector2f(620.0f, 930.0f),
+        sf::Vector2f(210.0f, 70.0f)
+    };
+}
+
+sf::FloatRect ShopScene::getRemoveNextPageRect() const
+{
+    return sf::FloatRect{
+        sf::Vector2f(1090.0f, 930.0f),
+        sf::Vector2f(210.0f, 70.0f)
+    };
+}
+
+sf::FloatRect ShopScene::getCancelRemoveRect() const
+{
+    return sf::FloatRect{
+        sf::Vector2f(1540.0f, 125.0f),
+        sf::Vector2f(250.0f, 70.0f)
+    };
+}
+
+void ShopScene::drawRemoveCardOverlay(
+    sf::RenderWindow& window,
+    const sf::Font& font
+)
+{
+    sf::RectangleShape dim(sf::Vector2f(1920.0f, 1080.0f));
+    dim.setPosition(sf::Vector2f(0.0f, 0.0f));
+    dim.setFillColor(sf::Color(0, 0, 0, 180));
+    window.draw(dim);
+
+    sf::RectangleShape panel(sf::Vector2f(1760.0f, 900.0f));
+    panel.setPosition(sf::Vector2f(80.0f, 100.0f));
+    panel.setFillColor(sf::Color(35, 35, 50, 245));
+    panel.setOutlineThickness(3.0f);
+    panel.setOutlineColor(sf::Color(230, 220, 180));
+    window.draw(panel);
+
+    std::ostringstream titleStream;
+    titleStream << "Choose a card to remove"
+                << "    Cost: "
+                << getRemoveCost()
+                << " Gold"
+                << "    Deck: "
+                << context.runState.masterDeck.size();
+
+    sf::Text title = makeText(font, titleStream.str(), 38);
+    title.setFillColor(sf::Color::White);
+    title.setPosition(sf::Vector2f(120.0f, 130.0f));
+    window.draw(title);
+
+    const sf::FloatRect cancelRect = getCancelRemoveRect();
+
+    sf::RectangleShape cancelButton(cancelRect.size);
+    cancelButton.setPosition(cancelRect.position);
+    cancelButton.setFillColor(sf::Color(120, 65, 65));
+    cancelButton.setOutlineThickness(2.0f);
+    cancelButton.setOutlineColor(sf::Color(240, 210, 180));
+    window.draw(cancelButton);
+
+    sf::Text cancelText = makeText(font, "Cancel", 28);
+    cancelText.setFillColor(sf::Color::White);
+    cancelText.setPosition(sf::Vector2f(
+        cancelRect.position.x + 78.0f,
+        cancelRect.position.y + 20.0f
+    ));
+    window.draw(cancelText);
+
+    const int cardsPerPage = getRemoveCardsPerPage();
+    const int startIndex = removePage_ * cardsPerPage;
+    const int deckSize =
+        static_cast<int>(context.runState.masterDeck.size());
+
+    for (int i = 0; i < cardsPerPage; ++i) {
+        const int deckIndex = startIndex + i;
+
+        if (deckIndex >= deckSize) {
+            break;
+        }
+
+        const CardInstance& instance =
+            context.runState.masterDeck[deckIndex];
+
+        std::string cardName = "Unknown Card";
+        std::string cardDescription;
+        int cardCost = 0;
+
+        if (context.cards.exists(instance.cardId)) {
+            const CardDef& def = context.cards.get(instance.cardId);
+
+            cardName = def.name;
+            cardDescription = def.description;
+            cardCost = def.cost;
+        }
+
+        const sf::FloatRect rect = getDeckCardRect(i);
+
+        sf::RectangleShape cardShape(rect.size);
+        cardShape.setPosition(rect.position);
+        cardShape.setFillColor(sf::Color(70, 70, 95));
+        cardShape.setOutlineThickness(3.0f);
+        cardShape.setOutlineColor(sf::Color(220, 210, 170));
+        window.draw(cardShape);
+
+        sf::Text nameText = makeText(font, cardName, 26);
+        nameText.setFillColor(sf::Color::White);
+        nameText.setPosition(sf::Vector2f(
+            rect.position.x + 18.0f,
+            rect.position.y + 16.0f
+        ));
+        window.draw(nameText);
+
+        std::ostringstream meta;
+        meta << "Cost: " << cardCost
+             << "    ID: " << instance.instanceId;
+
+        sf::Text metaText = makeText(font, meta.str(), 19);
+        metaText.setFillColor(sf::Color(210, 210, 210));
+        metaText.setPosition(sf::Vector2f(
+            rect.position.x + 18.0f,
+            rect.position.y + 54.0f
+        ));
+        window.draw(metaText);
+
+        sf::Text descText = makeText(font, cardDescription, 17);
+        descText.setFillColor(sf::Color(225, 225, 225));
+        descText.setPosition(sf::Vector2f(
+            rect.position.x + 18.0f,
+            rect.position.y + 90.0f
+        ));
+        window.draw(descText);
+    }
+
+    const sf::FloatRect prevRect = getRemovePrevPageRect();
+
+    sf::RectangleShape prevButton(prevRect.size);
+    prevButton.setPosition(prevRect.position);
+    prevButton.setFillColor(sf::Color(80, 80, 120));
+    window.draw(prevButton);
+
+    sf::Text prevText = makeText(font, "Previous", 24);
+    prevText.setFillColor(sf::Color::White);
+    prevText.setPosition(sf::Vector2f(
+        prevRect.position.x + 42.0f,
+        prevRect.position.y + 20.0f
+    ));
+    window.draw(prevText);
+
+    const sf::FloatRect nextRect = getRemoveNextPageRect();
+
+    sf::RectangleShape nextButton(nextRect.size);
+    nextButton.setPosition(nextRect.position);
+    nextButton.setFillColor(sf::Color(80, 80, 120));
+    window.draw(nextButton);
+
+    sf::Text nextText = makeText(font, "Next", 24);
+    nextText.setFillColor(sf::Color::White);
+    nextText.setPosition(sf::Vector2f(
+        nextRect.position.x + 72.0f,
+        nextRect.position.y + 20.0f
+    ));
+    window.draw(nextText);
+
+    std::ostringstream pageTextStream;
+    pageTextStream << "Page "
+                   << removePage_ + 1
+                   << " / "
+                   << getRemovePageCount();
+
+    sf::Text pageText = makeText(font, pageTextStream.str(), 24);
+    pageText.setFillColor(sf::Color(230, 230, 230));
+    pageText.setPosition(sf::Vector2f(880.0f, 956.0f));
+    window.draw(pageText);
+}
+

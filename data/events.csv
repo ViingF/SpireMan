@@ -20,5 +20,5 @@ event_id,title,description,choice_index,choice_text,choice_description,effects,b
 8,Moai Head,A stone Moai head stands silently. Its mouth gapes open like a doorway.,1,Leave,Nothing happens.,None:0,MoaiHead
 9,The Mausoleum,A dark mausoleum houses an ornate coffin. Something glimmers inside.,0,Open the coffin,"Gain a random Relic, gain a Curse.",GainGold:100;Curse:1002,Mausoleum
 9,The Mausoleum,A dark mausoleum houses an ornate coffin. Something glimmers inside.,1,Leave,Nothing happens.,None:0,Mausoleum
-10,The Nest,A disgusting nest filled with rotten eggs. Something sharp glints inside.,0,Search the nest,"Lose 6 HP, add Ritual Dagger to your deck.",LoseHp:6;AddCard:Ritual Dagger,TheNest
+10,The Nest,A disgusting nest filled with rotten eggs. Something sharp glints inside.,0,Search the nest,"Lose 6 HP, add Ritual Dagger to your deck.",LoseHp:6;AddCard:101,TheNest
 10,The Nest,A disgusting nest filled with rotten eggs. Something sharp glints inside.,1,Leave,Nothing happens.,None:0,TheNest

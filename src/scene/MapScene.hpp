@@ -7,6 +7,9 @@
 
 #include <SFML/Graphics.hpp>
 
+#include "ui/Button.hpp"
+#include "ui/CardPileOverlay.hpp"
+
 class MapScene : public Scene {
 public:
     explicit MapScene(GameContext& context);
@@ -48,6 +51,9 @@ private:
 private:
     MapSystem mapSystem_;
     SceneTransition transition_;
+    Button deckButton_;
+    CardPileOverlay deckOverlay_;
+
 
 };
 

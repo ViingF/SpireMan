@@ -207,10 +207,18 @@ void EventScene::handleEvent(
 
     for (int i = 0; i < static_cast<int>(eventDef.choices.size()); ++i) {
         if (getChoiceRect(i).contains(mousePos)) {
+            const EventChoiceDef& choice = eventDef.choices[i];
+
+            if (!canChoose(choice)) {
+                resultMessage_ = "Not enough gold.";
+                return;
+            }
+
             choose(i);
             return;
         }
     }
+
 }
 
 void EventScene::update(float)
@@ -288,14 +296,23 @@ void EventScene::draw(sf::RenderWindow& window)
     for (int i = 0; i < static_cast<int>(eventDef.choices.size()); ++i) {
         const sf::FloatRect rect = getChoiceRect(i);
 
+        const EventChoiceDef& choice = eventDef.choices[i];
+        const bool enabled = canChoose(choice);
+
         sf::RectangleShape button(rect.size);
         button.setPosition(rect.position);
-        button.setFillColor(sf::Color(70, 70, 95, 220));
+
+        if (enabled) {
+            button.setFillColor(sf::Color(70, 70, 95, 220));
+            button.setOutlineColor(sf::Color(210, 210, 230));
+        } else {
+            button.setFillColor(sf::Color(55, 55, 55, 180));
+            button.setOutlineColor(sf::Color(120, 120, 120));
+        }
+
         button.setOutlineThickness(3.0f);
-        button.setOutlineColor(sf::Color(210, 210, 230));
         window.draw(button);
 
-        const EventChoiceDef& choice = eventDef.choices[i];
 
         sf::Text choiceText = makeText(font, choice.text, 28);
         choiceText.setFillColor(sf::Color::White);
@@ -412,3 +429,26 @@ void EventScene::choose(int choiceIndex)
     }
 
 }
+
+bool EventScene::canChoose(const EventChoiceDef& choice) const
+{
+    int requiredGold = 0;
+    bool removesCard = false;
+
+    for (const EventEffect& effect : choice.effects) {
+        if (effect.type == EventEffectType::LoseGold) {
+            requiredGold += std::max(0, effect.value);
+        }
+
+        if (effect.type == EventEffectType::RemoveCard) {
+            removesCard = true;
+        }
+    }
+
+    if (removesCard && context.runState.gold < requiredGold) {
+        return false;
+    }
+
+    return true;
+}
+

@@ -7,6 +7,7 @@
 #include "EventDef.hpp"
 
 #include <random>
+#include <unordered_map>
 #include <vector>
 
 struct RunState {
@@ -34,6 +35,8 @@ struct RunState {
     EnemyId bossEnemyId = 0;
     int pendingRemoveCardCount = 0;
     std::vector<EventEffect> pendingEventEffects;
+    std::unordered_map<EventId, int> eventDrawCounts;
+
 };
 
 

@@ -187,7 +187,13 @@ void drawLine(
 }
 
 MapScene::MapScene(GameContext& context)
-    : Scene(context)
+    : Scene(context),
+    deckButton_(
+          sf::Vector2f(1580.0f, 22.0f),
+          sf::Vector2f(250.0f, 58.0f),
+          context.resources.getFont("zh-R"),
+          "Deck"
+      )
 {
     if (context.runState.mapNodes.empty()) {
         mapSystem_.startAct(
@@ -210,6 +216,22 @@ void MapScene::handleEvent(
     if (transition_.target != SceneType::None) {
         return;
     }
+    if (deckOverlay_.handleEvent(event, window)) {
+        return;
+    }
+
+    deckButton_.handleEvent(event, window);
+
+    if (deckButton_.wasClicked()) {
+        deckOverlay_.open(
+            "Master Deck",
+            &context.runState.masterDeck
+        );
+
+        deckButton_.reset();
+        return;
+    }
+
 
     sf::Vector2i pixelPosition;
 
@@ -248,6 +270,8 @@ void MapScene::draw(sf::RenderWindow& window)
             false
         );
     }
+
+    deckButton_.draw(window);
 
     const sf::Font& font = context.resources.getFont("zh-R");
 
@@ -304,6 +328,12 @@ void MapScene::draw(sf::RenderWindow& window)
         sf::Sprite sprite = makeNodeSprite(node, total);
         window.draw(sprite);
     }
+    deckOverlay_.draw(
+    window,
+    context.resources.getFont("zh-R"),
+    context.cards
+);
+
 }
 
 SceneTransition MapScene::getTransition() const
