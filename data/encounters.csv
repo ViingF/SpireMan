@@ -1,0 +1,21 @@
+id,name,enemyIds,isBoss,act
+1,Red and Green Worm,6|7,0,1
+2,Rat,2,0,1
+3,Acid and Green Slime,3|1,0,1
+4,Green Worm,7,0,1
+5,Gremlin Nob,4,0,1
+6,Three Sentries,5|5|5,0,1
+7,Slime Boss,1001,1,1
+8,Guardian,1002,1,1
+9,Cultist,101,0,2
+10,Shelled Parasite,102,0,2
+11,Snecko,106,0,2
+12,Snake Plant,107,0,2
+13,The Collector,2001,1,2
+14,Automaton,2002,1,2
+15,Darkling Trio,201|201|201,0,3
+16,Twin Orb Walkers,202|202,0,3
+17,Maw,203,0,3
+18,Nemesis,205,0,3
+19,TimeEater,3001,1,3
+20,AwakenedOne,3002,1,3

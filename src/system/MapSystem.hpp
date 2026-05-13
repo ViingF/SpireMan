@@ -1,9 +1,8 @@
-#ifndef SPIRELIKE_MAPSYSTEM_HPP
-#define SPIRELIKE_MAPSYSTEM_HPP
-
-#include "database/EnemyDatabase.hpp"
+#pragma once
+#include "database/EncounterDatabase.hpp"
 #include "database/EventDatabase.hpp"
 #include "model/RunState.hpp"
+
 class MapSystem {
 public:
     void generateRouteMap(
@@ -13,10 +12,16 @@ public:
 
     void startAct(
         RunState& runState,
-        int act,const EventDatabase& eventDatabase,const EnemyDatabase& enemyDatabase) const;
+        int act,
+        const EventDatabase& eventDatabase,
+        const EncounterDatabase& encounterDatabase
+    ) const;
 
     bool advanceToNextActIfPossible(
-        RunState& runState,const EventDatabase& eventDatabase,const EnemyDatabase& enemyDatabase) const;
+        RunState& runState,
+        const EventDatabase& eventDatabase,
+        const EncounterDatabase& encounterDatabase
+    ) const;
 
     void refreshNodeStates(RunState& runState) const;
 
@@ -26,5 +31,3 @@ public:
 
     bool isRouteFinished(const RunState& runState) const;
 };
-
-#endif // SPIRELIKE_MAPSYSTEM_HPP

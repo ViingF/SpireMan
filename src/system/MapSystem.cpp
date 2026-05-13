@@ -760,7 +760,7 @@ void MapSystem::startAct(
     RunState& runState,
     int act,
     const EventDatabase& eventDatabase,
-    const EnemyDatabase& enemyDatabase
+    const EncounterDatabase& encounterDatabase
 ) const
 {
     runState.act = std::clamp(act, 1, MAX_ACT);
@@ -769,21 +769,24 @@ void MapSystem::startAct(
     runState.mapNodes.clear();
     runState.currentMapNodeIndex = -1;
     runState.selectedMapNodeIndex = -1;
-    runState.currentEnemyId = 0;
 
-    runState.bossEnemyId =
-        enemyDatabase.chooseRandomBossIdByAct(
-            runState.act,
-            runState.rng
-        );
+    runState.currentEncounterId = 0;
+
+    runState.bossEncounterId =
+    encounterDatabase.chooseRandomBossEncounterId(
+        runState.act,
+        runState.rng
+    );
+
 
     generateRouteMap(runState, eventDatabase);
 }
 
+
 bool MapSystem::advanceToNextActIfPossible(
     RunState& runState,
     const EventDatabase& eventDatabase,
-    const EnemyDatabase& enemyDatabase
+    const EncounterDatabase& encounterDatabase
 ) const
 {
     if (!isRouteFinished(runState)) {
@@ -798,9 +801,10 @@ bool MapSystem::advanceToNextActIfPossible(
         runState,
         runState.act + 1,
         eventDatabase,
-        enemyDatabase
+        encounterDatabase
     );
 
     return true;
 }
+
 

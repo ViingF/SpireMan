@@ -26,6 +26,8 @@ private:
     CardDatabase cardDatabase;
     EnemyDatabase enemyDatabase;
     EventDatabase eventDatabase;
+    EncounterDatabase encounterDatabase;
+
 
     sf::RenderWindow window;
     ResourceManager resources;

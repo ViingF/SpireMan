@@ -30,6 +30,7 @@ using TargetId = int;
 using EnemyId = int;
 using EventId = int;
 using CardInstanceId = int;
+using EncounterId = int;
 constexpr TargetId NoTarget = -1;
 
 enum class BattleResult {

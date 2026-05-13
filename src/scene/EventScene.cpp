@@ -399,15 +399,18 @@ void EventScene::choose(int choiceIndex)
     }
 
     if (result.startCombat) {
-        EnemyId enemyId = context.enemies.chooseEnemyIdByFloor(
-            context.runState.floor,
+        EncounterId encounterId =
+            context.encounters.chooseEncounterIdByAct(
+            context.runState.act,
             context.runState.rng
         );
 
-        context.runState.currentEnemyId = enemyId;
 
-        transition_.target = SceneType::Combat;
-        transition_.enemyId = enemyId;
+    context.runState.currentEncounterId = encounterId;
+
+    transition_.target = SceneType::Combat;
+    transition_.encounterId = encounterId;
+
         return;
     }
 
@@ -417,7 +420,7 @@ void EventScene::choose(int choiceIndex)
         if (mapSystem_.advanceToNextActIfPossible(
                 context.runState,
                 context.events,
-                context.enemies
+                context.encounters
             )) {
             transition_.target = SceneType::Map;
             } else {

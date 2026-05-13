@@ -10,7 +10,8 @@ struct MapNode {
     MapNodeState state = MapNodeState::Locked;
 
     EventId eventId = 0;
-    EnemyId enemyId = 0;
+    EncounterId encounterId = 0;
+
     int layer = 0;
     int slot = 0;
     int orderInLayer = 0;

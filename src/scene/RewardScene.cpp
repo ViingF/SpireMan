@@ -105,7 +105,7 @@ void RewardScene::chooseCard(CardId cardId)
             if (mapSystem.advanceToNextActIfPossible(
                     context.runState,
                     context.events,
-                    context.enemies
+                    context.encounters
                 )) {
                 transition.target = SceneType::Map;
                 } else {

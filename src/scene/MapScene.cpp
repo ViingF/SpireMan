@@ -197,11 +197,12 @@ MapScene::MapScene(GameContext& context)
 {
     if (context.runState.mapNodes.empty()) {
         mapSystem_.startAct(
-            context.runState,
-            context.runState.act,
-            context.events,
-            context.enemies
-        );
+    context.runState,
+    context.runState.act,
+    context.events,
+    context.encounters
+);
+
     } else {
         mapSystem_.refreshNodeStates(context.runState);
     }
@@ -486,25 +487,26 @@ void MapScene::enterNode(int nodeIndex)
         return;
     }
 
-    EnemyId enemyId = 0;
+    EncounterId encounterId = 0;
 
     const bool finalNode = node.nextIndices.empty();
 
-    if (finalNode && context.runState.bossEnemyId > 0) {
-        enemyId = context.runState.bossEnemyId;
+    if (finalNode && context.runState.bossEncounterId > 0) {
+        encounterId = context.runState.bossEncounterId;
     } else {
-        enemyId = context.enemies.chooseEnemyIdByAct(
+        encounterId = context.encounters.chooseEncounterIdByAct(
     context.runState.act,
     context.runState.rng
 );
 
     }
 
-    context.runState.currentEnemyId = enemyId;
+    context.runState.currentEncounterId = encounterId;
 
     transition_.target = SceneType::Combat;
-    transition_.enemyId = enemyId;
+    transition_.encounterId = encounterId;
     transition_.mapNodeIndex = node.index;
+
 
 }
 bool MapScene::isBossNode(
@@ -513,8 +515,9 @@ bool MapScene::isBossNode(
 ) const
 {
     return node.type == MapNodeType::Combat &&
-           node.nextIndices.empty() &&
-           context.runState.bossEnemyId > 0;
+       node.nextIndices.empty() &&
+       context.runState.bossEncounterId > 0;
+
 }
 
 
@@ -524,22 +527,24 @@ std::string MapScene::getNodeTextureId(
 ) const
 {
     if (isBossNode(node, total)) {
-        const EnemyDef& boss =
-            context.enemies.get(context.runState.bossEnemyId);
+        const EncounterDef& encounter =
+    context.encounters.get(context.runState.bossEncounterId);
 
-        if (
-            !boss.mapTextureId.empty() &&
-            context.resources.hasTexture(boss.mapTextureId)
-        ) {
-            return boss.mapTextureId;
+        if (!encounter.enemies.empty()) {
+            EnemyId bossEnemyId = encounter.enemies.front().enemyId;
+            const EnemyDef& boss = context.enemies.get(bossEnemyId);
+
+            if (!boss.mapTextureId.empty() &&
+                context.resources.hasTexture(boss.mapTextureId)) {
+                return boss.mapTextureId;
+                }
+
+            if (!boss.textureId.empty() &&
+                context.resources.hasTexture(boss.textureId)) {
+                return boss.textureId;
+                }
         }
 
-        if (
-            !boss.textureId.empty() &&
-            context.resources.hasTexture(boss.textureId)
-        ) {
-            return boss.textureId;
-        }
     }
 
     if (node.state == MapNodeState::Completed) {

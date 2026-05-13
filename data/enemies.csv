@@ -1,17 +1,26 @@
 id,name,maxHp,textureId,movePattern,isBoss,mapTextureId,act
-1,Slime,30,Kaka,Attack:6;Block:4,0,,1
-2,Goblin,45,Rat,Attack:8;Attack:5;Block:6,0,,1
-100,Fire Lord,260,Slime,Attack:18;Buff:4;Attack:24,1,SlimeMap,1
-101,gg,300,Guardian,Attack:10;Buff:4;Attack:44,1,GuardianMap,1
-201,Cultist,56,Cultist,Attack:12;Buff:3;Attack:12,0,,2
-202,Shelled Parasite,68,Shelled Parasite,Block:9;Attack:14;Attack:10,0,,2
-203,Sneaky Gremlin,50,SneakyGremlin,Attack:8;Attack:8;Block:6;Attack:10,0,,2
-204,Spheric Guardian,74,Spheric Guardian,Block:12;Attack:16;Block:8,0,,2
-211,The Collector,240,TheCollector,Attack:18;Buff:3;Block:12;Attack:18,1,CollectorMap,2
-212,Automaton,260,Automaton,Block:15;Attack:22;Buff:4;Attack:22,1,AutomatonMap,2
-301,Darkling,52,Darkling,Attack:10;Attack:10;Buff:2,0,,3
-302,Orb Walker,74,OrbWalker,Attack:16;Attack:16,0,,3
-303,Maw,60,Maw,Attack:14;Attack:14;Buff:3,0,,3
-304,Spire Growth,80,SpireGrowth,Attack:16;Block:12;Attack:16,0,,3
-311,Time Eater,456,TimeEater,Block:20;Attack:24;Buff:3;Attack:28,1,TimeEaterMap,3
-312,Awakened One,540,AwakenedOne,Attack:18;Block:16;Attack:18;Buff:3;Attack:20,1,AwakenedOneMap,3
+1,Kaka,30,Kaka,Attack:6;Block:4,0,,1
+2,Rat,45,Rat,Attack:8;Attack:5;Block:6,0,,1
+3,AcidSlime,38,AcidSlime,Attack:8,0,,1
+4,GremlinNob,60,GremlinNob,Attack:8;Attack:8;Attack:10,0,,1
+5,Sentry,50,Sentry,Block:6;Attack:19;Attack:10,0,,1
+6,RedWorm,10,RedWorm,Attack:8,0,,1
+7,GreenWorm,10,GreenWorm,Attack:8,0,,1
+1001,Slime,260,Slime,Attack:18;Buff:4;Attack:24,1,SlimeMap,1
+1002,Guardian,300,Guardian,Attack:10;Buff:4;Attack:44,1,GuardianMap,1
+101,Cultist,56,Cultist,Attack:12;Buff:3;Attack:12,0,,2
+102,ShelledParasite,68,Shelled Parasite,Block:9;Attack:14;Attack:10,0,,2
+103,SneakyGremlin,50,SneakyGremlin,Attack:8;Attack:8;Block:6;Attack:10,0,,2
+104,MysticSnake,36,MysticSnake,Attack:9;Block:5,0,,2
+105,SphericGuardian,74,SphericGuardian,Block:12;Attack:16;Block:8,0,,2
+106,Snecko,66,Snecko,Block:12;Attack:16;Block:8,0,,2
+107,SnakePlant,77,SnakePlant,Attack:18;Buff:3;Block:12;Attack:18,0,,2
+2001,TheCollector,240,TheCollector,Attack:18;Buff:3;Block:12;Attack:18,1,CollectorMap,2
+2002,Automaton,260,Automaton,Block:15;Attack:22;Buff:4;Attack:22,1,AutomatonMap,2
+201,Darkling,52,Darkling,Attack:10;Attack:10;Buff:2,0,,3
+202,OrbWalker,74,OrbWalker,Attack:16;Attack:16,0,,3
+203,Maw,60,Maw,Attack:14;Attack:14;Buff:3,0,,3
+204,SpireGrowth,80,SpireGrowth,Attack:16;Block:12;Attack:16,0,,3
+205,Nemesis,99,Nemesis,Attack:16;Block:12;Attack:16,0,,3
+3001,TimeEater,456,TimeEater,Block:20;Attack:24;Buff:3;Attack:28,1,TimeEaterMap,3
+3002,AwakenedOne,540,AwakenedOne,Attack:18;Block:16;Attack:18;Buff:3;Attack:20,1,AwakenedOneMap,3

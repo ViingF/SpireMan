@@ -6,7 +6,14 @@ bool CombatSystem::hasCommittedResult() const {
     return false;
 }
 
-void CombatSystem::startCombat(RunState& runState, const EnemyDef& enemyDef, CardDatabase& cardDatabase) {
+ErrorCode CombatSystem::startCombat(
+    RunState& runState,
+    const EncounterDef& encounterDef,
+    const EnemyDatabase& enemyDatabase,
+    CardDatabase& cardDatabase
+) {
+    return ErrorCode::OK;
+
 }
 
 ErrorCode CombatSystem::playCard(int handIndex, TargetId targetId) {

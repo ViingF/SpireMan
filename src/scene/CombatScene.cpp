@@ -3,8 +3,9 @@
 
 CombatScene::CombatScene(
     GameContext& context,
-    const EnemyDef& enemyDef
+    const EncounterDef& encounterDef
 )
+
     : Scene(context),
       endTurnButton(
           sf::Vector2f(1550.f, 850.f),
@@ -32,10 +33,12 @@ CombatScene::CombatScene(
 )
 {
     combatSystem_.startCombat(
-        context.runState,
-        enemyDef,
-        context.cards
-    );
+    context.runState,
+    encounterDef,
+    context.enemies,
+    context.cards
+);
+
 }
 
 void CombatScene::handleEvent(

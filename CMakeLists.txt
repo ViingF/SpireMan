@@ -68,7 +68,10 @@ add_executable(SpireLike src/main.cpp
         src/scene/CardRemoveScene.cpp
         src/scene/CardRemoveScene.hpp
         src/ui/CardPileOverlay.cpp
-        src/ui/CardPileOverlay.hpp)
+        src/ui/CardPileOverlay.hpp
+        src/model/EncounterDef.hpp
+        src/database/EncounterDatabase.cpp
+        src/database/EncounterDatabase.hpp)
 
 target_link_libraries(SpireLike
         SFML::Graphics

@@ -9,9 +9,10 @@
 class CombatScene : public Scene {
 public:
     CombatScene(
-        GameContext& context,
-        const EnemyDef& enemyDef
+    GameContext& context,
+    const EncounterDef& encounterDef
     );
+
 
     void handleEvent(
         const sf::Event& event,

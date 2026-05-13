@@ -15,6 +15,7 @@
 #include "scene/CampfireScene.hpp"
 #include "scene/CardRemoveScene.hpp"
 #include "scene/ShopScene.hpp"
+#include "system/MapSystem.hpp"
 
 using namespace sf;
 using namespace std;
@@ -26,13 +27,15 @@ Game::Game()
           "SpireLike"
       ),
 
-      gameContext{
-          resources,
-          runState,
-          cardDatabase,
-          enemyDatabase,
-          eventDatabase
-      }
+    gameContext{
+    resources,
+    runState,
+    cardDatabase,
+    enemyDatabase,
+    eventDatabase,
+        encounterDatabase
+}
+
 {
     window.setFramerateLimit(60);
     resources.loadTexture("title","assets/images/title.png");
@@ -49,9 +52,17 @@ Game::Game()
     resources.loadTexture("campfireOutline","assets/images/restOutline.png");
     resources.loadTexture("shop","assets/images/shop.png");
     resources.loadTexture("shopOutline","assets/images/shopOutline.png");
+    resources.loadTexture("SneakPlant","assets/images/sneakplant.png");
+    resources.loadTexture("Nemesis","assets/images/nemesis.png");
+    resources.loadTexture("Sentry","assets/images/sentry.png");
+    resources.loadTexture("RedWorm","assets/images/redworm.png");
+    resources.loadTexture("GreenWorm","assets/images/greenworm.png");
+
 
     resources.loadTexture("Kaka","assets/images/kaka.png");
     resources.loadTexture("Rat","assets/images/rat.png");
+    resources.loadTexture("AcidSlime","assets/images/acidslime.png");
+    resources.loadTexture("GremlinNob","assets/images/gremlinnob.png");
     resources.loadTexture("Slime","assets/images/slime.png");
     resources.loadTexture("SlimeMap","assets/images/slimemap.png");
     resources.loadTexture("Guardian","assets/images/guardian.png");
@@ -61,6 +72,7 @@ Game::Game()
     resources.loadTexture("ShelledParasite","assets/images/Shelled Parasite.png");
     resources.loadTexture("SneakyGremlin","assets/images/Sneaky Gremlin.png");
     resources.loadTexture("SphericGuardian","assets/images/Spheric Guardian.png");
+    resources.loadTexture("Snecko","assets/images/snecko.png");
     resources.loadTexture("TheCollector","assets/images/The Collector.png");
     resources.loadTexture("AutomatonMap","assets/images/automatonmap.png");
     resources.loadTexture("CollectorMap","assets/images/collectormap.png");
@@ -103,17 +115,27 @@ Game::Game()
     auto eventCode=eventDatabase.loadFromCsv("data/events.csv");
     auto enemyCode=enemyDatabase.loadFromCsv("data/enemies.csv");
     auto cardCode=cardDatabase.loadFromCsv("data/cards.csv");
+    auto encounterCode = encounterDatabase.loadFromCsv("data/encounters.csv");
 
-    if (eventCode !=ErrorCode::OK||enemyCode !=ErrorCode::OK||cardCode !=ErrorCode::OK) {
+
+    if (
+    eventCode != ErrorCode::OK ||
+    enemyCode != ErrorCode::OK ||
+    encounterCode != ErrorCode::OK ||
+    cardCode != ErrorCode::OK
+) {
         throw std::runtime_error(
-        "Database load failed. events=" +
-        std::to_string(static_cast<int>(eventCode)) +
-        ", enemies=" +
-        std::to_string(static_cast<int>(enemyCode)) +
-        ", cards=" +
-        std::to_string(static_cast<int>(cardCode))
-    );
-    }
+            "Database load failed. events=" +
+            std::to_string(static_cast<int>(eventCode)) +
+            ", enemies=" +
+            std::to_string(static_cast<int>(enemyCode)) +
+            ", encounters=" +
+            std::to_string(static_cast<int>(encounterCode)) +
+            ", cards=" +
+            std::to_string(static_cast<int>(cardCode))
+        );
+}
+
 
 
 }
@@ -224,30 +246,20 @@ void Game::switchSceneIfNeeded()
 
         case SceneType::Combat:
         {
-            if (
-                !enemyDatabase.exists(
-                    transition.enemyId
-                )
-            )
-            {
-                currentScene =
-                    std::make_unique<MapScene>(
-                        gameContext
-                    );
-
+            if (!encounterDatabase.exists(transition.encounterId)) {
+                currentScene = std::make_unique<MapScene>(gameContext);
                 break;
             }
 
-            const EnemyDef& enemyDef =
-                enemyDatabase.get(
-                    transition.enemyId
-                );
+            const EncounterDef& encounterDef =
+                encounterDatabase.get(transition.encounterId);
 
             currentScene =
                 std::make_unique<CombatScene>(
                     gameContext,
-                    enemyDef
+                    encounterDef
                 );
+
 
             break;
         }
@@ -325,7 +337,7 @@ void Game::startNewRun()
     runState.gold = 99;
     runState.relics.clear();
 
-    runState.currentEnemyId = 0;
+    runState.currentEncounterId = 0;
     runState.nextCardInstanceId = 1;
     runState.act = 1;
     runState.floor = 0;
@@ -349,11 +361,12 @@ void Game::startNewRun()
 
     MapSystem mapSystem;
     mapSystem.startAct(
-        runState,
-        1,
-        eventDatabase,
-        enemyDatabase
-    );
+    runState,
+    1,
+    eventDatabase,
+    encounterDatabase
+);
+
 
     currentScene = std::make_unique<MapScene>(gameContext);
 

@@ -462,25 +462,30 @@ void CardRemoveScene::handleResolveResult(
         return;
     }
 
-    if (result.requiresCardRemove) {
+     if (result.requiresCardRemove) {
+        page_ = 0;
+        clampPage();
         return;
     }
 
     if (result.startCombat) {
-        EnemyId enemyId = context.enemies.chooseEnemyIdByFloor(
-            context.runState.floor,
-            context.runState.rng
-        );
+        EncounterId encounterId =
+            context.encounters.chooseEncounterIdByAct(
+    context.runState.act,
+    context.runState.rng
+);
 
-        context.runState.currentEnemyId = enemyId;
+
+        context.runState.currentEncounterId = encounterId;
 
         transition_.target = SceneType::Combat;
-        transition_.enemyId = enemyId;
+        transition_.encounterId = encounterId;
         return;
     }
 
     finishNormalEventNode();
 }
+
 
 void CardRemoveScene::finishNormalEventNode()
 {

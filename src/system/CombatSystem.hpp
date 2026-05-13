@@ -2,7 +2,9 @@
 #ifndef SPIRELIKE_COMBATSYSTEM_HPP
 #define SPIRELIKE_COMBATSYSTEM_HPP
 #include "database/CardDatabase.hpp"
+#include "database/EnemyDatabase.hpp"
 #include "model/CombatDeck.hpp"
+#include "model/EncounterDef.hpp"
 #include "model/Enemy.hpp"
 #include "model/Player.hpp"
 #include "model/RunState.hpp"
@@ -11,11 +13,13 @@ class CombatSystem {
 public:
     bool hasCommittedResult() const;
 
-    void startCombat(
+    ErrorCode startCombat(
     RunState& runState,
-    const EnemyDef& enemyDef,
+    const EncounterDef& encounterDef,
+    const EnemyDatabase& enemyDatabase,
     CardDatabase& cardDatabase
 );
+
 
 
 // 战斗中打出一张牌的唯一对外入口。
