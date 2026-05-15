@@ -17,36 +17,20 @@ sf::Text makeText(
     return sf::Text(font, content, size);
 }
 
-bool readLeftClickPosition(
-    const sf::Event& event,
-    sf::Vector2i& pixelPosition
-)
-{
-    if (const auto* mouse =
-            event.getIf<sf::Event::MouseButtonPressed>()) {
-        if (mouse->button == sf::Mouse::Button::Left) {
-            pixelPosition = mouse->position;
-            return true;
-        }
-    }
-
-    return false;
-}
-
-sf::FloatRect getRestButtonRect()
-{
-    return sf::FloatRect{
-        sf::Vector2f(1180.0f, 650.0f),
-        sf::Vector2f(520.0f, 110.0f)
-    };
-}
-
 }
 
 CampfireScene::CampfireScene(GameContext& context)
-    : Scene(context)
+    : Scene(context),
+      restButton_(
+          sf::Vector2f(1180.0f, 450.0f),
+          sf::Vector2f(520.0f, 400.0f),
+          context.resources.getFont("zh-R"),
+          ""
+      )
 {
-}
+    restButton_.setTexture(context.resources.getTexture("Sleep"));
+    }
+
 
 void CampfireScene::handleEvent(
     const sf::Event& event,
@@ -57,19 +41,14 @@ void CampfireScene::handleEvent(
         return;
     }
 
-    sf::Vector2i pixelPosition;
+    restButton_.handleEvent(event, window);
 
-    if (!readLeftClickPosition(event, pixelPosition)) {
-        return;
-    }
-
-    const sf::Vector2f mousePos =
-        window.mapPixelToCoords(pixelPosition);
-
-    if (getRestButtonRect().contains(mousePos)) {
+    if (restButton_.wasClicked()) {
+        restButton_.reset();
         rest();
     }
 }
+
 
 void CampfireScene::update(float)
 {
@@ -77,26 +56,21 @@ void CampfireScene::update(float)
 
 void CampfireScene::draw(sf::RenderWindow& window)
 {
-    sf::RectangleShape background(sf::Vector2f(1920.0f, 1080.0f));
-    background.setFillColor(sf::Color(24, 20, 18));
-    window.draw(background);
 
-    if (context.resources.hasTexture("campfire")) {
-        sf::Sprite campfire(context.resources.getTexture("campfire"));
+    if (context.resources.hasTexture("Campfire")) {
+        sf::Sprite campfire(context.resources.getTexture("Campfire"));
 
         const sf::Vector2u textureSize =
-            context.resources.getTexture("campfire").getSize();
+            context.resources.getTexture("Campfire").getSize();
 
         if (textureSize.x > 0 && textureSize.y > 0) {
-            const float targetSize = 520.0f;
 
             const float scale = std::min(
-                targetSize / static_cast<float>(textureSize.x),
-                targetSize / static_cast<float>(textureSize.y)
+                1920 / static_cast<float>(textureSize.x),
+                1080 / static_cast<float>(textureSize.y)
             );
 
             campfire.setScale(sf::Vector2f(scale, scale));
-            campfire.setPosition(sf::Vector2f(260.0f, 300.0f));
 
             window.draw(campfire);
         }
@@ -143,22 +117,8 @@ void CampfireScene::draw(sf::RenderWindow& window)
     healInfo.setPosition(sf::Vector2f(1120.0f, 410.0f));
     window.draw(healInfo);
 
-    const sf::FloatRect rect = getRestButtonRect();
+    restButton_.draw(window);
 
-    sf::RectangleShape button(rect.size);
-    button.setPosition(rect.position);
-    button.setFillColor(sf::Color(120, 70, 45));
-    button.setOutlineThickness(3.0f);
-    button.setOutlineColor(sf::Color(240, 210, 160));
-    window.draw(button);
-
-    sf::Text buttonText = makeText(font, "Rest", 36);
-    buttonText.setFillColor(sf::Color::White);
-    buttonText.setPosition(sf::Vector2f(
-        rect.position.x + 210.0f,
-        rect.position.y + 30.0f
-    ));
-    window.draw(buttonText);
 }
 
 SceneTransition CampfireScene::getTransition() const

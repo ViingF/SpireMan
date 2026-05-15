@@ -27,15 +27,20 @@ public:
 
     SceneTransition getTransition() const override;
 
+
 private:
     Button ironcladButton;
     RectangleShape ironcladPortrait;
 
     RectangleShape lockedButtons[3];
 
+    Button startButton;
     Button backButton;
 
+    bool ironcladSelected = true;
+
     SceneTransition transition;
+
 };
 
 #endif //SPIRELIKE_CHARACTERSELECTSCENE_HPP

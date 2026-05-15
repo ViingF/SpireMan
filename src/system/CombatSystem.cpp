@@ -95,7 +95,7 @@ void CombatSystem::applyCardEffects(const CardDef& card, TargetId targetId) {
 void CombatSystem::applySingleEffect(const CardEffect& effect, TargetId targetId) {
 }
 
-void CombatSystem::movePlayedCardAfterResolve(int handIndex, const CardDef& card) {
+void CombatSystem::movePlayedCardAfterResolve(const CardInstance& playedCard,const CardDef& card) {
 }
 
 void CombatSystem::dealDamageToEnemy(TargetId targetId, int amount) {

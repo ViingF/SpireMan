@@ -87,9 +87,10 @@ bool areAllEnemiesDefeated() const;
     );
 
     void movePlayedCardAfterResolve(
-        int handIndex,
-        const CardDef& card
+    const CardInstance& playedCard,
+    const CardDef& card
     );
+
 
     void dealDamageToEnemy(TargetId targetId, int amount);
     void gainBlock(int amount);
@@ -117,8 +118,8 @@ private:
     BattleResult result_ = BattleResult::Ongoing;
     bool resultCommitted_ = false;
 
-    // CardSystem cardSystem_;
-    // EnemyAISystem enemyAI_;
+    CardSystem cardSystem_;
+    EnemyAISystem enemyAI_;
 
     CardDatabase* cardDatabase_ = nullptr;
     std::mt19937* rng_ = nullptr;

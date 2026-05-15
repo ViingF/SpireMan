@@ -265,7 +265,7 @@ void EventScene::draw(sf::RenderWindow& window)
     ));
     window.draw(statusText);
 
-    const float panelX = 1030.0f;
+    const float panelX = 1130.0f;
     const float panelY = 120.0f;
     const float panelWidth = 850.0f;
     const float panelHeight = 900.0f;
@@ -273,8 +273,6 @@ void EventScene::draw(sf::RenderWindow& window)
     sf::RectangleShape panel(sf::Vector2f(panelWidth, panelHeight));
     panel.setPosition(sf::Vector2f(panelX, panelY));
     panel.setFillColor(sf::Color(0, 0, 0, 125));
-    panel.setOutlineThickness(2.0f);
-    panel.setOutlineColor(sf::Color(230, 220, 180, 120));
     window.draw(panel);
 
     sf::Text title = makeText(font, eventDef.title, 46);
@@ -353,9 +351,9 @@ SceneTransition EventScene::getTransition() const
 
 sf::FloatRect EventScene::getChoiceRect(int index) const
 {
-    const float x = 1080.0f;
+    const float x = 1180.0f;
     const float y = 610.0f + static_cast<float>(index) * 125.0f;
-    const float width = 760.0f;
+    const float width = 660.0f;
     const float height = 96.0f;
 
     return sf::FloatRect{

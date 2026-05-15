@@ -5,19 +5,27 @@ CharacterSelectScene::CharacterSelectScene(
 )
     : Scene(context),
 
-      ironcladButton(
-          sf::Vector2f(500.f, 800.f),
-          sf::Vector2f(120.f, 120.f),
-          context.resources.getFont("zh-R"),
-          ""
-      ),
+    ironcladButton(
+    sf::Vector2f(500.f, 800.f),
+    sf::Vector2f(120.f, 120.f),
+    context.resources.getFont("zh-R"),
+    ""
+    ),
 
-      backButton(
-          sf::Vector2f(1700.f, 800.f),
-          sf::Vector2f(120.f, 120.f),
-          context.resources.getFont("zh-R"),
-          "Back"
-      ) {
+    startButton(
+    sf::Vector2f(1350.f, 800.f),
+    sf::Vector2f(220.f, 90.f),
+    context.resources.getFont("zh-R"),
+    "Start"
+    ),
+
+    backButton(
+    sf::Vector2f(1700.f, 800.f),
+    sf::Vector2f(120.f, 120.f),
+    context.resources.getFont("zh-R"),
+    "Back"
+    )
+{
     ironcladButton.setTexture(context.resources.getTexture("ironcladButton"));
     ironcladPortrait.setTexture(&context.resources.getTexture("ironcladPortrait"));
     ironcladPortrait.setSize({1920,1080});
@@ -38,6 +46,11 @@ void CharacterSelectScene::handleEvent(
         window
     );
 
+    startButton.handleEvent(
+        event,
+        window
+    );
+
     backButton.handleEvent(
         event,
         window
@@ -45,20 +58,35 @@ void CharacterSelectScene::handleEvent(
 
     if (ironcladButton.wasClicked())
     {
-        transition.target =
-            SceneType::Map;
+        context.audio.playSound("Click");
+
+        ironcladSelected = true;
 
         ironcladButton.reset();
     }
 
+    if (startButton.wasClicked())
+    {
+        if (ironcladSelected)
+        {
+            context.audio.playSound("Click");
+
+            transition.target = SceneType::Map;
+        }
+
+        startButton.reset();
+    }
+
     if (backButton.wasClicked())
     {
+        context.audio.playSound("Click");
         transition.target =
             SceneType::Menu;
 
         backButton.reset();
     }
 }
+
 
 void CharacterSelectScene::update(
     float dt
@@ -78,7 +106,9 @@ void CharacterSelectScene::draw(
         window.draw(lockedButtons[i]);
     }
     ironcladButton.draw(window);
+    startButton.draw(window);
     backButton.draw(window);
+
 }
 
 SceneTransition

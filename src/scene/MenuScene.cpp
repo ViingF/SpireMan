@@ -2,6 +2,7 @@
 
 
 #include "config/Constants.hpp"
+#include "system/SaveSystem.hpp"
 
 MenuScene::MenuScene(GameContext& context)
     :   Scene(context),
@@ -19,6 +20,12 @@ MenuScene::MenuScene(GameContext& context)
           context.resources.getFont("zh-R"),
           "Quit"
       ) ,
+    loadButton(
+          sf::Vector2f(76.f, 670.f),
+          sf::Vector2f(400.f, 90.f),
+          context.resources.getFont("zh-R"),
+          "Load"
+      ),
         background(context.resources.getTexture(
             "title"
         )) {
@@ -31,6 +38,8 @@ MenuScene::MenuScene(GameContext& context)
     float scaleY = targetHeight / size.y;
 
     background.setScale({scaleX, scaleY});
+    loadButton.setEnabled(SaveSystem::hasSave());
+
 }
 
 void MenuScene::handleEvent(
@@ -40,9 +49,11 @@ void MenuScene::handleEvent(
 {
     startButton.handleEvent(event, window);
     quitButton.handleEvent(event, window);
+    loadButton.handleEvent(event, window);
 
     if (startButton.wasClicked())
     {
+        context.audio.playSound("Click");
 
         transition.target = SceneType::CharacterSelect;
 
@@ -51,11 +62,27 @@ void MenuScene::handleEvent(
 
     if (quitButton.wasClicked())
     {
+        context.audio.playSound("Click");
+
         const_cast<sf::RenderWindow&>(window).close();
 
         quitButton.reset();
     }
+
+    if (loadButton.wasClicked())
+    {
+        context.audio.playSound("Click");
+
+        if (SaveSystem::hasSave()) {
+            transition.target = SceneType::Map;
+            transition.loadGame = true;
+        }
+
+        loadButton.reset();
+    }
 }
+
+
 
 void MenuScene::update(float dt)
 {
@@ -70,6 +97,7 @@ void MenuScene::draw(sf::RenderWindow& window)
 
     startButton.draw(window);
     quitButton.draw(window);
+    loadButton.draw(window);
 }
 
 SceneTransition MenuScene::getTransition() const

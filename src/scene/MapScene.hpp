@@ -52,6 +52,7 @@ private:
     MapSystem mapSystem_;
     SceneTransition transition_;
     Button deckButton_;
+    Button saveQuitButton_;
     CardPileOverlay deckOverlay_;
 
 

@@ -27,6 +27,7 @@ public:
 private:
     Button startButton;
     Button quitButton;
+    Button loadButton;
 
     SceneTransition transition;
     Sprite background;

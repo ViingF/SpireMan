@@ -41,6 +41,8 @@ void RewardScene::handleEvent(
 
     if (cardButton1.wasClicked())
     {
+        context.audio.playSound("Click");
+
         chooseCard(rewardCard1);
 
         cardButton1.reset();
@@ -48,6 +50,8 @@ void RewardScene::handleEvent(
 
     if (cardButton2.wasClicked())
     {
+        context.audio.playSound("Click");
+
         chooseCard(rewardCard2);
 
         cardButton2.reset();
@@ -55,6 +59,8 @@ void RewardScene::handleEvent(
 
     if (cardButton3.wasClicked())
     {
+        context.audio.playSound("Click");
+
         chooseCard(rewardCard3);
 
         cardButton3.reset();

@@ -1,7 +1,8 @@
-
 #ifndef SPIRELIKE_BUTTON_HPP
 #define SPIRELIKE_BUTTON_HPP
+
 #include <SFML/Graphics.hpp>
+#include <string>
 
 class Button {
 public:
@@ -27,10 +28,21 @@ public:
 
     void reset();
 
+    void setText(const std::string& text);
+
+    void setEnabled(bool enabled);
+
+    bool isEnabled() const;
+
 private:
+    void centerText();
+
     sf::RectangleShape shape;
     sf::Text content;
     sf::Vector2f buttonsize;
+
     bool clicked = false;
+    bool enabled_ = true;
 };
-#endif //SPIRELIKE_BUTTON_HPP
+
+#endif

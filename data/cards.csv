@@ -1,7 +1,15 @@
-id,name,type,cost,target,effect1,value1,effect2,value2,description,textureid
-1,Strike,Attack,1,Enemy,DealDamage,6,None,0,Deal 6 damage.,Strike
-2,Defend,Skill,1,Self,GainBlock,5,None,0,Gain 5 block.,Defend
-3,Bash,Attack,2,Enemy,DealDamage,8,ApplyVulnerable,2,Deal 8 damage and apply 2 Vulnerable,Bash
-101,Ritual Dagger,Attack,1,Enemy,DealDamage,15,RitualDagger,3,"Deal 15 damage. If Fatal,permanently increase this card's damage by 3 this run.",RitualDagger
-1001,Necronomicurse,Curse,-1,Self,DealDamage,1,None,0,"Unplayable. At the end of your turn, if this card is in your hand, lose 1 HP",Necronomicurse
-1002,Writhe,Curse,-1,Self,ApplyWeak,1,None,0,"Unplayable. Whenever you draw this card, gain 1 Weak",Writhe
+id,name,type,cost,target,effect1,value1,effect2,value2,description,textureid,exhaust
+1,Strike,Attack,1,Enemy,DealDamage,6,None,0,Deal 6 damage.,Strike,0
+2,Defend,Skill,1,Self,GainBlock,5,None,0,Gain 5 block.,Defend,0
+3,Bash,Attack,2,Enemy,DealDamage,8,ApplyVulnerable,2,Deal 8 damage and apply 2 Vulnerable,Bash,0
+4,Anger,Attack,0,Enemy,DealDamage,6,None,0,Deal 6 damage. Add a copy of this card into your discard pile.,Anger,0
+5,Clothesline,Attack,2,Enemy,DealDamage,12,ApplyWeak,2,Deal 12 damage. Apply 2 Weak.,Clothesline,0
+6,Iron Wave,Attack,1,Enemy,DealDamage,5,GainBlock,5,Deal 5 damage. Gain 5 Block.,IronWave,0
+7,Pommel Strike,Attack,1,Enemy,DealDamage,9,DrawCards,1,Deal 9 damage. Draw 1 card.,PommelStrike,0
+8,Shrug It Off,Skill,1,Self,GainBlock,8,DrawCards,1,Gain 8 Block. Draw 1 card.,ShrugItOff,0
+9,Twin Strike,Attack,1,Enemy,DealDamage,5,DealDamage,5,Deal 5 damage twice.,TwinStrike,0
+10,WarCry,Skill,2,Self,GainBlock,12,DrawCards,1,Gain 12 Block. Draw 1 card.,WarCry,1
+11,Flex,Skill,0,Self,GainStrength,2,None,0,"Gain 2 Strength. At the end of this turn, lose 2 Strength.",Flex,0
+16,Seeing Red,Skill,1,Self,GainEnergy,2,None,0,Gain 2 Energy. Exhaust.,SeeingRed,1
+1001,Necronomicurse,Curse,-1,Self,DealDamage,1,None,0,"Unplayable. At the end of your turn, if this card is in your hand, lose 1 HP",Necronomicurse,0
+1002,Writhe,Curse,-1,Self,ApplyWeak,1,None,0,"Unplayable. Whenever you draw this card, gain 1 Weak",Writhe,0

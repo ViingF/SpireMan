@@ -6,7 +6,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 set(SFML_DIR "D:/SFML-3.0.2/lib/cmake/SFML")
 
-find_package(SFML 3 REQUIRED COMPONENTS Graphics Window System)
+find_package(SFML 3 REQUIRED COMPONENTS Graphics Window System Audio)
 
 add_executable(SpireLike src/main.cpp
         src/core/Scene.hpp
@@ -71,12 +71,17 @@ add_executable(SpireLike src/main.cpp
         src/ui/CardPileOverlay.hpp
         src/model/EncounterDef.hpp
         src/database/EncounterDatabase.cpp
-        src/database/EncounterDatabase.hpp)
+        src/database/EncounterDatabase.hpp
+        src/core/AudioManager.cpp
+        src/core/AudioManager.hpp
+        src/system/SaveSystem.cpp
+        src/system/SaveSystem.hpp)
 
 target_link_libraries(SpireLike
         SFML::Graphics
         SFML::Window
         SFML::System
+        SFML::Audio
 )
 
 target_include_directories(SpireLike PRIVATE src)

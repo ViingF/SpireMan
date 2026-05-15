@@ -21,6 +21,8 @@ private:
     void update(float dt);
     void render();
     void switchSceneIfNeeded();
+    void playMusicForScene(SceneType sceneType);
+
 
 private:
     CardDatabase cardDatabase;
@@ -28,9 +30,9 @@ private:
     EventDatabase eventDatabase;
     EncounterDatabase encounterDatabase;
 
-
     sf::RenderWindow window;
     ResourceManager resources;
+    AudioManager audio;
     RunState runState;
     std::unique_ptr<Scene> currentScene;
     GameContext gameContext;

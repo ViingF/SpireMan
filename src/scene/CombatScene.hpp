@@ -31,7 +31,9 @@ private:
     Button winButton;
     Button drawPileButton_;
     Button discardPileButton_;
+    Button exhaustPileButton_;
     CardPileOverlay pileOverlay_;
+
 
 };
 #endif //SPIRELIKE_COMBATSCENE_HPP

@@ -9,6 +9,8 @@
 
 #include <vector>
 
+#include "ui/Button.hpp"
+
 class ShopScene : public Scene {
 public:
     explicit ShopScene(GameContext& context);
@@ -62,6 +64,13 @@ private:
     bool removingCard_ = false;
     int removePage_ = 0;
     int shopRemoveCount_ = 0;
+
+    Button removeCardButton_;
+    Button leaveButton_;
+    Button cancelRemoveButton_;
+    Button removePrevPageButton_;
+    Button removeNextPageButton_;
+
 
 };
 

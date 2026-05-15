@@ -3,6 +3,7 @@
 #include "config/Constants.hpp"
 
 #include <algorithm>
+#include <iostream>
 #include <sstream>
 #include <string>
 
@@ -103,7 +104,37 @@ void drawShopBackground(
 }
 
 ShopScene::ShopScene(GameContext& context)
-    : Scene(context)
+    : Scene(context),
+      removeCardButton_(
+          sf::Vector2f(1180.0f, 710.0f),
+          sf::Vector2f(420.0f, 80.0f),
+          context.resources.getFont("zh-R"),
+          "Remove Card"
+      ),
+      leaveButton_(
+          sf::Vector2f(1180.0f, 820.0f),
+          sf::Vector2f(420.0f, 90.0f),
+          context.resources.getFont("zh-R"),
+          "Leave"
+      ),
+      cancelRemoveButton_(
+          sf::Vector2f(1540.0f, 125.0f),
+          sf::Vector2f(250.0f, 70.0f),
+          context.resources.getFont("zh-R"),
+          "Cancel"
+      ),
+      removePrevPageButton_(
+          sf::Vector2f(620.0f, 930.0f),
+          sf::Vector2f(210.0f, 70.0f),
+          context.resources.getFont("zh-R"),
+          "Previous"
+      ),
+      removeNextPageButton_(
+          sf::Vector2f(1090.0f, 930.0f),
+          sf::Vector2f(210.0f, 70.0f),
+          context.resources.getFont("zh-R"),
+          "Next"
+      )
 {
     for (int i = 0; i < SHOP_CARD_COUNT; ++i) {
         CardId cardId =
@@ -116,6 +147,7 @@ ShopScene::ShopScene(GameContext& context)
     }
 }
 
+
 void ShopScene::handleEvent(
     const sf::Event& event,
     const sf::RenderWindow& window
@@ -125,33 +157,40 @@ void ShopScene::handleEvent(
         return;
     }
 
-    sf::Vector2i pixelPosition;
-
-    if (!readLeftClickPosition(event, pixelPosition)) {
-        return;
-    }
-
-    const sf::Vector2f mousePos =
-        window.mapPixelToCoords(pixelPosition);
-
     if (removingCard_) {
-        if (getCancelRemoveRect().contains(mousePos)) {
+        cancelRemoveButton_.handleEvent(event, window);
+        removePrevPageButton_.handleEvent(event, window);
+        removeNextPageButton_.handleEvent(event, window);
+
+        if (cancelRemoveButton_.wasClicked()) {
+            cancelRemoveButton_.reset();
             removingCard_ = false;
             message_ = "Card removal cancelled.";
             return;
         }
 
-        if (getRemovePrevPageRect().contains(mousePos)) {
+        if (removePrevPageButton_.wasClicked()) {
+            removePrevPageButton_.reset();
             removePage_ -= 1;
             clampRemovePage();
             return;
         }
 
-        if (getRemoveNextPageRect().contains(mousePos)) {
+        if (removeNextPageButton_.wasClicked()) {
+            removeNextPageButton_.reset();
             removePage_ += 1;
             clampRemovePage();
             return;
         }
+
+        sf::Vector2i pixelPosition;
+
+        if (!readLeftClickPosition(event, pixelPosition)) {
+            return;
+        }
+
+        const sf::Vector2f mousePos =
+            window.mapPixelToCoords(pixelPosition);
 
         const int cardsPerPage = getRemoveCardsPerPage();
         const int startIndex = removePage_ * cardsPerPage;
@@ -174,22 +213,39 @@ void ShopScene::handleEvent(
         return;
     }
 
+    removeCardButton_.handleEvent(event, window);
+    leaveButton_.handleEvent(event, window);
+
+    if (removeCardButton_.wasClicked()) {
+        removeCardButton_.reset();
+        startRemoveCard();
+        return;
+    }
+
+    if (leaveButton_.wasClicked()) {
+        leaveButton_.reset();
+        leaveShop();
+        return;
+    }
+
+    sf::Vector2i pixelPosition;
+
+    if (!readLeftClickPosition(event, pixelPosition)) {
+        return;
+    }
+
+    const sf::Vector2f mousePos =
+        window.mapPixelToCoords(pixelPosition);
+
     for (int i = 0; i < static_cast<int>(cardOffers_.size()); ++i) {
         if (getCardRect(i).contains(mousePos)) {
             buyCard(i);
             return;
         }
     }
-
-    if (getRemoveCardRect().contains(mousePos)) {
-        startRemoveCard();
-        return;
-    }
-
-    if (getLeaveRect().contains(mousePos)) {
-        leaveShop();
-    }
 }
+
+
 
 
 void ShopScene::update(float)
@@ -310,44 +366,14 @@ void ShopScene::draw(sf::RenderWindow& window)
         window.draw(messageText);
     }
 
-    const sf::FloatRect removeRect = getRemoveCardRect();
-
-    sf::RectangleShape removeButton(removeRect.size);
-    removeButton.setPosition(removeRect.position);
-    removeButton.setFillColor(sf::Color(90, 65, 120, 230));
-    removeButton.setOutlineThickness(3.0f);
-    removeButton.setOutlineColor(sf::Color(220, 200, 255));
-    window.draw(removeButton);
-
     std::ostringstream removeTextStream;
     removeTextStream << "Remove Card: "
                      << getRemoveCost()
                      << " Gold";
 
-    sf::Text removeText = makeText(font, removeTextStream.str(), 28);
-    removeText.setFillColor(sf::Color::White);
-    removeText.setPosition(sf::Vector2f(
-        removeRect.position.x + 70.0f,
-        removeRect.position.y + 22.0f
-    ));
-    window.draw(removeText);
-
-    const sf::FloatRect leaveRect = getLeaveRect();
-
-    sf::RectangleShape leaveButton(leaveRect.size);
-    leaveButton.setPosition(leaveRect.position);
-    leaveButton.setFillColor(sf::Color(110, 70, 45, 230));
-    leaveButton.setOutlineThickness(3.0f);
-    leaveButton.setOutlineColor(sf::Color(240, 210, 160));
-    window.draw(leaveButton);
-
-    sf::Text leaveText = makeText(font, "Leave", 34);
-    leaveText.setFillColor(sf::Color::White);
-    leaveText.setPosition(sf::Vector2f(
-        leaveRect.position.x + 160.0f,
-        leaveRect.position.y + 25.0f
-    ));
-    window.draw(leaveText);
+    removeCardButton_.setText(removeTextStream.str());
+    removeCardButton_.draw(window);
+    leaveButton_.draw(window);
     if (removingCard_) {
         drawRemoveCardOverlay(window, font);
     }
@@ -439,6 +465,7 @@ int ShopScene::getRemoveCost() const
 
 void ShopScene::startRemoveCard()
 {
+
     if (context.runState.masterDeck.empty()) {
         message_ = "There are no cards to remove.";
         return;
@@ -629,22 +656,7 @@ void ShopScene::drawRemoveCardOverlay(
     title.setPosition(sf::Vector2f(120.0f, 130.0f));
     window.draw(title);
 
-    const sf::FloatRect cancelRect = getCancelRemoveRect();
-
-    sf::RectangleShape cancelButton(cancelRect.size);
-    cancelButton.setPosition(cancelRect.position);
-    cancelButton.setFillColor(sf::Color(120, 65, 65));
-    cancelButton.setOutlineThickness(2.0f);
-    cancelButton.setOutlineColor(sf::Color(240, 210, 180));
-    window.draw(cancelButton);
-
-    sf::Text cancelText = makeText(font, "Cancel", 28);
-    cancelText.setFillColor(sf::Color::White);
-    cancelText.setPosition(sf::Vector2f(
-        cancelRect.position.x + 78.0f,
-        cancelRect.position.y + 20.0f
-    ));
-    window.draw(cancelText);
+    cancelRemoveButton_.draw(window);
 
     const int cardsPerPage = getRemoveCardsPerPage();
     const int startIndex = removePage_ * cardsPerPage;
@@ -711,35 +723,8 @@ void ShopScene::drawRemoveCardOverlay(
         window.draw(descText);
     }
 
-    const sf::FloatRect prevRect = getRemovePrevPageRect();
-
-    sf::RectangleShape prevButton(prevRect.size);
-    prevButton.setPosition(prevRect.position);
-    prevButton.setFillColor(sf::Color(80, 80, 120));
-    window.draw(prevButton);
-
-    sf::Text prevText = makeText(font, "Previous", 24);
-    prevText.setFillColor(sf::Color::White);
-    prevText.setPosition(sf::Vector2f(
-        prevRect.position.x + 42.0f,
-        prevRect.position.y + 20.0f
-    ));
-    window.draw(prevText);
-
-    const sf::FloatRect nextRect = getRemoveNextPageRect();
-
-    sf::RectangleShape nextButton(nextRect.size);
-    nextButton.setPosition(nextRect.position);
-    nextButton.setFillColor(sf::Color(80, 80, 120));
-    window.draw(nextButton);
-
-    sf::Text nextText = makeText(font, "Next", 24);
-    nextText.setFillColor(sf::Color::White);
-    nextText.setPosition(sf::Vector2f(
-        nextRect.position.x + 72.0f,
-        nextRect.position.y + 20.0f
-    ));
-    window.draw(nextText);
+    removePrevPageButton_.draw(window);
+    removeNextPageButton_.draw(window);
 
     std::ostringstream pageTextStream;
     pageTextStream << "Page "

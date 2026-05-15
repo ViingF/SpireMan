@@ -57,3 +57,47 @@ sf::Font& ResourceManager::getFont(
     return it->second;
 }
 
+bool ResourceManager::hasFont(
+    const std::string& id
+) const {
+    return fontMap.find(id) != fontMap.end();
+}
+
+
+ErrorCode ResourceManager::loadSoundBuffer(
+    const std::string& id,
+    const std::string& path
+) {
+    if (soundBufferMap.find(id) != soundBufferMap.end()) {
+        return ErrorCode::OK;
+    }
+
+    sf::SoundBuffer buffer;
+
+    if (!buffer.loadFromFile(path)) {
+        return ErrorCode::RESOURCE_LOAD_FAILED;
+    }
+
+    soundBufferMap[id] = std::move(buffer);
+
+    return ErrorCode::OK;
+}
+
+sf::SoundBuffer& ResourceManager::getSoundBuffer(
+    const std::string& id
+) {
+    auto it = soundBufferMap.find(id);
+
+    if (it == soundBufferMap.end()) {
+        throw std::runtime_error("SoundBuffer not found: " + id);
+    }
+
+    return it->second;
+}
+
+bool ResourceManager::hasSoundBuffer(
+    const std::string& id
+) const {
+    return soundBufferMap.find(id) != soundBufferMap.end();
+}
+

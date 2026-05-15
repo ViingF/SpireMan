@@ -19,8 +19,12 @@ public:
     SoundBuffer& getSoundBuffer(const std::string& id);
     bool hasTexture(const std::string& id) const;
     bool hasFont(const std::string& id) const;
+    bool hasSoundBuffer(const std::string& id) const;
+
 private:
     std::map<std::string, sf::Texture> textureMap;
     map<std::string, sf::Font> fontMap;
+    std::map<std::string, sf::SoundBuffer> soundBufferMap;
+
 };
 #endif //SPIRELIKE_RESOURCEMANAGER_HPP

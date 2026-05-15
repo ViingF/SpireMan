@@ -193,6 +193,12 @@ MapScene::MapScene(GameContext& context)
           sf::Vector2f(250.0f, 58.0f),
           context.resources.getFont("zh-R"),
           "Deck"
+      ),
+    saveQuitButton_(
+          sf::Vector2f(1580.0f, 92.0f),
+          sf::Vector2f(250.0f, 58.0f),
+          context.resources.getFont("zh-R"),
+          "Save & Quit"
       )
 {
     if (context.runState.mapNodes.empty()) {
@@ -222,8 +228,10 @@ void MapScene::handleEvent(
     }
 
     deckButton_.handleEvent(event, window);
+    saveQuitButton_.handleEvent(event, window);
 
     if (deckButton_.wasClicked()) {
+        context.audio.playSound("Click");
         deckOverlay_.open(
             "Master Deck",
             &context.runState.masterDeck
@@ -232,6 +240,17 @@ void MapScene::handleEvent(
         deckButton_.reset();
         return;
     }
+
+    if (saveQuitButton_.wasClicked()) {
+        context.audio.playSound("Click");
+
+        transition_.target = SceneType::Menu;
+        transition_.saveAndQuit = true;
+
+        saveQuitButton_.reset();
+        return;
+    }
+
 
 
     sf::Vector2i pixelPosition;
@@ -273,6 +292,7 @@ void MapScene::draw(sf::RenderWindow& window)
     }
 
     deckButton_.draw(window);
+    saveQuitButton_.draw(window);
 
     const sf::Font& font = context.resources.getFont("zh-R");
 

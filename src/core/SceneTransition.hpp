@@ -9,6 +9,8 @@ struct SceneTransition {
     EncounterId encounterId = 0;
     EventId eventId = 0;
     int mapNodeIndex = -1;
+    bool loadGame = false;
+    bool saveAndQuit = false;
 };
 
 #endif //SPIRELIKE_SCENETRANSITION_HPP

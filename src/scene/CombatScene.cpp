@@ -30,7 +30,15 @@ CombatScene::CombatScene(
     sf::Vector2f(250.f, 70.f),
     context.resources.getFont("zh-R"),
     "Discard"
-)
+    ),
+
+    exhaustPileButton_(
+    sf::Vector2f(1550.f, 565.f),
+    sf::Vector2f(250.f, 70.f),
+    context.resources.getFont("zh-R"),
+    "Exhaust"
+    )
+
 {
     combatSystem_.startCombat(
     context.runState,
@@ -62,8 +70,11 @@ void CombatScene::handleEvent(
     winButton.handleEvent(event, window);
     drawPileButton_.handleEvent(event, window);
     discardPileButton_.handleEvent(event, window);
+    exhaustPileButton_.handleEvent(event, window);
+
 
     if (drawPileButton_.wasClicked()) {
+        context.audio.playSound("Click");
         const CombatDeck& deck = combatSystem_.getDeck();
 
         pileOverlay_.open(
@@ -76,6 +87,7 @@ void CombatScene::handleEvent(
     }
 
     if (discardPileButton_.wasClicked()) {
+        context.audio.playSound("Click");
         const CombatDeck& deck = combatSystem_.getDeck();
 
         pileOverlay_.open(
@@ -87,13 +99,31 @@ void CombatScene::handleEvent(
         return;
     }
 
+    if (exhaustPileButton_.wasClicked()) {
+        context.audio.playSound("Click");
+
+        const CombatDeck& deck =
+            combatSystem_.getDeck();
+
+        pileOverlay_.open(
+            "Exhaust Pile",
+            &deck.exhaustPile
+        );
+
+        exhaustPileButton_.reset();
+        return;
+    }
+
+
     if (endTurnButton.wasClicked())
     {
+        context.audio.playSound("Click");
         combatSystem_.endPlayerTurn();
         endTurnButton.reset();
     }
 
     if (winButton.wasClicked()) {
+        context.audio.playSound("Click");
         transition.target = SceneType::Reward;
         transition.battleResult = BattleResult::Victory;
         winButton.reset();
@@ -142,6 +172,8 @@ void CombatScene::draw(
     winButton.draw(window);
     drawPileButton_.draw(window);
     discardPileButton_.draw(window);
+    exhaustPileButton_.draw(window);
+
     pileOverlay_.draw(
         window,
         context.resources.getFont("zh-R"),

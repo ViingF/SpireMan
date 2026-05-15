@@ -16,6 +16,7 @@
 #include "scene/CardRemoveScene.hpp"
 #include "scene/ShopScene.hpp"
 #include "system/MapSystem.hpp"
+#include "system/SaveSystem.hpp"
 
 using namespace sf;
 using namespace std;
@@ -26,15 +27,17 @@ Game::Game()
           sf::VideoMode({1920, 1080}),
           "SpireLike"
       ),
+      audio(resources),
+      gameContext{
+          resources,
+          runState,
+          cardDatabase,
+          enemyDatabase,
+          eventDatabase,
+          encounterDatabase,
+          audio
+      }
 
-    gameContext{
-    resources,
-    runState,
-    cardDatabase,
-    enemyDatabase,
-    eventDatabase,
-        encounterDatabase
-}
 
 {
     window.setFramerateLimit(60);
@@ -52,13 +55,14 @@ Game::Game()
     resources.loadTexture("campfireOutline","assets/images/restOutline.png");
     resources.loadTexture("shop","assets/images/shop.png");
     resources.loadTexture("shopOutline","assets/images/shopOutline.png");
+    resources.loadTexture("Sleep","assets/images/sleep.png");
+    resources.loadTexture("Campfire","assets/images/campfire.png");
+
     resources.loadTexture("SneakPlant","assets/images/sneakplant.png");
     resources.loadTexture("Nemesis","assets/images/nemesis.png");
     resources.loadTexture("Sentry","assets/images/sentry.png");
     resources.loadTexture("RedWorm","assets/images/redworm.png");
     resources.loadTexture("GreenWorm","assets/images/greenworm.png");
-
-
     resources.loadTexture("Kaka","assets/images/kaka.png");
     resources.loadTexture("Rat","assets/images/rat.png");
     resources.loadTexture("AcidSlime","assets/images/acidslime.png");
@@ -107,11 +111,33 @@ Game::Game()
     resources.loadTexture("Defend","assets/images/defend.png");
     resources.loadTexture("Bash","assets/images/bash.png");
     resources.loadTexture("RitualDagger","assets/images/ritual_dagger.png");
+    resources.loadTexture("Anger","assets/images/anger.png");
+    resources.loadTexture("ClothesLine","assets/images/clothesline.png");
+    resources.loadTexture("IronWave","assets/images/iron_wave.png");
+    resources.loadTexture("PommelStrike","assets/images/pommel_strike.png");
+    resources.loadTexture("TwinStrike","assets/images/twin_strike.png");
+    resources.loadTexture("ShrugItOff","assets/images/shrug_it_off.png");
+    resources.loadTexture("Intimidate","assets/images/intimidate.png");
+    resources.loadTexture("WarCry","assets/images/warcry.png");
+    resources.loadTexture("Flex","assets/images/flex.png");
+    resources.loadTexture("LimitBreak","assets/images/limit_break.png");
+    resources.loadTexture("SeeingRed","assets/images/seeing_red.png");
 
 
     resources.loadFont("zh-B","assets/fonts/NotoSansCJKtc-Bold.otf");
     resources.loadFont("zh-M","assets/fonts/NotoSansCJKtc-Medium.otf");
     resources.loadFont("zh-R","assets/fonts/NotoSansCJKtc-Regular.otf");
+
+    resources.loadSoundBuffer("Click","assets/audio/sound/click.ogg");
+
+    audio.loadMusic("Menu","assets/audio/music/menu.ogg");
+    audio.loadMusic("Act1Map","assets/audio/music/act1map.ogg");
+    audio.loadMusic("Act1Combat","assets/audio/music/act1combat.ogg");
+    audio.loadMusic("Shop","assets/audio/music/shop.ogg");
+    audio.loadMusic("Event","assets/audio/music/event.ogg");
+    audio.loadMusic("End","assets/audio/music/end.ogg");
+    audio.loadMusic("Campfire","assets/audio/music/campfire.ogg");
+
     auto eventCode=eventDatabase.loadFromCsv("data/events.csv");
     auto enemyCode=enemyDatabase.loadFromCsv("data/enemies.csv");
     auto cardCode=cardDatabase.loadFromCsv("data/cards.csv");
@@ -172,6 +198,8 @@ void Game::run()
 
 void Game::update(float dt)
 {
+    audio.update(dt);
+
     if (currentScene)
     {
         currentScene->update(dt);
@@ -179,6 +207,7 @@ void Game::update(float dt)
 
     switchSceneIfNeeded();
 }
+
 
 
 void Game::render()
@@ -201,6 +230,7 @@ void Game::switchSceneIfNeeded()
                 std::make_unique<MenuScene>(
                     gameContext
                 );
+        playMusicForScene(SceneType::Menu);
         return;
     }
 
@@ -211,6 +241,41 @@ void Game::switchSceneIfNeeded()
     {
         return;
     }
+
+    if (transition.saveAndQuit)
+    {
+        SaveSystem::saveRun(runState);
+
+        currentScene =
+            std::make_unique<MenuScene>(
+                gameContext
+            );
+
+        playMusicForScene(SceneType::Menu);
+        return;
+    }
+
+    if (transition.loadGame)
+    {
+        if (SaveSystem::loadRun(runState)) {
+            currentScene =
+                std::make_unique<MapScene>(
+                    gameContext
+                );
+
+            playMusicForScene(SceneType::Map);
+        } else {
+            currentScene =
+                std::make_unique<MenuScene>(
+                    gameContext
+                );
+
+            playMusicForScene(SceneType::Menu);
+        }
+
+        return;
+    }
+
 
     switch (transition.target)
     {
@@ -276,6 +341,9 @@ void Game::switchSceneIfNeeded()
 
         case SceneType::End:
         {
+            SaveSystem::deleteSave();
+            runState.active = false;
+
             currentScene =
                 std::make_unique<EndScene>(
                     gameContext,
@@ -284,6 +352,7 @@ void Game::switchSceneIfNeeded()
 
             break;
         }
+
 
         case SceneType::CharacterSelect:
         {
@@ -323,6 +392,7 @@ void Game::switchSceneIfNeeded()
         default:
             break;
     }
+    playMusicForScene(transition.target);
 }
 
 void Game::startNewRun()
@@ -371,5 +441,45 @@ void Game::startNewRun()
     currentScene = std::make_unique<MapScene>(gameContext);
 
 }
+
+void Game::playMusicForScene(SceneType sceneType)
+{
+    switch (sceneType) {
+        case SceneType::Menu:
+        case SceneType::CharacterSelect:
+            audio.playMusic("Menu");
+            break;
+
+        case SceneType::Map:
+        case SceneType::Reward:
+        case SceneType::CardRemove:
+            audio.playMusic("Act1Map");
+            break;
+
+        case SceneType::Combat:
+            audio.playMusic("Act1Combat");
+            break;
+
+        case SceneType::Event:
+            audio.playMusic("Event");
+            break;
+
+        case SceneType::Campfire:
+            audio.playMusic("Campfire");
+            break;
+
+        case SceneType::Shop:
+            audio.playMusic("Shop");
+            break;
+
+        case SceneType::End:
+            audio.playMusic("End");
+            break;
+
+        default:
+            break;
+    }
+}
+
 
 

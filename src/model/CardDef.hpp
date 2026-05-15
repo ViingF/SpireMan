@@ -11,5 +11,6 @@ struct CardDef {
     TargetType target;
     std::vector<CardEffect> effects;
     std::string description;
+    bool exhaust = false;
 };
 #endif //SPIRELIKE_CARDDEF_HPP

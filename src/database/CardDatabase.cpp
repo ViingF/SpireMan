@@ -5,6 +5,33 @@
 
 namespace {
 
+    bool isBoolText(const std::string& text)
+    {
+        return text == "1" ||
+               text == "0" ||
+               text == "true" ||
+               text == "false" ||
+               text == "True" ||
+               text == "False" ||
+               text == "TRUE" ||
+               text == "FALSE" ||
+               text == "yes" ||
+               text == "no" ||
+               text == "Yes" ||
+               text == "No";
+    }
+
+    bool parseBoolText(const std::string& text)
+    {
+        return text == "1" ||
+               text == "true" ||
+               text == "True" ||
+               text == "TRUE" ||
+               text == "yes" ||
+               text == "Yes";
+    }
+
+
     bool isNoEffect(const std::string& text)
     {
         return text.empty()
@@ -174,7 +201,21 @@ ErrorCode CardDatabase::loadFromCsv(
 
             card.description = row[9];
 
+            card.exhaust = false;
+
+            if (row.size() >= 12) {
+                if (!isBoolText(row[11])) {
+                    return ErrorCode::INVALID_ENUM_VALUE;
+                }
+
+                card.exhaust = parseBoolText(row[11]);
+            }
+            else if (row.size() >= 11 && isBoolText(row[10])) {
+                 card.exhaust = parseBoolText(row[10]);
+            }
+
             cards[card.id] = card;
+
         }
         catch (...)
         {

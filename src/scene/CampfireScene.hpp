@@ -7,6 +7,8 @@
 
 #include <SFML/Graphics.hpp>
 
+#include "ui/Button.hpp"
+
 class CampfireScene : public Scene {
 public:
     explicit CampfireScene(GameContext& context);
@@ -28,6 +30,7 @@ private:
 private:
     MapSystem mapSystem_;
     SceneTransition transition_;
+    Button restButton_;
     bool used_ = false;
 };
 
