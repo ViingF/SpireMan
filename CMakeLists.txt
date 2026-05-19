@@ -75,7 +75,21 @@ add_executable(SpireLike src/main.cpp
         src/core/AudioManager.cpp
         src/core/AudioManager.hpp
         src/system/SaveSystem.cpp
-        src/system/SaveSystem.hpp)
+        src/system/SaveSystem.hpp
+        src/ui/CardView.cpp
+        src/ui/DeckView.cpp
+        src/ui/EnemyGroupView.cpp
+        src/ui/EnemyView.cpp
+        src/ui/EnergyView.cpp
+        src/ui/HealthBar.cpp
+        src/ui/IntentView.cpp
+        src/ui/RewardCardView.cpp
+        src/ui/ShopView.cpp
+        src/ui/StateView.cpp
+        src/ui/TextUtils.cpp
+        src/ui/DeckView.hpp
+        src/system/EnemyAISystem.cpp
+        src/system/CardSystem.cpp)
 
 target_link_libraries(SpireLike
         SFML::Graphics
@@ -85,3 +99,5 @@ target_link_libraries(SpireLike
 )
 
 target_include_directories(SpireLike PRIVATE src)
+
+

@@ -33,9 +33,11 @@ public:
     void setEnabled(bool enabled);
 
     bool isEnabled() const;
-
+    void setPlaceholderStyle();
 private:
     void centerText();
+    void applyVisualState();
+    void setHovered(bool hovered);
 
     sf::RectangleShape shape;
     sf::Text content;
@@ -43,6 +45,10 @@ private:
 
     bool clicked = false;
     bool enabled_ = true;
+    bool hovered_ = false;
+    bool usesPlaceholder_ = false;
+    sf::Color normalFill_ = sf::Color(80, 80, 120);
+    sf::Color hoverFill_ = sf::Color(110, 110, 170);
 };
 
 #endif

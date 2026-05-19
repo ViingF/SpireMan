@@ -6,16 +6,17 @@
 #include <sstream>
 #include <string>
 
+#include "ui/TextUtils.hpp"
+
 namespace {
 
-sf::Text makeText(
-    const sf::Font& font,
-    const std::string& content,
-    unsigned int size
-)
-{
-    return sf::Text(font, content, size);
-}
+    sf::Text makeText(
+        const sf::Font& font,
+        const std::string& content,
+        unsigned int size
+    ) {
+        return sf::Text(font, TextUtils::fromUtf8(content), size);
+    }
 
 }
 

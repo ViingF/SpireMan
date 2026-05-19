@@ -9,18 +9,19 @@
 #include <sstream>
 #include <string>
 
+#include "ui/TextUtils.hpp"
+
 namespace {
 
 
 
-sf::Text makeText(
-    const sf::Font& font,
-    const std::string& content,
-    unsigned int size
-)
-{
-    return sf::Text(font, content, size);
-}
+    sf::Text makeText(
+        const sf::Font& font,
+        const std::string& content,
+        unsigned int size
+    ) {
+        return sf::Text(font, TextUtils::fromUtf8(content), size);
+    }
 
 bool readLeftClickPosition(
     const sf::Event& event,
@@ -223,6 +224,7 @@ void MapScene::handleEvent(
     if (transition_.target != SceneType::None) {
         return;
     }
+
     if (deckOverlay_.handleEvent(event, window)) {
         return;
     }
@@ -232,9 +234,10 @@ void MapScene::handleEvent(
 
     if (deckButton_.wasClicked()) {
         context.audio.playSound("Click");
+
         deckOverlay_.open(
             "Master Deck",
-            &context.runState.masterDeck
+            buildPileViewData(context.runState.masterDeck)
         );
 
         deckButton_.reset();
@@ -251,8 +254,6 @@ void MapScene::handleEvent(
         return;
     }
 
-
-
     sf::Vector2i pixelPosition;
 
     if (!readLeftClickPosition(event, pixelPosition)) {
@@ -262,12 +263,14 @@ void MapScene::handleEvent(
     const sf::Vector2f mousePos =
         window.mapPixelToCoords(pixelPosition);
 
-    const int nodeIndex = getNodeIndexAtPosition(mousePos);
+    const int nodeIndex =
+        getNodeIndexAtPosition(mousePos);
 
     if (nodeIndex >= 0) {
         enterNode(nodeIndex);
     }
 }
+
 
 void MapScene::update(float)
 {
@@ -275,8 +278,11 @@ void MapScene::update(float)
 
 void MapScene::draw(sf::RenderWindow& window)
 {
-    const sf::Vector2f viewTopLeft = getViewTopLeft(window);
-    const sf::Vector2f viewSize = getViewSize(window);
+    const sf::Vector2f viewTopLeft =
+        getViewTopLeft(window);
+
+    const sf::Vector2f viewSize =
+        getViewSize(window);
 
     sf::RectangleShape background(viewSize);
     background.setPosition(viewTopLeft);
@@ -294,25 +300,34 @@ void MapScene::draw(sf::RenderWindow& window)
     deckButton_.draw(window);
     saveQuitButton_.draw(window);
 
-    const sf::Font& font = context.resources.getFont("zh-R");
+    const sf::Font& font =
+        context.resources.getFont("zh-R");
 
     std::ostringstream status;
     status << "Map"
-           << "    HP: " << context.runState.player.hp
-           << " / " << context.runState.player.maxHp
-           << "    Gold: " << context.runState.gold
-            << "    Act: " << context.runState.act
-            << "    Floor: " << context.runState.floorInAct
-    << "    Total Floor: " << context.runState.floor
-
+           << "    HP: "
+           << context.runState.player.hp
+           << " / "
+           << context.runState.player.maxHp
+           << "    Gold: "
+           << context.runState.gold
+           << "    Act: "
+           << context.runState.act
+           << "    Floor: "
+           << context.runState.floorInAct
+           << "    Total Floor: "
+           << context.runState.floor
            << "    Click the highlighted icon to continue";
 
-    sf::Text statusText = makeText(font, status.str(), 28);
+    sf::Text statusText =
+        makeText(font, status.str(), 28);
+
     statusText.setFillColor(sf::Color(245, 240, 220));
     statusText.setPosition(sf::Vector2f(
         viewTopLeft.x + 60.0f,
         viewTopLeft.y + 28.0f
     ));
+
     window.draw(statusText);
 
     const int total =
@@ -325,7 +340,8 @@ void MapScene::draw(sf::RenderWindow& window)
         for (int nextIndex : node.nextIndices) {
             if (
                 nextIndex < 0 ||
-                nextIndex >= static_cast<int>(context.runState.mapNodes.size())
+                nextIndex >=
+                    static_cast<int>(context.runState.mapNodes.size())
             ) {
                 continue;
             }
@@ -333,29 +349,34 @@ void MapScene::draw(sf::RenderWindow& window)
             const sf::Vector2f to =
                 getNodePosition(nextIndex, total);
 
-            sf::Color lineColor(170, 170, 100, 150);
-            lineColor.a=50;
+            sf::Color lineColor(170, 170, 100, 50);
 
             if (node.state == MapNodeState::Completed) {
                 lineColor = sf::Color(220, 210, 170, 220);
             }
 
-            drawLine(window, from, to, lineColor);
+            drawLine(
+                window,
+                from,
+                to,
+                lineColor
+            );
         }
     }
 
-
     for (const MapNode& node : context.runState.mapNodes) {
-        sf::Sprite sprite = makeNodeSprite(node, total);
+        sf::Sprite sprite =
+            makeNodeSprite(node, total);
+
         window.draw(sprite);
     }
-    deckOverlay_.draw(
-    window,
-    context.resources.getFont("zh-R"),
-    context.cards
-);
 
+    deckOverlay_.draw(
+        window,
+        font
+    );
 }
+
 
 SceneTransition MapScene::getTransition() const
 {
@@ -598,4 +619,76 @@ std::string MapScene::getNodeTextureId(
      return "monster";
 }
 
+std::vector<PileCardViewData> MapScene::buildPileViewData(
+    const std::vector<CardInstance>& cards
+)
+{
+    std::vector<PileCardViewData> result;
 
+    for (const CardInstance& instance : cards) {
+        if (!context.cards.exists(instance.cardId)) {
+            continue;
+        }
+
+        const CardDef& def =
+            context.cards.get(instance.cardId);
+
+        PileCardViewData data;
+        data.cardId = instance.cardId;
+        data.instanceId = instance.instanceId;
+        data.cardDef = &def;
+        data.textures = getCardRenderTextures(def);
+
+        result.push_back(data);
+    }
+
+    return result;
+}
+
+
+const sf::Texture& MapScene::getCardTemplateTexture(
+    CardType type
+)
+{
+    switch (type) {
+        case CardType::Attack:
+            return context.resources.getTexture("Attack");
+
+        case CardType::Skill:
+            return context.resources.getTexture("Skill");
+
+        case CardType::Curse:
+            return context.resources.getTexture("Curse");
+    }
+
+    return context.resources.getTexture("Attack");
+}
+
+const sf::Texture* MapScene::getCardArtTexture(
+    const CardDef& cardDef
+)
+{
+    if (
+        cardDef.textureId.empty() ||
+        !context.resources.hasTexture(cardDef.textureId)
+    ) {
+        return nullptr;
+    }
+
+    return &context.resources.getTexture(cardDef.textureId);
+}
+
+CardRenderTextures MapScene::getCardRenderTextures(
+    const CardDef& cardDef
+)
+{
+    CardRenderTextures textures;
+
+    textures.templateTexture =
+        &getCardTemplateTexture(cardDef.type);
+
+    textures.artTexture =
+        getCardArtTexture(cardDef);
+
+    return textures;
+}

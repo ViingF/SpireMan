@@ -45,7 +45,12 @@ private:
     ) const;
     int getLayerNodeCount(int layer) const;
     int getMaxLayer() const;
-
+    std::vector<PileCardViewData> buildPileViewData(
+        const std::vector<CardInstance>& cards
+    );
+    const sf::Texture& getCardTemplateTexture(CardType type);
+    const sf::Texture* getCardArtTexture(const CardDef& cardDef);
+    CardRenderTextures getCardRenderTextures(const CardDef& cardDef);
 
 
 private:

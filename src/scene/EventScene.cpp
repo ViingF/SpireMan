@@ -7,17 +7,17 @@
 #include <string>
 #include <vector>
 
+#include "ui/TextUtils.hpp"
+
 namespace {
 
-sf::Text makeText(
-    const sf::Font& font,
-    const std::string& content,
-    unsigned int size
-)
-{
-    sf::Text text(font, content, size);
-    return text;
-}
+    sf::Text makeText(
+        const sf::Font& font,
+        const std::string& content,
+        unsigned int size
+    ) {
+        return sf::Text(font, TextUtils::fromUtf8(content), size);
+    }
 
 bool readLeftClickPosition(
     const sf::Event& event,
@@ -184,7 +184,10 @@ EventScene::EventScene(GameContext& context, EventId eventId)
     : Scene(context)
     , eventId_(eventId)
 {
+    createChoiceButtons();
+    syncChoiceButtons();
 }
+
 
 void EventScene::handleEvent(
     const sf::Event& event,
@@ -195,6 +198,22 @@ void EventScene::handleEvent(
         return;
     }
 
+    const EventDef& eventDef = context.events.get(eventId_);
+
+    syncChoiceButtons();
+
+    for (Button& button : choiceButtons_) {
+        button.handleEvent(event, window);
+    }
+
+    for (int i = 0; i < static_cast<int>(choiceButtons_.size()); ++i) {
+        if (choiceButtons_[i].wasClicked()) {
+            choiceButtons_[i].reset();
+            choose(i);
+            return;
+        }
+    }
+
     sf::Vector2i pixelPosition;
     if (!readLeftClickPosition(event, pixelPosition)) {
         return;
@@ -203,23 +222,16 @@ void EventScene::handleEvent(
     const sf::Vector2f mousePos =
         window.mapPixelToCoords(pixelPosition);
 
-    const EventDef& eventDef = context.events.get(eventId_);
-
     for (int i = 0; i < static_cast<int>(eventDef.choices.size()); ++i) {
-        if (getChoiceRect(i).contains(mousePos)) {
-            const EventChoiceDef& choice = eventDef.choices[i];
+        const EventChoiceDef& choice = eventDef.choices[i];
 
-            if (!canChoose(choice)) {
-                resultMessage_ = "Not enough gold.";
-                return;
-            }
-
-            choose(i);
+        if (!canChoose(choice) && getChoiceRect(i).contains(mousePos)) {
+            resultMessage_ = "Not enough gold.";
             return;
         }
     }
-
 }
+
 
 void EventScene::update(float)
 {
@@ -297,19 +309,10 @@ void EventScene::draw(sf::RenderWindow& window)
         const EventChoiceDef& choice = eventDef.choices[i];
         const bool enabled = canChoose(choice);
 
-        sf::RectangleShape button(rect.size);
-        button.setPosition(rect.position);
-
-        if (enabled) {
-            button.setFillColor(sf::Color(70, 70, 95, 220));
-            button.setOutlineColor(sf::Color(210, 210, 230));
-        } else {
-            button.setFillColor(sf::Color(55, 55, 55, 180));
-            button.setOutlineColor(sf::Color(120, 120, 120));
+        if (i < static_cast<int>(choiceButtons_.size())) {
+            choiceButtons_[i].draw(window);
         }
 
-        button.setOutlineThickness(3.0f);
-        window.draw(button);
 
 
         sf::Text choiceText = makeText(font, choice.text, 28);
@@ -453,3 +456,35 @@ bool EventScene::canChoose(const EventChoiceDef& choice) const
     return true;
 }
 
+void EventScene::createChoiceButtons()
+{
+    const EventDef& eventDef = context.events.get(eventId_);
+
+    choiceButtons_.clear();
+    choiceButtons_.reserve(eventDef.choices.size());
+
+    for (int i = 0; i < static_cast<int>(eventDef.choices.size()); ++i) {
+        const sf::FloatRect rect = getChoiceRect(i);
+
+        choiceButtons_.emplace_back(
+            rect.position,
+            rect.size,
+            context.resources.getFont("zh-R"),
+            ""
+        );
+    }
+}
+
+void EventScene::syncChoiceButtons()
+{
+    const EventDef& eventDef = context.events.get(eventId_);
+
+    const int count = std::min(
+        static_cast<int>(choiceButtons_.size()),
+        static_cast<int>(eventDef.choices.size())
+    );
+
+    for (int i = 0; i < count; ++i) {
+        choiceButtons_[i].setEnabled(canChoose(eventDef.choices[i]));
+    }
+}

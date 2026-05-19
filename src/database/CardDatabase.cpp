@@ -201,6 +201,11 @@ ErrorCode CardDatabase::loadFromCsv(
 
             card.description = row[9];
 
+
+            if (row.size() >= 11) {
+                card.textureId = row[10];
+            }
+
             card.exhaust = false;
 
             if (row.size() >= 12) {

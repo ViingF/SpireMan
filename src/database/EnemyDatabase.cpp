@@ -10,60 +10,305 @@
 
 #include "model/Enemy.hpp"
 
-static EnemyIntentType parseEnemyIntentType(const std::string& text)
+static std::string trimLocal(const std::string& text)
 {
-    if (text == "Attack") {
-        return EnemyIntentType::Attack;
+    std::size_t begin = 0;
+
+    while (
+        begin < text.size() &&
+        std::isspace(static_cast<unsigned char>(text[begin]))
+    ) {
+        ++begin;
     }
 
-    if (text == "Block") {
-        return EnemyIntentType::Block;
+    std::size_t end = text.size();
+
+    while (
+        end > begin &&
+        std::isspace(static_cast<unsigned char>(text[end - 1]))
+    ) {
+        --end;
     }
 
-    if (text == "Buff") {
-        return EnemyIntentType::Buff;
-    }
-
-    throw std::runtime_error("Invalid EnemyIntentType");
+    return text.substr(begin, end - begin);
 }
 
-static EnemyIntent parseEnemyIntent(const std::string& text)
+static bool startsWith(
+    const std::string& text,
+    const std::string& prefix
+)
 {
-    const std::size_t pos = text.find(':');
-
-    if (pos == std::string::npos) {
-        throw std::runtime_error("Invalid enemy move format");
-    }
-
-    const std::string typeText = text.substr(0, pos);
-    const std::string valueText = text.substr(pos + 1);
-
-    EnemyIntent intent;
-    intent.type = parseEnemyIntentType(typeText);
-    intent.value = std::stoi(valueText);
-
-    return intent;
+    return text.rfind(prefix, 0) == 0;
 }
 
-static std::vector<EnemyIntent> parseMovePattern(const std::string& text)
+static bool isAllDigits(const std::string& text)
 {
-    std::vector<EnemyIntent> pattern;
+    if (text.empty()) {
+        return false;
+    }
+
+    for (char c : text) {
+        if (!std::isdigit(static_cast<unsigned char>(c))) {
+            return false;
+        }
+    }
+
+    return true;
+}
+
+static int toIntOrDefault(
+    const std::string& text,
+    int defaultValue = 0
+)
+{
+    if (!isAllDigits(text)) {
+        return defaultValue;
+    }
+
+    try {
+        return std::stoi(text);
+    }
+    catch (...) {
+        return defaultValue;
+    }
+}
+
+static int firstNumberOrDefault(
+    const std::string& text,
+    int defaultValue = 0
+)
+{
+    std::size_t begin = std::string::npos;
+
+    for (std::size_t i = 0; i < text.size(); ++i) {
+        if (std::isdigit(static_cast<unsigned char>(text[i]))) {
+            begin = i;
+            break;
+        }
+    }
+
+    if (begin == std::string::npos) {
+        return defaultValue;
+    }
+
+    std::size_t end = begin;
+
+    while (
+        end < text.size() &&
+        std::isdigit(static_cast<unsigned char>(text[end]))
+    ) {
+        ++end;
+    }
+
+    return toIntOrDefault(
+        text.substr(begin, end - begin),
+        defaultValue
+    );
+}
+
+static std::vector<std::string> splitLocal(
+    const std::string& text,
+    char delimiter
+)
+{
+    std::vector<std::string> result;
 
     std::size_t start = 0;
 
-    while (start < text.size()) {
-        const std::size_t end = text.find(';', start);
-
-        std::string item;
+    while (start <= text.size()) {
+        const std::size_t end = text.find(delimiter, start);
 
         if (end == std::string::npos) {
-            item = text.substr(start);
-            start = text.size();
-        } else {
-            item = text.substr(start, end - start);
-            start = end + 1;
+            result.push_back(trimLocal(text.substr(start)));
+            break;
         }
 
+        result.push_back(
+            trimLocal(text.substr(start, end - start))
+        );
+
+        start = end + 1;
+    }
+
+    return result;
+}
+
+static EnemyIntent makeIntent(
+    EnemyIntentType type,
+    int value
+)
+{
+    EnemyIntent intent;
+    intent.type = type;
+    intent.value = value;
+    return intent;
+}
+static int parseAttackValue(const std::string& text)
+{
+    std::string rest;
+
+    if (startsWith(text, "Attack")) {
+        rest = text.substr(std::string("Attack").size());
+    }
+    else if (startsWith(text, "HeavyScalingAttack")) {
+        rest = text.substr(std::string("HeavyScalingAttack").size());
+    }
+    else if (startsWith(text, "ScalingAttack")) {
+        rest = text.substr(std::string("ScalingAttack").size());
+    }
+    else {
+        return firstNumberOrDefault(text, 0);
+    }
+
+    if (rest.empty()) {
+        return 0;
+    }
+
+    const std::size_t toPos = rest.find("To");
+
+    if (toPos != std::string::npos) {
+        int left = toIntOrDefault(rest.substr(0, toPos), 0);
+        int right = toIntOrDefault(rest.substr(toPos + 2), left);
+
+        return (left + right) / 2;
+    }
+
+    const std::size_t xPos = rest.find('x');
+
+    if (xPos != std::string::npos) {
+        int damage = toIntOrDefault(rest.substr(0, xPos), 0);
+        int hits = toIntOrDefault(rest.substr(xPos + 1), 1);
+
+        if (damage > 0) {
+            return damage * hits;
+        }
+
+        return firstNumberOrDefault(rest.substr(xPos + 1), 0);
+    }
+
+    return toIntOrDefault(rest, firstNumberOrDefault(rest, 0));
+}
+static EnemyIntent parseEnemyActionToken(
+    const std::string& token,
+    const std::string& moveName
+)
+{
+    const std::string text = trimLocal(token);
+    const std::string name = trimLocal(moveName);
+
+    if (text.empty()) {
+        return makeIntent(EnemyIntentType::Buff, 0);
+    }
+
+    // 兼容 Attack:18 这种格式。
+    // 拆分后 moveName 是 Attack，token 是 18。
+    if (isAllDigits(text)) {
+        if (name == "Attack") {
+            return makeIntent(
+                EnemyIntentType::Attack,
+                toIntOrDefault(text, 0)
+            );
+        }
+
+        return makeIntent(EnemyIntentType::Buff, 0);
+    }
+
+    if (
+        startsWith(text, "Attack") ||
+        startsWith(text, "ScalingAttack") ||
+        startsWith(text, "HeavyScalingAttack")
+    ) {
+        return makeIntent(
+            EnemyIntentType::Attack,
+            parseAttackValue(text)
+        );
+    }
+
+    if (startsWith(text, "Block")) {
+        return makeIntent(
+            EnemyIntentType::Block,
+            firstNumberOrDefault(text, 0)
+        );
+    }
+
+    if (
+        startsWith(text, "AllyBlock") ||
+        startsWith(text, "AlliesBlock") ||
+        startsWith(text, "TeamBlock")
+    ) {
+        return makeIntent(
+            EnemyIntentType::Block,
+            firstNumberOrDefault(text, 0)
+        );
+    }
+
+    if (
+        startsWith(text, "GainStrength") ||
+        startsWith(text, "AllyStrength") ||
+        startsWith(text, "AlliesStrength") ||
+        startsWith(text, "TeamStrength") ||
+        startsWith(text, "GainRitual") ||
+        startsWith(text, "GainMetallicize") ||
+        startsWith(text, "GainThorns") ||
+        startsWith(text, "GainSharpHide") ||
+        startsWith(text, "Artifact")
+    ) {
+        return makeIntent(
+            EnemyIntentType::Buff,
+            firstNumberOrDefault(text, 0)
+        );
+    }
+
+    // ApplyWeak、ApplyFrail、AddDazed、Summon、Split、Escape 等
+    // 当前结构无法表达，统一作为 Buff(0) 占位。
+    return makeIntent(EnemyIntentType::Buff, 0);
+}
+static EnemyIntent parseEnemyIntent(const std::string& text)
+{
+    const std::string item = trimLocal(text);
+    const std::size_t pos = item.find(':');
+
+    if (pos == std::string::npos) {
+        return parseEnemyActionToken(item, item);
+    }
+
+    const std::string moveName = trimLocal(item.substr(0, pos));
+    const std::string actionText = trimLocal(item.substr(pos + 1));
+
+    EnemyIntent best = makeIntent(EnemyIntentType::Buff, 0);
+
+    for (const std::string& part : splitLocal(actionText, '+')) {
+        EnemyIntent current = parseEnemyActionToken(part, moveName);
+
+        if (current.type == EnemyIntentType::Attack) {
+            return current;
+        }
+
+        if (
+            current.type == EnemyIntentType::Block &&
+            best.type != EnemyIntentType::Block
+        ) {
+            best = current;
+        }
+        else if (
+            best.type == EnemyIntentType::Buff &&
+            best.value == 0
+        ) {
+            best = current;
+        }
+    }
+
+    return best;
+}
+
+
+static std::vector<EnemyIntent> parseMovePattern(
+    const std::string& text
+)
+{
+    std::vector<EnemyIntent> pattern;
+
+    for (const std::string& item : splitLocal(text, ';')) {
         if (!item.empty()) {
             pattern.push_back(parseEnemyIntent(item));
         }
@@ -71,6 +316,7 @@ static std::vector<EnemyIntent> parseMovePattern(const std::string& text)
 
     return pattern;
 }
+
 
 static bool parseBossFlag(const std::string& text)
 {
@@ -99,14 +345,12 @@ ErrorCode EnemyDatabase::loadFromCsv(const std::string& path)
         return ErrorCode::DATA_FORMAT_ERROR;
     }
 
-    constexpr int kMaxAct = 3;
+    constexpr int kMaxAct = 4;
 
     for (std::size_t i = 1; i < rows.size(); ++i) {
         const auto& row = rows[i];
 
-        // 新表结构要求 8 列：
-        // id,name,maxHp,textureId,movePattern,isBoss,mapTextureId,act
-        if (row.size() < 8) {
+         if (row.size() < 8) {
             return ErrorCode::DATA_FORMAT_ERROR;
         }
 
@@ -127,8 +371,6 @@ ErrorCode EnemyDatabase::loadFromCsv(const std::string& path)
             enemy.mapTextureId = row[6];
             enemy.act = std::stoi(row[7]);
 
-            // Boss 在地图上需要图标。
-            // 如果 CSV 没填 mapTextureId，就默认使用战斗贴图 textureId。
             if (enemy.isBoss && enemy.mapTextureId.empty()) {
                 enemy.mapTextureId = enemy.textureId;
             }

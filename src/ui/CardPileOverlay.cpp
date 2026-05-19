@@ -1,11 +1,10 @@
 #include "CardPileOverlay.hpp"
 
-#include "database/CardDatabase.hpp"
+#include "CardView.hpp"
 #include "model/CardDef.hpp"
 
 #include <algorithm>
 #include <sstream>
-#include <vector>
 
 namespace {
 
@@ -55,76 +54,45 @@ sf::Vector2f getViewSize(
     return window.getView().getSize();
 }
 
-std::vector<std::string> wrapText(
-    const std::string& text,
-    std::size_t maxCharsPerLine
-)
-{
-    std::vector<std::string> lines;
-    std::istringstream input(text);
-
-    std::string word;
-    std::string line;
-
-    while (input >> word) {
-        if (
-            line.size() + word.size() + 1 >
-            maxCharsPerLine
-        ) {
-            if (!line.empty()) {
-                lines.push_back(line);
-                line.clear();
-            }
-        }
-
-        if (!line.empty()) {
-            line += " ";
-        }
-
-        line += word;
-    }
-
-    if (!line.empty()) {
-        lines.push_back(line);
-    }
-
-    return lines;
-}
-
-void drawWrappedText(
+void drawButton(
     sf::RenderWindow& window,
     const sf::Font& font,
+    const sf::FloatRect& rect,
     const std::string& text,
-    unsigned int size,
-    sf::Vector2f position,
-    float lineSpacing,
-    sf::Color color,
-    std::size_t maxCharsPerLine
+    sf::Color fillColor
 )
 {
-    const std::vector<std::string> lines =
-        wrapText(text, maxCharsPerLine);
+    sf::RectangleShape button(rect.size);
+    button.setPosition(rect.position);
+    button.setFillColor(fillColor);
+    button.setOutlineThickness(2.0f);
+    button.setOutlineColor(sf::Color(240, 210, 180));
+    window.draw(button);
 
-    for (std::size_t i = 0; i < lines.size(); ++i) {
-        sf::Text lineText =
-            makeText(font, lines[i], size);
+    sf::Text buttonText = makeText(font, text, 24);
+    buttonText.setFillColor(sf::Color::White);
 
-        lineText.setFillColor(color);
-        lineText.setPosition(sf::Vector2f(
-            position.x,
-            position.y +
-                static_cast<float>(i) * lineSpacing
-        ));
+    const sf::FloatRect bounds =
+        buttonText.getLocalBounds();
 
-        window.draw(lineText);
-    }
+    buttonText.setPosition(sf::Vector2f(
+        rect.position.x +
+            rect.size.x * 0.5f -
+            bounds.size.x * 0.5f,
+        rect.position.y +
+            rect.size.y * 0.5f -
+            bounds.size.y * 0.5f -
+            6.0f
+    ));
+
+    window.draw(buttonText);
 }
 
 }
 
 void CardPileOverlay::open(
     const std::string& title,
-    const std::vector<CardInstance>* cards
+    const std::vector<PileCardViewData>& cards
 )
 {
     title_ = title;
@@ -133,16 +101,17 @@ void CardPileOverlay::open(
     clampPage();
 }
 
+
 void CardPileOverlay::close()
 {
-    cards_ = nullptr;
+    cards_.clear();
     title_.clear();
     page_ = 0;
 }
 
 bool CardPileOverlay::isOpen() const
 {
-    return cards_ != nullptr;
+    return !title_.empty();
 }
 
 bool CardPileOverlay::handleEvent(
@@ -157,7 +126,6 @@ bool CardPileOverlay::handleEvent(
     sf::Vector2i pixelPosition;
 
     if (!readLeftClickPosition(event, pixelPosition)) {
-        // 弹窗打开时，非点击事件也不需要让底层场景处理
         return true;
     }
 
@@ -186,8 +154,7 @@ bool CardPileOverlay::handleEvent(
 
 void CardPileOverlay::draw(
     sf::RenderWindow& window,
-    const sf::Font& font,
-    const CardDatabase& cardDatabase
+    const sf::Font& font
 ) const
 {
     if (!isOpen()) {
@@ -212,9 +179,7 @@ void CardPileOverlay::draw(
     window.draw(panel);
 
     const int cardCount =
-        cards_ == nullptr
-            ? 0
-            : static_cast<int>(cards_->size());
+        static_cast<int>(cards_.size());
 
     std::ostringstream titleStream;
     titleStream << title_ << "    Cards: " << cardCount;
@@ -229,22 +194,13 @@ void CardPileOverlay::draw(
     ));
     window.draw(titleText);
 
-    const sf::FloatRect closeRect = getCloseRect(window);
-
-    sf::RectangleShape closeButton(closeRect.size);
-    closeButton.setPosition(closeRect.position);
-    closeButton.setFillColor(sf::Color(120, 65, 65));
-    closeButton.setOutlineThickness(2.0f);
-    closeButton.setOutlineColor(sf::Color(240, 210, 180));
-    window.draw(closeButton);
-
-    sf::Text closeText = makeText(font, "Close", 24);
-    closeText.setFillColor(sf::Color::White);
-    closeText.setPosition(sf::Vector2f(
-        closeRect.position.x + 35.0f,
-        closeRect.position.y + 16.0f
-    ));
-    window.draw(closeText);
+    drawButton(
+        window,
+        font,
+        getCloseRect(window),
+        "Close",
+        sf::Color(120, 65, 65)
+    );
 
     if (cardCount <= 0) {
         sf::Text emptyText =
@@ -253,109 +209,74 @@ void CardPileOverlay::draw(
         emptyText.setFillColor(sf::Color(230, 230, 230));
         emptyText.setPosition(sf::Vector2f(
             panelRect.position.x + 40.0f,
-            panelRect.position.y + 120.0f
+            panelRect.position.y + 130.0f
         ));
         window.draw(emptyText);
     }
 
     const int cardsPerPage = getCardsPerPage();
     const int startIndex = page_ * cardsPerPage;
+    const int endIndex = std::min(
+        startIndex + cardsPerPage,
+        static_cast<int>(cards_.size())
+    );
 
-    for (int i = 0; i < cardsPerPage; ++i) {
-        const int cardIndex = startIndex + i;
+    for (int cardIndex = startIndex;
+         cardIndex < endIndex;
+         ++cardIndex) {
+        const int visibleIndex =
+            cardIndex - startIndex;
 
-        if (cardIndex >= cardCount) {
-            break;
-        }
+        const PileCardViewData& data =
+            cards_[cardIndex];
 
-        const CardInstance& instance = (*cards_)[cardIndex];
-
-        std::string cardName = "Unknown Card";
-        std::string cardDescription;
-        int cost = 0;
-
-        if (cardDatabase.exists(instance.cardId)) {
-            const CardDef& def =
-                cardDatabase.get(instance.cardId);
-
-            cardName = def.name;
-            cardDescription = def.description;
-            cost = def.cost;
+        if (data.cardDef == nullptr) {
+            continue;
         }
 
         const sf::FloatRect rect =
-            getCardRect(window, i);
+            getCardRect(window, visibleIndex);
 
-        sf::RectangleShape cardShape(rect.size);
-        cardShape.setPosition(rect.position);
-        cardShape.setFillColor(sf::Color(70, 70, 95));
-        cardShape.setOutlineThickness(3.0f);
-        cardShape.setOutlineColor(sf::Color(220, 210, 170));
-        window.draw(cardShape);
-
-        sf::Text nameText = makeText(font, cardName, 25);
-        nameText.setFillColor(sf::Color::White);
-        nameText.setPosition(sf::Vector2f(
-            rect.position.x + 18.0f,
-            rect.position.y + 14.0f
-        ));
-        window.draw(nameText);
-
-        std::ostringstream meta;
-        meta << "Cost: " << cost
-             << "    ID: " << instance.instanceId;
-
-        sf::Text metaText = makeText(font, meta.str(), 18);
-        metaText.setFillColor(sf::Color(210, 210, 210));
-        metaText.setPosition(sf::Vector2f(
-            rect.position.x + 18.0f,
-            rect.position.y + 48.0f
-        ));
-        window.draw(metaText);
-
-        drawWrappedText(
-            window,
-            font,
-            cardDescription,
-            18,
-            sf::Vector2f(
-                rect.position.x + 18.0f,
-                rect.position.y + 80.0f
-            ),
-            24.0f,
-            sf::Color(225, 225, 225),
-            24
+        CardView cardView(
+            data.cardId,
+            rect.position,
+            rect.size
         );
-    }
 
-    const sf::FloatRect prevRect = getPrevRect(window);
-    const sf::FloatRect nextRect = getNextRect(window);
+        cardView.draw(
+            window,
+            *data.cardDef,
+            data.textures,
+            font
+        );
+         }
 
-    sf::RectangleShape prevButton(prevRect.size);
-    prevButton.setPosition(prevRect.position);
-    prevButton.setFillColor(sf::Color(80, 80, 120));
-    window.draw(prevButton);
 
-    sf::Text prevText = makeText(font, "Previous", 24);
-    prevText.setFillColor(sf::Color::White);
-    prevText.setPosition(sf::Vector2f(
-        prevRect.position.x + 36.0f,
-        prevRect.position.y + 18.0f
-    ));
-    window.draw(prevText);
+    const bool hasPrev =
+        page_ > 0;
 
-    sf::RectangleShape nextButton(nextRect.size);
-    nextButton.setPosition(nextRect.position);
-    nextButton.setFillColor(sf::Color(80, 80, 120));
-    window.draw(nextButton);
+    const bool hasNext =
+        page_ + 1 < getPageCount();
 
-    sf::Text nextText = makeText(font, "Next", 24);
-    nextText.setFillColor(sf::Color::White);
-    nextText.setPosition(sf::Vector2f(
-        nextRect.position.x + 62.0f,
-        nextRect.position.y + 18.0f
-    ));
-    window.draw(nextText);
+    drawButton(
+        window,
+        font,
+        getPrevRect(window),
+        "Previous",
+        hasPrev
+            ? sf::Color(80, 80, 120)
+            : sf::Color(55, 55, 70)
+    );
+
+    drawButton(
+        window,
+        font,
+        getNextRect(window),
+        "Next",
+        hasNext
+            ? sf::Color(80, 80, 120)
+            : sf::Color(55, 55, 70)
+    );
 
     std::ostringstream pageStream;
     pageStream << "Page "
@@ -363,30 +284,42 @@ void CardPileOverlay::draw(
                << " / "
                << getPageCount();
 
-    sf::Text pageText = makeText(font, pageStream.str(), 24);
+    sf::Text pageText =
+        makeText(font, pageStream.str(), 24);
+
     pageText.setFillColor(sf::Color(230, 230, 230));
+
+    const sf::FloatRect pageBounds =
+        pageText.getLocalBounds();
+
     pageText.setPosition(sf::Vector2f(
-        panelRect.position.x + panelRect.size.x * 0.5f - 60.0f,
-        panelRect.position.y + panelRect.size.y - 72.0f
+        panelRect.position.x +
+            panelRect.size.x * 0.5f -
+            pageBounds.size.x * 0.5f,
+        panelRect.position.y +
+            panelRect.size.y -
+            72.0f
     ));
+
     window.draw(pageText);
 }
 
 int CardPileOverlay::getCardsPerPage() const
 {
-    return 15;
+    return 5;
 }
 
 int CardPileOverlay::getPageCount() const
 {
-    if (cards_ == nullptr || cards_->empty()) {
+    if (cards_.empty()) {
         return 1;
     }
 
     const int cardCount =
-        static_cast<int>(cards_->size());
+        static_cast<int>(cards_.size());
 
-    const int cardsPerPage = getCardsPerPage();
+    const int cardsPerPage =
+        getCardsPerPage();
 
     return (cardCount + cardsPerPage - 1) /
            cardsPerPage;
@@ -394,7 +327,8 @@ int CardPileOverlay::getPageCount() const
 
 void CardPileOverlay::clampPage()
 {
-    const int pageCount = getPageCount();
+    const int pageCount =
+        getPageCount();
 
     if (page_ < 0) {
         page_ = 0;
@@ -409,8 +343,11 @@ sf::FloatRect CardPileOverlay::getPanelRect(
     const sf::RenderWindow& window
 ) const
 {
-    const sf::Vector2f viewTopLeft = getViewTopLeft(window);
-    const sf::Vector2f viewSize = getViewSize(window);
+    const sf::Vector2f viewTopLeft =
+        getViewTopLeft(window);
+
+    const sf::Vector2f viewSize =
+        getViewSize(window);
 
     return sf::FloatRect{
         sf::Vector2f(
@@ -428,11 +365,14 @@ sf::FloatRect CardPileOverlay::getCloseRect(
     const sf::RenderWindow& window
 ) const
 {
-    const sf::FloatRect panel = getPanelRect(window);
+    const sf::FloatRect panel =
+        getPanelRect(window);
 
     return sf::FloatRect{
         sf::Vector2f(
-            panel.position.x + panel.size.x - 170.0f,
+            panel.position.x +
+                panel.size.x -
+                170.0f,
             panel.position.y + 28.0f
         ),
         sf::Vector2f(130.0f, 58.0f)
@@ -443,12 +383,17 @@ sf::FloatRect CardPileOverlay::getPrevRect(
     const sf::RenderWindow& window
 ) const
 {
-    const sf::FloatRect panel = getPanelRect(window);
+    const sf::FloatRect panel =
+        getPanelRect(window);
 
     return sf::FloatRect{
         sf::Vector2f(
-            panel.position.x + 520.0f,
-            panel.position.y + panel.size.y - 90.0f
+            panel.position.x +
+                panel.size.x * 0.5f -
+                250.0f,
+            panel.position.y +
+                panel.size.y -
+                90.0f
         ),
         sf::Vector2f(180.0f, 62.0f)
     };
@@ -458,12 +403,17 @@ sf::FloatRect CardPileOverlay::getNextRect(
     const sf::RenderWindow& window
 ) const
 {
-    const sf::FloatRect panel = getPanelRect(window);
+    const sf::FloatRect panel =
+        getPanelRect(window);
 
     return sf::FloatRect{
         sf::Vector2f(
-            panel.position.x + panel.size.x - 700.0f,
-            panel.position.y + panel.size.y - 90.0f
+            panel.position.x +
+                panel.size.x * 0.5f +
+                70.0f,
+            panel.position.y +
+                panel.size.y -
+                90.0f
         ),
         sf::Vector2f(180.0f, 62.0f)
     };
@@ -474,30 +424,40 @@ sf::FloatRect CardPileOverlay::getCardRect(
     int visibleIndex
 ) const
 {
-    const sf::FloatRect panel = getPanelRect(window);
+    const sf::FloatRect panel =
+        getPanelRect(window);
 
     constexpr int columns = 5;
 
-    const int row = visibleIndex / columns;
-    const int column = visibleIndex % columns;
+    const int column =
+        visibleIndex % columns;
 
-    const float cardWidth = 300.0f;
-    const float cardHeight = 180.0f;
-    const float gapX = 36.0f;
-    const float gapY = 30.0f;
+    const float cardWidth = 294.0f;
+    const float cardHeight = 414.0f;
+    const float gapX = 28.0f;
 
-    const float startX = panel.position.x + 45.0f;
-    const float startY = panel.position.y + 125.0f;
+    const float totalWidth =
+        static_cast<float>(columns) * cardWidth +
+        static_cast<float>(columns - 1) * gapX;
+
+    const float startX =
+        panel.position.x +
+        panel.size.x * 0.5f -
+        totalWidth * 0.5f;
+
+    const float startY =
+        panel.position.y + 145.0f;
 
     return sf::FloatRect{
         sf::Vector2f(
             startX +
                 static_cast<float>(column) *
                     (cardWidth + gapX),
-            startY +
-                static_cast<float>(row) *
-                    (cardHeight + gapY)
+            startY
         ),
-        sf::Vector2f(cardWidth, cardHeight)
+        sf::Vector2f(
+            cardWidth,
+            cardHeight
+        )
     };
 }

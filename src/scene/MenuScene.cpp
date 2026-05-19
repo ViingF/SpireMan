@@ -11,7 +11,7 @@ MenuScene::MenuScene(GameContext& context)
           sf::Vector2f(76.f, 820.f),
           sf::Vector2f(400.f, 100.f),
           context.resources.getFont("zh-R"),
-          "Start"
+          "开始"
       ),
 
         quitButton(
@@ -28,7 +28,8 @@ MenuScene::MenuScene(GameContext& context)
       ),
         background(context.resources.getTexture(
             "title"
-        )) {
+        ))
+{
     Vector2u size = context.resources.getTexture(
             "title"
         ).getSize();
@@ -39,6 +40,9 @@ MenuScene::MenuScene(GameContext& context)
 
     background.setScale({scaleX, scaleY});
     loadButton.setEnabled(SaveSystem::hasSave());
+    startButton.setTexture(context.resources.getTexture("blank"));
+    quitButton.setTexture(context.resources.getTexture("blank"));
+    loadButton.setTexture(context.resources.getTexture("blank"));
 
 }
 

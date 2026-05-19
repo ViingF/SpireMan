@@ -5,21 +5,29 @@
 #include <string>
 #include <vector>
 
-#include "model/CardInstance.hpp"
+#include "CardView.hpp"
+#include "../model/Types.hpp"
 
-class CardDatabase;
+struct CardDef;
+
+struct PileCardViewData {
+    CardId cardId = 0;
+    CardInstanceId instanceId = 0;
+    const CardDef* cardDef = nullptr;
+    CardRenderTextures textures;
+};
+
 
 class CardPileOverlay {
 public:
     void open(
         const std::string& title,
-        const std::vector<CardInstance>* cards
+        const std::vector<PileCardViewData>& cards
     );
 
     void close();
     bool isOpen() const;
 
-    // 返回 true 表示事件已被弹窗消费，场景不应继续处理点击
     bool handleEvent(
         const sf::Event& event,
         const sf::RenderWindow& window
@@ -27,12 +35,11 @@ public:
 
     void draw(
         sf::RenderWindow& window,
-        const sf::Font& font,
-        const CardDatabase& cardDatabase
+        const sf::Font& font
     ) const;
 
 private:
-    const std::vector<CardInstance>* cards_ = nullptr;
+    std::vector<PileCardViewData> cards_;
     std::string title_;
     int page_ = 0;
 
@@ -40,22 +47,10 @@ private:
     int getPageCount() const;
     void clampPage();
 
-    sf::FloatRect getPanelRect(
-        const sf::RenderWindow& window
-    ) const;
-
-    sf::FloatRect getCloseRect(
-        const sf::RenderWindow& window
-    ) const;
-
-    sf::FloatRect getPrevRect(
-        const sf::RenderWindow& window
-    ) const;
-
-    sf::FloatRect getNextRect(
-        const sf::RenderWindow& window
-    ) const;
-
+    sf::FloatRect getPanelRect(const sf::RenderWindow& window) const;
+    sf::FloatRect getCloseRect(const sf::RenderWindow& window) const;
+    sf::FloatRect getPrevRect(const sf::RenderWindow& window) const;
+    sf::FloatRect getNextRect(const sf::RenderWindow& window) const;
     sf::FloatRect getCardRect(
         const sf::RenderWindow& window,
         int visibleIndex

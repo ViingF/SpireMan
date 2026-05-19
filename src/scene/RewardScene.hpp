@@ -14,6 +14,8 @@
 
 #include <SFML/Graphics.hpp>
 
+#include "ui/CardView.hpp"
+
 class RewardScene : public Scene {
 public:
     explicit RewardScene(GameContext& context);
@@ -31,17 +33,18 @@ public:
 
 private:
     void chooseCard(CardId cardId);
+    const sf::Texture& getCardTemplateTexture(CardType type);
+    const sf::Texture* getCardArtTexture(const CardDef& cardDef);
+    CardRenderTextures getCardRenderTextures(const CardDef& cardDef);
+
 
 private:
-    Button cardButton1;
-    Button cardButton2;
-    Button cardButton3;
-
-    CardId rewardCard1 = 1;
-    CardId rewardCard2 = 2;
-    CardId rewardCard3 = 3;
 
     SceneTransition transition;
+
+    std::vector<CardId> rewardCardIds_;
+    std::vector<CardView> rewardCardViews_;
+
 };
 
 #endif //SPIRELIKE_REWARDSCENE_HPP

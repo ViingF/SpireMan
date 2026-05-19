@@ -7,17 +7,17 @@
 #include <sstream>
 #include <vector>
 
+#include "ui/TextUtils.hpp"
+
 namespace {
 
-sf::Text makeText(
-    const sf::Font& font,
-    const std::string& content,
-    unsigned int size
-)
-{
-    sf::Text text(font, content, size);
-    return text;
-}
+    sf::Text makeText(
+        const sf::Font& font,
+        const std::string& content,
+        unsigned int size
+    ) {
+        return sf::Text(font, TextUtils::fromUtf8(content), size);
+    }
 
 bool readLeftClickPosition(
     const sf::Event& event,

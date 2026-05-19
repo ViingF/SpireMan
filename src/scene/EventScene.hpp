@@ -12,6 +12,8 @@
 #include <string>
 #include <vector>
 
+#include "ui/Button.hpp"
+
 class EventScene : public Scene {
 public:
     EventScene(GameContext& context, EventId eventId);
@@ -32,6 +34,8 @@ private:
 
     void choose(int choiceIndex);
     bool canChoose(const EventChoiceDef& choice) const;
+    void createChoiceButtons();
+    void syncChoiceButtons();
 
 private:
     EventId eventId_ = 0;
@@ -43,5 +47,6 @@ private:
 
     bool resolved_ = false;
     std::string resultMessage_;
+    std::vector<Button> choiceButtons_;
 };
 #endif //SPIRELIKE_EVENTSCENE_HPP
