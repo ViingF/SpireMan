@@ -9,7 +9,9 @@
 
 #include <vector>
 
+#include "CardRemoveScene.hpp"
 #include "ui/Button.hpp"
+#include "ui/ShopView.hpp"
 
 class ShopScene : public Scene {
 public:
@@ -25,19 +27,13 @@ public:
     void draw(sf::RenderWindow& window) override;
 
     SceneTransition getTransition() const override;
+    void resetTransition() override;
 
 private:
-    sf::FloatRect getCardRect(int index) const;
-    sf::FloatRect getLeaveRect() const;
 
     void buyCard(int index);
     void leaveShop();
-    sf::FloatRect getRemoveCardRect() const;
 
-    sf::FloatRect getDeckCardRect(int visibleIndex) const;
-    sf::FloatRect getRemovePrevPageRect() const;
-    sf::FloatRect getRemoveNextPageRect() const;
-    sf::FloatRect getCancelRemoveRect() const;
 
     int getRemoveCost() const;
     int getRemoveCardsPerPage() const;
@@ -46,10 +42,14 @@ private:
 
     void startRemoveCard();
     void removeCardByDeckIndex(int deckIndex);
-    void drawRemoveCardOverlay(
-        sf::RenderWindow& window,
-        const sf::Font& font
-    );
+
+    const sf::Texture& getCardTemplateTexture(CardType type) const;
+    const sf::Texture* getCardArtTexture(const CardDef& cardDef) const;
+    CardRenderTextures getCardRenderTextures(const CardDef& cardDef) const;
+    std::vector<ShopCardViewData> buildShopCardViewData() const;
+
+    void finishRemoveCardFromScene();
+
 
 
 private:
@@ -70,6 +70,12 @@ private:
     Button cancelRemoveButton_;
     Button removePrevPageButton_;
     Button removeNextPageButton_;
+    Button mapIconButton_;
+
+    ShopView shopView_;
+    int pendingShopRemoveCost_ = 0;
+    std::unique_ptr<CardRemoveScene> removeCardScene_;
+
 
 
 };

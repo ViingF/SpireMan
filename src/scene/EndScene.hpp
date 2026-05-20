@@ -25,6 +25,7 @@ public:
     void draw(sf::RenderWindow& window) override;
 
     SceneTransition getTransition() const override;
+    void resetTransition() override;
 
 private:
     BattleResult result;

@@ -28,6 +28,7 @@ public:
     void draw(sf::RenderWindow& window) override;
 
     SceneTransition getTransition() const override;
+    void resetTransition() override;
 
 private:
     sf::FloatRect getChoiceRect(int index) const;
@@ -36,6 +37,7 @@ private:
     bool canChoose(const EventChoiceDef& choice) const;
     void createChoiceButtons();
     void syncChoiceButtons();
+    void drawBackground(sf::RenderWindow& window);
 
 private:
     EventId eventId_ = 0;
@@ -48,5 +50,8 @@ private:
     bool resolved_ = false;
     std::string resultMessage_;
     std::vector<Button> choiceButtons_;
+    Button mapIconButton_;
+
+
 };
 #endif //SPIRELIKE_EVENTSCENE_HPP

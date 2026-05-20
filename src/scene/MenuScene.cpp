@@ -108,3 +108,8 @@ SceneTransition MenuScene::getTransition() const
 {
     return transition;
 }
+
+void MenuScene::resetTransition()
+{
+    transition = SceneTransition{};
+}

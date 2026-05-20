@@ -8,6 +8,7 @@
 #include <vector>
 
 #include "ui/TextUtils.hpp"
+#include "ui/TopInfoBar.hpp"
 
 namespace {
 
@@ -124,8 +125,8 @@ void drawTextureCover(
         return;
     }
 
-    const float targetWidth = 1080.0f;
-    const float targetHeight = 1080.0f;
+    const float targetWidth = 900.0f;
+    const float targetHeight = 900.0f;
 
     const float scaleX =
         targetWidth / static_cast<float>(textureSize.x);
@@ -135,7 +136,7 @@ void drawTextureCover(
 
     sprite.setScale(sf::Vector2f(scaleX, scaleY));
 
-    sprite.setPosition(viewTopLeft);
+    sprite.setPosition({viewTopLeft.x+50, viewTopLeft.y+150});
 
     window.draw(sprite);
 }
@@ -182,8 +183,19 @@ void drawEventBackground(
 
 EventScene::EventScene(GameContext& context, EventId eventId)
     : Scene(context)
-    , eventId_(eventId)
+    , eventId_(eventId),
+mapIconButton_(
+    sf::Vector2f(0.0f, 0.0f),
+    sf::Vector2f(64.0f, 64.0f),
+    context.resources.getFont("zh-R"),
+    ""
+)
+
 {
+    mapIconButton_.setTexture(
+    context.resources.getTexture("map")
+);
+
     createChoiceButtons();
     syncChoiceButtons();
 }
@@ -194,6 +206,20 @@ void EventScene::handleEvent(
     const sf::RenderWindow& window
 )
 {
+    TopInfoBar::layoutMapButton(mapIconButton_, window);
+    mapIconButton_.handleEvent(event, window);
+
+    if (mapIconButton_.wasClicked()) {
+        context.audio.playSound("Click");
+
+        transition_.openMapPreview = true;
+        transition_.target = SceneType::Map;
+
+        mapIconButton_.reset();
+        return;
+    }
+
+
     if (transition_.target != SceneType::None || resolved_) {
         return;
     }
@@ -239,6 +265,7 @@ void EventScene::update(float)
 
 void EventScene::draw(sf::RenderWindow& window)
 {
+    drawBackground(window);
     const sf::Font& font = context.resources.getFont("zh-R");
     const EventDef& eventDef = context.events.get(eventId_);
 
@@ -248,34 +275,20 @@ void EventScene::draw(sf::RenderWindow& window)
         eventDef
     );
 
-    const sf::View& view = window.getView();
-    const sf::Vector2f viewCenter = view.getCenter();
-    const sf::Vector2f viewSize = view.getSize();
+    TopInfoBar::draw(
+    window,
+    context,
+    font,
+    std::nullopt,
+    true,
+    true,
+    false // map 图标由按钮绘制
+);
 
-    const sf::Vector2f viewTopLeft(
-        viewCenter.x - viewSize.x * 0.5f,
-        viewCenter.y - viewSize.y * 0.5f
-    );
+    TopInfoBar::layoutMapButton(mapIconButton_, window);
+    mapIconButton_.draw(window);
 
-    sf::RectangleShape topBar(sf::Vector2f(viewSize.x, 86.0f));
-    topBar.setPosition(viewTopLeft);
-    topBar.setFillColor(sf::Color(0, 0, 0, 135));
-    window.draw(topBar);
 
-    std::ostringstream status;
-    status << "Event"
-           << "    HP: " << context.runState.player.hp
-           << " / " << context.runState.player.maxHp
-           << "    Gold: " << context.runState.gold
-           << "    Floor: " << context.runState.floor;
-
-    sf::Text statusText = makeText(font, status.str(), 28);
-    statusText.setFillColor(sf::Color(245, 240, 220));
-    statusText.setPosition(sf::Vector2f(
-        viewTopLeft.x + 60.0f,
-        viewTopLeft.y + 28.0f
-    ));
-    window.draw(statusText);
 
     const float panelX = 1130.0f;
     const float panelY = 120.0f;
@@ -472,6 +485,8 @@ void EventScene::createChoiceButtons()
             context.resources.getFont("zh-R"),
             ""
         );
+        choiceButtons_[i].setTexture(context.resources.getTexture("enabledButton"));
+
     }
 }
 
@@ -487,4 +502,16 @@ void EventScene::syncChoiceButtons()
     for (int i = 0; i < count; ++i) {
         choiceButtons_[i].setEnabled(canChoose(eventDef.choices[i]));
     }
+}
+
+void EventScene::resetTransition()
+{
+    transition_ = SceneTransition{};
+}
+
+void EventScene::drawBackground(sf::RenderWindow &window) {
+    RectangleShape background;
+    background.setTexture(&context.resources.getTexture("eventbackground"));
+    background.setSize({static_cast<float>(window.getSize().x),static_cast<float>(window.getSize().y)});
+    window.draw(background);
 }

@@ -15,12 +15,13 @@ sf::Text TextUtils::createText(
     sf::Vector2f position
 ) {
     sf::Text txt(font);
-    txt.setString(text);
+    txt.setString(TextUtils::fromUtf8(text));
     txt.setCharacterSize(characterSize);
     txt.setFillColor(color);
     txt.setPosition(position);
     return txt;
 }
+
 
 sf::Text TextUtils::createWhiteText(
     const sf::Font& font,

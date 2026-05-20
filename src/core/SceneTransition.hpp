@@ -11,6 +11,8 @@ struct SceneTransition {
     int mapNodeIndex = -1;
     bool loadGame = false;
     bool saveAndQuit = false;
+    bool openMapPreview = false;
+    bool closeMapPreview = false;
 };
 
 #endif //SPIRELIKE_SCENETRANSITION_HPP

@@ -32,6 +32,7 @@ public:
     void draw(sf::RenderWindow& window) override;
 
     SceneTransition getTransition() const override;
+    void resetTransition() override;
 
 private:
 
@@ -111,6 +112,8 @@ private:
     Button drawPileButton_;
     Button discardPileButton_;
     Button exhaustPileButton_;
+    Button mapIconButton_;
+
 
     CardPileOverlay pileOverlay_;
 

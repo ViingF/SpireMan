@@ -89,7 +89,9 @@ add_executable(SpireLike src/main.cpp
         src/ui/TextUtils.cpp
         src/ui/DeckView.hpp
         src/system/EnemyAISystem.cpp
-        src/system/CardSystem.cpp)
+        src/system/CardSystem.cpp
+        src/ui/TopInfoBar.cpp
+        src/ui/TopInfoBar.hpp)
 
 target_link_libraries(SpireLike
         SFML::Graphics

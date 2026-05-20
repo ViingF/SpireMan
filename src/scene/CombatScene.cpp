@@ -5,7 +5,6 @@
 #include "ui/CardView.hpp"
 #include "ui/EnemyView.hpp"
 #include "ui/EnergyView.hpp"
-#include "ui/HealthBar.hpp"
 #include "ui/StateView.hpp"
 #include "ui/TextUtils.hpp"
 
@@ -14,6 +13,8 @@
 #include <optional>
 #include <string>
 #include <vector>
+
+#include "ui/TopInfoBar.hpp"
 
 namespace {
 
@@ -177,33 +178,6 @@ void addMissingCardsFromDatabase(
             cardId
         });
     }
-}
-
-sf::Texture& getFirstExistingTexture(
-    ResourceManager& resources,
-    std::initializer_list<const char*> textureIds
-)
-{
-    for (const char* textureId : textureIds) {
-        if (resources.hasTexture(textureId)) {
-            return resources.getTexture(textureId);
-        }
-    }
-
-    return resources.getTexture(*textureIds.begin());
-}
-
-    std::vector<int> getAliveEnemyIndices(const std::vector<Enemy>& enemies)
-{
-    std::vector<int> result;
-
-    for (int i = 0; i < static_cast<int>(enemies.size()); ++i) {
-        if (enemies[i].hp > 0) {
-            result.push_back(i);
-        }
-    }
-
-    return result;
 }
 
     sf::FloatRect getEnemyScreenRect(
@@ -371,8 +345,20 @@ CombatScene::CombatScene(
           {128.f, 128.f},
           context.resources.getFont("zh-R"),
           "消耗堆"
-      )
+          ),
+    mapIconButton_(
+        sf::Vector2f(0.0f, 0.0f),
+        sf::Vector2f(64.0f, 64.0f),
+        context.resources.getFont("zh-R"),
+        ""
+    )
+
 {
+    mapIconButton_.setTexture(
+    context.resources.getTexture("map")
+);
+
+
     enemyTextureIds_.clear();
 
     for (const EncounterEnemySlot& slot : encounterDef.enemies) {
@@ -464,6 +450,20 @@ void CombatScene::handleEvent(
     const sf::RenderWindow& window
 )
 {
+    TopInfoBar::layoutMapButton(mapIconButton_, window);
+    mapIconButton_.handleEvent(event, window);
+
+    if (mapIconButton_.wasClicked()) {
+        context.audio.playSound("Click");
+
+        transition_ = SceneTransition{};
+        transition_.openMapPreview = true;
+
+        mapIconButton_.reset();
+        return;
+    }
+
+
     layoutPileButtons(window);
     if (pileOverlay_.isOpen()) {
         pileOverlay_.handleEvent(event, window);
@@ -614,19 +614,27 @@ void CombatScene::draw(sf::RenderWindow& window)
         context.resources.getFont("zh-R");
 
     drawBackground(window);
-    drawTop(window);
+    TopInfoBar::draw(
+    window,
+    context,
+    font,
+    std::nullopt,
+    true,
+    true,
+    false // map 图标由按钮绘制
+);
+
+    TopInfoBar::layoutMapButton(mapIconButton_, window);
+    mapIconButton_.draw(window);
+
+
     drawPileButton_.draw(window);
     discardPileButton_.draw(window);
     exhaustPileButton_.draw(window);
     endTurnButton_.draw(window);
     drawPlayerInfo(window);
     drawPlayerStatus(window, font);
-    drawPanelHeart(window, font);
-    drawPanelGoldBag(window, font);
-    drawDeck(window);
-    drawMap(window);
-    drawFloor(window, font);
-    drawSettings(window);
+
     drawBurningBlood(window);
     drawEnemies(window, font);
     drawHand(window, font);
@@ -1169,3 +1177,7 @@ void CombatScene::drawEnergy(
     );
 }
 
+void CombatScene::resetTransition()
+{
+    transition_ = SceneTransition{};
+}

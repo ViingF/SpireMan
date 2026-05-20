@@ -30,6 +30,7 @@ public:
     void draw(sf::RenderWindow& window) override;
 
     SceneTransition getTransition() const override;
+    void resetTransition() override;
 
 private:
     void chooseCard(CardId cardId);
@@ -44,6 +45,8 @@ private:
 
     std::vector<CardId> rewardCardIds_;
     std::vector<CardView> rewardCardViews_;
+    Button mapIconButton_;
+
 
 };
 

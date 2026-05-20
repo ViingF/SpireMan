@@ -7,6 +7,7 @@
 #include <string>
 
 #include "ui/TextUtils.hpp"
+#include "ui/TopInfoBar.hpp"
 
 namespace {
 
@@ -27,8 +28,18 @@ CampfireScene::CampfireScene(GameContext& context)
           sf::Vector2f(520.0f, 400.0f),
           context.resources.getFont("zh-R"),
           ""
-      )
+          ),mapIconButton_(
+        sf::Vector2f(0.0f, 0.0f),
+        sf::Vector2f(64.0f, 64.0f),
+        context.resources.getFont("zh-R"),
+        ""
+    )
+
 {
+    mapIconButton_.setTexture(
+    context.resources.getTexture("map")
+);
+
     restButton_.setTexture(context.resources.getTexture("Sleep"));
     }
 
@@ -38,6 +49,20 @@ void CampfireScene::handleEvent(
     const sf::RenderWindow& window
 )
 {
+    TopInfoBar::layoutMapButton(mapIconButton_, window);
+    mapIconButton_.handleEvent(event, window);
+
+    if (mapIconButton_.wasClicked()) {
+        context.audio.playSound("Click");
+
+        transition_.openMapPreview = true;
+        transition_.target = SceneType::Map;
+
+        mapIconButton_.reset();
+        return;
+    }
+
+
     if (transition_.target != SceneType::None || used_) {
         return;
     }
@@ -79,17 +104,20 @@ void CampfireScene::draw(sf::RenderWindow& window)
 
     const sf::Font& font = context.resources.getFont("zh-R");
 
-    std::ostringstream status;
-    status << "Campfire"
-           << "    HP: " << context.runState.player.hp
-           << " / " << context.runState.player.maxHp
-           << "    Gold: " << context.runState.gold
-           << "    Floor: " << context.runState.floor;
+    TopInfoBar::draw(
+    window,
+    context,
+    font,
+    std::nullopt,
+    true,
+    true,
+    false // map 图标由按钮绘制
+);
 
-    sf::Text statusText = makeText(font, status.str(), 28);
-    statusText.setFillColor(sf::Color(245, 240, 220));
-    statusText.setPosition(sf::Vector2f(60.0f, 28.0f));
-    window.draw(statusText);
+    TopInfoBar::layoutMapButton(mapIconButton_, window);
+    mapIconButton_.draw(window);
+
+
 
     sf::Text title = makeText(font, "Campfire", 56);
     title.setFillColor(sf::Color::White);
@@ -149,4 +177,9 @@ void CampfireScene::rest()
     }
 
     used_ = true;
+}
+
+void CampfireScene::resetTransition()
+{
+    transition_ = SceneTransition{};
 }

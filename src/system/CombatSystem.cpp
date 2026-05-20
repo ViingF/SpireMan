@@ -20,12 +20,23 @@ ErrorCode CombatSystem::startCombat(RunState& runState, const EncounterDef& enco
     // ... 其他属性
 
     // 根据 EncounterDef 创建多个敌人
-    for (const auto& slot : encounterDef.enemies) {
-        if (!enemyDatabase.exists(slot.enemyId)) {
-            // 记录错误，可跳过或返回错误码
+    int enemyCount = 0;
+
+    for (const auto& slot : encounterDef.enemies)
+    {
+        // 最多只允许 3 个敌人
+        if (enemyCount >= 3)
+        {
+            break;
+        }
+
+        if (!enemyDatabase.exists(slot.enemyId))
+        {
             continue;
         }
+
         const EnemyDef& def = enemyDatabase.get(slot.enemyId);
+
         Enemy enemy;
         enemy.id = def.id;
         enemy.name = def.name;
@@ -36,7 +47,10 @@ ErrorCode CombatSystem::startCombat(RunState& runState, const EncounterDef& enco
         enemy.vulnerable = 0;
         enemy.weak = 0;
         enemy.movePattern = def.movePattern;
+
         enemies_.push_back(enemy);
+
+        enemyCount++;
     }
 
     if (enemies_.empty()) return ErrorCode::INVALID_SCENE_STATE; // 没有敌人，报错

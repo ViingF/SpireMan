@@ -64,3 +64,7 @@ SceneTransition EndScene::getTransition() const
 {
     return transition;
 }
+
+void EndScene::resetTransition() {
+    transition = SceneTransition{};
+}

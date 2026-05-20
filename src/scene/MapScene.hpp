@@ -12,7 +12,11 @@
 
 class MapScene : public Scene {
 public:
-    explicit MapScene(GameContext& context);
+    explicit MapScene(
+    GameContext& context,
+    bool viewOnly = false
+);
+
 
     void handleEvent(
         const sf::Event& event,
@@ -24,6 +28,7 @@ public:
     void draw(sf::RenderWindow& window) override;
 
     SceneTransition getTransition() const override;
+    void resetTransition() override;
 
 private:
     sf::Vector2f getNodePosition(int index, int total) const;
@@ -56,9 +61,11 @@ private:
 private:
     MapSystem mapSystem_;
     SceneTransition transition_;
-    Button deckButton_;
-    Button saveQuitButton_;
+    Button deckIconButton_;
+    Button settingsIconButton_;
     CardPileOverlay deckOverlay_;
+    bool viewOnly_ = false;
+    Button mapIconButton_;
 
 
 };

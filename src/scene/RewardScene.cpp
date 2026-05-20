@@ -2,11 +2,23 @@
 
 #include "config/Constants.hpp"
 #include "system/MapSystem.hpp"
+#include "ui/TopInfoBar.hpp"
+
 RewardScene::RewardScene(
     GameContext& context
 )
-    : Scene(context)
+: Scene(context),mapIconButton_(
+sf::Vector2f(0.0f, 0.0f),
+sf::Vector2f(64.0f, 64.0f),
+context.resources.getFont("zh-R"),
+""
+)
 {
+    mapIconButton_.setTexture(
+    context.resources.getTexture("map")
+);
+
+
     for (int i = 0; i < 3; ++i) {
         CardId id = context.cards.chooseRandomRewardCardId(
             context.runState.rng
@@ -30,6 +42,20 @@ void RewardScene::handleEvent(
     const sf::RenderWindow& window
 )
 {
+
+    TopInfoBar::layoutMapButton(mapIconButton_, window);
+    mapIconButton_.handleEvent(event, window);
+
+    if (mapIconButton_.wasClicked()) {
+        context.audio.playSound("Click");
+
+        transition.openMapPreview = true;
+        transition.target = SceneType::Map;
+
+        mapIconButton_.reset();
+        return;
+    }
+
 
     if (const auto* mousePressed =
         event.getIf<sf::Event::MouseButtonPressed>()) {
@@ -79,6 +105,19 @@ void RewardScene::draw(sf::RenderWindow& window)
             font
         );
     }
+    TopInfoBar::draw(
+    window,
+    context,
+    font,
+    std::nullopt,
+    true,
+    true,
+    false // map 图标由按钮绘制
+);
+
+    TopInfoBar::layoutMapButton(mapIconButton_, window);
+    mapIconButton_.draw(window);
+
 }
 
 
@@ -175,3 +214,7 @@ CardRenderTextures RewardScene::getCardRenderTextures(
     return textures;
 }
 
+void RewardScene::resetTransition()
+{
+    transition = SceneTransition{};
+}

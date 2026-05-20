@@ -116,3 +116,7 @@ CharacterSelectScene::getTransition() const
 {
     return transition;
 }
+
+void CharacterSelectScene::resetTransition() {
+    transition = SceneTransition{};
+}

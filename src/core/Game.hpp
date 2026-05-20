@@ -36,4 +36,10 @@ private:
     RunState runState;
     std::unique_ptr<Scene> currentScene;
     GameContext gameContext;
+    // 新增：临时查看地图时，保存原来的场景
+    std::unique_ptr<Scene> suspendedScene_;
+
+    // 新增：记录当前场景类型，用于返回后恢复音乐
+    SceneType currentSceneType_ = SceneType::None;
+    SceneType suspendedSceneType_ = SceneType::None;
 };

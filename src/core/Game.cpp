@@ -81,6 +81,11 @@ Game::Game()
     resources.loadTexture("attack","assets/images/attack.png");
     resources.loadTexture("buff","assets/images/buff1.png");
     resources.loadTexture("exhaustPile","assets/images/ascension.png");
+    resources.loadTexture("shopbackground","assets/images/shopbackground.png");
+    resources.loadTexture("eventbackground","assets/images/eventbackground.png");
+    resources.loadTexture("enabledButton","assets/images/enabledButton.png");
+    resources.loadTexture("cancelButton","assets/images/cancelButton.png");
+    resources.loadTexture("removecard","assets/images/removecard.png");
 
     //怪物
     resources.loadTexture("AcidSlimeL","assets/images/enemies/AcidSlimeL.png");
@@ -289,30 +294,80 @@ void Game::switchSceneIfNeeded()
                 std::make_unique<MenuScene>(
                     gameContext
                 );
+        currentSceneType_ = SceneType::Menu;
         playMusicForScene(SceneType::Menu);
         return;
     }
 
     SceneTransition transition =
-        currentScene->getTransition();
+    currentScene->getTransition();
+
+    if (transition.closeMapPreview)
+    {
+        currentScene->resetTransition();
+
+        if (suspendedScene_)
+        {
+            currentScene = std::move(suspendedScene_);
+            currentSceneType_ = suspendedSceneType_;
+            suspendedSceneType_ = SceneType::None;
+
+            playMusicForScene(currentSceneType_);
+        }
+
+        return;
+    }
+
+    if (transition.openMapPreview)
+    {
+        // 关键修正：必须先清掉原场景的 openMapPreview
+        currentScene->resetTransition();
+
+        if (currentSceneType_ == SceneType::Map)
+        {
+            return;
+        }
+
+        suspendedSceneType_ = currentSceneType_;
+        suspendedScene_ = std::move(currentScene);
+
+        currentScene =
+            std::make_unique<MapScene>(
+                gameContext,
+                true
+            );
+
+        currentSceneType_ = SceneType::Map;
+
+        playMusicForScene(SceneType::Map);
+        return;
+    }
 
     if (transition.target == SceneType::None)
     {
         return;
     }
 
+
+
     if (transition.saveAndQuit)
     {
         SaveSystem::saveRun(runState);
+
+        suspendedScene_.reset();
+        suspendedSceneType_ = SceneType::None;
 
         currentScene =
             std::make_unique<MenuScene>(
                 gameContext
             );
 
+        currentSceneType_ = SceneType::Menu;
+
         playMusicForScene(SceneType::Menu);
         return;
     }
+
 
     if (transition.loadGame)
     {
@@ -321,14 +376,14 @@ void Game::switchSceneIfNeeded()
                 std::make_unique<MapScene>(
                     gameContext
                 );
-
+            currentSceneType_ = SceneType::Map;
             playMusicForScene(SceneType::Map);
         } else {
             currentScene =
                 std::make_unique<MenuScene>(
                     gameContext
                 );
-
+            currentSceneType_ = SceneType::Menu;
             playMusicForScene(SceneType::Menu);
         }
 
@@ -344,6 +399,7 @@ void Game::switchSceneIfNeeded()
                 std::make_unique<MenuScene>(
                     gameContext
                 );
+            currentSceneType_ = SceneType::Menu;
             break;
         }
         case SceneType::Event:
@@ -356,6 +412,7 @@ void Game::switchSceneIfNeeded()
                 gameContext,
                 transition.eventId
             );
+            currentSceneType_ = SceneType::Event;
             break;
 
         case SceneType::Map:
@@ -364,6 +421,7 @@ void Game::switchSceneIfNeeded()
                 std::make_unique<MapScene>(
                     gameContext
                 );
+            currentSceneType_ = SceneType::Map;
 
             break;
         }
@@ -383,6 +441,7 @@ void Game::switchSceneIfNeeded()
                     gameContext,
                     encounterDef
                 );
+            currentSceneType_ = SceneType::Combat;
 
 
             break;
@@ -394,6 +453,7 @@ void Game::switchSceneIfNeeded()
                 std::make_unique<RewardScene>(
                     gameContext
                 );
+            currentSceneType_ = SceneType::Reward;
 
             break;
         }
@@ -408,6 +468,7 @@ void Game::switchSceneIfNeeded()
                     gameContext,
                     transition.battleResult
                 );
+            currentSceneType_ = SceneType::End;
 
             break;
         }
@@ -420,6 +481,7 @@ void Game::switchSceneIfNeeded()
                 std::make_unique<CharacterSelectScene>(
                     gameContext
                 );
+            currentSceneType_ = SceneType::CharacterSelect;
             break;
         }
         case SceneType::Campfire:
@@ -427,6 +489,7 @@ void Game::switchSceneIfNeeded()
                  std::make_unique<CampfireScene>(
                      gameContext
                  );
+            currentSceneType_ = SceneType::Campfire;
             break;
 
         case SceneType::Shop:
@@ -434,6 +497,7 @@ void Game::switchSceneIfNeeded()
                  std::make_unique<ShopScene>(
                      gameContext
                  );
+            currentSceneType_ = SceneType::Shop;
             break;
         case SceneType::CardRemove:
         {
@@ -441,6 +505,7 @@ void Game::switchSceneIfNeeded()
                 std::make_unique<CardRemoveScene>(
                     gameContext
                 );
+            currentSceneType_ = SceneType::CardRemove;
 
             break;
         }
@@ -451,7 +516,9 @@ void Game::switchSceneIfNeeded()
         default:
             break;
     }
+    currentSceneType_ = transition.target;
     playMusicForScene(transition.target);
+
 }
 
 void Game::startNewRun()
@@ -498,6 +565,8 @@ void Game::startNewRun()
 
 
     currentScene = std::make_unique<MapScene>(gameContext);
+    currentSceneType_ = SceneType::Map;
+
 
 }
 

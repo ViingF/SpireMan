@@ -22,6 +22,9 @@ public:
 
     virtual SceneTransition getTransition() const=0;
 
+    virtual void resetTransition() = 0;
+
+
 protected:
     GameContext context;
 

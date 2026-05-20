@@ -23,6 +23,7 @@ public:
     void draw(sf::RenderWindow& window) override;
 
     SceneTransition getTransition() const override;
+    void resetTransition() override;
 
 private:
     void rest();
@@ -31,6 +32,8 @@ private:
     MapSystem mapSystem_;
     SceneTransition transition_;
     Button restButton_;
+    Button mapIconButton_;
+
     bool used_ = false;
 };
 

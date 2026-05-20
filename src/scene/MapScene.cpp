@@ -10,6 +10,7 @@
 #include <string>
 
 #include "ui/TextUtils.hpp"
+#include "ui/TopInfoBar.hpp"
 
 namespace {
 
@@ -187,33 +188,55 @@ void drawLine(
 
 }
 
-MapScene::MapScene(GameContext& context)
+MapScene::MapScene(
+    GameContext& context,
+    bool viewOnly
+)
     : Scene(context),
-    deckButton_(
-          sf::Vector2f(1580.0f, 22.0f),
-          sf::Vector2f(250.0f, 58.0f),
+      viewOnly_(viewOnly),
+      mapIconButton_(
+          sf::Vector2f(0.0f, 0.0f),
+          sf::Vector2f(64.0f, 64.0f),
           context.resources.getFont("zh-R"),
-          "Deck"
+          ""
       ),
-    saveQuitButton_(
-          sf::Vector2f(1580.0f, 92.0f),
-          sf::Vector2f(250.0f, 58.0f),
+      deckIconButton_(
+          sf::Vector2f(0.0f, 0.0f),
+          sf::Vector2f(64.0f, 64.0f),
           context.resources.getFont("zh-R"),
-          "Save & Quit"
+          ""
+      ),
+      settingsIconButton_(
+          sf::Vector2f(0.0f, 0.0f),
+          sf::Vector2f(64.0f, 64.0f),
+          context.resources.getFont("zh-R"),
+          ""
       )
 {
+    mapIconButton_.setTexture(
+        context.resources.getTexture("map")
+    );
+
+    deckIconButton_.setTexture(
+        context.resources.getTexture("deck")
+    );
+
+    settingsIconButton_.setTexture(
+        context.resources.getTexture("settings")
+    );
+
     if (context.runState.mapNodes.empty()) {
         mapSystem_.startAct(
-    context.runState,
-    context.runState.act,
-    context.events,
-    context.encounters
-);
-
+            context.runState,
+            context.runState.act,
+            context.events,
+            context.encounters
+        );
     } else {
         mapSystem_.refreshNodeStates(context.runState);
     }
 }
+
 
 
 void MapScene::handleEvent(
@@ -221,18 +244,37 @@ void MapScene::handleEvent(
     const sf::RenderWindow& window
 )
 {
-    if (transition_.target != SceneType::None) {
+    if (transition_.target != SceneType::None ||
+        transition_.closeMapPreview) {
         return;
-    }
+        }
 
     if (deckOverlay_.handleEvent(event, window)) {
         return;
     }
 
-    deckButton_.handleEvent(event, window);
-    saveQuitButton_.handleEvent(event, window);
+    TopInfoBar::layoutMapButton(mapIconButton_, window);
+    TopInfoBar::layoutDeckButton(deckIconButton_, window);
+    TopInfoBar::layoutSettingsButton(settingsIconButton_, window);
 
-    if (deckButton_.wasClicked()) {
+    if (viewOnly_) {
+        mapIconButton_.handleEvent(event, window);
+    }
+
+    deckIconButton_.handleEvent(event, window);
+    settingsIconButton_.handleEvent(event, window);
+
+    if (viewOnly_ && mapIconButton_.wasClicked()) {
+        context.audio.playSound("Click");
+
+        transition_ = SceneTransition{};
+        transition_.closeMapPreview = true;
+
+        mapIconButton_.reset();
+        return;
+    }
+
+    if (deckIconButton_.wasClicked()) {
         context.audio.playSound("Click");
 
         deckOverlay_.open(
@@ -240,17 +282,22 @@ void MapScene::handleEvent(
             buildPileViewData(context.runState.masterDeck)
         );
 
-        deckButton_.reset();
+        deckIconButton_.reset();
         return;
     }
 
-    if (saveQuitButton_.wasClicked()) {
+    if (settingsIconButton_.wasClicked()) {
         context.audio.playSound("Click");
 
         transition_.target = SceneType::Menu;
         transition_.saveAndQuit = true;
 
-        saveQuitButton_.reset();
+        settingsIconButton_.reset();
+        return;
+    }
+
+    // 只读地图模式到这里就结束，不允许选择下一节点
+    if (viewOnly_) {
         return;
     }
 
@@ -270,6 +317,7 @@ void MapScene::handleEvent(
         enterNode(nodeIndex);
     }
 }
+
 
 
 void MapScene::update(float)
@@ -297,38 +345,34 @@ void MapScene::draw(sf::RenderWindow& window)
         );
     }
 
-    deckButton_.draw(window);
-    saveQuitButton_.draw(window);
-
     const sf::Font& font =
-        context.resources.getFont("zh-R");
+    context.resources.getFont("zh-R");
 
-    std::ostringstream status;
-    status << "Map"
-           << "    HP: "
-           << context.runState.player.hp
-           << " / "
-           << context.runState.player.maxHp
-           << "    Gold: "
-           << context.runState.gold
-           << "    Act: "
-           << context.runState.act
-           << "    Floor: "
-           << context.runState.floorInAct
-           << "    Total Floor: "
-           << context.runState.floor
-           << "    Click the highlighted icon to continue";
+    TopInfoBar::draw(
+    window,
+    context,
+    font,
+    std::nullopt,
+    true,
+    true,
+    false
+    );
 
-    sf::Text statusText =
-        makeText(font, status.str(), 28);
+    TopInfoBar::layoutMapButton(mapIconButton_, window);
+    mapIconButton_.draw(window);
 
-    statusText.setFillColor(sf::Color(245, 240, 220));
-    statusText.setPosition(sf::Vector2f(
-        viewTopLeft.x + 60.0f,
-        viewTopLeft.y + 28.0f
-    ));
 
-    window.draw(statusText);
+    if (viewOnly_) {
+        TopInfoBar::layoutMapButton(mapIconButton_, window);
+        mapIconButton_.draw(window);
+    }
+
+    TopInfoBar::layoutDeckButton(deckIconButton_, window);
+    TopInfoBar::layoutSettingsButton(settingsIconButton_, window);
+
+    deckIconButton_.draw(window);
+    settingsIconButton_.draw(window);
+
 
     const int total =
         static_cast<int>(context.runState.mapNodes.size());
@@ -691,4 +735,9 @@ CardRenderTextures MapScene::getCardRenderTextures(
         getCardArtTexture(cardDef);
 
     return textures;
+}
+
+void MapScene::resetTransition()
+{
+    transition_ = SceneTransition{};
 }
