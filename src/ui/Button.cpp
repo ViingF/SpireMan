@@ -183,3 +183,15 @@ void Button::setPlaceholderStyle()
     shape.setOutlineThickness(2.f);
     content.setFillColor(sf::Color(40, 40, 40));
 }
+
+void Button::setPosition(sf::Vector2f position)
+{
+    shape.setPosition(position);
+    centerText();
+}
+
+void Button::setSize(sf::Vector2f size)
+{
+    shape.setSize(size);
+    centerText();
+}

@@ -22,13 +22,14 @@ void StateView::draw(
 
         sf::RectangleShape icon({48.f, 48.f});
         icon.setPosition({currentX, position_.y});
+        icon.setFillColor(sf::Color::White);
         icon.setTexture(state.texture);
 
         sf::Text valueText = TextUtils::createWhiteText(
             font,
             std::to_string(state.value),
             15,
-            {currentX - 20.f, position_.y + 40.f}
+            {currentX + 10.f, position_.y + 50.f}
         );
 
         window.draw(icon);

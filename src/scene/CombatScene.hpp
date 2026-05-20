@@ -41,6 +41,8 @@ private:
         const sf::RenderWindow& window
     );
 
+    void layoutPileButtons(const sf::RenderWindow& window);
+
     void updateBattleTransition();
 
     void drawPlayerInfo(sf::RenderWindow& window) const;
@@ -52,15 +54,24 @@ private:
 
     void drawBackground(sf::RenderWindow& window) const;
 
-    void drawPanelHeart(sf::RenderWindow& window) const;
+    void drawPanelHeart(
+        sf::RenderWindow& window,
+        sf::Font& font
+    ) const;
 
-    void drawPanelGoldBag(sf::RenderWindow& window) const;
+    void drawPanelGoldBag(
+        sf::RenderWindow& window,
+        sf::Font& font
+    ) const;
 
     void drawDeck(sf::RenderWindow& window) const;
 
     void drawMap(sf::RenderWindow& window) const;
 
-    void drawFloor(sf::RenderWindow& window) const;
+    void drawFloor(
+        sf::RenderWindow& window,
+        sf::Font& font
+    ) const;
 
     void drawSettings(sf::RenderWindow& window) const;
 
@@ -68,15 +79,29 @@ private:
 
     void drawTop(sf::RenderWindow& window) const;
 
+    void syncHandCardViews() const;
+
     void drawHand(
         sf::RenderWindow& window,
         sf::Font& font
+    ) const;
+
+    const sf::Texture& getCardTemplateTexture(CardType type) const;
+    const sf::Texture* getCardArtTexture(const CardDef& cardDef) const;
+    CardRenderTextures getCardRenderTextures(const CardDef& cardDef) const;
+
+    std::vector<PileCardViewData> buildPileCardViewData(
+        const std::vector<CardInstance>& cards
     ) const;
 
     void drawEnemies(
         sf::RenderWindow& window,
         sf::Font &font
     ) const;
+
+    void drawEnergy(
+        sf::RenderWindow &window,
+        sf::Font &font) const;
 
 private:
     CombatSystem combatSystem_;
@@ -91,7 +116,7 @@ private:
 
     EnemyGroupView enemyGroupView_;
 
-    std::vector<CardView> cardViews_;
+    mutable std::vector<CardView> cardViews_;
     std::vector<std::string> enemyTextureIds_;
 
     int hoveredCardIndex_ = -1;
@@ -100,7 +125,7 @@ private:
     SceneTransition transition_;
 
     EncounterDef encounterDef_;
-    GameContext& context_;
+    GameContext context_;
 };
 
 #endif

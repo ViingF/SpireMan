@@ -30,6 +30,9 @@ public:
         const sf::Font& font
     ) const;
 
+    void setDrawScale(sf::Vector2f scale);
+
+
 private:
     sf::Vector2f getDrawPosition() const;
 
@@ -49,21 +52,24 @@ private:
     static std::string costToString(int cost);
 
     static void drawWrappedText(
-        sf::RenderWindow& window,
-        const sf::Font& font,
-        const std::string& text,
-        unsigned int size,
-        sf::Vector2f position,
-        float lineSpacing,
-        sf::Color color,
-        std::size_t maxCharsPerLine
-    );
+    sf::RenderWindow& window,
+    const sf::Font& font,
+    const std::string& text,
+    unsigned int size,
+    sf::Vector2f position,
+    float lineSpacing,
+    sf::Color color,
+    float maxWidth,
+    std::size_t maxLines
+);
+
 
 private:
     CardId id_;
     sf::Vector2f position_;
     sf::Vector2f size_;
     bool isSelected_ = false;
+    sf::Vector2f drawScale_{1.f, 1.f};
 };
 
 #endif // SPIRELIKE_CARDVIEW_HPP

@@ -34,6 +34,8 @@ public:
 
     bool isEnabled() const;
     void setPlaceholderStyle();
+    void setPosition(sf::Vector2f position);
+    void setSize(sf::Vector2f size);
 private:
     void centerText();
     void applyVisualState();

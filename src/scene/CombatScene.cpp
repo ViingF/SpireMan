@@ -1,5 +1,6 @@
 #include "CombatScene.hpp"
 
+#include "core/ResourceManager.hpp"
 #include "database/CardDatabase.hpp"
 #include "ui/CardView.hpp"
 #include "ui/EnemyView.hpp"
@@ -19,36 +20,43 @@ namespace {
 sf::Color kEnemyPlaceholderFill = sf::Color::White;
 sf::Color kEnemyPlaceholderOutline = sf::Color(40, 40, 40);
 
-constexpr float kEnemySpriteWidth = 1500.f;
-constexpr float kEnemySpriteHeight = 1000.f;
-constexpr float kEnemyDisplayScale = 0.5f;
-constexpr float kEnemyDisplayWidth =
+const float kEnemySpriteWidth = 1500.f;
+const float kEnemySpriteHeight = 1000.f;
+const float kEnemyDisplayScale = 1.0f;
+const float kEnemyDisplayWidth =
     kEnemySpriteWidth * kEnemyDisplayScale;
-constexpr float kEnemyDisplayHeight =
+const float kEnemyDisplayHeight =
     kEnemySpriteHeight * kEnemyDisplayScale;
-constexpr float kIntentSize = 64.f;
-constexpr float kHealthBarWidth = 240.f;
-constexpr float kHealthBarHeight = 30.f;
-constexpr float kStateIconSize = 48.f;
-constexpr float kStateIconSpacing = 55.f;
+// 意图/状态仍按放大前的布局宽度定位
+const float kEnemyUILayoutDisplayWidth =
+    kEnemySpriteWidth * 0.5f;
+const float kIntentSize = 64.f;
+const float kHealthBarWidth = 240.f;
+const float kHealthBarHeight = 30.f;
+const float kStateIconSize = 48.f;
+const float kStateIconSpacing = 55.f;
 
-constexpr float kIntentGapAboveEnemy = 10.f;
-constexpr float kEnemyHealthBarOffsetY = 455.f;
-constexpr float kStateGapBelowHealthBar = 8.f;
+const float kIntentGapAboveEnemy = 10.f;
+const float kIntentOffsetX = 380.f;
+const float kIntentOffsetY = 310.f;
+const float kEnemyHealthBarDesignY = 800.f;
+const float kStateGapBelowHealthBar = 19.f;
 
-constexpr float kPlayerDesignX = 113.f;
-constexpr float kPlayerDesignY = 488.f;
-constexpr float kPlayerDisplayWidth = 750.f;
-constexpr float kPlayerDisplayHeight = 500.f;
+const float kPlayerDesignX = 113.f;
+const float kPlayerDesignY = 488.f;
+const float kPlayerHealthBarDesignY = 800.f;
+const float kPlayerDisplayScale = 0.5f;
+const float kPlayerDisplayWidth = 750.f;
+const float kPlayerDisplayHeight = 500.f;
 
-    constexpr float kEnemyHitboxWidth = 260.f;
-    constexpr float kEnemyHitboxHeight = 360.f;
+    const float kEnemyHitboxWidth = 260.f;
+    const float kEnemyHitboxHeight = 360.f;
 
     // 这两个值需要按素材微调
-    constexpr float kEnemyHitboxOffsetX =
+    const float kEnemyHitboxOffsetX =
         (kEnemyDisplayWidth - kEnemyHitboxWidth) * 0.5f;
 
-    constexpr float kEnemyHitboxOffsetY = 90.f;
+    const float kEnemyHitboxOffsetY = 90.f;
 
 
 struct EnemyLayoutConfig {
@@ -66,8 +74,6 @@ struct CombatUnitStatus {
 void applyEnemyPlaceholderStyle(sf::RectangleShape& shape)
 {
     shape.setFillColor(kEnemyPlaceholderFill);
-    shape.setOutlineColor(kEnemyPlaceholderOutline);
-    shape.setOutlineThickness(2.f);
 }
 
 const EnemyLayoutConfig& getEnemyLayoutConfig(int enemyCount)
@@ -100,65 +106,77 @@ sf::Vector2f toScreenPosition(
 void drawStatusIcons(
     sf::RenderWindow& window,
     const sf::Font& font,
+    ResourceManager& resources,
     float screenX,
     float screenY,
     const CombatUnitStatus& status
 )
 {
-    float currentX = screenX;
+    std::vector<StateIconViewData> states;
 
-    auto drawIcon = [&](int value) {
-        if (value <= 0) {
+    auto tryAdd = [&](int value, const char* textureId) {
+        if (value <= 0 || !resources.hasTexture(textureId)) {
             return;
         }
 
-        sf::RectangleShape icon({kStateIconSize, kStateIconSize});
-        // icon.setTexture(&...);  // 状态纹理 48x48
-        applyEnemyPlaceholderStyle(icon);
-        icon.setPosition({currentX, screenY});
-        window.draw(icon);
-
-        sf::Text valueText = TextUtils::createWhiteText(
-            font,
-            std::to_string(value),
-            15,
-            {currentX + 10.f, screenY + 50.f}
-        );
-        window.draw(valueText);
-
-        currentX += kStateIconSpacing;
+        states.push_back({
+            value,
+            &resources.getTexture(textureId)
+        });
     };
 
-    drawIcon(status.block);
-    drawIcon(status.strength);
-    drawIcon(status.vulnerable);
-    drawIcon(status.weak);
+    tryAdd(status.block, "block");
+    tryAdd(status.strength, "strength");
+    tryAdd(status.vulnerable, "vulnerable");
+    tryAdd(status.weak, "weak");
+
+    StateView stateView({screenX, screenY});
+    stateView.draw(window, font, states);
 }
 
-constexpr float CARD_START_X = 430.f;
-constexpr float CARD_START_Y = 650.f;
-constexpr float CARD_SPACING = 170.f;
+const float kDesignWidth = 1920.f;
+const float kDesignHeight = 1080.f;
+const float kPileButtonDesignSize = 128.f;
+const float kDrawPileDesignY = 943.f;
+const float kDiscardPileDesignY = 943.f;
+const float kExhaustPileDesignY = 743.f;
 
-std::vector<PileCardViewData> convertToPileCardViews(
-    const std::vector<CardInstance>& cards,
+const float kHandCardWidth = 190.f;
+const float kHandCardHeight = 268.f;
+const float kHandCardSideExpand = 30.f;
+const float CARD_START_X = 350.f;
+const float CARD_START_Y = 650.f + 215.f - 20.f;
+const float CARD_SPACING = 198.f;
+
+void addMissingCardsFromDatabase(
+    RunState& runState,
     CardDatabase& cardDb
 )
 {
-    std::vector<PileCardViewData> result;
-    result.reserve(cards.size());
+    for (CardId cardId : cardDb.getAllCardIds()) {
+        const CardDef& def = cardDb.get(cardId);
 
-    for (const auto& card : cards) {
-        PileCardViewData data;
-        data.cardId = card.cardId;
-        data.instanceId = card.instanceId;
-        data.cardDef = &cardDb.get(card.cardId);
-        // data.textures.templateTexture = ...
-        // data.textures.artTexture = ...
-        data.textures = {};
-        result.push_back(data);
+        if (def.type == CardType::Curse) {
+            continue;
+        }
+
+        const bool alreadyInDeck = std::any_of(
+            runState.masterDeck.begin(),
+            runState.masterDeck.end(),
+            [cardId](const CardInstance& inst) {
+                return inst.cardId == cardId;
+            }
+        );
+
+        if (alreadyInDeck) {
+            continue;
+        }
+
+        runState.masterDeck.push_back({
+            runState.nextCardInstanceId++,
+            cardId
+        });
     }
-
-    return result;
 }
 
 sf::Texture& getFirstExistingTexture(
@@ -369,6 +387,11 @@ CombatScene::CombatScene(
         enemyTextureIds_.push_back(enemyDef.textureId);
     }
 
+    addMissingCardsFromDatabase(
+        context.runState,
+        context.cards
+    );
+
     combatSystem_.startCombat(
         context.runState,
         encounterDef,
@@ -405,11 +428,43 @@ CombatScene::CombatScene(
     }
 }
 
+void CombatScene::layoutPileButtons(const sf::RenderWindow& window)
+{
+    const float scaleX =
+        static_cast<float>(window.getSize().x) / kDesignWidth;
+    const float scaleY =
+        static_cast<float>(window.getSize().y) / kDesignHeight;
+
+    const sf::Vector2f buttonSize = {
+        kPileButtonDesignSize * scaleX,
+        kPileButtonDesignSize * scaleY
+    };
+
+    drawPileButton_.setSize(buttonSize);
+    drawPileButton_.setPosition({
+        10.f * scaleX,
+        kDrawPileDesignY * scaleY
+    });
+
+    discardPileButton_.setSize(buttonSize);
+    discardPileButton_.setPosition({
+        1780.f * scaleX,
+        kDiscardPileDesignY * scaleY
+    });
+
+    exhaustPileButton_.setSize(buttonSize);
+    exhaustPileButton_.setPosition({
+        1780.f * scaleX,
+        kExhaustPileDesignY * scaleY
+    });
+}
+
 void CombatScene::handleEvent(
     const sf::Event& event,
     const sf::RenderWindow& window
 )
 {
+    layoutPileButtons(window);
     if (pileOverlay_.isOpen()) {
         pileOverlay_.handleEvent(event, window);
         return;
@@ -474,20 +529,11 @@ void CombatScene::handleEvent(
         selectedHandIndex_ = -1;
     }
 
-    // 2. 检测是否点击了手牌
-    for (size_t i = 0; i < hand.size(); ++i) {
-        sf::FloatRect cardBounds(
-            {
-                CARD_START_X + static_cast<float>(i) * CARD_SPACING,
-                CARD_START_Y
-            },
-            {
-                150.f,
-                220.f
-            }
-        );
+    syncHandCardViews();
 
-        if (!cardBounds.contains(mousePos)) {
+    // 2. 检测是否点击了手牌
+    for (size_t i = 0; i < cardViews_.size(); ++i) {
+        if (!cardViews_[i].contains(mousePos)) {
             continue;
         }
 
@@ -529,29 +575,26 @@ void CombatScene::handlePileButtons(
     (void)window;
 
     if (drawPileButton_.wasClicked()) {
-        auto pileCards = convertToPileCardViews(
-            combatSystem_.getDeck().drawPile,
-            context.cards
+        pileOverlay_.open(
+            "抽牌堆",
+            buildPileCardViewData(combatSystem_.getDeck().drawPile)
         );
-        pileOverlay_.open("抽牌堆", pileCards);
         drawPileButton_.reset();
     }
 
     if (discardPileButton_.wasClicked()) {
-        auto pileCards = convertToPileCardViews(
-            combatSystem_.getDeck().discardPile,
-            context.cards
+        pileOverlay_.open(
+            "弃牌堆",
+            buildPileCardViewData(combatSystem_.getDeck().discardPile)
         );
-        pileOverlay_.open("弃牌堆", pileCards);
         discardPileButton_.reset();
     }
 
     if (exhaustPileButton_.wasClicked()) {
-        auto pileCards = convertToPileCardViews(
-            combatSystem_.getDeck().exhaustPile,
-            context.cards
+        pileOverlay_.open(
+            "消耗堆",
+            buildPileCardViewData(combatSystem_.getDeck().exhaustPile)
         );
-        pileOverlay_.open("消耗堆", pileCards);
         exhaustPileButton_.reset();
     }
 }
@@ -563,6 +606,8 @@ void CombatScene::update(float dt)
 
 void CombatScene::draw(sf::RenderWindow& window)
 {
+    layoutPileButtons(window);
+
     window.clear(sf::Color(50, 50, 50));
 
     sf::Font& font =
@@ -576,15 +621,16 @@ void CombatScene::draw(sf::RenderWindow& window)
     endTurnButton_.draw(window);
     drawPlayerInfo(window);
     drawPlayerStatus(window, font);
-    drawPanelHeart(window);
-    drawPanelGoldBag(window) ;
+    drawPanelHeart(window, font);
+    drawPanelGoldBag(window, font);
     drawDeck(window);
     drawMap(window);
-    drawFloor(window);
+    drawFloor(window, font);
     drawSettings(window);
     drawBurningBlood(window);
     drawEnemies(window, font);
     drawHand(window, font);
+    drawEnergy(window, font);
 
     pileOverlay_.draw(
         window,
@@ -628,13 +674,12 @@ SceneTransition CombatScene::getTransition() const
 void CombatScene::drawPlayerInfo(sf::RenderWindow& window) const
 {
     sf::RectangleShape player({kEnemySpriteWidth, kEnemySpriteHeight});
-    player.setScale({kEnemyDisplayScale, kEnemyDisplayScale});
+    player.setScale({kPlayerDisplayScale, kPlayerDisplayScale});
     const float x = 113.f * window.getSize().x / 1920.f;
     const float y = 488.f * window.getSize().y / 1080.f;
     player.setPosition({x, y});
 
-     player.setTexture(&context_.resources.getTexture("IronClad"));
-    applyEnemyPlaceholderStyle(player);
+    player.setTexture(&context_.resources.getTexture("IronClad"));
     window.draw(player);
 }
 
@@ -652,8 +697,7 @@ void CombatScene::drawPlayerStatus(
     const float designHealthX =
         kPlayerDesignX +
         (kPlayerDisplayWidth - kHealthBarWidth) * 0.5f;
-    const float designHealthY =
-        kPlayerDesignY + kPlayerDisplayHeight + kStateGapBelowHealthBar;
+    const float designHealthY = kPlayerHealthBarDesignY;
     const float designStateY =
         designHealthY + kHealthBarHeight + kStateGapBelowHealthBar;
 
@@ -683,6 +727,7 @@ void CombatScene::drawPlayerStatus(
     drawStatusIcons(
         window,
         font,
+        context_.resources,
         statePos.x,
         statePos.y,
         CombatUnitStatus{
@@ -702,20 +747,57 @@ void CombatScene::drawBackground(sf::RenderWindow& window) const {
     window.draw(background);
 }
 
-void CombatScene::drawPanelHeart(sf::RenderWindow& window) const{
-    sf::RectangleShape panelHeart({64.f, 64.f});
+void CombatScene::drawPanelHeart(
+    sf::RenderWindow& window,
+    sf::Font& font
+) const {
+    const float kIconDesignX = 265.f;
+    const float kIconSize = 64.f;
+
+    const float scaleX =
+        static_cast<float>(window.getSize().x) / kDesignWidth;
+    const float x = kIconDesignX * scaleX;
+
+    sf::RectangleShape panelHeart({kIconSize, kIconSize});
     panelHeart.setTexture(&context_.resources.getTexture("panelHeart"));
-    const float x = 265.f / 1920.f * window.getSize().x;
     panelHeart.setPosition({x, 0.f});
     window.draw(panelHeart);
+
+    const int hp = combatSystem_.getPlayer().hp;
+    sf::Text hpText = TextUtils::createWhiteText(
+        font,
+        std::to_string(hp),
+        28,
+        {x + kIconSize + 6.f, 18.f}
+    );
+    window.draw(hpText);
 }
 
-void CombatScene::drawPanelGoldBag(sf::RenderWindow& window) const{
-    sf::RectangleShape panelGoldBag({64.f, 64.f});
-    panelGoldBag.setTexture(&context_.resources.getTexture("panelGoldBag"));
-    const float x = 425.f / 1920.f * window.getSize().x;
+void CombatScene::drawPanelGoldBag(
+    sf::RenderWindow& window,
+    sf::Font& font
+) const {
+    const float kIconDesignX = 425.f;
+    const float kIconSize = 64.f;
+
+    const float scaleX =
+        static_cast<float>(window.getSize().x) / kDesignWidth;
+    const float x = kIconDesignX * scaleX;
+
+    sf::RectangleShape panelGoldBag({kIconSize, kIconSize});
+    panelGoldBag.setTexture(
+        &context_.resources.getTexture("panelGoldBag")
+    );
     panelGoldBag.setPosition({x, 0.f});
     window.draw(panelGoldBag);
+
+    sf::Text goldText = TextUtils::createWhiteText(
+        font,
+        std::to_string(context_.runState.gold),
+        28,
+        {x + kIconSize + 6.f, 18.f}
+    );
+    window.draw(goldText);
 }
 
 
@@ -735,12 +817,29 @@ void CombatScene::drawMap(sf::RenderWindow& window) const{
     window.draw(map);
 }
 
-void CombatScene::drawFloor(sf::RenderWindow& window) const{
-    sf::RectangleShape floor({64.f, 64.f});
-    floor.setTexture(&context_.resources.getTexture("floor"));
-    const float x = 890.f / 1920.f * window.getSize().x;
-    floor.setPosition({x, 0.f});
-    window.draw(floor);
+void CombatScene::drawFloor(
+    sf::RenderWindow& window,
+    sf::Font& font
+) const {
+    const float kIconDesignX = 890.f;
+    const float kIconSize = 64.f;
+
+    const float scaleX =
+        static_cast<float>(window.getSize().x) / kDesignWidth;
+    const float x = kIconDesignX * scaleX;
+
+    sf::RectangleShape floorIcon({kIconSize, kIconSize});
+    floorIcon.setTexture(&context_.resources.getTexture("floor"));
+    floorIcon.setPosition({x, 0.f});
+    window.draw(floorIcon);
+
+    sf::Text floorText = TextUtils::createWhiteText(
+        font,
+        std::to_string(context_.runState.floorInAct),
+        28,
+        {x + kIconSize + 6.f, 18.f}
+    );
+    window.draw(floorText);
 }
 
 void CombatScene::drawSettings(sf::RenderWindow& window) const{
@@ -769,14 +868,118 @@ void CombatScene::drawTop(sf::RenderWindow& window) const {
     window.draw(top);
 }
 
+void CombatScene::syncHandCardViews() const
+{
+    const auto& hand = combatSystem_.getDeck().hand;
+
+    cardViews_.clear();
+    cardViews_.reserve(hand.size());
+
+    for (size_t i = 0; i < hand.size(); ++i) {
+        const float slotLeft =
+            CARD_START_X + static_cast<float>(i) * CARD_SPACING;
+
+        cardViews_.emplace_back(
+            hand[i].cardId,
+            sf::Vector2f{
+                slotLeft,
+                CARD_START_Y
+            },
+            sf::Vector2f{kHandCardWidth, kHandCardHeight}
+        );
+
+        if (static_cast<int>(i) == selectedHandIndex_) {
+            cardViews_.back().setSelected(true);
+        }
+    }
+}
+
+
+const sf::Texture& CombatScene::getCardTemplateTexture(
+    CardType type
+) const
+{
+    switch (type) {
+        case CardType::Attack:
+            return context_.resources.getTexture("Attack");
+
+        case CardType::Skill:
+            return context_.resources.getTexture("Skill");
+
+        case CardType::Curse:
+            return context_.resources.getTexture("Curse");
+    }
+
+    return context_.resources.getTexture("Attack");
+}
+
+const sf::Texture* CombatScene::getCardArtTexture(
+    const CardDef& cardDef
+) const
+{
+    if (
+        cardDef.textureId.empty() ||
+        !context_.resources.hasTexture(cardDef.textureId)
+    ) {
+        return nullptr;
+    }
+
+    return &context_.resources.getTexture(cardDef.textureId);
+}
+
+CardRenderTextures CombatScene::getCardRenderTextures(
+    const CardDef& cardDef
+) const
+{
+    CardRenderTextures textures;
+
+    textures.templateTexture =
+        &getCardTemplateTexture(cardDef.type);
+
+    textures.artTexture =
+        getCardArtTexture(cardDef);
+
+    return textures;
+}
+
+std::vector<PileCardViewData> CombatScene::buildPileCardViewData(
+    const std::vector<CardInstance>& cards
+) const
+{
+    std::vector<PileCardViewData> result;
+    result.reserve(cards.size());
+
+    for (const CardInstance& card : cards) {
+        if (!context_.cards.exists(card.cardId)) {
+            continue;
+        }
+
+        const CardDef& def = context_.cards.get(card.cardId);
+
+        PileCardViewData data;
+        data.cardId = card.cardId;
+        data.instanceId = card.instanceId;
+        data.cardDef = &def;
+        data.textures = getCardRenderTextures(def);
+        result.push_back(data);
+    }
+
+    return result;
+}
+
 void CombatScene::drawHand(
     sf::RenderWindow& window,
     sf::Font& font
 ) const {
-    const auto& hand = combatSystem_.getDeck().hand;
-    const CardRenderTextures emptyTextures;
+    syncHandCardViews();
 
-    for (size_t i = 0; i < hand.size(); ++i) {
+    const auto& hand = combatSystem_.getDeck().hand;
+
+    for (size_t i = 0; i < cardViews_.size(); ++i) {
+        if (i >= hand.size()) {
+            break;
+        }
+
         const CardInstance& card = hand[i];
 
         if (!context_.cards.exists(card.cardId)) {
@@ -784,24 +987,9 @@ void CombatScene::drawHand(
         }
 
         const CardDef& def = context_.cards.get(card.cardId);
+        const CardRenderTextures textures = getCardRenderTextures(def);
 
-        CardView cardView(
-            card.cardId,
-            {
-                CARD_START_X + static_cast<float>(i) * CARD_SPACING,
-                CARD_START_Y
-            },
-            {150.f, 220.f}
-        );
-
-        if (static_cast<int>(i) == selectedHandIndex_) {
-            cardView.setSelected(true);
-        }
-
-        //CardRenderTextures textures;
-        //textures.templateTexture = &getCardTemplateTexture(def.type);
-        //textures.artTexture = getCardArtTexture(def);
-        cardView.draw(window, def, emptyTextures, font);
+        cardViews_[i].draw(window, def, textures, font);
     }
 }
 
@@ -840,16 +1028,22 @@ void CombatScene::drawEnemies(
         const float designEnemyY = config.yPosition;
 
         const float designIntentX =
-            designEnemyX + (kEnemyDisplayWidth - kIntentSize) * 0.5f;
+            designEnemyX +
+            (kEnemyUILayoutDisplayWidth - kIntentSize) * 0.5f +
+            kIntentOffsetX;
         const float designIntentY =
-            designEnemyY - kIntentSize - kIntentGapAboveEnemy;
+            designEnemyY -
+            kIntentSize -
+            kIntentGapAboveEnemy +
+            kIntentOffsetY;
 
         const float designHealthX =
             designEnemyX + (kEnemyDisplayWidth - kHealthBarWidth) * 0.5f;
-        const float designHealthY =
-            designEnemyY + kEnemyHealthBarOffsetY;
+        const float designHealthY = kEnemyHealthBarDesignY;
         const float designStateY =
-            designHealthY + kHealthBarHeight + kStateGapBelowHealthBar;
+            designHealthY +
+            kHealthBarHeight +
+            kStateGapBelowHealthBar;
 
         const sf::Vector2f enemyPos = toScreenPosition(
             designEnemyX,
@@ -923,9 +1117,11 @@ void CombatScene::drawEnemies(
             enemyRect.setTexture(
                 &context_.resources.getTexture(enemyTextureIds_[enemyIndex])
             );
+        } else {
+            enemyRect.setFillColor(kEnemyPlaceholderFill);
         }
 
-        applyEnemyPlaceholderStyle(enemyRect);
+        enemyRect.setOutlineThickness(0.f);
         window.draw(enemyRect);
 
         drawHealthBar(
@@ -940,6 +1136,7 @@ void CombatScene::drawEnemies(
         drawStatusIcons(
             window,
             font,
+            context_.resources,
             statePos.x,
             statePos.y,
             CombatUnitStatus{
@@ -950,5 +1147,25 @@ void CombatScene::drawEnemies(
             }
         );
     }
+}
+
+void CombatScene::drawEnergy(
+    sf::RenderWindow& window,
+    sf::Font& font
+) const {
+    EnergyView energy;
+    sf::Texture& energyTexture =
+        context_.resources.getTexture("energy");
+
+    const int nowEnergy = combatSystem_.getEnergy();
+    const int maxEnergy = 3;
+
+    energy.draw(
+        window,
+        energyTexture,
+        font,
+        nowEnergy,
+        maxEnergy
+    );
 }
 
