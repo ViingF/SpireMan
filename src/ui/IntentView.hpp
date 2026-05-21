@@ -1,16 +1,29 @@
 #ifndef SPIRELIKE_INTENTVIEW_HPP
 #define SPIRELIKE_INTENTVIEW_HPP
+
 #include <SFML/Graphics.hpp>
+
+struct IntentViewData {
+    const sf::Texture* texture = nullptr;
+    int value = -1;
+};
 
 class IntentView {
 public:
-    IntentView();//这里不用传进来坐标原因是只有一个怪,目的的坐标固定
-    void draw(sf::RenderWindow &window,sf::Texture &texture);
-    void draw(sf::RenderWindow &window,sf::Texture &texture,sf::Font &font,int value);
-    //考虑到三种状态有两种情况:一种是带有数值，另一种只有图标，所以对以上函数进行重载
+    IntentView(
+        sf::Vector2f position,
+        float size
+    );
+
+    void draw(
+        sf::RenderWindow& window,
+        const sf::Font& font,
+        const IntentViewData& data
+    ) const;
+
 private:
-    sf::Vector2f position;
+    sf::Vector2f position_;
+    float size_ = 64.f;
 };
 
-
-#endif //SPIRELIKE_INTENTVIEW_HPP
+#endif

@@ -1,0 +1,3 @@
+C:/Users/PC/CLionProjects/SpireLike/cmake-build-debug/CMakeFiles/SpireLike.dir
+C:/Users/PC/CLionProjects/SpireLike/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/PC/CLionProjects/SpireLike/cmake-build-debug/CMakeFiles/rebuild_cache.dir

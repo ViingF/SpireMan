@@ -18,22 +18,6 @@ namespace {
         return sf::Text(font, TextUtils::fromUtf8(content), size);
     }
 
-bool readLeftClickPosition(
-    const sf::Event& event,
-    sf::Vector2i& pixelPosition
-)
-{
-    if (const auto* mouse =
-            event.getIf<sf::Event::MouseButtonPressed>()) {
-        if (mouse->button == sf::Mouse::Button::Left) {
-            pixelPosition = mouse->position;
-            return true;
-        }
-    }
-
-    return false;
-}
-
 sf::Vector2f getViewTopLeft(
     const sf::RenderWindow& window
 )
@@ -55,41 +39,30 @@ sf::Vector2f getViewSize(
     return window.getView().getSize();
 }
 
-void drawButton(
-    sf::RenderWindow& window,
-    const sf::Font& font,
-    const sf::FloatRect& rect,
-    const std::string& text,
-    sf::Color fillColor
-)
+}
+
+CardPileOverlay::CardPileOverlay(sf::Font& font)
+    : closeButton_(
+          sf::Vector2f(0.0f, 0.0f),
+          sf::Vector2f(130.0f, 58.0f),
+          font,
+          "Close"
+      ),
+      prevButton_(
+          sf::Vector2f(0.0f, 0.0f),
+          sf::Vector2f(180.0f, 62.0f),
+          font,
+          "Previous"
+      ),
+      nextButton_(
+          sf::Vector2f(0.0f, 0.0f),
+          sf::Vector2f(180.0f, 62.0f),
+          font,
+          "Next"
+      )
 {
-    sf::RectangleShape button(rect.size);
-    button.setPosition(rect.position);
-    button.setFillColor(fillColor);
-    button.setOutlineThickness(2.0f);
-    button.setOutlineColor(sf::Color(240, 210, 180));
-    window.draw(button);
-
-    sf::Text buttonText = makeText(font, text, 24);
-    buttonText.setFillColor(sf::Color::White);
-
-    const sf::FloatRect bounds =
-        buttonText.getLocalBounds();
-
-    buttonText.setPosition(sf::Vector2f(
-        rect.position.x +
-            rect.size.x * 0.5f -
-            bounds.size.x * 0.5f,
-        rect.position.y +
-            rect.size.y * 0.5f -
-            bounds.size.y * 0.5f -
-            6.0f
-    ));
-
-    window.draw(buttonText);
 }
 
-}
 
 void CardPileOverlay::open(
     const std::string& title,
@@ -108,7 +81,12 @@ void CardPileOverlay::close()
     cards_.clear();
     title_.clear();
     page_ = 0;
+
+    closeButton_.reset();
+    prevButton_.reset();
+    nextButton_.reset();
 }
+
 
 bool CardPileOverlay::isOpen() const
 {
@@ -124,27 +102,27 @@ bool CardPileOverlay::handleEvent(
         return false;
     }
 
-    sf::Vector2i pixelPosition;
+    layoutButtons(window);
 
-    if (!readLeftClickPosition(event, pixelPosition)) {
-        return true;
-    }
+    closeButton_.handleEvent(event, window);
+    prevButton_.handleEvent(event, window);
+    nextButton_.handleEvent(event, window);
 
-    const sf::Vector2f mousePos =
-        window.mapPixelToCoords(pixelPosition);
-
-    if (getCloseRect(window).contains(mousePos)) {
+    if (closeButton_.wasClicked()) {
+        closeButton_.reset();
         close();
         return true;
     }
 
-    if (getPrevRect(window).contains(mousePos)) {
+    if (prevButton_.wasClicked()) {
+        prevButton_.reset();
         page_ -= 1;
         clampPage();
         return true;
     }
 
-    if (getNextRect(window).contains(mousePos)) {
+    if (nextButton_.wasClicked()) {
+        nextButton_.reset();
         page_ += 1;
         clampPage();
         return true;
@@ -153,14 +131,17 @@ bool CardPileOverlay::handleEvent(
     return true;
 }
 
+
 void CardPileOverlay::draw(
     sf::RenderWindow& window,
     const sf::Font& font
-) const
+)
 {
     if (!isOpen()) {
         return;
     }
+
+    layoutButtons(window);
 
     const sf::Vector2f viewTopLeft = getViewTopLeft(window);
     const sf::Vector2f viewSize = getViewSize(window);
@@ -195,13 +176,8 @@ void CardPileOverlay::draw(
     ));
     window.draw(titleText);
 
-    drawButton(
-        window,
-        font,
-        getCloseRect(window),
-        "Close",
-        sf::Color(120, 65, 65)
-    );
+    closeButton_.draw(window);
+
 
     if (cardCount <= 0) {
         sf::Text emptyText =
@@ -252,32 +228,9 @@ void CardPileOverlay::draw(
         );
          }
 
+    prevButton_.draw(window);
+    nextButton_.draw(window);
 
-    const bool hasPrev =
-        page_ > 0;
-
-    const bool hasNext =
-        page_ + 1 < getPageCount();
-
-    drawButton(
-        window,
-        font,
-        getPrevRect(window),
-        "Previous",
-        hasPrev
-            ? sf::Color(80, 80, 120)
-            : sf::Color(55, 55, 70)
-    );
-
-    drawButton(
-        window,
-        font,
-        getNextRect(window),
-        "Next",
-        hasNext
-            ? sf::Color(80, 80, 120)
-            : sf::Color(55, 55, 70)
-    );
 
     std::ostringstream pageStream;
     pageStream << "Page "
@@ -461,4 +414,29 @@ sf::FloatRect CardPileOverlay::getCardRect(
             cardHeight
         )
     };
+}
+
+void CardPileOverlay::layoutButtons(
+    const sf::RenderWindow& window
+)
+{
+    const sf::FloatRect closeRect = getCloseRect(window);
+    closeButton_.setPosition(closeRect.position);
+    closeButton_.setSize(closeRect.size);
+
+    const sf::FloatRect prevRect = getPrevRect(window);
+    prevButton_.setPosition(prevRect.position);
+    prevButton_.setSize(prevRect.size);
+    prevButton_.setEnabled(page_ > 0);
+
+    const sf::FloatRect nextRect = getNextRect(window);
+    nextButton_.setPosition(nextRect.position);
+    nextButton_.setSize(nextRect.size);
+    nextButton_.setEnabled(page_ + 1 < getPageCount());
+}
+
+void CardPileOverlay::setTextures(sf::Texture& texture) {
+    prevButton_.setTexture(texture);
+    nextButton_.setTexture(texture);
+    closeButton_.setTexture(texture);
 }

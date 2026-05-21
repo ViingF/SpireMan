@@ -16,6 +16,7 @@ EndScene::EndScene(GameContext& context, BattleResult result)
           "Quit"
       )
 {
+    background.setSize({1920,1080});
 }
 
 void EndScene::handleEvent(
@@ -49,13 +50,15 @@ void EndScene::draw(sf::RenderWindow& window)
 {
     if (result == BattleResult::Victory)
     {
-        window.clear(sf::Color(30, 60, 40));
+        window.clear();
     }
     else
     {
-        window.clear(sf::Color(60, 30, 30));
+        background.setTexture(&context.resources.getTexture("death"));
+        window.clear();
     }
 
+    window.draw(background);
     menuButton.draw(window);
     quitButton.draw(window);
 }

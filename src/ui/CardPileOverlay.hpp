@@ -5,6 +5,7 @@
 #include <string>
 #include <vector>
 
+#include "Button.hpp"
 #include "CardView.hpp"
 #include "../model/Types.hpp"
 
@@ -20,6 +21,8 @@ struct PileCardViewData {
 
 class CardPileOverlay {
 public:
+    explicit CardPileOverlay(sf::Font& font);
+
     void open(
         const std::string& title,
         const std::vector<PileCardViewData>& cards
@@ -36,12 +39,15 @@ public:
     void draw(
         sf::RenderWindow& window,
         const sf::Font& font
-    ) const;
+    );
+    void setTextures(sf::Texture& texture);
 
 private:
     std::vector<PileCardViewData> cards_;
     std::string title_;
     int page_ = 0;
+
+    void layoutButtons(const sf::RenderWindow& window);
 
     int getCardsPerPage() const;
     int getPageCount() const;
@@ -55,6 +61,11 @@ private:
         const sf::RenderWindow& window,
         int visibleIndex
     ) const;
+
+    Button closeButton_;
+    Button prevButton_;
+    Button nextButton_;
 };
+
 
 #endif

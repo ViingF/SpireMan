@@ -211,7 +211,7 @@ MapScene::MapScene(
           sf::Vector2f(64.0f, 64.0f),
           context.resources.getFont("zh-R"),
           ""
-      )
+      ),deckOverlay_(context.resources.getFont("zh-R"))
 {
     mapIconButton_.setTexture(
         context.resources.getTexture("map")
@@ -235,6 +235,7 @@ MapScene::MapScene(
     } else {
         mapSystem_.refreshNodeStates(context.runState);
     }
+    deckOverlay_.setTextures(context.resources.getTexture("enabledButton"));
 }
 
 

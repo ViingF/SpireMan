@@ -34,6 +34,8 @@ private:
     Button quitButton;
 
     SceneTransition transition;
+
+    RectangleShape background;
 };
 
 #endif //SPIRELIKE_ENDSCENE_HPP

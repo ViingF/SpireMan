@@ -1,0 +1,11 @@
+{
+"rules": [
+{
+"primary-output": "CMakeFiles\\SpireLike.dir\\src\\database\\EventDatabase.cpp.obj",
+"requires": [
+]
+}
+],
+"version": 0,
+"revision": 0
+}

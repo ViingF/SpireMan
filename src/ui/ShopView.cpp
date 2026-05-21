@@ -136,7 +136,7 @@ void ShopView::drawMain(
 
     mapIconButton.draw(window);
 
-    sf::Text title = makeText(font, "Merchant", 52);
+    sf::Text title = makeText(font, "商人", 52);
     title.setFillColor(sf::Color::White);
     title.setPosition({panelX_ + 45.f, panelY_ + 40.f});
     window.draw(title);
@@ -151,7 +151,7 @@ void ShopView::drawMain(
     }
 
     removeCardButton.setText(
-        "Remove Card: " + std::to_string(removeCost) + " Gold"
+        "删除卡牌: " + std::to_string(removeCost) + " 金币"
     );
 
     removeCardButton.setTexture(context.resources.getTexture("removecard"));
@@ -197,7 +197,7 @@ void ShopView::draw(
 
             sf::Text soldText = TextUtils::createWhiteText(
                 font,
-                "Sold",
+                "已卖出",
                 28,
                 {
                     rect.position.x + rect.size.x * 0.5f - 35.f,

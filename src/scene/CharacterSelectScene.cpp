@@ -13,15 +13,15 @@ CharacterSelectScene::CharacterSelectScene(
     ),
 
     startButton(
-    sf::Vector2f(1350.f, 800.f),
-    sf::Vector2f(220.f, 90.f),
+    sf::Vector2f(1650.f, 800.f),
+    sf::Vector2f(320.f, 90.f),
     context.resources.getFont("zh-R"),
     "Start"
     ),
 
     backButton(
-    sf::Vector2f(1700.f, 800.f),
-    sf::Vector2f(120.f, 120.f),
+    sf::Vector2f(0, 800.f),
+    sf::Vector2f(220.f, 80.f),
     context.resources.getFont("zh-R"),
     "Back"
     )
@@ -34,6 +34,8 @@ CharacterSelectScene::CharacterSelectScene(
         lockedButtons[i].setSize({120.f,120.f});
         lockedButtons[i].setPosition({700.f+i*200.f,800.f});
     }
+    startButton.setTexture(context.resources.getTexture("confirmButton"));
+    backButton.setTexture(context.resources.getTexture("cancelButton"));
 }
 
 void CharacterSelectScene::handleEvent(

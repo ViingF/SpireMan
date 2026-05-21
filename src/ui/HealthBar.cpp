@@ -1,37 +1,59 @@
+// ui/HealthBar.cpp
 #include "HealthBar.hpp"
 
 #include "TextUtils.hpp"
 
-HealthBar::HealthBar(sf::Vector2f position)
-    : position_(position)
+#include <algorithm>
+
+HealthBar::HealthBar(
+    sf::Vector2f position,
+    sf::Vector2f size
+)
+    : position_(position),
+      size_(size)
 {
 }
 
 void HealthBar::draw(
     sf::RenderWindow& window,
-    const sf::Texture& texture,
+    const sf::Texture* texture,
     const sf::Font& font,
-    int nowHp,
+    int hp,
     int maxHp
 ) const {
     if (maxHp <= 0) {
         return;
     }
 
-    const float scale =
-        static_cast<float>(nowHp) / static_cast<float>(maxHp);
+    const int clampedHp = std::clamp(hp, 0, maxHp);
+    const float ratio =
+        static_cast<float>(clampedHp) / static_cast<float>(maxHp);
 
-    sf::RectangleShape healthBar({240.f * scale, 30.f});
-    healthBar.setTexture(&texture);
-    healthBar.setPosition(position_);
+    sf::RectangleShape background(size_);
+    background.setFillColor(sf::Color(40, 40, 40, 180));
+    background.setPosition(position_);
+    window.draw(background);
 
-    sf::Text text = TextUtils::createWhiteText(
+    sf::RectangleShape foreground({
+        size_.x * ratio,
+        size_.y
+    });
+
+    if (texture != nullptr) {
+        foreground.setTexture(texture);
+    } else {
+        foreground.setFillColor(sf::Color(180, 40, 40));
+    }
+
+    foreground.setPosition(position_);
+    window.draw(foreground);
+
+    sf::Text hpText = TextUtils::createWhiteText(
         font,
-        TextUtils::formatHpText(nowHp, maxHp),
+        TextUtils::formatHpText(clampedHp, maxHp),
         15,
-        {position_.x + 60.f, position_.y + 10.f}
+        {position_.x + 60.f, position_.y + 5.f}
     );
 
-    window.draw(healthBar);
-    window.draw(text);
+    window.draw(hpText);
 }

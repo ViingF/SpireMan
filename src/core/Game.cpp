@@ -86,6 +86,9 @@ Game::Game()
     resources.loadTexture("enabledButton","assets/images/enabledButton.png");
     resources.loadTexture("cancelButton","assets/images/cancelButton.png");
     resources.loadTexture("removecard","assets/images/removecard.png");
+    resources.loadTexture("confirmButton","assets/images/confirmButton.png");
+    resources.loadTexture("death","assets/images/death.png");
+
 
     //怪物
     resources.loadTexture("AcidSlimeL","assets/images/enemies/AcidSlimeL.png");

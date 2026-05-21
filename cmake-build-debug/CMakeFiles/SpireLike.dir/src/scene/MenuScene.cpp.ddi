@@ -1,0 +1,11 @@
+{
+"rules": [
+{
+"primary-output": "CMakeFiles/SpireLike.dir/src/scene/MenuScene.cpp.o",
+"requires": [
+]
+}
+],
+"version": 0,
+"revision": 0
+}

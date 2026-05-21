@@ -1,35 +1,49 @@
-
 #include "IntentView.hpp"
+
 #include "TextUtils.hpp"
+
 #include <string>
-IntentView::IntentView() {
-    position = {1410,500};
+
+IntentView::IntentView(
+    sf::Vector2f position,
+    float size
+)
+    : position_(position),
+      size_(size)
+{
 }
 
-void IntentView::draw(sf::RenderWindow &window,sf::Texture &texture) {
-    sf::RectangleShape intent({64,64});
-    intent.setTexture(&texture);
-    intent.setPosition(position);
+void IntentView::draw(
+    sf::RenderWindow& window,
+    const sf::Font& font,
+    const IntentViewData& data
+) const
+{
+    sf::RectangleShape icon({size_, size_});
 
-    window.draw(intent);
-}
+    if (data.texture != nullptr) {
+        icon.setTexture(data.texture);
+        icon.setFillColor(sf::Color::White);
+    } else {
+        icon.setFillColor(sf::Color(255, 255, 255, 180));
+    }
 
-void IntentView::draw(sf::RenderWindow &window,sf::Texture &texture,sf::Font &font,int value) {
-    if (value < 0) {
+    icon.setPosition(position_);
+    window.draw(icon);
+
+    if (data.value < 0) {
         return;
     }
 
-    sf::RectangleShape intent({64,64});
-    intent.setTexture(&texture);
-    intent.setPosition(position);
-
     sf::Text text = TextUtils::createWhiteText(
         font,
-        std::to_string(value),
+        std::to_string(data.value),
         25,
-        {position.x-10, position.y+55}
+        {
+            position_.x - 10.f,
+            position_.y + size_ + 5.f
+        }
     );
 
-    window.draw(intent);
     window.draw(text);
 }

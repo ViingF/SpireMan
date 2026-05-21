@@ -1,0 +1,729 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="BackendCodeEditorMiscSettings">
+    <option name="/Default/Housekeeping/FeatureSuggestion/FeatureSuggestionManager/DisabledSuggesters/=SwitchToGoToActionSuggester/@EntryIndexedValue" value="true" type="bool" />
+  </component>
+  <component name="CMakePresetLoader">{
+  &quot;useNewFormat&quot;: true
+}</component>
+  <component name="CMakeProjectFlavorService">
+    <option name="flavorId" value="CMakePlainProjectFlavor" />
+  </component>
+  <component name="CMakeReloadState">
+    <option name="reloaded" value="true" />
+  </component>
+  <component name="CMakeRunConfigurationManager">
+    <generated>
+      <config projectName="SpireLike" targetName="SpireLike" />
+    </generated>
+  </component>
+  <component name="CMakeSettings">
+    <configurations>
+      <configuration PROFILE_NAME="Debug" ENABLED="true" CONFIG_NAME="Debug" GENERATION_OPTIONS="-DSFML_DIR=D:/SFML-3.0.2/lib/cmake/SFML" />
+    </configurations>
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="f968c596-13f0-460b-99b2-e8cdc1e703ee" name="更改" comment="界面显示完善&#10;1.大部分按钮已经设置了材质&#10;2.修复了中文乱码问题&#10;3.提供完整的顶栏地图，保存，牌堆功能&#10;4.优化了商店界面布局&#10;5.优化了事件界面布局">
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/images/cards/anger.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/images/cards/bash.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/images/cards/bludgeon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/images/cards/clothesline.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/images/cards/defend.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/images/cards/flex.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/images/cards/impervious.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/images/cards/intimidate.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/images/cards/iron_wave.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/images/cards/limit_break.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/images/cards/necronomicurse.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/images/cards/pommel_strike.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/images/cards/pummel.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/images/cards/ritual_dagger.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/images/cards/seeing_red.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/images/cards/shrug_it_off.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/images/cards/strike.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/images/cards/twin_strike.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/images/cards/warcry.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/images/cards/writhe.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/images/confirmButton.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/images/death.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/images/events/backToBasics.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/images/events/cleric.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/images/events/cursedTome.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/images/events/fishing.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/images/events/goldenIdol.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/images/events/goldenWing.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/images/events/goopPuddle.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/images/events/ladyInBlue.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/images/events/liarsGame.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/images/events/library.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/images/events/mausoleum.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/images/events/moaiHead.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/images/events/shiningLight.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/images/events/theNest.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/query/cache-v2" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/query/cmakeFiles-v1" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/query/codemodel-v2" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/query/toolchains-v1" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/cache-v2-14b6b42134086d375411.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/cmakeFiles-v1-ea6fe87c20420ab71f6c.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/codemodel-v2-45099abf11f367292357.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/directory-.-Debug-d0094a50bb2071803777.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/index-2026-05-21T10-33-45-0512.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/target-SpireLike-Debug-21c1ad87948c171c1f6a.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/toolchains-v1-b2da77fa8f54371161ea.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/.ninja_deps" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/.ninja_log" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeCache.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/4.1.2/CMakeCCompiler.cmake" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/4.1.2/CMakeCXXCompiler.cmake" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/4.1.2/CMakeDetermineCompilerABI_C.bin" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/4.1.2/CMakeDetermineCompilerABI_CXX.bin" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/4.1.2/CMakeRCCompiler.cmake" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/4.1.2/CMakeSystem.cmake" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/4.1.2/CompilerIdC/CMakeCCompilerId.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/4.1.2/CompilerIdC/a.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/4.1.2/CompilerIdCXX/CMakeCXXCompilerId.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/4.1.2/CompilerIdCXX/a.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CMakeConfigureLog.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/InstallScripts.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/CXX.dd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/CXXDependInfo.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/CXXModules.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/main.cpp.ddi" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/main.cpp.obj" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/main.cpp.obj.ddi" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/main.cpp.obj.ddi.d" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/main.cpp.obj.ddi.i" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/main.cpp.obj.modmap" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/core/AudioManager.cpp.ddi" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/core/AudioManager.cpp.obj" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/core/AudioManager.cpp.obj.ddi" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/core/AudioManager.cpp.obj.ddi.d" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/core/AudioManager.cpp.obj.ddi.i" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/core/AudioManager.cpp.obj.modmap" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/core/Game.cpp.ddi" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/core/Game.cpp.obj" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/core/Game.cpp.obj.ddi" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/core/Game.cpp.obj.ddi.d" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/core/Game.cpp.obj.ddi.i" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/core/Game.cpp.obj.modmap" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/core/Logger.cpp.ddi" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/core/Logger.cpp.obj" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/core/Logger.cpp.obj.ddi" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/core/Logger.cpp.obj.ddi.d" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/core/Logger.cpp.obj.ddi.i" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/core/Logger.cpp.obj.modmap" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/core/ResourceManager.cpp.ddi" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/core/ResourceManager.cpp.obj" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/core/ResourceManager.cpp.obj.ddi" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/core/ResourceManager.cpp.obj.ddi.d" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/core/ResourceManager.cpp.obj.ddi.i" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/core/ResourceManager.cpp.obj.modmap" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/database/CardDatabase.cpp.ddi" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/database/CardDatabase.cpp.obj" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/database/CardDatabase.cpp.obj.ddi" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/database/CardDatabase.cpp.obj.ddi.d" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/database/CardDatabase.cpp.obj.ddi.i" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/database/CardDatabase.cpp.obj.modmap" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/database/DataLoader.cpp.ddi" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/database/DataLoader.cpp.obj" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/database/DataLoader.cpp.obj.ddi" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/database/DataLoader.cpp.obj.ddi.d" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/database/DataLoader.cpp.obj.ddi.i" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/database/DataLoader.cpp.obj.modmap" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/database/EncounterDatabase.cpp.ddi" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/database/EncounterDatabase.cpp.obj" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/database/EncounterDatabase.cpp.obj.ddi" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/database/EncounterDatabase.cpp.obj.ddi.d" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/database/EncounterDatabase.cpp.obj.ddi.i" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/database/EncounterDatabase.cpp.obj.modmap" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/database/EnemyDatabase.cpp.ddi" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/database/EnemyDatabase.cpp.obj" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/database/EnemyDatabase.cpp.obj.ddi" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/database/EnemyDatabase.cpp.obj.ddi.d" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/database/EnemyDatabase.cpp.obj.ddi.i" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/database/EnemyDatabase.cpp.obj.modmap" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/database/EventDatabase.cpp.ddi" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/database/EventDatabase.cpp.obj" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/database/EventDatabase.cpp.obj.ddi" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/database/EventDatabase.cpp.obj.ddi.d" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/database/EventDatabase.cpp.obj.ddi.i" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/database/EventDatabase.cpp.obj.modmap" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/database/RelicDatabase.cpp.ddi" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/database/RelicDatabase.cpp.obj" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/database/RelicDatabase.cpp.obj.ddi" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/database/RelicDatabase.cpp.obj.ddi.d" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/database/RelicDatabase.cpp.obj.ddi.i" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/database/RelicDatabase.cpp.obj.modmap" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/main.cpp.ddi" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/main.cpp.obj" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/main.cpp.obj.ddi" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/main.cpp.obj.ddi.d" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/main.cpp.obj.ddi.i" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/main.cpp.obj.modmap" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/scene/CampfireScene.cpp.ddi" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/scene/CampfireScene.cpp.obj" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/scene/CampfireScene.cpp.obj.ddi" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/scene/CampfireScene.cpp.obj.ddi.d" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/scene/CampfireScene.cpp.obj.ddi.i" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/scene/CampfireScene.cpp.obj.modmap" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/scene/CardRemoveScene.cpp.ddi" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/scene/CardRemoveScene.cpp.obj" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/scene/CardRemoveScene.cpp.obj.ddi" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/scene/CardRemoveScene.cpp.obj.ddi.d" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/scene/CardRemoveScene.cpp.obj.ddi.i" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/scene/CardRemoveScene.cpp.obj.modmap" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/scene/CharacterSelectScene.cpp.ddi" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/scene/CharacterSelectScene.cpp.obj" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/scene/CharacterSelectScene.cpp.obj.ddi" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/scene/CharacterSelectScene.cpp.obj.ddi.d" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/scene/CharacterSelectScene.cpp.obj.ddi.i" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/scene/CharacterSelectScene.cpp.obj.modmap" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/scene/CombatScene.cpp.ddi" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/scene/CombatScene.cpp.obj" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/scene/CombatScene.cpp.obj.ddi" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/scene/CombatScene.cpp.obj.ddi.d" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/scene/CombatScene.cpp.obj.ddi.i" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/scene/CombatScene.cpp.obj.modmap" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/scene/EndScene.cpp.ddi" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/scene/EndScene.cpp.obj" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/scene/EndScene.cpp.obj.ddi" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/scene/EndScene.cpp.obj.ddi.d" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/scene/EndScene.cpp.obj.ddi.i" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/scene/EndScene.cpp.obj.modmap" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/scene/EventScene.cpp.ddi" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/scene/EventScene.cpp.obj" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/scene/EventScene.cpp.obj.ddi" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/scene/EventScene.cpp.obj.ddi.d" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/scene/EventScene.cpp.obj.ddi.i" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/scene/EventScene.cpp.obj.modmap" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/scene/MapScene.cpp.ddi" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/scene/MapScene.cpp.obj" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/scene/MapScene.cpp.obj.ddi" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/scene/MapScene.cpp.obj.ddi.d" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/scene/MapScene.cpp.obj.ddi.i" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/scene/MapScene.cpp.obj.modmap" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/scene/MenuScene.cpp.ddi" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/scene/MenuScene.cpp.obj" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/scene/MenuScene.cpp.obj.ddi" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/scene/MenuScene.cpp.obj.ddi.d" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/scene/MenuScene.cpp.obj.ddi.i" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/scene/MenuScene.cpp.obj.modmap" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/scene/RewardScene.cpp.ddi" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/scene/RewardScene.cpp.obj" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/scene/RewardScene.cpp.obj.ddi" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/scene/RewardScene.cpp.obj.ddi.d" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/scene/RewardScene.cpp.obj.ddi.i" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/scene/RewardScene.cpp.obj.modmap" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/scene/ShopScene.cpp.ddi" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/scene/ShopScene.cpp.obj" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/scene/ShopScene.cpp.obj.ddi" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/scene/ShopScene.cpp.obj.ddi.d" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/scene/ShopScene.cpp.obj.ddi.i" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/scene/ShopScene.cpp.obj.modmap" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/system/CardSystem.cpp.ddi" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/system/CardSystem.cpp.obj" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/system/CardSystem.cpp.obj.ddi" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/system/CardSystem.cpp.obj.ddi.d" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/system/CardSystem.cpp.obj.ddi.i" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/system/CardSystem.cpp.obj.modmap" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/system/CombatSystem.cpp.ddi" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/system/CombatSystem.cpp.obj" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/system/CombatSystem.cpp.obj.ddi" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/system/CombatSystem.cpp.obj.ddi.d" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/system/CombatSystem.cpp.obj.ddi.i" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/system/CombatSystem.cpp.obj.modmap" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/system/EnemyAISystem.cpp.ddi" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/system/EnemyAISystem.cpp.obj" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/system/EnemyAISystem.cpp.obj.ddi" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/system/EnemyAISystem.cpp.obj.ddi.d" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/system/EnemyAISystem.cpp.obj.ddi.i" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/system/EnemyAISystem.cpp.obj.modmap" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/system/EventSystem.cpp.ddi" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/system/EventSystem.cpp.obj" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/system/EventSystem.cpp.obj.ddi" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/system/EventSystem.cpp.obj.ddi.d" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/system/EventSystem.cpp.obj.ddi.i" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/system/EventSystem.cpp.obj.modmap" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/system/MapSystem.cpp.ddi" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/system/MapSystem.cpp.obj" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/system/MapSystem.cpp.obj.ddi" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/system/MapSystem.cpp.obj.ddi.d" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/system/MapSystem.cpp.obj.ddi.i" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/system/MapSystem.cpp.obj.modmap" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/system/SaveSystem.cpp.ddi" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/system/SaveSystem.cpp.obj" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/system/SaveSystem.cpp.obj.ddi" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/system/SaveSystem.cpp.obj.ddi.d" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/system/SaveSystem.cpp.obj.ddi.i" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/system/SaveSystem.cpp.obj.modmap" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/ui/Button.cpp.ddi" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/ui/Button.cpp.obj" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/ui/Button.cpp.obj.ddi" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/ui/Button.cpp.obj.ddi.d" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/ui/Button.cpp.obj.ddi.i" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/ui/Button.cpp.obj.modmap" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/ui/CardPileOverlay.cpp.ddi" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/ui/CardPileOverlay.cpp.obj" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/ui/CardPileOverlay.cpp.obj.ddi" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/ui/CardPileOverlay.cpp.obj.ddi.d" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/ui/CardPileOverlay.cpp.obj.ddi.i" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/ui/CardPileOverlay.cpp.obj.modmap" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/ui/CardView.cpp.ddi" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/ui/CardView.cpp.obj" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/ui/CardView.cpp.obj.ddi" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/ui/CardView.cpp.obj.ddi.d" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/ui/CardView.cpp.obj.ddi.i" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/ui/CardView.cpp.obj.modmap" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/ui/DeckView.cpp.ddi" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/ui/DeckView.cpp.obj" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/ui/DeckView.cpp.obj.ddi" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/ui/DeckView.cpp.obj.ddi.d" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/ui/DeckView.cpp.obj.ddi.i" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/ui/DeckView.cpp.obj.modmap" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/ui/EnemyGroupView.cpp.ddi" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/ui/EnemyGroupView.cpp.obj" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/ui/EnemyGroupView.cpp.obj.ddi" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/ui/EnemyGroupView.cpp.obj.ddi.d" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/ui/EnemyGroupView.cpp.obj.ddi.i" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/ui/EnemyGroupView.cpp.obj.modmap" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/ui/EnemyView.cpp.ddi" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/ui/EnemyView.cpp.obj" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/ui/EnemyView.cpp.obj.ddi" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/ui/EnemyView.cpp.obj.ddi.d" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/ui/EnemyView.cpp.obj.ddi.i" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/ui/EnemyView.cpp.obj.modmap" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/ui/EnergyView.cpp.ddi" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/ui/EnergyView.cpp.obj" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/ui/EnergyView.cpp.obj.ddi" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/ui/EnergyView.cpp.obj.ddi.d" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/ui/EnergyView.cpp.obj.ddi.i" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/ui/EnergyView.cpp.obj.modmap" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/ui/HealthBar.cpp.ddi" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/ui/HealthBar.cpp.obj" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/ui/HealthBar.cpp.obj.ddi" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/ui/HealthBar.cpp.obj.ddi.d" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/ui/HealthBar.cpp.obj.ddi.i" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/ui/HealthBar.cpp.obj.modmap" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/ui/IntentView.cpp.ddi" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/ui/IntentView.cpp.obj" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/ui/IntentView.cpp.obj.ddi" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/ui/IntentView.cpp.obj.ddi.d" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/ui/IntentView.cpp.obj.ddi.i" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/ui/IntentView.cpp.obj.modmap" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/ui/RewardCardView.cpp.ddi" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/ui/RewardCardView.cpp.obj" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/ui/RewardCardView.cpp.obj.ddi" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/ui/RewardCardView.cpp.obj.ddi.d" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/ui/RewardCardView.cpp.obj.ddi.i" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/ui/RewardCardView.cpp.obj.modmap" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/ui/ShopView.cpp.ddi" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/ui/ShopView.cpp.obj" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/ui/ShopView.cpp.obj.ddi" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/ui/ShopView.cpp.obj.ddi.d" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/ui/ShopView.cpp.obj.ddi.i" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/ui/ShopView.cpp.obj.modmap" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/ui/StateView.cpp.ddi" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/ui/StateView.cpp.obj" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/ui/StateView.cpp.obj.ddi" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/ui/StateView.cpp.obj.ddi.d" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/ui/StateView.cpp.obj.ddi.i" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/ui/StateView.cpp.obj.modmap" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/ui/TextUtils.cpp.ddi" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/ui/TextUtils.cpp.obj" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/ui/TextUtils.cpp.obj.ddi" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/ui/TextUtils.cpp.obj.ddi.d" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/ui/TextUtils.cpp.obj.ddi.i" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/ui/TextUtils.cpp.obj.modmap" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/ui/TopInfoBar.cpp.ddi" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/ui/TopInfoBar.cpp.obj" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/ui/TopInfoBar.cpp.obj.ddi" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/ui/TopInfoBar.cpp.obj.ddi.d" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/ui/TopInfoBar.cpp.obj.ddi.i" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SpireLike.dir/src/ui/TopInfoBar.cpp.obj.modmap" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TargetDirectories.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/clion-Debug-log.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/clion-environment.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/cmake.check_cache" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/rules.ninja" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/SpireLike.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/Testing/Temporary/LastTest.log" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/build.ninja" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/cmake_install.cmake" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/sfml-audio-3.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/sfml-audio-d-3.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/sfml-graphics-3.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/sfml-graphics-d-3.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/sfml-network-3.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/sfml-network-d-3.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/sfml-system-3.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/sfml-system-d-3.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/sfml-window-3.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/sfml-window-d-3.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/save.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/src.zip" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/endTurnButton.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/images/endTurnButton.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/title.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/images/title.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/core/Game.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/Game.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/scene/CharacterSelectScene.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/scene/CharacterSelectScene.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/scene/CombatScene.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/scene/CombatScene.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/scene/EndScene.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/scene/EndScene.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/scene/EndScene.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/scene/EndScene.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/scene/MapScene.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/scene/MapScene.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/CardPileOverlay.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/CardPileOverlay.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/CardPileOverlay.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/CardPileOverlay.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/DeckView.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/DeckView.hpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/EnemyGroupView.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/EnemyGroupView.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/EnemyGroupView.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/EnemyGroupView.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/EnemyView.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/EnemyView.hpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/HealthBar.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/HealthBar.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/HealthBar.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/HealthBar.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/IntentView.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/IntentView.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/IntentView.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/IntentView.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/ShopView.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/ShopView.cpp" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ClangdSettings">
+    <option name="formatViaClangd" value="false" />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Debug" />
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="feature-A" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;ViingF&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/ViingF/SpireLike.git&quot;,
+    &quot;accountId&quot;: &quot;d44a6fa8-2907-418d-b640-60b4d8125ea8&quot;
+  }
+}</component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/src/scene/RewardScene.cpp" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/scene/ShopScene.cpp" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://D:/SFML-3.0.2/include/SFML/Window/Event.inl" root0="FORCE_HIGHLIGHTING" />
+  </component>
+  <component name="MacroExpansionManager">
+    <option name="directoryName" value="aSTAClo9" />
+  </component>
+  <component name="ProjectApplicationVersion">
+    <option name="ide" value="CLion" />
+    <option name="majorVersion" value="2025" />
+    <option name="minorVersion" value="3.1.1" />
+    <option name="productBranch" value="Classic" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 8
+}</component>
+  <component name="ProjectId" id="3CsNviRLip2ToMBBxAfUIhmAnd1" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "CMake 应用程序.SpireLike.executor": "Run",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.RadMigrateCodeStyle": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.cidr.known.project.marker": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.readMode.enableVisualFormatting": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "RunOnceActivity.west.config.association.type.startup.service": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "cf.first.check.clang-format": "false",
+    "cidr.known.project.marker": "true",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "C:/Users/PC/CLionProjects/SpireLike/assets/images",
+    "nodejs_package_manager_path": "npm",
+    "org.rust.first.attach.projects": "true",
+    "run.code.analysis.last.selected.profile": "pProject Default",
+    "settings.editor.selected.configurable": "reference.settings.project.statistic.project.settings",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\PC\CLionProjects\SpireLike\assets\images" />
+      <recent name="C:\Users\PC\CLionProjects\SpireLike\src\scene" />
+      <recent name="C:\Users\PC\CLionProjects\SpireLike\src\ui" />
+      <recent name="C:\Users\PC\CLionProjects\SpireLike\src\system" />
+      <recent name="C:\Users\PC\CLionProjects\SpireLike\assets\images\cards" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\PC\CLionProjects\SpireLike\assets\images" />
+      <recent name="C:\Users\PC\CLionProjects\SpireLike\assets\images\mapicons" />
+      <recent name="C:\Users\PC\CLionProjects\SpireLike\data" />
+      <recent name="C:\Users\PC\CLionProjects\SpireLike\assets\audio\music" />
+      <recent name="C:\Users\PC\CLionProjects\SpireLike\src" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="SpireLike" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" WORKING_DIR="file://$PROJECT_DIR$" PASS_PARENT_ENVS_2="true" PROJECT_NAME="SpireLike" TARGET_NAME="SpireLike" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="SpireLike" RUN_TARGET_NAME="SpireLike">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="默认任务">
+      <changelist id="f968c596-13f0-460b-99b2-e8cdc1e703ee" name="更改" comment="" />
+      <created>1777170549773</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1777170549773</updated>
+      <workItem from="1777170550988" duration="6292000" />
+      <workItem from="1777208256720" duration="33373000" />
+      <workItem from="1778050874825" duration="228000" />
+      <workItem from="1778051119290" duration="88097000" />
+      <workItem from="1778656198949" duration="102617000" />
+    </task>
+    <task id="LOCAL-00001" summary="first commit">
+      <option name="closed" value="true" />
+      <created>1777870346527</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1777870346527</updated>
+    </task>
+    <task id="LOCAL-00002" summary="first commit">
+      <option name="closed" value="true" />
+      <created>1777992020577</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1777992020577</updated>
+    </task>
+    <task id="LOCAL-00003" summary="first commit">
+      <option name="closed" value="true" />
+      <created>1778051654727</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1778051654727</updated>
+    </task>
+    <task id="LOCAL-00004" summary="结构基本确定并实现核心功能">
+      <option name="closed" value="true" />
+      <created>1778071905789</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1778071905789</updated>
+    </task>
+    <task id="LOCAL-00005" summary="增加并实现了事件系统">
+      <option name="closed" value="true" />
+      <created>1778137881223</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1778137881223</updated>
+    </task>
+    <task id="LOCAL-00006" summary="增加并实现了事件系统">
+      <option name="closed" value="true" />
+      <created>1778310702995</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1778310702995</updated>
+    </task>
+    <task id="LOCAL-00007" summary="1.完善地图：使用游戏贴图，增加并实现了随机boss&#10;2.完善选角色界面：使用游戏贴图&#10;3.完善事件：使用游戏贴图（目前贴图与对应事件无关，未来将适配）&#10;4.完善按钮：实现了按钮居中显示文字的功能&#10;5.修复了回到菜单后游戏进度未清空的bug">
+      <option name="closed" value="true" />
+      <created>1778339171687</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1778339171687</updated>
+    </task>
+    <task id="LOCAL-00008" summary="完善地图：&#10;1.由单直线改为网状&#10;2.优化图标比例及连线效果&#10;3.增加并实现了基本的火堆及商店框架">
+      <option name="closed" value="true" />
+      <created>1778397188106</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1778397188106</updated>
+    </task>
+    <task id="LOCAL-00009" summary="完善地图：&#10;增加限制生成节点数量的功能&#10;补充资源：&#10;补充了事件的文本资源和图片资源，保证一一对应，但部分选项由于功能不支持而做了调整，目前尚未完全做完&#10;修复bug：&#10;从csv读取时读取失败已修复，并规范了csv格式">
+      <option name="closed" value="true" />
+      <created>1778597620853</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1778597620853</updated>
+    </task>
+    <task id="LOCAL-00010" summary="噢对了，已改为三层地图">
+      <option name="closed" value="true" />
+      <created>1778598194212</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1778598194212</updated>
+    </task>
+    <task id="LOCAL-00011" summary="1.csv内容修正&#10;2.增加并实现了商店删牌功能&#10;3.解决了事件分布不均的问题&#10;4.增加了查看牌堆的功能，包括在地图上的牌库，战斗中的抽、弃牌堆（由于战斗逻辑未实现，目前战斗中查看均为空）">
+      <option name="closed" value="true" />
+      <created>1778659689619</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1778659689619</updated>
+    </task>
+    <task id="LOCAL-00012" summary="1.增加并实现了商店删牌功能&#10;2.增加了查看牌堆的功能，包括在地图上的牌库，战斗中的抽、弃牌堆（由于战斗逻辑未实现，目前战斗中查看均为空）&#10;3.csv内容修正&#10;4.解决了事件分布不均的问题&#10;5.修复了金币不满足条件仍可触发事件选项的bug">
+      <option name="closed" value="true" />
+      <created>1778660038233</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1778660038233</updated>
+    </task>
+    <task id="LOCAL-00013" summary="1.新增并实现了遭遇及多敌人&#10;2.补充了csv数据">
+      <option name="closed" value="true" />
+      <created>1778684680450</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1778684680450</updated>
+    </task>
+    <task id="LOCAL-00014" summary="更新内容：&#10;1.增加并实现了音频功能，同时导入了ogg文件&#10;2.支持消耗卡牌，同步支持消耗牌堆查看，csv格式更新等&#10;3.增加并实现了存读档功能&#10;4.完善了Button的功能&#10;5.选择角色界面新增开始按钮">
+      <option name="closed" value="true" />
+      <created>1778810944589</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1778810944589</updated>
+    </task>
+    <task id="LOCAL-00015" summary="首次整合">
+      <option name="closed" value="true" />
+      <created>1779203004741</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1779203004741</updated>
+    </task>
+    <task id="LOCAL-00016" summary="界面显示完善">
+      <option name="closed" value="true" />
+      <created>1779247176775</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1779247176775</updated>
+    </task>
+    <task id="LOCAL-00017" summary="界面显示完善&#10;1.大部分按钮已经设置了材质&#10;2.修复了中文乱码问题&#10;3.提供完整的顶栏地图，保存，牌堆功能&#10;4.优化了商店界面布局&#10;5.优化了事件界面布局">
+      <option name="closed" value="true" />
+      <created>1779290120680</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1779290120680</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="VCPKGProject">
+    <isAutomaticCheckingOnLaunch value="false" />
+    <isAutomaticFoundErrors value="true" />
+    <isAutomaticReloadCMake value="true" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="OPEN_GENERIC_TABS">
+      <map>
+        <entry key="5679d1aa-b574-4c2d-a9e0-f55508202be6" value="TOOL_WINDOW" />
+      </map>
+    </option>
+    <option name="TAB_STATES">
+      <map>
+        <entry key="5679d1aa-b574-4c2d-a9e0-f55508202be6">
+          <value>
+            <State>
+              <option name="CUSTOM_BOOLEAN_PROPERTIES">
+                <map>
+                  <entry key="Show.Git.Branches" value="true" />
+                </map>
+              </option>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="develop" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="feature-A" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="first commit" />
+    <MESSAGE value="结构基本确定并实现核心功能" />
+    <MESSAGE value="增加并实现了事件系统" />
+    <MESSAGE value="1.完善地图：使用游戏贴图，增加并实现了随机boss&#10;2.完善选角色界面：使用游戏贴图&#10;3.完善事件：使用游戏贴图（目前贴图与对应事件无关，未来将适配）&#10;4.完善按钮：实现了按钮居中显示文字的功能&#10;5.修复了回到菜单后游戏进度未清空的bug" />
+    <MESSAGE value="完善地图：&#10;1.由单直线改为网状&#10;2.优化图标比例及连线效果&#10;3.增加并实现了基本的火堆及商店框架" />
+    <MESSAGE value="完善地图：&#10;增加限制生成节点数量的功能&#10;补充资源：&#10;补充了事件的文本资源和图片资源，保证一一对应，但部分选项由于功能不支持而做了调整，目前尚未完全做完&#10;修复bug：&#10;从csv读取时读取失败已修复，并规范了csv格式" />
+    <MESSAGE value="噢对了，已改为三层地图" />
+    <MESSAGE value="1.增加并实现了商店删牌功能&#10;2.增加了查看牌堆的功能，包括在地图上的牌库，战斗中的抽、弃牌堆（由于战斗逻辑未实现，目前战斗中查看均为空）&#10;3.csv内容修正&#10;4.解决了事件分布不均的问题&#10;5.修复了金币不足时也能触发事件选项效果的bug" />
+    <MESSAGE value="1.增加并实现了商店删牌功能&#10;2.增加了查看牌堆的功能，包括在地图上的牌库，战斗中的抽、弃牌堆（由于战斗逻辑未实现，目前战斗中查看均为空）&#10;3.csv内容修正&#10;4.解决了事件分布不均的问题&#10;5.修复了金币不满足条件仍可触发事件选项的bug" />
+    <MESSAGE value="1.增加并实现了商店删牌功能&#10;2.增加了查看牌堆的功能，包括在地图上的牌库，战斗中的抽、弃牌堆（由于战斗逻辑未实现，目前战斗中查看均为空）&#10;3.csv内容修正&#10;4.解决了事件分布不均的问题&#10;5.修复了金币不足时也能触发事件选项效果的bug" />
+    <MESSAGE value="1.新增并实现了遭遇及多敌人&#10;2.补充了csv数据" />
+    <MESSAGE value="更新内容：&#10;1.增加并实现了音频功能，同时导入了ogg文件&#10;2.支持消耗卡牌，同步支持消耗牌堆查看，csv格式更新等&#10;3.增加并实现了存读档功能&#10;4.完善了Button的功能&#10;5.选择角色界面新增开始按钮" />
+    <MESSAGE value="首次整合" />
+    <MESSAGE value="界面显示完善" />
+    <MESSAGE value="界面显示完善&#10;1.大部分按钮已经设置了材质&#10;2.修复了中文乱码问题&#10;3.提供完整的顶栏地图，保存，牌堆功能&#10;4.优化了商店界面布局&#10;5.优化了事件界面布局" />
+    <option name="LAST_COMMIT_MESSAGE" value="界面显示完善&#10;1.大部分按钮已经设置了材质&#10;2.修复了中文乱码问题&#10;3.提供完整的顶栏地图，保存，牌堆功能&#10;4.优化了商店界面布局&#10;5.优化了事件界面布局" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+</project>

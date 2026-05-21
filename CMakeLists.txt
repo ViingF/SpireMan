@@ -77,9 +77,7 @@ add_executable(SpireLike src/main.cpp
         src/system/SaveSystem.cpp
         src/system/SaveSystem.hpp
         src/ui/CardView.cpp
-        src/ui/DeckView.cpp
         src/ui/EnemyGroupView.cpp
-        src/ui/EnemyView.cpp
         src/ui/EnergyView.cpp
         src/ui/HealthBar.cpp
         src/ui/IntentView.cpp
@@ -87,7 +85,6 @@ add_executable(SpireLike src/main.cpp
         src/ui/ShopView.cpp
         src/ui/StateView.cpp
         src/ui/TextUtils.cpp
-        src/ui/DeckView.hpp
         src/system/EnemyAISystem.cpp
         src/system/CardSystem.cpp
         src/ui/TopInfoBar.cpp
