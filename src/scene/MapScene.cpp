@@ -528,6 +528,7 @@ void MapScene::enterNode(int nodeIndex)
         mapSystem_.selectNode(context.runState, nodeIndex);
 
     if (error != ErrorCode::OK) {
+        context.failureToast.show("无法进入该节点");
         return;
     }
 

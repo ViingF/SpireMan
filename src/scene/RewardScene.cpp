@@ -2,7 +2,17 @@
 
 #include "config/Constants.hpp"
 #include "system/MapSystem.hpp"
+#include "ui/TextUtils.hpp"
 #include "ui/TopInfoBar.hpp"
+namespace {
+    sf::Text makeText(
+            const sf::Font& font,
+            const std::string& content,
+            unsigned int size
+        ) {
+        return sf::Text(font, TextUtils::fromUtf8(content), size);
+    }
+}
 
 RewardScene::RewardScene(
     GameContext& context
@@ -12,11 +22,12 @@ sf::Vector2f(0.0f, 0.0f),
 sf::Vector2f(64.0f, 64.0f),
 context.resources.getFont("zh-R"),
 ""
-)
+),context_(context),LeapButton({0,765},{296,56},context.resources.getFont("zh-R"),"取消")
 {
     mapIconButton_.setTexture(
     context.resources.getTexture("map")
 );
+
 
 
     for (int i = 0; i < 3; ++i) {
@@ -34,7 +45,6 @@ context.resources.getFont("zh-R"),
             )
         );
     }
-
 }
 
 void RewardScene::handleEvent(
@@ -53,6 +63,16 @@ void RewardScene::handleEvent(
         transition.target = SceneType::Map;
 
         mapIconButton_.reset();
+        return;
+    }
+
+    LeapButton.handleEvent(event, window);
+    if (LeapButton.wasClicked()) {
+        context.audio.playSound("Click");
+
+        finishRewardAndContinueMap();
+
+        LeapButton.reset();
         return;
     }
 
@@ -118,6 +138,13 @@ void RewardScene::draw(sf::RenderWindow& window)
     TopInfoBar::layoutMapButton(mapIconButton_, window);
     mapIconButton_.draw(window);
 
+    sf::Font RewardFont = context_.resources.getFont("zh-R");
+    drawReward(window, RewardFont);
+
+    LeapButton.setTexture(context_.resources.getTexture("cancelButton"));
+    LeapButton.draw( window);
+
+
 }
 
 
@@ -140,6 +167,11 @@ void RewardScene::chooseCard(CardId cardId)
     context.runState.nextCardInstanceId += 1;
     context.runState.masterDeck.push_back(newCard);
 
+    finishRewardAndContinueMap();
+}
+
+void RewardScene::finishRewardAndContinueMap()
+{
     MapSystem mapSystem;
 
     if (!context.runState.mapNodes.empty()) {
@@ -152,14 +184,13 @@ void RewardScene::chooseCard(CardId cardId)
                     context.encounters
                 )) {
                 transition.target = SceneType::Map;
-                } else {
-                    transition.target = SceneType::End;
-                    transition.battleResult = BattleResult::Victory;
-                }
+            } else {
+                transition.target = SceneType::End;
+                transition.battleResult = BattleResult::Victory;
+            }
         } else {
             transition.target = SceneType::Map;
         }
-
 
         return;
     }
@@ -218,3 +249,17 @@ void RewardScene::resetTransition()
 {
     transition = SceneTransition{};
 }
+
+void RewardScene::drawReward(sf::RenderWindow &window,sf::Font &font) {
+    sf::Texture texture = context.resources.getTexture("selectBanner");
+    sf::RectangleShape rec({1112,238});
+    rec.setPosition({403,158});
+    rec.setTexture(&texture);
+
+    sf::Text text=makeText(font,"选择一张牌",45);
+    text.setPosition({795,220});
+
+    window.draw(rec);
+    window.draw(text);
+}
+

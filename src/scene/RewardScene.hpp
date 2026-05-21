@@ -34,9 +34,13 @@ public:
 
 private:
     void chooseCard(CardId cardId);
+    void finishRewardAndContinueMap();
     const sf::Texture& getCardTemplateTexture(CardType type);
     const sf::Texture* getCardArtTexture(const CardDef& cardDef);
     CardRenderTextures getCardRenderTextures(const CardDef& cardDef);
+    void drawReward(sf::RenderWindow &window,sf::Font &font);
+
+
 
 
 private:
@@ -46,8 +50,9 @@ private:
     std::vector<CardId> rewardCardIds_;
     std::vector<CardView> rewardCardViews_;
     Button mapIconButton_;
+    Button LeapButton;
 
-
+    GameContext context_;
 };
 
 #endif //SPIRELIKE_REWARDSCENE_HPP

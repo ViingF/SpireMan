@@ -17,6 +17,8 @@ EndScene::EndScene(GameContext& context, BattleResult result)
       )
 {
     background.setSize({1920,1080});
+    menuButton.setTexture(context.resources.getTexture("endTurnButton"));
+    quitButton.setTexture(context.resources.getTexture("endTurnButton"));
 }
 
 void EndScene::handleEvent(
@@ -24,6 +26,10 @@ void EndScene::handleEvent(
     const sf::RenderWindow& window
 )
 {
+    if (!shouldShowButtons()) {
+        return;
+    }
+
     menuButton.handleEvent(event, window);
     quitButton.handleEvent(event, window);
 
@@ -42,32 +48,45 @@ void EndScene::handleEvent(
     }
 }
 
+
 void EndScene::update(float dt)
 {
+    if (
+        result == BattleResult::Victory &&
+        !shouldShowButtons()
+    ) {
+        victoryElapsed += dt;
+    }
 }
+
 
 void EndScene::draw(sf::RenderWindow& window)
 {
+    window.clear();
+
     if (result == BattleResult::Victory)
     {
-        window.clear();
-        for (int i=1;i<5;i++) {
-            background.setTexture(&context.resources.getTexture("end"+std::to_string(i)));
-            window.draw(background);
-            sleep(seconds(2));
-        }
-        background.setTexture(&context.resources.getTexture("end5"));
+        const int imageIndex = currentVictoryImageIndex();
+
+        background.setTexture(
+            &context.resources.getTexture(
+                "end" + std::to_string(imageIndex)
+            )
+        );
     }
     else
     {
         background.setTexture(&context.resources.getTexture("death"));
-        window.clear();
     }
 
     window.draw(background);
-    menuButton.draw(window);
-    quitButton.draw(window);
+
+    if (shouldShowButtons()) {
+        menuButton.draw(window);
+        quitButton.draw(window);
+    }
 }
+
 
 SceneTransition EndScene::getTransition() const
 {
@@ -76,4 +95,34 @@ SceneTransition EndScene::getTransition() const
 
 void EndScene::resetTransition() {
     transition = SceneTransition{};
+}
+
+bool EndScene::shouldShowButtons() const
+{
+    if (result != BattleResult::Victory) {
+        return true;
+    }
+
+    return victoryElapsed >=
+        VictoryFrameSeconds * VictoryIntroImageCount;
+}
+
+int EndScene::currentVictoryImageIndex() const
+{
+    if (shouldShowButtons()) {
+        return 5;
+    }
+
+    const int imageIndex =
+        static_cast<int>(victoryElapsed / VictoryFrameSeconds) + 1;
+
+    if (imageIndex < 1) {
+        return 1;
+    }
+
+    if (imageIndex > VictoryIntroImageCount) {
+        return VictoryIntroImageCount;
+    }
+
+    return imageIndex;
 }

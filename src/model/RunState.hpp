@@ -11,6 +11,8 @@
 #include <vector>
 
 struct RunState {
+    std::string playerName = "Player";
+
     RunPlayerState player {70, 70};
     std::vector<CardInstance> masterDeck;
 

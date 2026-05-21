@@ -27,6 +27,9 @@ public:
     SceneTransition getTransition() const override;
     void resetTransition() override;
 
+    bool shouldShowButtons() const;
+    int currentVictoryImageIndex() const;
+
 private:
     BattleResult result;
 
@@ -36,6 +39,12 @@ private:
     SceneTransition transition;
 
     RectangleShape background;
+
+
+    float victoryElapsed = 0.0f;
+
+    static constexpr float VictoryFrameSeconds = 2.0f;
+    static constexpr int VictoryIntroImageCount = 4;
 };
 
 #endif //SPIRELIKE_ENDSCENE_HPP

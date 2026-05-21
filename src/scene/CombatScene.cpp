@@ -154,6 +154,23 @@ void addMissingCardsFromDatabase(
     return &resources.getTexture(textureId);
 }
 
+    const char* combatFailureMessage(ErrorCode code)
+{
+    switch (code) {
+        case ErrorCode::NOT_ENOUGH_ENERGY:
+            return "能量不足";
+        case ErrorCode::INVALID_TARGET:
+            return "目标无效";
+        case ErrorCode::CARD_NOT_IN_HAND:
+            return "卡牌不在手牌中";
+        case ErrorCode::INVALID_SCENE_STATE:
+            return "当前状态无法操作";
+        default:
+            return "操作失败";
+    }
+}
+
+
 
 } // namespace
 
@@ -350,7 +367,10 @@ void CombatScene::handleEvent(
 
                     if (result == ErrorCode::OK) {
                         selectedHandIndex_ = -1;
+                    } else {
+                        context_.failureToast.show(combatFailureMessage(result));
                     }
+
 
                     updateBattleTransition();
                     return;
@@ -387,7 +407,10 @@ void CombatScene::handleEvent(
 
             if (result == ErrorCode::OK) {
                 selectedHandIndex_ = -1;
+            } else {
+                context_.failureToast.show(combatFailureMessage(result));
             }
+
         }
 
         updateBattleTransition();
@@ -539,7 +562,7 @@ void CombatScene::drawPlayerStatus(
         (kPlayerDisplayWidth - kHealthBarWidth) * 0.5f;
     const float designHealthY = kPlayerHealthBarDesignY;
     const float designStateY =
-        designHealthY + kHealthBarHeight + kStateGapBelowHealthBar;
+        designHealthY + kHealthBarHeight + kStateGapBelowHealthBar - 110.f;
 
     const sf::Vector2f healthPos = toScreenPosition(
         designHealthX,

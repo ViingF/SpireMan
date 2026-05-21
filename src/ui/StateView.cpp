@@ -29,7 +29,7 @@ void StateView::draw(
             font,
             std::to_string(state.value),
             15,
-            {currentX + 10.f, position_.y + 50.f}
+            {currentX + 10.f, position_.y + 45.f}
         );
 
         window.draw(icon);

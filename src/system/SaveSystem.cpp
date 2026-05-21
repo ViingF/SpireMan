@@ -6,7 +6,9 @@
 
 namespace {
 
-constexpr const char* SAVE_MAGIC = "SPIRELIKE_SAVE_V1";
+    const char* SAVE_MAGIC_V1 = "SPIRELIKE_SAVE_V1";
+    const char* SAVE_MAGIC_V2 = "SPIRELIKE_SAVE_V2";
+
 
 void writeEventEffects(
     std::ofstream& out,
@@ -69,10 +71,13 @@ bool SaveSystem::saveRun(
 
     out << std::setprecision(9);
 
-    out << SAVE_MAGIC << '\n';
+    out << SAVE_MAGIC_V2 << '\n';
+
+    out << std::quoted(runState.playerName) << '\n';
 
     out << runState.player.maxHp << ' '
         << runState.player.hp << '\n';
+
 
     out << runState.act << ' '
         << runState.floor << ' '
@@ -153,15 +158,27 @@ bool SaveSystem::loadRun(
         return false;
     }
 
-    if (magic != SAVE_MAGIC) {
+    if (
+    magic != SAVE_MAGIC_V1 &&
+    magic != SAVE_MAGIC_V2
+) {
         return false;
-    }
+}
 
     RunState loaded;
+
+    if (magic == SAVE_MAGIC_V2) {
+        if (!(in >> std::quoted(loaded.playerName))) {
+            return false;
+        }
+    } else {
+        loaded.playerName = "Player";
+    }
 
     if (!(in >> loaded.player.maxHp >> loaded.player.hp)) {
         return false;
     }
+
 
     if (!(in >> loaded.act
              >> loaded.floor

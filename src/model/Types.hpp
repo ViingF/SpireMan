@@ -63,6 +63,7 @@ enum class CardType {
 
 enum class TargetType {
     Enemy,
+    AllEnemies,
     Self,
     None
 };

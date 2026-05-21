@@ -28,10 +28,12 @@ constexpr float kIntentOffsetY = 310.f;
 constexpr float kEnemyHealthBarDesignY = 800.f;
 constexpr float kStateGapBelowHealthBar = 19.f;
 
-constexpr float kEnemyHitboxWidth = 260.f;
-constexpr float kEnemyHitboxHeight = 360.f;
+constexpr float kEnemyHitboxWidth = 320.f;
+constexpr float kEnemyHitboxTopOffsetY = 90.f;
+constexpr float kEnemyHitboxBottomY = kEnemyHealthBarDesignY;
 constexpr float kEnemyHitboxOffsetX =
     (kEnemyDisplayWidth - kEnemyHitboxWidth) * 0.5f;
+
 constexpr float kEnemyHitboxOffsetY = 90.f;
 
 struct EnemyLayoutConfig {
@@ -150,16 +152,24 @@ sf::FloatRect EnemyGroupView::getEnemyHitRect(
     const EnemyLayoutConfig& layout =
         getEnemyLayoutConfig(slotCount);
 
+    const float designHitboxTopY =
+    layout.yPosition + kEnemyHitboxTopOffsetY;
+
+    const float designHitboxHeight =
+        std::max(0.f, kEnemyHitboxBottomY - designHitboxTopY);
+
+
     return sf::FloatRect(
-        {
-            (layout.xPositions[index] + kEnemyHitboxOffsetX) * scaleX,
-            (layout.yPosition + kEnemyHitboxOffsetY) * scaleY
-        },
-        {
-            kEnemyHitboxWidth * scaleX,
-            kEnemyHitboxHeight * scaleY
-        }
-    );
+    {
+        (layout.xPositions[index] + kEnemyHitboxOffsetX) * scaleX,
+        designHitboxTopY * scaleY
+    },
+    {
+        kEnemyHitboxWidth * scaleX,
+        designHitboxHeight * scaleY
+    }
+);
+
 }
 
 
@@ -227,7 +237,7 @@ void EnemyGroupView::draw(
         const float designHealthY = kEnemyHealthBarDesignY;
 
         const float designStateY =
-            designHealthY + kHealthBarHeight + kStateGapBelowHealthBar;
+        designHealthY + kHealthBarHeight + kStateGapBelowHealthBar - 110.f;
 
         IntentView intentView(
             {designIntentX * scaleX, designIntentY * scaleY},

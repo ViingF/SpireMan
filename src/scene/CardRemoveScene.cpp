@@ -444,9 +444,10 @@ void CardRemoveScene::chooseCardByDeckIndex(int deckIndex)
         );
 
     if (code != ErrorCode::OK) {
-        message_ = "删除失败.";
+        context.failureToast.show("删除失败");
         return;
     }
+
 
     message_ = "已经删除.\n";
 

@@ -29,15 +29,17 @@ Game::Game()
           "SpireLike"
       ),
       audio(resources),
-      gameContext{
-          resources,
-          runState,
-          cardDatabase,
-          enemyDatabase,
-          eventDatabase,
-          encounterDatabase,
-          audio
-      }
+gameContext{
+    resources,
+    runState,
+    cardDatabase,
+    enemyDatabase,
+    eventDatabase,
+    encounterDatabase,
+    audio,
+    failureToast_
+}
+
 
 
 {
@@ -92,6 +94,7 @@ Game::Game()
     for (int i=1;i<6;i++) {
         resources.loadTexture("end"+std::to_string(i),FILEPATH+"/assets/images/end"+std::to_string(i)+".png");
     }
+    resources.loadTexture("selectBanner",FILEPATH+"/assets/images/selectBanner.png");
 
     //怪物
     resources.loadTexture("AcidSlimeL",FILEPATH+"/assets/images/enemies/AcidSlimeL.png");
@@ -275,8 +278,11 @@ void Game::update(float dt)
         currentScene->update(dt);
     }
 
+    failureToast_.update(dt);
+
     switchSceneIfNeeded();
 }
+
 
 
 
@@ -289,8 +295,14 @@ void Game::render()
         currentScene->draw(window);
     }
 
+    failureToast_.draw(
+        window,
+        resources.getFont("zh-R")
+    );
+
     window.display();
 }
+
 
 void Game::switchSceneIfNeeded()
 {
@@ -391,6 +403,7 @@ void Game::switchSceneIfNeeded()
                 );
             currentSceneType_ = SceneType::Menu;
             playMusicForScene(SceneType::Menu);
+            failureToast_.show("读取存档失败");
         }
 
         return;
@@ -529,7 +542,14 @@ void Game::switchSceneIfNeeded()
 
 void Game::startNewRun()
 {
+    const std::string keepPlayerName =
+        runState.playerName.empty()
+            ? "Player"
+            : runState.playerName;
+
     runState = RunState{};
+    runState.playerName = keepPlayerName;
+
     runState.active = true;
 
     runState.player.maxHp = 70;

@@ -8,6 +8,7 @@
 #include "database/EnemyDatabase.hpp"
 #include "database/EventDatabase.hpp"
 #include "model/RunState.hpp"
+#include "ui/FailureToast.hpp"
 
 struct GameContext {
     ResourceManager& resources;
@@ -17,6 +18,7 @@ struct GameContext {
     EventDatabase& events;
     EncounterDatabase& encounters;
     AudioManager& audio;
+    FailureToast& failureToast;
 };
 
 #endif //SPIRELIKE_GAMECONTEXT_HPP

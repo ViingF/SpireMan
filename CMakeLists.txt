@@ -88,7 +88,9 @@ add_executable(SpireMan src/main.cpp
         src/system/EnemyAISystem.cpp
         src/system/CardSystem.cpp
         src/ui/TopInfoBar.cpp
-        src/ui/TopInfoBar.hpp)
+        src/ui/TopInfoBar.hpp
+        src/ui/FailureToast.cpp
+        src/ui/FailureToast.hpp)
 
 target_link_libraries(SpireMan
         SFML::Graphics

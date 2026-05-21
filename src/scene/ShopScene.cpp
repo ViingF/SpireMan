@@ -28,6 +28,19 @@ bool readLeftClickPosition(
     return false;
 }
 
+    bool isShopBannedCard(CardId cardId, const CardDef& card)
+{
+    return cardId == 1 ||
+           cardId == 2 ||
+           card.name == "Strike" ||
+           card.name == "Defend" ||
+           card.name == "打击" ||
+           card.name == "防御" ||
+           card.textureId == "Strike" ||
+           card.textureId == "Defend";
+}
+
+
 }
 
 ShopScene::ShopScene(GameContext& context)
@@ -70,15 +83,38 @@ ShopScene::ShopScene(GameContext& context)
     )
 
 {
-    for (int i = 0; i < SHOP_CARD_COUNT; ++i) {
-        CardId cardId =
-            context.cards.chooseRandomRewardCardId(context.runState.rng);
+    std::vector<CardId> candidates;
 
-        if (cardId != 0) {
-            cardOffers_.push_back(cardId);
-            sold_.push_back(false);
+    for (CardId cardId : context.cards.getRewardCardIds()) {
+        if (!context.cards.exists(cardId)) {
+            continue;
         }
+
+        const CardDef& card = context.cards.get(cardId);
+
+        if (isShopBannedCard(cardId, card)) {
+            continue;
+        }
+
+        candidates.push_back(cardId);
     }
+
+    std::shuffle(
+        candidates.begin(),
+        candidates.end(),
+        context.runState.rng
+    );
+
+    const int offerCount = std::min(
+        SHOP_CARD_COUNT,
+        static_cast<int>(candidates.size())
+    );
+
+    for (int i = 0; i < offerCount; ++i) {
+        cardOffers_.push_back(candidates[i]);
+        sold_.push_back(false);
+    }
+
     mapIconButton_.setTexture(
     context.resources.getTexture("map")
 );
@@ -233,14 +269,15 @@ void ShopScene::buyCard(int index)
     }
 
     if (sold_[index]) {
-        message_ = "这张卡已经被卖出了";
+        context.failureToast.show("这张卡已经被卖出了");
         return;
     }
 
     if (context.runState.gold < SHOP_CARD_COST) {
-        message_ = "金币不足";
+        context.failureToast.show("金币不足");
         return;
     }
+
 
     context.runState.gold -= SHOP_CARD_COST;
 
@@ -278,9 +315,10 @@ void ShopScene::startRemoveCard()
 {
 
     if (context.runState.masterDeck.empty()) {
-        message_ = "没有可丢弃的卡牌";
+        context.failureToast.show("没有可丢弃的卡牌");
         return;
     }
+
 
     const int cost = getRemoveCost();
 
@@ -290,7 +328,7 @@ void ShopScene::startRemoveCard()
              << cost
              << " 金币";
 
-        message_ = text.str();
+        context.failureToast.show(text.str());
         return;
     }
 

@@ -120,7 +120,25 @@ void TopInfoBar::draw(
     sf::RectangleShape topBar({viewSize.x, kBarHeight});
     topBar.setPosition(topLeft);
     topBar.setFillColor(sf::Color(128, 128, 128));
+
     window.draw(topBar);
+
+    const std::string playerName =
+        context.runState.playerName.empty()
+            ? "Player"
+            : context.runState.playerName;
+
+    sf::Text nameText = TextUtils::createWhiteText(
+        font,
+        playerName,
+        28,
+        {
+            topLeft.x + 20.0f,
+            topLeft.y + 18.0f
+        }
+    );
+
+    window.draw(nameText);
 
     const int hp = hpOverride.value_or(context.runState.player.hp);
 

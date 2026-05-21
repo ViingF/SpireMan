@@ -145,6 +145,11 @@ ErrorCode CombatSystem::canPlayCard(int handIndex, TargetId targetId) const
         if (targetId == NoTarget) return ErrorCode::INVALID_TARGET;
         if (getAliveEnemyByTargetId(targetId) == nullptr) return ErrorCode::INVALID_TARGET;
         break;
+        case TargetType::AllEnemies:
+    if (targetId != NoTarget) return ErrorCode::INVALID_TARGET;
+    if (areAllEnemiesDefeated()) return ErrorCode::INVALID_TARGET;
+    break;
+
     case TargetType::Self:
         if (targetId != NoTarget) return ErrorCode::INVALID_TARGET;
         break;
@@ -330,34 +335,62 @@ void CombatSystem::payCardCost(const CardDef& card)
 }
 void CombatSystem::applyCardEffects(const CardDef& card, TargetId targetId)
 {
+    const bool targetAllEnemies = (card.target == TargetType::AllEnemies);
+
     for (const auto& effect : card.effects) {
         switch (effect.type) {
-        case EffectType::DealDamage:
-            dealDamageToEnemy(targetId, effect.value);
-            break;
-        case EffectType::GainBlock:
-            gainBlock(effect.value);
-            break;
-        case EffectType::DrawCards:
-            drawCards(effect.value);
-            break;
-        case EffectType::GainEnergy:
-            gainEnergy(effect.value);
-            break;
-        case EffectType::ApplyVulnerable:
-            applyVulnerableToEnemy(targetId, effect.value);
-            break;
-        case EffectType::ApplyWeak:
-            applyWeakToEnemy(targetId, effect.value);
-            break;
-        case EffectType::GainStrength:
-            gainStrength(effect.value);
-            break;
-        default:
-            break;
+            case EffectType::DealDamage:
+                if (targetAllEnemies) {
+                    for (TargetId i = 0; i < static_cast<TargetId>(enemies_.size()); ++i) {
+                        dealDamageToEnemy(i, effect.value);
+                    }
+                } else {
+                    dealDamageToEnemy(targetId, effect.value);
+                }
+                break;
+
+            case EffectType::GainBlock:
+                gainBlock(effect.value);
+                break;
+
+            case EffectType::DrawCards:
+                drawCards(effect.value);
+                break;
+
+            case EffectType::GainEnergy:
+                gainEnergy(effect.value);
+                break;
+
+            case EffectType::ApplyVulnerable:
+                if (targetAllEnemies) {
+                    for (TargetId i = 0; i < static_cast<TargetId>(enemies_.size()); ++i) {
+                        applyVulnerableToEnemy(i, effect.value);
+                    }
+                } else {
+                    applyVulnerableToEnemy(targetId, effect.value);
+                }
+                break;
+
+            case EffectType::ApplyWeak:
+                if (targetAllEnemies) {
+                    for (TargetId i = 0; i < static_cast<TargetId>(enemies_.size()); ++i) {
+                        applyWeakToEnemy(i, effect.value);
+                    }
+                } else {
+                    applyWeakToEnemy(targetId, effect.value);
+                }
+                break;
+
+            case EffectType::GainStrength:
+                gainStrength(effect.value);
+                break;
+
+            default:
+                break;
         }
     }
 }
+
 void CombatSystem::movePlayedCardAfterResolve(const CardInstance& playedCard, const CardDef& card)
 {
     auto it = std::find_if(deck_.hand.begin(), deck_.hand.end(),[&playedCard](const CardInstance& inst) 

@@ -252,9 +252,10 @@ void EventScene::handleEvent(
         const EventChoiceDef& choice = eventDef.choices[i];
 
         if (!canChoose(choice) && getChoiceRect(i).contains(mousePos)) {
-            resultMessage_ = "金币不足";
+            context.failureToast.show("金币不足");
             return;
         }
+
     }
 }
 
@@ -394,9 +395,12 @@ void EventScene::choose(int choiceIndex)
         );
 
     if (result.error != ErrorCode::OK) {
-        resultMessage_ = result.message;
+        context.failureToast.show(
+            result.message.empty() ? "操作失败" : result.message
+        );
         return;
     }
+
 
     resultMessage_ = result.message;
     resolved_ = true;

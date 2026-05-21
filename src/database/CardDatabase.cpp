@@ -152,6 +152,10 @@ ErrorCode CardDatabase::loadFromCsv(
             {
                 card.target = TargetType::Enemy;
             }
+            else if (row[4] == "AllEnemies" || row[4] == "AllEnemy")
+            {
+                card.target = TargetType::AllEnemies;
+            }
             else if (row[4] == "Self")
             {
                 card.target = TargetType::Self;

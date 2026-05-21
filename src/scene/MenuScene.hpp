@@ -25,13 +25,21 @@ public:
     SceneTransition getTransition() const override;
     void resetTransition() override;
 
+    void handleNameInputEvent(const sf::Event& event);
+    void confirmNameInput();
+    void executeCommand(const std::string& input);
+
 private:
     Button startButton;
     Button quitButton;
     Button loadButton;
+    Button nameButton;
 
     SceneTransition transition;
     Sprite background;
+    bool editingName = false;
+    std::string nameInput = "Player";
+    std::string menuMessage;
 
 };
 
