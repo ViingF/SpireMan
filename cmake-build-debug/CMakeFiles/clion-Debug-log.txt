@@ -1,5 +1,5 @@
-"D:\CLion 2025.3.1.1\bin\cmake\win\x64\bin\cmake.exe" -DCMAKE_BUILD_TYPE=Debug "-DCMAKE_MAKE_PROGRAM=D:/CLion 2025.3.1.1/bin/ninja/win/x64/ninja.exe" -DSFML_DIR=D:/SFML-3.0.2/lib/cmake/SFML -G Ninja -S C:\Users\PC\CLionProjects\SpireLike -B C:\Users\PC\CLionProjects\SpireLike\cmake-build-debug
+"D:\CLion 2025.3.1.1\bin\cmake\win\x64\bin\cmake.exe" -DCMAKE_BUILD_TYPE=Debug "-DCMAKE_MAKE_PROGRAM=D:/CLion 2025.3.1.1/bin/ninja/win/x64/ninja.exe" -DSFML_DIR=D:/SFML-3.0.2/lib/cmake/SFML -G Ninja -S C:\Users\PC\CLionProjects\SpireMan -B C:\Users\PC\CLionProjects\SpireMan\cmake-build-debug
 -- Found SFML 3.0.2 in D:/SFML-3.0.2/lib/cmake/SFML
 -- Configuring done (0.1s)
--- Generating done (0.1s)
--- Build files have been written to: C:/Users/PC/CLionProjects/SpireLike/cmake-build-debug
+-- Generating done (0.0s)
+-- Build files have been written to: C:/Users/PC/CLionProjects/SpireMan/cmake-build-debug

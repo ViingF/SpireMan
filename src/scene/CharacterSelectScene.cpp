@@ -16,14 +16,14 @@ CharacterSelectScene::CharacterSelectScene(
     sf::Vector2f(1650.f, 800.f),
     sf::Vector2f(320.f, 90.f),
     context.resources.getFont("zh-R"),
-    "Start"
+    "开始"
     ),
 
     backButton(
     sf::Vector2f(0, 800.f),
     sf::Vector2f(220.f, 80.f),
     context.resources.getFont("zh-R"),
-    "Back"
+    "返回"
     )
 {
     ironcladButton.setTexture(context.resources.getTexture("ironcladButton"));

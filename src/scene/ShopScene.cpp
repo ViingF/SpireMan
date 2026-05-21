@@ -132,56 +132,6 @@ void ShopScene::handleEvent(
         return;
     }
 
-    if (removingCard_) {
-        cancelRemoveButton_.handleEvent(event, window);
-        removePrevPageButton_.handleEvent(event, window);
-        removeNextPageButton_.handleEvent(event, window);
-
-        if (cancelRemoveButton_.wasClicked()) {
-            cancelRemoveButton_.reset();
-            removingCard_ = false;
-            message_ = "Card removal cancelled.";
-            return;
-        }
-
-        if (removePrevPageButton_.wasClicked()) {
-            removePrevPageButton_.reset();
-            removePage_ -= 1;
-            clampRemovePage();
-            return;
-        }
-
-        if (removeNextPageButton_.wasClicked()) {
-            removeNextPageButton_.reset();
-            removePage_ += 1;
-            clampRemovePage();
-            return;
-        }
-
-        sf::Vector2i pixelPosition;
-
-        if (!readLeftClickPosition(event, pixelPosition)) {
-            return;
-        }
-
-        const sf::Vector2f mousePos =
-            window.mapPixelToCoords(pixelPosition);
-
-        int deckIndex = -1;
-
-        if (shopView_.handleRemoveCardClick(
-                mousePos,
-                static_cast<int>(context.runState.masterDeck.size()),
-                removePage_,
-                deckIndex
-            )) {
-            removeCardByDeckIndex(deckIndex);
-            return;
-        }
-
-        return;
-    }
-
     removeCardButton_.handleEvent(event, window);
     leaveButton_.handleEvent(event, window);
 
@@ -283,12 +233,12 @@ void ShopScene::buyCard(int index)
     }
 
     if (sold_[index]) {
-        message_ = "This card has already been sold.";
+        message_ = "这张卡已经被卖出了";
         return;
     }
 
     if (context.runState.gold < SHOP_CARD_COST) {
-        message_ = "Not enough gold.";
+        message_ = "金币不足";
         return;
     }
 
@@ -304,7 +254,7 @@ void ShopScene::buyCard(int index)
 
 
     sold_[index] = true;
-    message_ = "Card purchased.";
+    message_ = "卡牌已购买";
 }
 
 void ShopScene::leaveShop()
@@ -328,7 +278,7 @@ void ShopScene::startRemoveCard()
 {
 
     if (context.runState.masterDeck.empty()) {
-        message_ = "There are no cards to remove.";
+        message_ = "没有可丢弃的卡牌";
         return;
     }
 
@@ -336,9 +286,9 @@ void ShopScene::startRemoveCard()
 
     if (context.runState.gold < cost) {
         std::ostringstream text;
-        text << "Not enough gold. Need "
+        text << "金币不足，需要 "
              << cost
-             << " gold.";
+             << " 金币";
 
         message_ = text.str();
         return;
@@ -360,97 +310,6 @@ void ShopScene::startRemoveCard()
     message_.clear();
 
 
-}
-
-void ShopScene::removeCardByDeckIndex(int deckIndex)
-{
-    if (
-        deckIndex < 0 ||
-        deckIndex >= static_cast<int>(context.runState.masterDeck.size())
-    ) {
-        return;
-    }
-
-    const int cost = getRemoveCost();
-
-    if (context.runState.gold < cost) {
-        std::ostringstream text;
-        text << "Not enough gold. Need "
-             << cost
-             << " gold.";
-
-        message_ = text.str();
-        removingCard_ = false;
-        return;
-    }
-
-    std::string removedName = "a card";
-
-    const CardId cardId =
-        context.runState.masterDeck[deckIndex].cardId;
-
-    if (context.cards.exists(cardId)) {
-        removedName = context.cards.get(cardId).name;
-    }
-
-    context.runState.gold -= cost;
-
-    context.runState.masterDeck.erase(
-        context.runState.masterDeck.begin() + deckIndex
-    );
-
-    shopRemoveCount_ += 1;
-    removingCard_ = false;
-
-    clampRemovePage();
-
-    std::ostringstream text;
-    text << "Removed "
-         << removedName
-         << " for "
-         << cost
-         << " gold.";
-
-    if (!context.runState.masterDeck.empty()) {
-        text << " Next removal costs "
-             << getRemoveCost()
-             << " gold.";
-    }
-
-    message_ = text.str();
-}
-
-int ShopScene::getRemoveCardsPerPage() const
-{
-    return shopView_.getRemoveCardsPerPage();
-}
-
-
-int ShopScene::getRemovePageCount() const
-{
-    const int deckSize =
-        static_cast<int>(context.runState.masterDeck.size());
-
-    if (deckSize <= 0) {
-        return 1;
-    }
-
-    const int cardsPerPage = getRemoveCardsPerPage();
-
-    return (deckSize + cardsPerPage - 1) / cardsPerPage;
-}
-
-void ShopScene::clampRemovePage()
-{
-    const int pageCount = getRemovePageCount();
-
-    if (removePage_ < 0) {
-        removePage_ = 0;
-    }
-
-    if (removePage_ >= pageCount) {
-        removePage_ = pageCount - 1;
-    }
 }
 
 void ShopScene::resetTransition()
@@ -541,21 +400,21 @@ void ShopScene::finishRemoveCardFromScene()
         shopRemoveCount_ += 1;
 
         std::ostringstream text;
-        text << "Removed a card for "
+        text << "丢弃卡牌并花费 "
              << pendingShopRemoveCost_
-             << " gold.";
+             << " 金币.";
 
         if (!context.runState.masterDeck.empty()) {
-            text << " Next removal costs "
+            text << " 下一次丢弃花费 "
                  << getRemoveCost()
-                 << " gold.";
+                 << " 金币.";
         }
 
         message_ = text.str();
     } else {
         context.runState.gold += pendingShopRemoveCost_;
         context.runState.pendingRemoveCardCount = 0;
-        message_ = "Card removal cancelled.";
+        message_ = "取消删除卡牌";
     }
 
     pendingShopRemoveCost_ = 0;

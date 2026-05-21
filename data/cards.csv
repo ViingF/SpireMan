@@ -1,16 +1,16 @@
 id,name,type,cost,target,effect1,value1,effect2,value2,description,textureid,exhaust
-1,Strike,Attack,1,Enemy,DealDamage,6,None,0,Deal 6 damage.,Strike,0
-2,Defend,Skill,1,Self,GainBlock,5,None,0,Gain 5 block.,Defend,0
-3,Bash,Attack,2,Enemy,DealDamage,8,ApplyVulnerable,2,Deal 8 damage. Apply 2 Vulnerable.,Bash,0
-4,Clothesline,Attack,2,Enemy,DealDamage,12,ApplyWeak,2,Deal 12 damage. Apply 2 Weak.,Clothesline,0
-5,Iron Wave,Attack,1,Enemy,GainBlock,5,DealDamage,5,Gain 5 Block. Deal 5 damage.,IronWave,0
-6,Pommel Strike,Attack,1,Enemy,DealDamage,9,DrawCards,1,Deal 9 damage. Draw 1 card.,PommelStrike,0
-7,Shrug it Off,Skill,1,Self,GainBlock,8,DrawCards,1,Gain 8 Block. Draw 1 card.,ShrugItOff,0
-8,Twin Strike,Attack,1,Enemy,DealDamage,10,None,0,Deal 5 damage twice.,TwinStrike,0
-9,Intimidate,Skill,0,Enemy,ApplyWeak,1,None,0,Apply 1 Weak to ALL enemies. Exhaust.,Intimidate,1
-10,Pummel,Attack,1,Enemy,DealDamage,8,None,0,Deal 2 damage 4 times. Exhaust.,Pummel,1
-11,Seeing Red,Skill,1,Self,GainEnergy,2,None,0,Gain 2 Energy. Exhaust.,SeeingRed,1
-12,Bludgeon,Attack,3,Enemy,DealDamage,32,None,0,Deal 32 damage.,Bludgeon,0
-13,Impervious,Skill,2,Self,GainBlock,30,None,0,Gain 30 Block. Exhaust.,Impervious,1
-1001,Necronomicurse,Curse,-1,Self,DealDamage,1,None,0,"Unplayable. At the end of your turn, if this card is in your hand, lose 1 HP",Necronomicurse,0
-1002,Writhe,Curse,-1,Self,ApplyWeak,1,None,0,"Unplayable. Whenever you draw this card, gain 1 Weak",Writhe,0
+1,打击,Attack,1,Enemy,DealDamage,6,None,0,造成6点伤害。,Strike,0
+2,防御,Skill,1,Self,GainBlock,5,None,0,获得5点格挡。,Defend,0
+3,痛击,Attack,2,Enemy,DealDamage,8,ApplyVulnerable,2,造成8点伤害。施加2层易伤。,Bash,0
+4,金刚臂,Attack,2,Enemy,DealDamage,12,ApplyWeak,2,造成12点伤害。施加2层虚弱。,Clothesline,0
+5,铁斩波,Attack,1,Enemy,GainBlock,5,DealDamage,5,获得5点格挡。造成5点伤害。,IronWave,0
+6,剑柄打击,Attack,1,Enemy,DealDamage,9,DrawCards,1,造成9点伤害。抽1张牌。,PommelStrike,0
+7,耸肩无视,Skill,1,Self,GainBlock,8,DrawCards,1,获得8点格挡。抽1张牌。,ShrugItOff,0
+8,双重打击,Attack,1,Enemy,DealDamage,10,None,0,造成5点伤害两次。,TwinStrike,0
+9,威吓,Skill,0,Enemy,ApplyWeak,1,None,0,对所有敌人施加1层虚弱。消耗。,Intimidate,1
+10,连续拳,Attack,1,Enemy,DealDamage,8,None,0,造成2点伤害4次。消耗。,Pummel,1
+11,盛怒,Skill,1,Self,GainEnergy,2,None,0,获得2点能量。消耗。,SeeingRed,1
+12,重锤,Attack,3,Enemy,DealDamage,32,None,0,造成32点伤害。,Bludgeon,0
+13,坚不可摧,Skill,2,Self,GainBlock,30,None,0,获得30点格挡。消耗。,Impervious,1
+1001,死灵诅咒,Curse,-1,Self,DealDamage,1,None,0,"不能被打出。在你的回合结束时，如果此牌在你的手牌中，失去1点生命。",Necronomicurse,0
+1002,苦恼,Curse,-1,Self,ApplyWeak,1,None,0,不能被打出。每当你抽到这张牌时，获得1层虚弱。,Writhe,0

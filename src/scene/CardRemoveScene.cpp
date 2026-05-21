@@ -235,15 +235,15 @@ void CardRemoveScene::draw(sf::RenderWindow& window)
 
 
     std::ostringstream titleText;
-    titleText << "Choose "
+    titleText << "选择 "
               << context.runState.pendingRemoveCardCount
-              << " card";
+              << " 卡牌";
 
     if (context.runState.pendingRemoveCardCount > 1) {
         titleText << "s";
     }
 
-    titleText << " to remove";
+    titleText << "丢弃";
 
     sf::Text title = makeText(font, titleText.str(), 44);
     title.setFillColor(sf::Color::White);
@@ -312,7 +312,7 @@ void CardRemoveScene::draw(sf::RenderWindow& window)
     prevButton.setTexture(&context.resources.getTexture("enabledButton"));
     window.draw(prevButton);
 
-    sf::Text prevText = makeText(font, "Previous", 24);
+    sf::Text prevText = makeText(font, "上一页", 24);
     prevText.setFillColor(sf::Color::White);
     prevText.setPosition(sf::Vector2f(
         prevRect.position.x + 42.0f,
@@ -326,7 +326,7 @@ void CardRemoveScene::draw(sf::RenderWindow& window)
     nextButton.setTexture(&context.resources.getTexture("enabledButton"));
     window.draw(nextButton);
 
-    sf::Text nextText = makeText(font, "Next", 24);
+    sf::Text nextText = makeText(font, "下一页", 24);
     nextText.setFillColor(sf::Color::White);
     nextText.setPosition(sf::Vector2f(
         nextRect.position.x + 72.0f,
@@ -335,7 +335,7 @@ void CardRemoveScene::draw(sf::RenderWindow& window)
     window.draw(nextText);
 
     std::ostringstream pageTextStream;
-    pageTextStream << "Page "
+    pageTextStream << "页数 "
                    << page_ + 1
                    << " / "
                    << getPageCount();
@@ -444,11 +444,11 @@ void CardRemoveScene::chooseCardByDeckIndex(int deckIndex)
         );
 
     if (code != ErrorCode::OK) {
-        message_ = "Failed to remove card.";
+        message_ = "删除失败.";
         return;
     }
 
-    message_ = "Removed a card.\n";
+    message_ = "已经删除.\n";
 
     clampPage();
 

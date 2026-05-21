@@ -179,13 +179,13 @@ std::string CardView::cardTypeToString(CardType type)
 {
     switch (type) {
     case CardType::Attack:
-        return "Attack";
+        return "攻击";
 
     case CardType::Skill:
-        return "Skill";
+        return "技能";
 
     case CardType::Curse:
-        return "Curse";
+        return "诅咒";
     }
 
     return "Unknown";
@@ -422,7 +422,7 @@ void CardView::draw(
 
     centerText(typeText, {
         drawPosition.x + size_.x * 0.5f,
-        drawPosition.y + size_.y * 0.56f
+        drawPosition.y + size_.y * 0.53f
     });
 
     setTextCenterX(typeText, drawPosition.x + size_.x * 0.5f);

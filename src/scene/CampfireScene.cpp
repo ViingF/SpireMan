@@ -24,8 +24,8 @@ namespace {
 CampfireScene::CampfireScene(GameContext& context)
     : Scene(context),
       restButton_(
-          sf::Vector2f(1180.0f, 450.0f),
-          sf::Vector2f(520.0f, 400.0f),
+          sf::Vector2f(1180.0f, 550.0f),
+          sf::Vector2f(420.0f, 200.0f),
           context.resources.getFont("zh-R"),
           ""
           ),mapIconButton_(
@@ -119,14 +119,14 @@ void CampfireScene::draw(sf::RenderWindow& window)
 
 
 
-    sf::Text title = makeText(font, "Campfire", 56);
+    sf::Text title = makeText(font, "营火", 56);
     title.setFillColor(sf::Color::White);
     title.setPosition(sf::Vector2f(1120.0f, 250.0f));
     window.draw(title);
 
     sf::Text desc = makeText(
         font,
-        "Rest and recover some HP before continuing.",
+        "在这里休息，恢复血量",
         30
     );
     desc.setFillColor(sf::Color(230, 230, 230));
@@ -139,7 +139,7 @@ void CampfireScene::draw(sf::RenderWindow& window)
     );
 
     std::ostringstream healText;
-    healText << "Recover " << healAmount << " HP";
+    healText << "恢复 " << healAmount << " 生命值";
 
     sf::Text healInfo = makeText(font, healText.str(), 28);
     healInfo.setFillColor(sf::Color(240, 220, 160));

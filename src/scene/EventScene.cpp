@@ -252,7 +252,7 @@ void EventScene::handleEvent(
         const EventChoiceDef& choice = eventDef.choices[i];
 
         if (!canChoose(choice) && getChoiceRect(i).contains(mousePos)) {
-            resultMessage_ = "Not enough gold.";
+            resultMessage_ = "金币不足";
             return;
         }
     }

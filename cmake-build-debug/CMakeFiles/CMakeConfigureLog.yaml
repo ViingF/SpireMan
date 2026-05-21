@@ -45,6 +45,7 @@ events:
       - "D:/apache-maven-3.9.14/bin/"
       - "C:/Users/PC/.jdks/openjdk-25.0.1/bin/"
       - "C:/Program Files/PowerToys/DSCModules/"
+      - "D:/Git/cmd/"
       - "C:/Program Files/MySQL/MySQL Shell 8.0/bin/"
       - "C:/Users/PC/AppData/Local/Microsoft/WindowsApps/"
       - "D:/CLion 2025.3.1.1/bin/ninja/win/x64/"
@@ -67,6 +68,7 @@ events:
         - "D:\\apache-maven-3.9.14\\bin"
         - "C:\\Users\\PC\\.jdks\\openjdk-25.0.1\\bin"
         - "C:\\Program Files\\PowerToys\\DSCModules\\"
+        - "D:\\Git\\cmd"
         - "C:\\Program Files\\MySQL\\MySQL Shell 8.0\\bin\\"
         - "C:\\Users\\PC\\AppData\\Local\\Microsoft\\WindowsApps"
         - "D:\\CLion 2025.3.1.1\\bin\\ninja\\win\\x64"
@@ -108,6 +110,7 @@ events:
         - "D:\\apache-maven-3.9.14\\bin"
         - "C:\\Users\\PC\\.jdks\\openjdk-25.0.1\\bin"
         - "C:\\Program Files\\PowerToys\\DSCModules\\"
+        - "D:\\Git\\cmd"
         - "C:\\Program Files\\MySQL\\MySQL Shell 8.0\\bin\\"
         - "C:\\Users\\PC\\AppData\\Local\\Microsoft\\WindowsApps"
         - "D:\\CLion 2025.3.1.1\\bin\\ninja\\win\\x64"
@@ -131,7 +134,7 @@ events:
       Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "a.exe"
       
       The C compiler identification is GNU, found in:
-        C:/Users/PC/CLionProjects/SpireLike/cmake-build-debug/CMakeFiles/4.1.2/CompilerIdC/a.exe
+        C:/Users/PC/CLionProjects/SpireMan/cmake-build-debug/CMakeFiles/4.1.2/CompilerIdC/a.exe
       
   -
     kind: "find-v1"
@@ -164,6 +167,7 @@ events:
       - "D:/apache-maven-3.9.14/bin/"
       - "C:/Users/PC/.jdks/openjdk-25.0.1/bin/"
       - "C:/Program Files/PowerToys/DSCModules/"
+      - "D:/Git/cmd/"
       - "C:/Program Files/MySQL/MySQL Shell 8.0/bin/"
       - "C:/Users/PC/AppData/Local/Microsoft/WindowsApps/"
       - "D:/CLion 2025.3.1.1/bin/ninja/win/x64/"
@@ -183,6 +187,7 @@ events:
         - "D:\\apache-maven-3.9.14\\bin"
         - "C:\\Users\\PC\\.jdks\\openjdk-25.0.1\\bin"
         - "C:\\Program Files\\PowerToys\\DSCModules\\"
+        - "D:\\Git\\cmd"
         - "C:\\Program Files\\MySQL\\MySQL Shell 8.0\\bin\\"
         - "C:\\Users\\PC\\AppData\\Local\\Microsoft\\WindowsApps"
         - "D:\\CLion 2025.3.1.1\\bin\\ninja\\win\\x64"
@@ -217,6 +222,7 @@ events:
       - "D:/apache-maven-3.9.14/bin/"
       - "C:/Users/PC/.jdks/openjdk-25.0.1/bin/"
       - "C:/Program Files/PowerToys/DSCModules/"
+      - "D:/Git/cmd/"
       - "C:/Program Files/MySQL/MySQL Shell 8.0/bin/"
       - "C:/Users/PC/AppData/Local/Microsoft/WindowsApps/"
       - "D:/CLion 2025.3.1.1/bin/ninja/win/x64/"
@@ -236,6 +242,7 @@ events:
         - "D:\\apache-maven-3.9.14\\bin"
         - "C:\\Users\\PC\\.jdks\\openjdk-25.0.1\\bin"
         - "C:\\Program Files\\PowerToys\\DSCModules\\"
+        - "D:\\Git\\cmd"
         - "C:\\Program Files\\MySQL\\MySQL Shell 8.0\\bin\\"
         - "C:\\Users\\PC\\AppData\\Local\\Microsoft\\WindowsApps"
         - "D:\\CLion 2025.3.1.1\\bin\\ninja\\win\\x64"
@@ -270,6 +277,7 @@ events:
       - "D:/apache-maven-3.9.14/bin/"
       - "C:/Users/PC/.jdks/openjdk-25.0.1/bin/"
       - "C:/Program Files/PowerToys/DSCModules/"
+      - "D:/Git/cmd/"
       - "C:/Program Files/MySQL/MySQL Shell 8.0/bin/"
       - "C:/Users/PC/AppData/Local/Microsoft/WindowsApps/"
       - "D:/CLion 2025.3.1.1/bin/ninja/win/x64/"
@@ -289,6 +297,7 @@ events:
         - "D:\\apache-maven-3.9.14\\bin"
         - "C:\\Users\\PC\\.jdks\\openjdk-25.0.1\\bin"
         - "C:\\Program Files\\PowerToys\\DSCModules\\"
+        - "D:\\Git\\cmd"
         - "C:\\Program Files\\MySQL\\MySQL Shell 8.0\\bin\\"
         - "C:\\Users\\PC\\AppData\\Local\\Microsoft\\WindowsApps"
         - "D:\\CLion 2025.3.1.1\\bin\\ninja\\win\\x64"
@@ -323,6 +332,7 @@ events:
       - "D:/apache-maven-3.9.14/bin/"
       - "C:/Users/PC/.jdks/openjdk-25.0.1/bin/"
       - "C:/Program Files/PowerToys/DSCModules/"
+      - "D:/Git/cmd/"
       - "C:/Program Files/MySQL/MySQL Shell 8.0/bin/"
       - "C:/Users/PC/AppData/Local/Microsoft/WindowsApps/"
       - "D:/CLion 2025.3.1.1/bin/ninja/win/x64/"
@@ -342,6 +352,7 @@ events:
         - "D:\\apache-maven-3.9.14\\bin"
         - "C:\\Users\\PC\\.jdks\\openjdk-25.0.1\\bin"
         - "C:\\Program Files\\PowerToys\\DSCModules\\"
+        - "D:\\Git\\cmd"
         - "C:\\Program Files\\MySQL\\MySQL Shell 8.0\\bin\\"
         - "C:\\Users\\PC\\AppData\\Local\\Microsoft\\WindowsApps"
         - "D:\\CLion 2025.3.1.1\\bin\\ninja\\win\\x64"
@@ -376,6 +387,7 @@ events:
       - "D:/apache-maven-3.9.14/bin/"
       - "C:/Users/PC/.jdks/openjdk-25.0.1/bin/"
       - "C:/Program Files/PowerToys/DSCModules/"
+      - "D:/Git/cmd/"
       - "C:/Program Files/MySQL/MySQL Shell 8.0/bin/"
       - "C:/Users/PC/AppData/Local/Microsoft/WindowsApps/"
       - "D:/CLion 2025.3.1.1/bin/ninja/win/x64/"
@@ -395,6 +407,7 @@ events:
         - "D:\\apache-maven-3.9.14\\bin"
         - "C:\\Users\\PC\\.jdks\\openjdk-25.0.1\\bin"
         - "C:\\Program Files\\PowerToys\\DSCModules\\"
+        - "D:\\Git\\cmd"
         - "C:\\Program Files\\MySQL\\MySQL Shell 8.0\\bin\\"
         - "C:\\Users\\PC\\AppData\\Local\\Microsoft\\WindowsApps"
         - "D:\\CLion 2025.3.1.1\\bin\\ninja\\win\\x64"
@@ -429,6 +442,7 @@ events:
       - "D:/apache-maven-3.9.14/bin/"
       - "C:/Users/PC/.jdks/openjdk-25.0.1/bin/"
       - "C:/Program Files/PowerToys/DSCModules/"
+      - "D:/Git/cmd/"
       - "C:/Program Files/MySQL/MySQL Shell 8.0/bin/"
       - "C:/Users/PC/AppData/Local/Microsoft/WindowsApps/"
       - "D:/CLion 2025.3.1.1/bin/ninja/win/x64/"
@@ -448,6 +462,7 @@ events:
         - "D:\\apache-maven-3.9.14\\bin"
         - "C:\\Users\\PC\\.jdks\\openjdk-25.0.1\\bin"
         - "C:\\Program Files\\PowerToys\\DSCModules\\"
+        - "D:\\Git\\cmd"
         - "C:\\Program Files\\MySQL\\MySQL Shell 8.0\\bin\\"
         - "C:\\Users\\PC\\AppData\\Local\\Microsoft\\WindowsApps"
         - "D:\\CLion 2025.3.1.1\\bin\\ninja\\win\\x64"
@@ -482,6 +497,7 @@ events:
       - "D:/apache-maven-3.9.14/bin/"
       - "C:/Users/PC/.jdks/openjdk-25.0.1/bin/"
       - "C:/Program Files/PowerToys/DSCModules/"
+      - "D:/Git/cmd/"
       - "C:/Program Files/MySQL/MySQL Shell 8.0/bin/"
       - "C:/Users/PC/AppData/Local/Microsoft/WindowsApps/"
       - "D:/CLion 2025.3.1.1/bin/ninja/win/x64/"
@@ -501,6 +517,7 @@ events:
         - "D:\\apache-maven-3.9.14\\bin"
         - "C:\\Users\\PC\\.jdks\\openjdk-25.0.1\\bin"
         - "C:\\Program Files\\PowerToys\\DSCModules\\"
+        - "D:\\Git\\cmd"
         - "C:\\Program Files\\MySQL\\MySQL Shell 8.0\\bin\\"
         - "C:\\Users\\PC\\AppData\\Local\\Microsoft\\WindowsApps"
         - "D:\\CLion 2025.3.1.1\\bin\\ninja\\win\\x64"
@@ -535,6 +552,7 @@ events:
       - "D:/apache-maven-3.9.14/bin/"
       - "C:/Users/PC/.jdks/openjdk-25.0.1/bin/"
       - "C:/Program Files/PowerToys/DSCModules/"
+      - "D:/Git/cmd/"
       - "C:/Program Files/MySQL/MySQL Shell 8.0/bin/"
       - "C:/Users/PC/AppData/Local/Microsoft/WindowsApps/"
       - "D:/CLion 2025.3.1.1/bin/ninja/win/x64/"
@@ -554,6 +572,7 @@ events:
         - "D:\\apache-maven-3.9.14\\bin"
         - "C:\\Users\\PC\\.jdks\\openjdk-25.0.1\\bin"
         - "C:\\Program Files\\PowerToys\\DSCModules\\"
+        - "D:\\Git\\cmd"
         - "C:\\Program Files\\MySQL\\MySQL Shell 8.0\\bin\\"
         - "C:\\Users\\PC\\AppData\\Local\\Microsoft\\WindowsApps"
         - "D:\\CLion 2025.3.1.1\\bin\\ninja\\win\\x64"
@@ -588,6 +607,7 @@ events:
       - "D:/apache-maven-3.9.14/bin/"
       - "C:/Users/PC/.jdks/openjdk-25.0.1/bin/"
       - "C:/Program Files/PowerToys/DSCModules/"
+      - "D:/Git/cmd/"
       - "C:/Program Files/MySQL/MySQL Shell 8.0/bin/"
       - "C:/Users/PC/AppData/Local/Microsoft/WindowsApps/"
       - "D:/CLion 2025.3.1.1/bin/ninja/win/x64/"
@@ -607,6 +627,7 @@ events:
         - "D:\\apache-maven-3.9.14\\bin"
         - "C:\\Users\\PC\\.jdks\\openjdk-25.0.1\\bin"
         - "C:\\Program Files\\PowerToys\\DSCModules\\"
+        - "D:\\Git\\cmd"
         - "C:\\Program Files\\MySQL\\MySQL Shell 8.0\\bin\\"
         - "C:\\Users\\PC\\AppData\\Local\\Microsoft\\WindowsApps"
         - "D:\\CLion 2025.3.1.1\\bin\\ninja\\win\\x64"
@@ -641,6 +662,7 @@ events:
       - "D:/apache-maven-3.9.14/bin/"
       - "C:/Users/PC/.jdks/openjdk-25.0.1/bin/"
       - "C:/Program Files/PowerToys/DSCModules/"
+      - "D:/Git/cmd/"
       - "C:/Program Files/MySQL/MySQL Shell 8.0/bin/"
       - "C:/Users/PC/AppData/Local/Microsoft/WindowsApps/"
       - "D:/CLion 2025.3.1.1/bin/ninja/win/x64/"
@@ -660,6 +682,7 @@ events:
         - "D:\\apache-maven-3.9.14\\bin"
         - "C:\\Users\\PC\\.jdks\\openjdk-25.0.1\\bin"
         - "C:\\Program Files\\PowerToys\\DSCModules\\"
+        - "D:\\Git\\cmd"
         - "C:\\Program Files\\MySQL\\MySQL Shell 8.0\\bin\\"
         - "C:\\Users\\PC\\AppData\\Local\\Microsoft\\WindowsApps"
         - "D:\\CLion 2025.3.1.1\\bin\\ninja\\win\\x64"
@@ -694,6 +717,7 @@ events:
       - "D:/apache-maven-3.9.14/bin/"
       - "C:/Users/PC/.jdks/openjdk-25.0.1/bin/"
       - "C:/Program Files/PowerToys/DSCModules/"
+      - "D:/Git/cmd/"
       - "C:/Program Files/MySQL/MySQL Shell 8.0/bin/"
       - "C:/Users/PC/AppData/Local/Microsoft/WindowsApps/"
       - "D:/CLion 2025.3.1.1/bin/ninja/win/x64/"
@@ -731,6 +755,9 @@ events:
       - "C:/Program Files/PowerToys/DSCModules/tapi.com"
       - "C:/Program Files/PowerToys/DSCModules/tapi.exe"
       - "C:/Program Files/PowerToys/DSCModules/tapi"
+      - "D:/Git/cmd/tapi.com"
+      - "D:/Git/cmd/tapi.exe"
+      - "D:/Git/cmd/tapi"
       - "C:/Program Files/MySQL/MySQL Shell 8.0/bin/tapi.com"
       - "C:/Program Files/MySQL/MySQL Shell 8.0/bin/tapi.exe"
       - "C:/Program Files/MySQL/MySQL Shell 8.0/bin/tapi"
@@ -754,6 +781,7 @@ events:
         - "D:\\apache-maven-3.9.14\\bin"
         - "C:\\Users\\PC\\.jdks\\openjdk-25.0.1\\bin"
         - "C:\\Program Files\\PowerToys\\DSCModules\\"
+        - "D:\\Git\\cmd"
         - "C:\\Program Files\\MySQL\\MySQL Shell 8.0\\bin\\"
         - "C:\\Users\\PC\\AppData\\Local\\Microsoft\\WindowsApps"
         - "D:\\CLion 2025.3.1.1\\bin\\ninja\\win\\x64"
@@ -791,6 +819,7 @@ events:
       - "D:/apache-maven-3.9.14/bin/"
       - "C:/Users/PC/.jdks/openjdk-25.0.1/bin/"
       - "C:/Program Files/PowerToys/DSCModules/"
+      - "D:/Git/cmd/"
       - "C:/Program Files/MySQL/MySQL Shell 8.0/bin/"
       - "C:/Users/PC/AppData/Local/Microsoft/WindowsApps/"
       - "D:/CLion 2025.3.1.1/bin/ninja/win/x64/"
@@ -828,6 +857,9 @@ events:
       - "C:/Program Files/PowerToys/DSCModules/gcc-ar-14.2.com"
       - "C:/Program Files/PowerToys/DSCModules/gcc-ar-14.2.exe"
       - "C:/Program Files/PowerToys/DSCModules/gcc-ar-14.2"
+      - "D:/Git/cmd/gcc-ar-14.2.com"
+      - "D:/Git/cmd/gcc-ar-14.2.exe"
+      - "D:/Git/cmd/gcc-ar-14.2"
       - "C:/Program Files/MySQL/MySQL Shell 8.0/bin/gcc-ar-14.2.com"
       - "C:/Program Files/MySQL/MySQL Shell 8.0/bin/gcc-ar-14.2.exe"
       - "C:/Program Files/MySQL/MySQL Shell 8.0/bin/gcc-ar-14.2"
@@ -870,6 +902,9 @@ events:
       - "C:/Program Files/PowerToys/DSCModules/gcc-ar-14.com"
       - "C:/Program Files/PowerToys/DSCModules/gcc-ar-14.exe"
       - "C:/Program Files/PowerToys/DSCModules/gcc-ar-14"
+      - "D:/Git/cmd/gcc-ar-14.com"
+      - "D:/Git/cmd/gcc-ar-14.exe"
+      - "D:/Git/cmd/gcc-ar-14"
       - "C:/Program Files/MySQL/MySQL Shell 8.0/bin/gcc-ar-14.com"
       - "C:/Program Files/MySQL/MySQL Shell 8.0/bin/gcc-ar-14.exe"
       - "C:/Program Files/MySQL/MySQL Shell 8.0/bin/gcc-ar-14"
@@ -912,6 +947,9 @@ events:
       - "C:/Program Files/PowerToys/DSCModules/gcc-ar14.com"
       - "C:/Program Files/PowerToys/DSCModules/gcc-ar14.exe"
       - "C:/Program Files/PowerToys/DSCModules/gcc-ar14"
+      - "D:/Git/cmd/gcc-ar14.com"
+      - "D:/Git/cmd/gcc-ar14.exe"
+      - "D:/Git/cmd/gcc-ar14"
       - "C:/Program Files/MySQL/MySQL Shell 8.0/bin/gcc-ar14.com"
       - "C:/Program Files/MySQL/MySQL Shell 8.0/bin/gcc-ar14.exe"
       - "C:/Program Files/MySQL/MySQL Shell 8.0/bin/gcc-ar14"
@@ -936,6 +974,7 @@ events:
         - "D:\\apache-maven-3.9.14\\bin"
         - "C:\\Users\\PC\\.jdks\\openjdk-25.0.1\\bin"
         - "C:\\Program Files\\PowerToys\\DSCModules\\"
+        - "D:\\Git\\cmd"
         - "C:\\Program Files\\MySQL\\MySQL Shell 8.0\\bin\\"
         - "C:\\Users\\PC\\AppData\\Local\\Microsoft\\WindowsApps"
         - "D:\\CLion 2025.3.1.1\\bin\\ninja\\win\\x64"
@@ -973,6 +1012,7 @@ events:
       - "D:/apache-maven-3.9.14/bin/"
       - "C:/Users/PC/.jdks/openjdk-25.0.1/bin/"
       - "C:/Program Files/PowerToys/DSCModules/"
+      - "D:/Git/cmd/"
       - "C:/Program Files/MySQL/MySQL Shell 8.0/bin/"
       - "C:/Users/PC/AppData/Local/Microsoft/WindowsApps/"
       - "D:/CLion 2025.3.1.1/bin/ninja/win/x64/"
@@ -1010,6 +1050,9 @@ events:
       - "C:/Program Files/PowerToys/DSCModules/gcc-ranlib-14.2.com"
       - "C:/Program Files/PowerToys/DSCModules/gcc-ranlib-14.2.exe"
       - "C:/Program Files/PowerToys/DSCModules/gcc-ranlib-14.2"
+      - "D:/Git/cmd/gcc-ranlib-14.2.com"
+      - "D:/Git/cmd/gcc-ranlib-14.2.exe"
+      - "D:/Git/cmd/gcc-ranlib-14.2"
       - "C:/Program Files/MySQL/MySQL Shell 8.0/bin/gcc-ranlib-14.2.com"
       - "C:/Program Files/MySQL/MySQL Shell 8.0/bin/gcc-ranlib-14.2.exe"
       - "C:/Program Files/MySQL/MySQL Shell 8.0/bin/gcc-ranlib-14.2"
@@ -1052,6 +1095,9 @@ events:
       - "C:/Program Files/PowerToys/DSCModules/gcc-ranlib-14.com"
       - "C:/Program Files/PowerToys/DSCModules/gcc-ranlib-14.exe"
       - "C:/Program Files/PowerToys/DSCModules/gcc-ranlib-14"
+      - "D:/Git/cmd/gcc-ranlib-14.com"
+      - "D:/Git/cmd/gcc-ranlib-14.exe"
+      - "D:/Git/cmd/gcc-ranlib-14"
       - "C:/Program Files/MySQL/MySQL Shell 8.0/bin/gcc-ranlib-14.com"
       - "C:/Program Files/MySQL/MySQL Shell 8.0/bin/gcc-ranlib-14.exe"
       - "C:/Program Files/MySQL/MySQL Shell 8.0/bin/gcc-ranlib-14"
@@ -1094,6 +1140,9 @@ events:
       - "C:/Program Files/PowerToys/DSCModules/gcc-ranlib14.com"
       - "C:/Program Files/PowerToys/DSCModules/gcc-ranlib14.exe"
       - "C:/Program Files/PowerToys/DSCModules/gcc-ranlib14"
+      - "D:/Git/cmd/gcc-ranlib14.com"
+      - "D:/Git/cmd/gcc-ranlib14.exe"
+      - "D:/Git/cmd/gcc-ranlib14"
       - "C:/Program Files/MySQL/MySQL Shell 8.0/bin/gcc-ranlib14.com"
       - "C:/Program Files/MySQL/MySQL Shell 8.0/bin/gcc-ranlib14.exe"
       - "C:/Program Files/MySQL/MySQL Shell 8.0/bin/gcc-ranlib14"
@@ -1118,6 +1167,7 @@ events:
         - "D:\\apache-maven-3.9.14\\bin"
         - "C:\\Users\\PC\\.jdks\\openjdk-25.0.1\\bin"
         - "C:\\Program Files\\PowerToys\\DSCModules\\"
+        - "D:\\Git\\cmd"
         - "C:\\Program Files\\MySQL\\MySQL Shell 8.0\\bin\\"
         - "C:\\Users\\PC\\AppData\\Local\\Microsoft\\WindowsApps"
         - "D:\\CLion 2025.3.1.1\\bin\\ninja\\win\\x64"
@@ -1163,6 +1213,7 @@ events:
         - "D:\\apache-maven-3.9.14\\bin"
         - "C:\\Users\\PC\\.jdks\\openjdk-25.0.1\\bin"
         - "C:\\Program Files\\PowerToys\\DSCModules\\"
+        - "D:\\Git\\cmd"
         - "C:\\Program Files\\MySQL\\MySQL Shell 8.0\\bin\\"
         - "C:\\Users\\PC\\AppData\\Local\\Microsoft\\WindowsApps"
         - "D:\\CLion 2025.3.1.1\\bin\\ninja\\win\\x64"
@@ -1204,6 +1255,7 @@ events:
         - "D:\\apache-maven-3.9.14\\bin"
         - "C:\\Users\\PC\\.jdks\\openjdk-25.0.1\\bin"
         - "C:\\Program Files\\PowerToys\\DSCModules\\"
+        - "D:\\Git\\cmd"
         - "C:\\Program Files\\MySQL\\MySQL Shell 8.0\\bin\\"
         - "C:\\Users\\PC\\AppData\\Local\\Microsoft\\WindowsApps"
         - "D:\\CLion 2025.3.1.1\\bin\\ninja\\win\\x64"
@@ -1227,7 +1279,7 @@ events:
       Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "a.exe"
       
       The CXX compiler identification is GNU, found in:
-        C:/Users/PC/CLionProjects/SpireLike/cmake-build-debug/CMakeFiles/4.1.2/CompilerIdCXX/a.exe
+        C:/Users/PC/CLionProjects/SpireMan/cmake-build-debug/CMakeFiles/4.1.2/CompilerIdCXX/a.exe
       
   -
     kind: "find-v1"
@@ -1263,6 +1315,7 @@ events:
       - "D:/apache-maven-3.9.14/bin/"
       - "C:/Users/PC/.jdks/openjdk-25.0.1/bin/"
       - "C:/Program Files/PowerToys/DSCModules/"
+      - "D:/Git/cmd/"
       - "C:/Program Files/MySQL/MySQL Shell 8.0/bin/"
       - "C:/Users/PC/AppData/Local/Microsoft/WindowsApps/"
       - "D:/CLion 2025.3.1.1/bin/ninja/win/x64/"
@@ -1300,6 +1353,9 @@ events:
       - "C:/Program Files/PowerToys/DSCModules/gcc-ar-14.2.com"
       - "C:/Program Files/PowerToys/DSCModules/gcc-ar-14.2.exe"
       - "C:/Program Files/PowerToys/DSCModules/gcc-ar-14.2"
+      - "D:/Git/cmd/gcc-ar-14.2.com"
+      - "D:/Git/cmd/gcc-ar-14.2.exe"
+      - "D:/Git/cmd/gcc-ar-14.2"
       - "C:/Program Files/MySQL/MySQL Shell 8.0/bin/gcc-ar-14.2.com"
       - "C:/Program Files/MySQL/MySQL Shell 8.0/bin/gcc-ar-14.2.exe"
       - "C:/Program Files/MySQL/MySQL Shell 8.0/bin/gcc-ar-14.2"
@@ -1342,6 +1398,9 @@ events:
       - "C:/Program Files/PowerToys/DSCModules/gcc-ar-14.com"
       - "C:/Program Files/PowerToys/DSCModules/gcc-ar-14.exe"
       - "C:/Program Files/PowerToys/DSCModules/gcc-ar-14"
+      - "D:/Git/cmd/gcc-ar-14.com"
+      - "D:/Git/cmd/gcc-ar-14.exe"
+      - "D:/Git/cmd/gcc-ar-14"
       - "C:/Program Files/MySQL/MySQL Shell 8.0/bin/gcc-ar-14.com"
       - "C:/Program Files/MySQL/MySQL Shell 8.0/bin/gcc-ar-14.exe"
       - "C:/Program Files/MySQL/MySQL Shell 8.0/bin/gcc-ar-14"
@@ -1384,6 +1443,9 @@ events:
       - "C:/Program Files/PowerToys/DSCModules/gcc-ar14.com"
       - "C:/Program Files/PowerToys/DSCModules/gcc-ar14.exe"
       - "C:/Program Files/PowerToys/DSCModules/gcc-ar14"
+      - "D:/Git/cmd/gcc-ar14.com"
+      - "D:/Git/cmd/gcc-ar14.exe"
+      - "D:/Git/cmd/gcc-ar14"
       - "C:/Program Files/MySQL/MySQL Shell 8.0/bin/gcc-ar14.com"
       - "C:/Program Files/MySQL/MySQL Shell 8.0/bin/gcc-ar14.exe"
       - "C:/Program Files/MySQL/MySQL Shell 8.0/bin/gcc-ar14"
@@ -1408,6 +1470,7 @@ events:
         - "D:\\apache-maven-3.9.14\\bin"
         - "C:\\Users\\PC\\.jdks\\openjdk-25.0.1\\bin"
         - "C:\\Program Files\\PowerToys\\DSCModules\\"
+        - "D:\\Git\\cmd"
         - "C:\\Program Files\\MySQL\\MySQL Shell 8.0\\bin\\"
         - "C:\\Users\\PC\\AppData\\Local\\Microsoft\\WindowsApps"
         - "D:\\CLion 2025.3.1.1\\bin\\ninja\\win\\x64"
@@ -1445,6 +1508,7 @@ events:
       - "D:/apache-maven-3.9.14/bin/"
       - "C:/Users/PC/.jdks/openjdk-25.0.1/bin/"
       - "C:/Program Files/PowerToys/DSCModules/"
+      - "D:/Git/cmd/"
       - "C:/Program Files/MySQL/MySQL Shell 8.0/bin/"
       - "C:/Users/PC/AppData/Local/Microsoft/WindowsApps/"
       - "D:/CLion 2025.3.1.1/bin/ninja/win/x64/"
@@ -1482,6 +1546,9 @@ events:
       - "C:/Program Files/PowerToys/DSCModules/gcc-ranlib-14.2.com"
       - "C:/Program Files/PowerToys/DSCModules/gcc-ranlib-14.2.exe"
       - "C:/Program Files/PowerToys/DSCModules/gcc-ranlib-14.2"
+      - "D:/Git/cmd/gcc-ranlib-14.2.com"
+      - "D:/Git/cmd/gcc-ranlib-14.2.exe"
+      - "D:/Git/cmd/gcc-ranlib-14.2"
       - "C:/Program Files/MySQL/MySQL Shell 8.0/bin/gcc-ranlib-14.2.com"
       - "C:/Program Files/MySQL/MySQL Shell 8.0/bin/gcc-ranlib-14.2.exe"
       - "C:/Program Files/MySQL/MySQL Shell 8.0/bin/gcc-ranlib-14.2"
@@ -1524,6 +1591,9 @@ events:
       - "C:/Program Files/PowerToys/DSCModules/gcc-ranlib-14.com"
       - "C:/Program Files/PowerToys/DSCModules/gcc-ranlib-14.exe"
       - "C:/Program Files/PowerToys/DSCModules/gcc-ranlib-14"
+      - "D:/Git/cmd/gcc-ranlib-14.com"
+      - "D:/Git/cmd/gcc-ranlib-14.exe"
+      - "D:/Git/cmd/gcc-ranlib-14"
       - "C:/Program Files/MySQL/MySQL Shell 8.0/bin/gcc-ranlib-14.com"
       - "C:/Program Files/MySQL/MySQL Shell 8.0/bin/gcc-ranlib-14.exe"
       - "C:/Program Files/MySQL/MySQL Shell 8.0/bin/gcc-ranlib-14"
@@ -1566,6 +1636,9 @@ events:
       - "C:/Program Files/PowerToys/DSCModules/gcc-ranlib14.com"
       - "C:/Program Files/PowerToys/DSCModules/gcc-ranlib14.exe"
       - "C:/Program Files/PowerToys/DSCModules/gcc-ranlib14"
+      - "D:/Git/cmd/gcc-ranlib14.com"
+      - "D:/Git/cmd/gcc-ranlib14.exe"
+      - "D:/Git/cmd/gcc-ranlib14"
       - "C:/Program Files/MySQL/MySQL Shell 8.0/bin/gcc-ranlib14.com"
       - "C:/Program Files/MySQL/MySQL Shell 8.0/bin/gcc-ranlib14.exe"
       - "C:/Program Files/MySQL/MySQL Shell 8.0/bin/gcc-ranlib14"
@@ -1590,6 +1663,7 @@ events:
         - "D:\\apache-maven-3.9.14\\bin"
         - "C:\\Users\\PC\\.jdks\\openjdk-25.0.1\\bin"
         - "C:\\Program Files\\PowerToys\\DSCModules\\"
+        - "D:\\Git\\cmd"
         - "C:\\Program Files\\MySQL\\MySQL Shell 8.0\\bin\\"
         - "C:\\Users\\PC\\AppData\\Local\\Microsoft\\WindowsApps"
         - "D:\\CLion 2025.3.1.1\\bin\\ninja\\win\\x64"
@@ -1627,6 +1701,7 @@ events:
       - "D:/apache-maven-3.9.14/bin/"
       - "C:/Users/PC/.jdks/openjdk-25.0.1/bin/"
       - "C:/Program Files/PowerToys/DSCModules/"
+      - "D:/Git/cmd/"
       - "C:/Program Files/MySQL/MySQL Shell 8.0/bin/"
       - "C:/Users/PC/AppData/Local/Microsoft/WindowsApps/"
       - "D:/CLion 2025.3.1.1/bin/ninja/win/x64/"
@@ -1658,6 +1733,7 @@ events:
         - "D:\\apache-maven-3.9.14\\bin"
         - "C:\\Users\\PC\\.jdks\\openjdk-25.0.1\\bin"
         - "C:\\Program Files\\PowerToys\\DSCModules\\"
+        - "D:\\Git\\cmd"
         - "C:\\Program Files\\MySQL\\MySQL Shell 8.0\\bin\\"
         - "C:\\Users\\PC\\AppData\\Local\\Microsoft\\WindowsApps"
         - "D:\\CLion 2025.3.1.1\\bin\\ninja\\win\\x64"
@@ -1676,8 +1752,8 @@ events:
     checks:
       - "Detecting C compiler ABI info"
     directories:
-      source: "C:/Users/PC/CLionProjects/SpireLike/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-x0loh1"
-      binary: "C:/Users/PC/CLionProjects/SpireLike/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-x0loh1"
+      source: "C:/Users/PC/CLionProjects/SpireMan/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-uft2ed"
+      binary: "C:/Users/PC/CLionProjects/SpireMan/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-uft2ed"
     cmakeVariables:
       CMAKE_C_FLAGS: ""
       CMAKE_C_FLAGS_DEBUG: "-g"
@@ -1686,10 +1762,10 @@ events:
       variable: "CMAKE_C_ABI_COMPILED"
       cached: true
       stdout: |
-        Change Dir: 'C:/Users/PC/CLionProjects/SpireLike/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-x0loh1'
+        Change Dir: 'C:/Users/PC/CLionProjects/SpireMan/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-uft2ed'
         
-        Run Build Command(s): "D:/CLion 2025.3.1.1/bin/ninja/win/x64/ninja.exe" -v cmTC_3d4e7
-        [1/2] D:\\mingw64\\bin\\gcc.exe   -fdiagnostics-color=always   -v -o CMakeFiles/cmTC_3d4e7.dir/CMakeCCompilerABI.c.obj -c "D:/CLion 2025.3.1.1/bin/cmake/win/x64/share/cmake-4.1/Modules/CMakeCCompilerABI.c"
+        Run Build Command(s): "D:/CLion 2025.3.1.1/bin/ninja/win/x64/ninja.exe" -v cmTC_73d11
+        [1/2] D:\\mingw64\\bin\\gcc.exe   -fdiagnostics-color=always   -v -o CMakeFiles/cmTC_73d11.dir/CMakeCCompilerABI.c.obj -c "D:/CLion 2025.3.1.1/bin/cmake/win/x64/share/cmake-4.1/Modules/CMakeCCompilerABI.c"
         Using built-in specs.
         COLLECT_GCC=D:\\mingw64\\bin\\gcc.exe
         OFFLOAD_TARGET_NAMES=nvptx-none
@@ -1698,8 +1774,8 @@ events:
         Thread model: posix
         Supported LTO compression algorithms: zlib zstd
         gcc version 14.2.0 (MinGW-W64 x86_64-ucrt-posix-seh, built by Brecht Sanders, r2) 
-        COLLECT_GCC_OPTIONS='-fdiagnostics-color=always' '-v' '-o' 'CMakeFiles/cmTC_3d4e7.dir/CMakeCCompilerABI.c.obj' '-c' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_3d4e7.dir/'
-         D:/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/14.2.0/cc1.exe -quiet -v -iprefix D:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/ -D_REENTRANT D:/CLion 2025.3.1.1/bin/cmake/win/x64/share/cmake-4.1/Modules/CMakeCCompilerABI.c -quiet -dumpdir CMakeFiles/cmTC_3d4e7.dir/ -dumpbase CMakeCCompilerABI.c.c -dumpbase-ext .c -mtune=generic -march=x86-64 -version -fdiagnostics-color=always -o C:\\Users\\PC\\AppData\\Local\\Temp\\ccEKSznD.s
+        COLLECT_GCC_OPTIONS='-fdiagnostics-color=always' '-v' '-o' 'CMakeFiles/cmTC_73d11.dir/CMakeCCompilerABI.c.obj' '-c' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_73d11.dir/'
+         D:/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/14.2.0/cc1.exe -quiet -v -iprefix D:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/ -D_REENTRANT D:/CLion 2025.3.1.1/bin/cmake/win/x64/share/cmake-4.1/Modules/CMakeCCompilerABI.c -quiet -dumpdir CMakeFiles/cmTC_73d11.dir/ -dumpbase CMakeCCompilerABI.c.c -dumpbase-ext .c -mtune=generic -march=x86-64 -version -fdiagnostics-color=always -o C:\\Users\\PC\\AppData\\Local\\Temp\\ccEPPbbd.s
         GNU C17 (MinGW-W64 x86_64-ucrt-posix-seh, built by Brecht Sanders, r2) version 14.2.0 (x86_64-w64-mingw32)
         	compiled by GNU C version 14.2.0, GMP version 6.3.0, MPFR version 4.2.1, MPC version 1.3.1, isl version isl-0.27-GMP
         
@@ -1718,13 +1794,13 @@ events:
          D:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../x86_64-w64-mingw32/include
         End of search list.
         Compiler executable checksum: 083cdfdb36f80abb23036714270fd518
-        COLLECT_GCC_OPTIONS='-fdiagnostics-color=always' '-v' '-o' 'CMakeFiles/cmTC_3d4e7.dir/CMakeCCompilerABI.c.obj' '-c' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_3d4e7.dir/'
-         D:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../x86_64-w64-mingw32/bin/as.exe -v -o CMakeFiles/cmTC_3d4e7.dir/CMakeCCompilerABI.c.obj C:\\Users\\PC\\AppData\\Local\\Temp\\ccEKSznD.s
+        COLLECT_GCC_OPTIONS='-fdiagnostics-color=always' '-v' '-o' 'CMakeFiles/cmTC_73d11.dir/CMakeCCompilerABI.c.obj' '-c' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_73d11.dir/'
+         D:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../x86_64-w64-mingw32/bin/as.exe -v -o CMakeFiles/cmTC_73d11.dir/CMakeCCompilerABI.c.obj C:\\Users\\PC\\AppData\\Local\\Temp\\ccEPPbbd.s
         GNU assembler version 2.43.1 (x86_64-w64-mingw32) using BFD version (Binutils for MinGW-W64 x86_64, built by Brecht Sanders, r2) 2.43.1
         COMPILER_PATH=D:/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/14.2.0/;D:/mingw64/bin/../libexec/gcc/;D:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../x86_64-w64-mingw32/bin/
         LIBRARY_PATH=D:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/;D:/mingw64/bin/../lib/gcc/;D:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../x86_64-w64-mingw32/lib/../lib/;D:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../lib/;D:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../x86_64-w64-mingw32/lib/;D:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../\x0d
-        COLLECT_GCC_OPTIONS='-fdiagnostics-color=always' '-v' '-o' 'CMakeFiles/cmTC_3d4e7.dir/CMakeCCompilerABI.c.obj' '-c' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_3d4e7.dir/CMakeCCompilerABI.c.'\x0d
-        [2/2] C:\\Windows\\system32\\cmd.exe /C "cd . && D:\\mingw64\\bin\\gcc.exe  -v -Wl,-v CMakeFiles/cmTC_3d4e7.dir/CMakeCCompilerABI.c.obj -o cmTC_3d4e7.exe -Wl,--out-implib,libcmTC_3d4e7.dll.a -Wl,--major-image-version,0,--minor-image-version,0   && cd ."
+        COLLECT_GCC_OPTIONS='-fdiagnostics-color=always' '-v' '-o' 'CMakeFiles/cmTC_73d11.dir/CMakeCCompilerABI.c.obj' '-c' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_73d11.dir/CMakeCCompilerABI.c.'\x0d
+        [2/2] C:\\Windows\\system32\\cmd.exe /C "cd . && D:\\mingw64\\bin\\gcc.exe  -v -Wl,-v CMakeFiles/cmTC_73d11.dir/CMakeCCompilerABI.c.obj -o cmTC_73d11.exe -Wl,--out-implib,libcmTC_73d11.dll.a -Wl,--major-image-version,0,--minor-image-version,0   && cd ."
         Using built-in specs.
         COLLECT_GCC=D:\\mingw64\\bin\\gcc.exe
         COLLECT_LTO_WRAPPER=D:/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/14.2.0/lto-wrapper.exe
@@ -1736,12 +1812,12 @@ events:
         gcc version 14.2.0 (MinGW-W64 x86_64-ucrt-posix-seh, built by Brecht Sanders, r2) 
         COMPILER_PATH=D:/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/14.2.0/;D:/mingw64/bin/../libexec/gcc/;D:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../x86_64-w64-mingw32/bin/
         LIBRARY_PATH=D:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/;D:/mingw64/bin/../lib/gcc/;D:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../x86_64-w64-mingw32/lib/../lib/;D:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../lib/;D:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../x86_64-w64-mingw32/lib/;D:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../
-        COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_3d4e7.exe' '-mtune=generic' '-march=x86-64' '-dumpdir' 'cmTC_3d4e7.'
-         D:/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/14.2.0/collect2.exe -plugin D:/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/14.2.0/liblto_plugin.dll -plugin-opt=D:/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/14.2.0/lto-wrapper.exe -plugin-opt=-fresolution=C:\\Users\\PC\\AppData\\Local\\Temp\\ccO1XyxJ.res -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_eh -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lpthread -plugin-opt=-pass-through=-ladvapi32 -plugin-opt=-pass-through=-lshell32 -plugin-opt=-pass-through=-luser32 -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_eh -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -m i386pep -Bdynamic -o cmTC_3d4e7.exe D:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../x86_64-w64-mingw32/lib/../lib/crt2.o D:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/crtbegin.o -LD:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0 -LD:/mingw64/bin/../lib/gcc -LD:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../x86_64-w64-mingw32/lib/../lib -LD:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../lib -LD:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../x86_64-w64-mingw32/lib -LD:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../.. -v CMakeFiles/cmTC_3d4e7.dir/CMakeCCompilerABI.c.obj --out-implib libcmTC_3d4e7.dll.a --major-image-version 0 --minor-image-version 0 -lmingw32 -lgcc -lgcc_eh -lmingwex -lmsvcrt -lkernel32 -lpthread -ladvapi32 -lshell32 -luser32 -lkernel32 -lmingw32 -lgcc -lgcc_eh -lmingwex -lmsvcrt -lkernel32 D:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/crtend.o
+        COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_73d11.exe' '-mtune=generic' '-march=x86-64' '-dumpdir' 'cmTC_73d11.'
+         D:/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/14.2.0/collect2.exe -plugin D:/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/14.2.0/liblto_plugin.dll -plugin-opt=D:/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/14.2.0/lto-wrapper.exe -plugin-opt=-fresolution=C:\\Users\\PC\\AppData\\Local\\Temp\\ccf6QWYb.res -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_eh -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lpthread -plugin-opt=-pass-through=-ladvapi32 -plugin-opt=-pass-through=-lshell32 -plugin-opt=-pass-through=-luser32 -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_eh -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -m i386pep -Bdynamic -o cmTC_73d11.exe D:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../x86_64-w64-mingw32/lib/../lib/crt2.o D:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/crtbegin.o -LD:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0 -LD:/mingw64/bin/../lib/gcc -LD:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../x86_64-w64-mingw32/lib/../lib -LD:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../lib -LD:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../x86_64-w64-mingw32/lib -LD:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../.. -v CMakeFiles/cmTC_73d11.dir/CMakeCCompilerABI.c.obj --out-implib libcmTC_73d11.dll.a --major-image-version 0 --minor-image-version 0 -lmingw32 -lgcc -lgcc_eh -lmingwex -lmsvcrt -lkernel32 -lpthread -ladvapi32 -lshell32 -luser32 -lkernel32 -lmingw32 -lgcc -lgcc_eh -lmingwex -lmsvcrt -lkernel32 D:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/crtend.o
         collect2 version 14.2.0
-        D:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../x86_64-w64-mingw32/bin/ld.exe -plugin D:/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/14.2.0/liblto_plugin.dll -plugin-opt=D:/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/14.2.0/lto-wrapper.exe -plugin-opt=-fresolution=C:\\Users\\PC\\AppData\\Local\\Temp\\ccO1XyxJ.res -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_eh -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lpthread -plugin-opt=-pass-through=-ladvapi32 -plugin-opt=-pass-through=-lshell32 -plugin-opt=-pass-through=-luser32 -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_eh -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -m i386pep -Bdynamic -o cmTC_3d4e7.exe D:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../x86_64-w64-mingw32/lib/../lib/crt2.o D:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/crtbegin.o -LD:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0 -LD:/mingw64/bin/../lib/gcc -LD:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../x86_64-w64-mingw32/lib/../lib -LD:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../lib -LD:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../x86_64-w64-mingw32/lib -LD:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../.. -v CMakeFiles/cmTC_3d4e7.dir/CMakeCCompilerABI.c.obj --out-implib libcmTC_3d4e7.dll.a --major-image-version 0 --minor-image-version 0 -lmingw32 -lgcc -lgcc_eh -lmingwex -lmsvcrt -lkernel32 -lpthread -ladvapi32 -lshell32 -luser32 -lkernel32 -lmingw32 -lgcc -lgcc_eh -lmingwex -lmsvcrt -lkernel32 D:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/crtend.o\x0d
+        D:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../x86_64-w64-mingw32/bin/ld.exe -plugin D:/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/14.2.0/liblto_plugin.dll -plugin-opt=D:/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/14.2.0/lto-wrapper.exe -plugin-opt=-fresolution=C:\\Users\\PC\\AppData\\Local\\Temp\\ccf6QWYb.res -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_eh -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lpthread -plugin-opt=-pass-through=-ladvapi32 -plugin-opt=-pass-through=-lshell32 -plugin-opt=-pass-through=-luser32 -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_eh -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -m i386pep -Bdynamic -o cmTC_73d11.exe D:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../x86_64-w64-mingw32/lib/../lib/crt2.o D:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/crtbegin.o -LD:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0 -LD:/mingw64/bin/../lib/gcc -LD:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../x86_64-w64-mingw32/lib/../lib -LD:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../lib -LD:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../x86_64-w64-mingw32/lib -LD:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../.. -v CMakeFiles/cmTC_73d11.dir/CMakeCCompilerABI.c.obj --out-implib libcmTC_73d11.dll.a --major-image-version 0 --minor-image-version 0 -lmingw32 -lgcc -lgcc_eh -lmingwex -lmsvcrt -lkernel32 -lpthread -ladvapi32 -lshell32 -luser32 -lkernel32 -lmingw32 -lgcc -lgcc_eh -lmingwex -lmsvcrt -lkernel32 D:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/crtend.o\x0d
         GNU ld (Binutils for MinGW-W64 x86_64, built by Brecht Sanders, r2) 2.43.1\x0d
-        COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_3d4e7.exe' '-mtune=generic' '-march=x86-64' '-dumpdir' 'cmTC_3d4e7.'\x0d
+        COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_73d11.exe' '-mtune=generic' '-march=x86-64' '-dumpdir' 'cmTC_73d11.'\x0d
         
       exitCode: 0
   -
@@ -1776,10 +1852,10 @@ events:
       Parsed C implicit link information:
         link line regex: [^( *|.*[/\\])(ld[0-9]*(|\\.[a-rt-z][a-z]*|\\.s[a-np-z][a-z]*|\\.so[a-z]+)|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\\]+-)?ld|collect2)[^/\\]*( |$)]
         linker tool regex: [^[ 	]*(->|")?[ 	]*(([^"]*[/\\])?(ld[0-9]*(|\\.[a-rt-z][a-z]*|\\.s[a-np-z][a-z]*|\\.so[a-z]+)))("|,| |$)]
-        ignore line: [Change Dir: 'C:/Users/PC/CLionProjects/SpireLike/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-x0loh1']
+        ignore line: [Change Dir: 'C:/Users/PC/CLionProjects/SpireMan/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-uft2ed']
         ignore line: []
-        ignore line: [Run Build Command(s): "D:/CLion 2025.3.1.1/bin/ninja/win/x64/ninja.exe" -v cmTC_3d4e7]
-        ignore line: [[1/2] D:\\mingw64\\bin\\gcc.exe   -fdiagnostics-color=always   -v -o CMakeFiles/cmTC_3d4e7.dir/CMakeCCompilerABI.c.obj -c "D:/CLion 2025.3.1.1/bin/cmake/win/x64/share/cmake-4.1/Modules/CMakeCCompilerABI.c"]
+        ignore line: [Run Build Command(s): "D:/CLion 2025.3.1.1/bin/ninja/win/x64/ninja.exe" -v cmTC_73d11]
+        ignore line: [[1/2] D:\\mingw64\\bin\\gcc.exe   -fdiagnostics-color=always   -v -o CMakeFiles/cmTC_73d11.dir/CMakeCCompilerABI.c.obj -c "D:/CLion 2025.3.1.1/bin/cmake/win/x64/share/cmake-4.1/Modules/CMakeCCompilerABI.c"]
         ignore line: [Using built-in specs.]
         ignore line: [COLLECT_GCC=D:\\mingw64\\bin\\gcc.exe]
         ignore line: [OFFLOAD_TARGET_NAMES=nvptx-none]
@@ -1788,8 +1864,8 @@ events:
         ignore line: [Thread model: posix]
         ignore line: [Supported LTO compression algorithms: zlib zstd]
         ignore line: [gcc version 14.2.0 (MinGW-W64 x86_64-ucrt-posix-seh  built by Brecht Sanders  r2) ]
-        ignore line: [COLLECT_GCC_OPTIONS='-fdiagnostics-color=always' '-v' '-o' 'CMakeFiles/cmTC_3d4e7.dir/CMakeCCompilerABI.c.obj' '-c' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_3d4e7.dir/']
-        ignore line: [ D:/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/14.2.0/cc1.exe -quiet -v -iprefix D:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/ -D_REENTRANT D:/CLion 2025.3.1.1/bin/cmake/win/x64/share/cmake-4.1/Modules/CMakeCCompilerABI.c -quiet -dumpdir CMakeFiles/cmTC_3d4e7.dir/ -dumpbase CMakeCCompilerABI.c.c -dumpbase-ext .c -mtune=generic -march=x86-64 -version -fdiagnostics-color=always -o C:\\Users\\PC\\AppData\\Local\\Temp\\ccEKSznD.s]
+        ignore line: [COLLECT_GCC_OPTIONS='-fdiagnostics-color=always' '-v' '-o' 'CMakeFiles/cmTC_73d11.dir/CMakeCCompilerABI.c.obj' '-c' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_73d11.dir/']
+        ignore line: [ D:/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/14.2.0/cc1.exe -quiet -v -iprefix D:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/ -D_REENTRANT D:/CLion 2025.3.1.1/bin/cmake/win/x64/share/cmake-4.1/Modules/CMakeCCompilerABI.c -quiet -dumpdir CMakeFiles/cmTC_73d11.dir/ -dumpbase CMakeCCompilerABI.c.c -dumpbase-ext .c -mtune=generic -march=x86-64 -version -fdiagnostics-color=always -o C:\\Users\\PC\\AppData\\Local\\Temp\\ccEPPbbd.s]
         ignore line: [GNU C17 (MinGW-W64 x86_64-ucrt-posix-seh  built by Brecht Sanders  r2) version 14.2.0 (x86_64-w64-mingw32)]
         ignore line: [	compiled by GNU C version 14.2.0  GMP version 6.3.0  MPFR version 4.2.1  MPC version 1.3.1  isl version isl-0.27-GMP]
         ignore line: []
@@ -1808,8 +1884,8 @@ events:
         ignore line: [ D:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../x86_64-w64-mingw32/include]
         ignore line: [End of search list.]
         ignore line: [Compiler executable checksum: 083cdfdb36f80abb23036714270fd518]
-        ignore line: [COLLECT_GCC_OPTIONS='-fdiagnostics-color=always' '-v' '-o' 'CMakeFiles/cmTC_3d4e7.dir/CMakeCCompilerABI.c.obj' '-c' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_3d4e7.dir/']
-        ignore line: [ D:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../x86_64-w64-mingw32/bin/as.exe -v -o CMakeFiles/cmTC_3d4e7.dir/CMakeCCompilerABI.c.obj C:\\Users\\PC\\AppData\\Local\\Temp\\ccEKSznD.s]
+        ignore line: [COLLECT_GCC_OPTIONS='-fdiagnostics-color=always' '-v' '-o' 'CMakeFiles/cmTC_73d11.dir/CMakeCCompilerABI.c.obj' '-c' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_73d11.dir/']
+        ignore line: [ D:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../x86_64-w64-mingw32/bin/as.exe -v -o CMakeFiles/cmTC_73d11.dir/CMakeCCompilerABI.c.obj C:\\Users\\PC\\AppData\\Local\\Temp\\ccEPPbbd.s]
         ignore line: [GNU assembler version 2.43.1 (x86_64-w64-mingw32) using BFD version (Binutils for MinGW-W64 x86_64  built by Brecht Sanders  r2) 2.43.1]
         ignore line: [COMPILER_PATH=D:/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/14.2.0/]
         ignore line: [D:/mingw64/bin/../libexec/gcc/]
@@ -1820,8 +1896,8 @@ events:
         ignore line: [D:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../lib/]
         ignore line: [D:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../x86_64-w64-mingw32/lib/]
         ignore line: [D:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../\x0d]
-        ignore line: [COLLECT_GCC_OPTIONS='-fdiagnostics-color=always' '-v' '-o' 'CMakeFiles/cmTC_3d4e7.dir/CMakeCCompilerABI.c.obj' '-c' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_3d4e7.dir/CMakeCCompilerABI.c.'\x0d]
-        ignore line: [[2/2] C:\\Windows\\system32\\cmd.exe /C "cd . && D:\\mingw64\\bin\\gcc.exe  -v -Wl -v CMakeFiles/cmTC_3d4e7.dir/CMakeCCompilerABI.c.obj -o cmTC_3d4e7.exe -Wl --out-implib libcmTC_3d4e7.dll.a -Wl --major-image-version 0 --minor-image-version 0   && cd ."]
+        ignore line: [COLLECT_GCC_OPTIONS='-fdiagnostics-color=always' '-v' '-o' 'CMakeFiles/cmTC_73d11.dir/CMakeCCompilerABI.c.obj' '-c' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_73d11.dir/CMakeCCompilerABI.c.'\x0d]
+        ignore line: [[2/2] C:\\Windows\\system32\\cmd.exe /C "cd . && D:\\mingw64\\bin\\gcc.exe  -v -Wl -v CMakeFiles/cmTC_73d11.dir/CMakeCCompilerABI.c.obj -o cmTC_73d11.exe -Wl --out-implib libcmTC_73d11.dll.a -Wl --major-image-version 0 --minor-image-version 0   && cd ."]
         ignore line: [Using built-in specs.]
         ignore line: [COLLECT_GCC=D:\\mingw64\\bin\\gcc.exe]
         ignore line: [COLLECT_LTO_WRAPPER=D:/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/14.2.0/lto-wrapper.exe]
@@ -1840,13 +1916,13 @@ events:
         ignore line: [D:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../lib/]
         ignore line: [D:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../x86_64-w64-mingw32/lib/]
         ignore line: [D:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../]
-        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_3d4e7.exe' '-mtune=generic' '-march=x86-64' '-dumpdir' 'cmTC_3d4e7.']
-        link line: [ D:/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/14.2.0/collect2.exe -plugin D:/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/14.2.0/liblto_plugin.dll -plugin-opt=D:/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/14.2.0/lto-wrapper.exe -plugin-opt=-fresolution=C:\\Users\\PC\\AppData\\Local\\Temp\\ccO1XyxJ.res -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_eh -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lpthread -plugin-opt=-pass-through=-ladvapi32 -plugin-opt=-pass-through=-lshell32 -plugin-opt=-pass-through=-luser32 -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_eh -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -m i386pep -Bdynamic -o cmTC_3d4e7.exe D:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../x86_64-w64-mingw32/lib/../lib/crt2.o D:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/crtbegin.o -LD:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0 -LD:/mingw64/bin/../lib/gcc -LD:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../x86_64-w64-mingw32/lib/../lib -LD:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../lib -LD:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../x86_64-w64-mingw32/lib -LD:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../.. -v CMakeFiles/cmTC_3d4e7.dir/CMakeCCompilerABI.c.obj --out-implib libcmTC_3d4e7.dll.a --major-image-version 0 --minor-image-version 0 -lmingw32 -lgcc -lgcc_eh -lmingwex -lmsvcrt -lkernel32 -lpthread -ladvapi32 -lshell32 -luser32 -lkernel32 -lmingw32 -lgcc -lgcc_eh -lmingwex -lmsvcrt -lkernel32 D:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/crtend.o]
+        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_73d11.exe' '-mtune=generic' '-march=x86-64' '-dumpdir' 'cmTC_73d11.']
+        link line: [ D:/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/14.2.0/collect2.exe -plugin D:/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/14.2.0/liblto_plugin.dll -plugin-opt=D:/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/14.2.0/lto-wrapper.exe -plugin-opt=-fresolution=C:\\Users\\PC\\AppData\\Local\\Temp\\ccf6QWYb.res -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_eh -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lpthread -plugin-opt=-pass-through=-ladvapi32 -plugin-opt=-pass-through=-lshell32 -plugin-opt=-pass-through=-luser32 -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_eh -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -m i386pep -Bdynamic -o cmTC_73d11.exe D:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../x86_64-w64-mingw32/lib/../lib/crt2.o D:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/crtbegin.o -LD:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0 -LD:/mingw64/bin/../lib/gcc -LD:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../x86_64-w64-mingw32/lib/../lib -LD:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../lib -LD:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../x86_64-w64-mingw32/lib -LD:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../.. -v CMakeFiles/cmTC_73d11.dir/CMakeCCompilerABI.c.obj --out-implib libcmTC_73d11.dll.a --major-image-version 0 --minor-image-version 0 -lmingw32 -lgcc -lgcc_eh -lmingwex -lmsvcrt -lkernel32 -lpthread -ladvapi32 -lshell32 -luser32 -lkernel32 -lmingw32 -lgcc -lgcc_eh -lmingwex -lmsvcrt -lkernel32 D:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/crtend.o]
           arg [D:/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/14.2.0/collect2.exe] ==> ignore
           arg [-plugin] ==> ignore
           arg [D:/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/14.2.0/liblto_plugin.dll] ==> ignore
           arg [-plugin-opt=D:/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/14.2.0/lto-wrapper.exe] ==> ignore
-          arg [-plugin-opt=-fresolution=C:\\Users\\PC\\AppData\\Local\\Temp\\ccO1XyxJ.res] ==> ignore
+          arg [-plugin-opt=-fresolution=C:\\Users\\PC\\AppData\\Local\\Temp\\ccf6QWYb.res] ==> ignore
           arg [-plugin-opt=-pass-through=-lmingw32] ==> ignore
           arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
           arg [-plugin-opt=-pass-through=-lgcc_eh] ==> ignore
@@ -1868,7 +1944,7 @@ events:
           arg [i386pep] ==> ignore
           arg [-Bdynamic] ==> search dynamic
           arg [-o] ==> ignore
-          arg [cmTC_3d4e7.exe] ==> ignore
+          arg [cmTC_73d11.exe] ==> ignore
           arg [D:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../x86_64-w64-mingw32/lib/../lib/crt2.o] ==> obj [D:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../x86_64-w64-mingw32/lib/../lib/crt2.o]
           arg [D:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/crtbegin.o] ==> obj [D:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/crtbegin.o]
           arg [-LD:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0] ==> dir [D:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0]
@@ -1878,9 +1954,9 @@ events:
           arg [-LD:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../x86_64-w64-mingw32/lib] ==> dir [D:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../x86_64-w64-mingw32/lib]
           arg [-LD:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../..] ==> dir [D:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../..]
           arg [-v] ==> ignore
-          arg [CMakeFiles/cmTC_3d4e7.dir/CMakeCCompilerABI.c.obj] ==> ignore
+          arg [CMakeFiles/cmTC_73d11.dir/CMakeCCompilerABI.c.obj] ==> ignore
           arg [--out-implib] ==> ignore
-          arg [libcmTC_3d4e7.dll.a] ==> ignore
+          arg [libcmTC_73d11.dll.a] ==> ignore
           arg [--major-image-version] ==> ignore
           arg [0] ==> ignore
           arg [--minor-image-version] ==> ignore
@@ -1962,8 +2038,8 @@ events:
     checks:
       - "Detecting CXX compiler ABI info"
     directories:
-      source: "C:/Users/PC/CLionProjects/SpireLike/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-eqp1fy"
-      binary: "C:/Users/PC/CLionProjects/SpireLike/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-eqp1fy"
+      source: "C:/Users/PC/CLionProjects/SpireMan/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-owmtcb"
+      binary: "C:/Users/PC/CLionProjects/SpireMan/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-owmtcb"
     cmakeVariables:
       CMAKE_CXX_FLAGS: ""
       CMAKE_CXX_FLAGS_DEBUG: "-g"
@@ -1973,10 +2049,10 @@ events:
       variable: "CMAKE_CXX_ABI_COMPILED"
       cached: true
       stdout: |
-        Change Dir: 'C:/Users/PC/CLionProjects/SpireLike/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-eqp1fy'
+        Change Dir: 'C:/Users/PC/CLionProjects/SpireMan/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-owmtcb'
         
-        Run Build Command(s): "D:/CLion 2025.3.1.1/bin/ninja/win/x64/ninja.exe" -v cmTC_c30cc
-        [1/2] D:\\mingw64\\bin\\c++.exe   -fdiagnostics-color=always   -v -o CMakeFiles/cmTC_c30cc.dir/CMakeCXXCompilerABI.cpp.obj -c "D:/CLion 2025.3.1.1/bin/cmake/win/x64/share/cmake-4.1/Modules/CMakeCXXCompilerABI.cpp"
+        Run Build Command(s): "D:/CLion 2025.3.1.1/bin/ninja/win/x64/ninja.exe" -v cmTC_1f946
+        [1/2] D:\\mingw64\\bin\\c++.exe   -fdiagnostics-color=always   -v -o CMakeFiles/cmTC_1f946.dir/CMakeCXXCompilerABI.cpp.obj -c "D:/CLion 2025.3.1.1/bin/cmake/win/x64/share/cmake-4.1/Modules/CMakeCXXCompilerABI.cpp"
         Using built-in specs.
         COLLECT_GCC=D:\\mingw64\\bin\\c++.exe
         OFFLOAD_TARGET_NAMES=nvptx-none
@@ -1985,8 +2061,8 @@ events:
         Thread model: posix
         Supported LTO compression algorithms: zlib zstd
         gcc version 14.2.0 (MinGW-W64 x86_64-ucrt-posix-seh, built by Brecht Sanders, r2) 
-        COLLECT_GCC_OPTIONS='-fdiagnostics-color=always' '-v' '-o' 'CMakeFiles/cmTC_c30cc.dir/CMakeCXXCompilerABI.cpp.obj' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_c30cc.dir/'
-         D:/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/14.2.0/cc1plus.exe -quiet -v -iprefix D:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/ -D_REENTRANT D:/CLion 2025.3.1.1/bin/cmake/win/x64/share/cmake-4.1/Modules/CMakeCXXCompilerABI.cpp -quiet -dumpdir CMakeFiles/cmTC_c30cc.dir/ -dumpbase CMakeCXXCompilerABI.cpp.cpp -dumpbase-ext .cpp -mtune=generic -march=x86-64 -version -fdiagnostics-color=always -o C:\\Users\\PC\\AppData\\Local\\Temp\\ccwACjC2.s
+        COLLECT_GCC_OPTIONS='-fdiagnostics-color=always' '-v' '-o' 'CMakeFiles/cmTC_1f946.dir/CMakeCXXCompilerABI.cpp.obj' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_1f946.dir/'
+         D:/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/14.2.0/cc1plus.exe -quiet -v -iprefix D:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/ -D_REENTRANT D:/CLion 2025.3.1.1/bin/cmake/win/x64/share/cmake-4.1/Modules/CMakeCXXCompilerABI.cpp -quiet -dumpdir CMakeFiles/cmTC_1f946.dir/ -dumpbase CMakeCXXCompilerABI.cpp.cpp -dumpbase-ext .cpp -mtune=generic -march=x86-64 -version -fdiagnostics-color=always -o C:\\Users\\PC\\AppData\\Local\\Temp\\ccnGl5au.s
         GNU C++17 (MinGW-W64 x86_64-ucrt-posix-seh, built by Brecht Sanders, r2) version 14.2.0 (x86_64-w64-mingw32)
         	compiled by GNU C version 14.2.0, GMP version 6.3.0, MPFR version 4.2.1, MPC version 1.3.1, isl version isl-0.27-GMP
         
@@ -2011,13 +2087,13 @@ events:
          D:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../x86_64-w64-mingw32/include
         End of search list.
         Compiler executable checksum: 0a151f404c3e06bb380959acc81ec24d
-        COLLECT_GCC_OPTIONS='-fdiagnostics-color=always' '-v' '-o' 'CMakeFiles/cmTC_c30cc.dir/CMakeCXXCompilerABI.cpp.obj' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_c30cc.dir/'
-         D:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../x86_64-w64-mingw32/bin/as.exe -v -o CMakeFiles/cmTC_c30cc.dir/CMakeCXXCompilerABI.cpp.obj C:\\Users\\PC\\AppData\\Local\\Temp\\ccwACjC2.s
+        COLLECT_GCC_OPTIONS='-fdiagnostics-color=always' '-v' '-o' 'CMakeFiles/cmTC_1f946.dir/CMakeCXXCompilerABI.cpp.obj' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_1f946.dir/'
+         D:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../x86_64-w64-mingw32/bin/as.exe -v -o CMakeFiles/cmTC_1f946.dir/CMakeCXXCompilerABI.cpp.obj C:\\Users\\PC\\AppData\\Local\\Temp\\ccnGl5au.s
         GNU assembler version 2.43.1 (x86_64-w64-mingw32) using BFD version (Binutils for MinGW-W64 x86_64, built by Brecht Sanders, r2) 2.43.1
         COMPILER_PATH=D:/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/14.2.0/;D:/mingw64/bin/../libexec/gcc/;D:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../x86_64-w64-mingw32/bin/
         LIBRARY_PATH=D:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/;D:/mingw64/bin/../lib/gcc/;D:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../x86_64-w64-mingw32/lib/../lib/;D:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../lib/;D:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../x86_64-w64-mingw32/lib/;D:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../
-        COLLECT_GCC_OPTIONS='-fdiagnostics-color=always' '-v' '-o' 'CMakeFiles/cmTC_c30cc.dir/CMakeCXXCompilerABI.cpp.obj' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_c30cc.dir/CMakeCXXCompilerABI.cpp.'\x0d
-        [2/2] C:\\Windows\\system32\\cmd.exe /C "cd . && D:\\mingw64\\bin\\c++.exe  -v -Wl,-v CMakeFiles/cmTC_c30cc.dir/CMakeCXXCompilerABI.cpp.obj -o cmTC_c30cc.exe -Wl,--out-implib,libcmTC_c30cc.dll.a -Wl,--major-image-version,0,--minor-image-version,0   && cd ."
+        COLLECT_GCC_OPTIONS='-fdiagnostics-color=always' '-v' '-o' 'CMakeFiles/cmTC_1f946.dir/CMakeCXXCompilerABI.cpp.obj' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_1f946.dir/CMakeCXXCompilerABI.cpp.'\x0d
+        [2/2] C:\\Windows\\system32\\cmd.exe /C "cd . && D:\\mingw64\\bin\\c++.exe  -v -Wl,-v CMakeFiles/cmTC_1f946.dir/CMakeCXXCompilerABI.cpp.obj -o cmTC_1f946.exe -Wl,--out-implib,libcmTC_1f946.dll.a -Wl,--major-image-version,0,--minor-image-version,0   && cd ."
         Using built-in specs.
         COLLECT_GCC=D:\\mingw64\\bin\\c++.exe
         COLLECT_LTO_WRAPPER=D:/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/14.2.0/lto-wrapper.exe
@@ -2029,12 +2105,12 @@ events:
         gcc version 14.2.0 (MinGW-W64 x86_64-ucrt-posix-seh, built by Brecht Sanders, r2) 
         COMPILER_PATH=D:/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/14.2.0/;D:/mingw64/bin/../libexec/gcc/;D:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../x86_64-w64-mingw32/bin/
         LIBRARY_PATH=D:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/;D:/mingw64/bin/../lib/gcc/;D:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../x86_64-w64-mingw32/lib/../lib/;D:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../lib/;D:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../x86_64-w64-mingw32/lib/;D:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../
-        COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_c30cc.exe' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'cmTC_c30cc.'
-         D:/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/14.2.0/collect2.exe -plugin D:/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/14.2.0/liblto_plugin.dll -plugin-opt=D:/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/14.2.0/lto-wrapper.exe -plugin-opt=-fresolution=C:\\Users\\PC\\AppData\\Local\\Temp\\ccWxRgDc.res -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lpthread -plugin-opt=-pass-through=-ladvapi32 -plugin-opt=-pass-through=-lshell32 -plugin-opt=-pass-through=-luser32 -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -m i386pep -Bdynamic -o cmTC_c30cc.exe D:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../x86_64-w64-mingw32/lib/../lib/crt2.o D:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/crtbegin.o -LD:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0 -LD:/mingw64/bin/../lib/gcc -LD:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../x86_64-w64-mingw32/lib/../lib -LD:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../lib -LD:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../x86_64-w64-mingw32/lib -LD:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../.. -v CMakeFiles/cmTC_c30cc.dir/CMakeCXXCompilerABI.cpp.obj --out-implib libcmTC_c30cc.dll.a --major-image-version 0 --minor-image-version 0 -lstdc++ -lmingw32 -lgcc_s -lgcc -lmingwex -lmsvcrt -lkernel32 -lpthread -ladvapi32 -lshell32 -luser32 -lkernel32 -lmingw32 -lgcc_s -lgcc -lmingwex -lmsvcrt -lkernel32 D:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/crtend.o
+        COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_1f946.exe' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'cmTC_1f946.'
+         D:/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/14.2.0/collect2.exe -plugin D:/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/14.2.0/liblto_plugin.dll -plugin-opt=D:/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/14.2.0/lto-wrapper.exe -plugin-opt=-fresolution=C:\\Users\\PC\\AppData\\Local\\Temp\\ccfCOxqA.res -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lpthread -plugin-opt=-pass-through=-ladvapi32 -plugin-opt=-pass-through=-lshell32 -plugin-opt=-pass-through=-luser32 -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -m i386pep -Bdynamic -o cmTC_1f946.exe D:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../x86_64-w64-mingw32/lib/../lib/crt2.o D:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/crtbegin.o -LD:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0 -LD:/mingw64/bin/../lib/gcc -LD:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../x86_64-w64-mingw32/lib/../lib -LD:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../lib -LD:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../x86_64-w64-mingw32/lib -LD:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../.. -v CMakeFiles/cmTC_1f946.dir/CMakeCXXCompilerABI.cpp.obj --out-implib libcmTC_1f946.dll.a --major-image-version 0 --minor-image-version 0 -lstdc++ -lmingw32 -lgcc_s -lgcc -lmingwex -lmsvcrt -lkernel32 -lpthread -ladvapi32 -lshell32 -luser32 -lkernel32 -lmingw32 -lgcc_s -lgcc -lmingwex -lmsvcrt -lkernel32 D:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/crtend.o
         collect2 version 14.2.0
-        D:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../x86_64-w64-mingw32/bin/ld.exe -plugin D:/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/14.2.0/liblto_plugin.dll -plugin-opt=D:/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/14.2.0/lto-wrapper.exe -plugin-opt=-fresolution=C:\\Users\\PC\\AppData\\Local\\Temp\\ccWxRgDc.res -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lpthread -plugin-opt=-pass-through=-ladvapi32 -plugin-opt=-pass-through=-lshell32 -plugin-opt=-pass-through=-luser32 -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -m i386pep -Bdynamic -o cmTC_c30cc.exe D:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../x86_64-w64-mingw32/lib/../lib/crt2.o D:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/crtbegin.o -LD:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0 -LD:/mingw64/bin/../lib/gcc -LD:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../x86_64-w64-mingw32/lib/../lib -LD:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../lib -LD:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../x86_64-w64-mingw32/lib -LD:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../.. -v CMakeFiles/cmTC_c30cc.dir/CMakeCXXCompilerABI.cpp.obj --out-implib libcmTC_c30cc.dll.a --major-image-version 0 --minor-image-version 0 -lstdc++ -lmingw32 -lgcc_s -lgcc -lmingwex -lmsvcrt -lkernel32 -lpthread -ladvapi32 -lshell32 -luser32 -lkernel32 -lmingw32 -lgcc_s -lgcc -lmingwex -lmsvcrt -lkernel32 D:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/crtend.o\x0d
+        D:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../x86_64-w64-mingw32/bin/ld.exe -plugin D:/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/14.2.0/liblto_plugin.dll -plugin-opt=D:/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/14.2.0/lto-wrapper.exe -plugin-opt=-fresolution=C:\\Users\\PC\\AppData\\Local\\Temp\\ccfCOxqA.res -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lpthread -plugin-opt=-pass-through=-ladvapi32 -plugin-opt=-pass-through=-lshell32 -plugin-opt=-pass-through=-luser32 -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -m i386pep -Bdynamic -o cmTC_1f946.exe D:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../x86_64-w64-mingw32/lib/../lib/crt2.o D:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/crtbegin.o -LD:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0 -LD:/mingw64/bin/../lib/gcc -LD:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../x86_64-w64-mingw32/lib/../lib -LD:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../lib -LD:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../x86_64-w64-mingw32/lib -LD:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../.. -v CMakeFiles/cmTC_1f946.dir/CMakeCXXCompilerABI.cpp.obj --out-implib libcmTC_1f946.dll.a --major-image-version 0 --minor-image-version 0 -lstdc++ -lmingw32 -lgcc_s -lgcc -lmingwex -lmsvcrt -lkernel32 -lpthread -ladvapi32 -lshell32 -luser32 -lkernel32 -lmingw32 -lgcc_s -lgcc -lmingwex -lmsvcrt -lkernel32 D:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/crtend.o\x0d
         GNU ld (Binutils for MinGW-W64 x86_64, built by Brecht Sanders, r2) 2.43.1\x0d
-        COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_c30cc.exe' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'cmTC_c30cc.'\x0d
+        COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_1f946.exe' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'cmTC_1f946.'\x0d
         
       exitCode: 0
   -
@@ -2075,10 +2151,10 @@ events:
       Parsed CXX implicit link information:
         link line regex: [^( *|.*[/\\])(ld[0-9]*(|\\.[a-rt-z][a-z]*|\\.s[a-np-z][a-z]*|\\.so[a-z]+)|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\\]+-)?ld|collect2)[^/\\]*( |$)]
         linker tool regex: [^[ 	]*(->|")?[ 	]*(([^"]*[/\\])?(ld[0-9]*(|\\.[a-rt-z][a-z]*|\\.s[a-np-z][a-z]*|\\.so[a-z]+)))("|,| |$)]
-        ignore line: [Change Dir: 'C:/Users/PC/CLionProjects/SpireLike/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-eqp1fy']
+        ignore line: [Change Dir: 'C:/Users/PC/CLionProjects/SpireMan/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-owmtcb']
         ignore line: []
-        ignore line: [Run Build Command(s): "D:/CLion 2025.3.1.1/bin/ninja/win/x64/ninja.exe" -v cmTC_c30cc]
-        ignore line: [[1/2] D:\\mingw64\\bin\\c++.exe   -fdiagnostics-color=always   -v -o CMakeFiles/cmTC_c30cc.dir/CMakeCXXCompilerABI.cpp.obj -c "D:/CLion 2025.3.1.1/bin/cmake/win/x64/share/cmake-4.1/Modules/CMakeCXXCompilerABI.cpp"]
+        ignore line: [Run Build Command(s): "D:/CLion 2025.3.1.1/bin/ninja/win/x64/ninja.exe" -v cmTC_1f946]
+        ignore line: [[1/2] D:\\mingw64\\bin\\c++.exe   -fdiagnostics-color=always   -v -o CMakeFiles/cmTC_1f946.dir/CMakeCXXCompilerABI.cpp.obj -c "D:/CLion 2025.3.1.1/bin/cmake/win/x64/share/cmake-4.1/Modules/CMakeCXXCompilerABI.cpp"]
         ignore line: [Using built-in specs.]
         ignore line: [COLLECT_GCC=D:\\mingw64\\bin\\c++.exe]
         ignore line: [OFFLOAD_TARGET_NAMES=nvptx-none]
@@ -2087,8 +2163,8 @@ events:
         ignore line: [Thread model: posix]
         ignore line: [Supported LTO compression algorithms: zlib zstd]
         ignore line: [gcc version 14.2.0 (MinGW-W64 x86_64-ucrt-posix-seh  built by Brecht Sanders  r2) ]
-        ignore line: [COLLECT_GCC_OPTIONS='-fdiagnostics-color=always' '-v' '-o' 'CMakeFiles/cmTC_c30cc.dir/CMakeCXXCompilerABI.cpp.obj' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_c30cc.dir/']
-        ignore line: [ D:/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/14.2.0/cc1plus.exe -quiet -v -iprefix D:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/ -D_REENTRANT D:/CLion 2025.3.1.1/bin/cmake/win/x64/share/cmake-4.1/Modules/CMakeCXXCompilerABI.cpp -quiet -dumpdir CMakeFiles/cmTC_c30cc.dir/ -dumpbase CMakeCXXCompilerABI.cpp.cpp -dumpbase-ext .cpp -mtune=generic -march=x86-64 -version -fdiagnostics-color=always -o C:\\Users\\PC\\AppData\\Local\\Temp\\ccwACjC2.s]
+        ignore line: [COLLECT_GCC_OPTIONS='-fdiagnostics-color=always' '-v' '-o' 'CMakeFiles/cmTC_1f946.dir/CMakeCXXCompilerABI.cpp.obj' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_1f946.dir/']
+        ignore line: [ D:/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/14.2.0/cc1plus.exe -quiet -v -iprefix D:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/ -D_REENTRANT D:/CLion 2025.3.1.1/bin/cmake/win/x64/share/cmake-4.1/Modules/CMakeCXXCompilerABI.cpp -quiet -dumpdir CMakeFiles/cmTC_1f946.dir/ -dumpbase CMakeCXXCompilerABI.cpp.cpp -dumpbase-ext .cpp -mtune=generic -march=x86-64 -version -fdiagnostics-color=always -o C:\\Users\\PC\\AppData\\Local\\Temp\\ccnGl5au.s]
         ignore line: [GNU C++17 (MinGW-W64 x86_64-ucrt-posix-seh  built by Brecht Sanders  r2) version 14.2.0 (x86_64-w64-mingw32)]
         ignore line: [	compiled by GNU C version 14.2.0  GMP version 6.3.0  MPFR version 4.2.1  MPC version 1.3.1  isl version isl-0.27-GMP]
         ignore line: []
@@ -2113,8 +2189,8 @@ events:
         ignore line: [ D:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../x86_64-w64-mingw32/include]
         ignore line: [End of search list.]
         ignore line: [Compiler executable checksum: 0a151f404c3e06bb380959acc81ec24d]
-        ignore line: [COLLECT_GCC_OPTIONS='-fdiagnostics-color=always' '-v' '-o' 'CMakeFiles/cmTC_c30cc.dir/CMakeCXXCompilerABI.cpp.obj' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_c30cc.dir/']
-        ignore line: [ D:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../x86_64-w64-mingw32/bin/as.exe -v -o CMakeFiles/cmTC_c30cc.dir/CMakeCXXCompilerABI.cpp.obj C:\\Users\\PC\\AppData\\Local\\Temp\\ccwACjC2.s]
+        ignore line: [COLLECT_GCC_OPTIONS='-fdiagnostics-color=always' '-v' '-o' 'CMakeFiles/cmTC_1f946.dir/CMakeCXXCompilerABI.cpp.obj' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_1f946.dir/']
+        ignore line: [ D:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../x86_64-w64-mingw32/bin/as.exe -v -o CMakeFiles/cmTC_1f946.dir/CMakeCXXCompilerABI.cpp.obj C:\\Users\\PC\\AppData\\Local\\Temp\\ccnGl5au.s]
         ignore line: [GNU assembler version 2.43.1 (x86_64-w64-mingw32) using BFD version (Binutils for MinGW-W64 x86_64  built by Brecht Sanders  r2) 2.43.1]
         ignore line: [COMPILER_PATH=D:/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/14.2.0/]
         ignore line: [D:/mingw64/bin/../libexec/gcc/]
@@ -2125,8 +2201,8 @@ events:
         ignore line: [D:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../lib/]
         ignore line: [D:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../x86_64-w64-mingw32/lib/]
         ignore line: [D:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../]
-        ignore line: [COLLECT_GCC_OPTIONS='-fdiagnostics-color=always' '-v' '-o' 'CMakeFiles/cmTC_c30cc.dir/CMakeCXXCompilerABI.cpp.obj' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_c30cc.dir/CMakeCXXCompilerABI.cpp.'\x0d]
-        ignore line: [[2/2] C:\\Windows\\system32\\cmd.exe /C "cd . && D:\\mingw64\\bin\\c++.exe  -v -Wl -v CMakeFiles/cmTC_c30cc.dir/CMakeCXXCompilerABI.cpp.obj -o cmTC_c30cc.exe -Wl --out-implib libcmTC_c30cc.dll.a -Wl --major-image-version 0 --minor-image-version 0   && cd ."]
+        ignore line: [COLLECT_GCC_OPTIONS='-fdiagnostics-color=always' '-v' '-o' 'CMakeFiles/cmTC_1f946.dir/CMakeCXXCompilerABI.cpp.obj' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_1f946.dir/CMakeCXXCompilerABI.cpp.'\x0d]
+        ignore line: [[2/2] C:\\Windows\\system32\\cmd.exe /C "cd . && D:\\mingw64\\bin\\c++.exe  -v -Wl -v CMakeFiles/cmTC_1f946.dir/CMakeCXXCompilerABI.cpp.obj -o cmTC_1f946.exe -Wl --out-implib libcmTC_1f946.dll.a -Wl --major-image-version 0 --minor-image-version 0   && cd ."]
         ignore line: [Using built-in specs.]
         ignore line: [COLLECT_GCC=D:\\mingw64\\bin\\c++.exe]
         ignore line: [COLLECT_LTO_WRAPPER=D:/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/14.2.0/lto-wrapper.exe]
@@ -2145,13 +2221,13 @@ events:
         ignore line: [D:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../lib/]
         ignore line: [D:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../x86_64-w64-mingw32/lib/]
         ignore line: [D:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../]
-        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_c30cc.exe' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'cmTC_c30cc.']
-        link line: [ D:/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/14.2.0/collect2.exe -plugin D:/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/14.2.0/liblto_plugin.dll -plugin-opt=D:/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/14.2.0/lto-wrapper.exe -plugin-opt=-fresolution=C:\\Users\\PC\\AppData\\Local\\Temp\\ccWxRgDc.res -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lpthread -plugin-opt=-pass-through=-ladvapi32 -plugin-opt=-pass-through=-lshell32 -plugin-opt=-pass-through=-luser32 -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -m i386pep -Bdynamic -o cmTC_c30cc.exe D:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../x86_64-w64-mingw32/lib/../lib/crt2.o D:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/crtbegin.o -LD:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0 -LD:/mingw64/bin/../lib/gcc -LD:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../x86_64-w64-mingw32/lib/../lib -LD:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../lib -LD:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../x86_64-w64-mingw32/lib -LD:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../.. -v CMakeFiles/cmTC_c30cc.dir/CMakeCXXCompilerABI.cpp.obj --out-implib libcmTC_c30cc.dll.a --major-image-version 0 --minor-image-version 0 -lstdc++ -lmingw32 -lgcc_s -lgcc -lmingwex -lmsvcrt -lkernel32 -lpthread -ladvapi32 -lshell32 -luser32 -lkernel32 -lmingw32 -lgcc_s -lgcc -lmingwex -lmsvcrt -lkernel32 D:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/crtend.o]
+        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_1f946.exe' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'cmTC_1f946.']
+        link line: [ D:/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/14.2.0/collect2.exe -plugin D:/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/14.2.0/liblto_plugin.dll -plugin-opt=D:/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/14.2.0/lto-wrapper.exe -plugin-opt=-fresolution=C:\\Users\\PC\\AppData\\Local\\Temp\\ccfCOxqA.res -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lpthread -plugin-opt=-pass-through=-ladvapi32 -plugin-opt=-pass-through=-lshell32 -plugin-opt=-pass-through=-luser32 -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -m i386pep -Bdynamic -o cmTC_1f946.exe D:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../x86_64-w64-mingw32/lib/../lib/crt2.o D:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/crtbegin.o -LD:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0 -LD:/mingw64/bin/../lib/gcc -LD:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../x86_64-w64-mingw32/lib/../lib -LD:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../lib -LD:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../x86_64-w64-mingw32/lib -LD:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../.. -v CMakeFiles/cmTC_1f946.dir/CMakeCXXCompilerABI.cpp.obj --out-implib libcmTC_1f946.dll.a --major-image-version 0 --minor-image-version 0 -lstdc++ -lmingw32 -lgcc_s -lgcc -lmingwex -lmsvcrt -lkernel32 -lpthread -ladvapi32 -lshell32 -luser32 -lkernel32 -lmingw32 -lgcc_s -lgcc -lmingwex -lmsvcrt -lkernel32 D:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/crtend.o]
           arg [D:/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/14.2.0/collect2.exe] ==> ignore
           arg [-plugin] ==> ignore
           arg [D:/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/14.2.0/liblto_plugin.dll] ==> ignore
           arg [-plugin-opt=D:/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/14.2.0/lto-wrapper.exe] ==> ignore
-          arg [-plugin-opt=-fresolution=C:\\Users\\PC\\AppData\\Local\\Temp\\ccWxRgDc.res] ==> ignore
+          arg [-plugin-opt=-fresolution=C:\\Users\\PC\\AppData\\Local\\Temp\\ccfCOxqA.res] ==> ignore
           arg [-plugin-opt=-pass-through=-lmingw32] ==> ignore
           arg [-plugin-opt=-pass-through=-lgcc_s] ==> ignore
           arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
@@ -2173,7 +2249,7 @@ events:
           arg [i386pep] ==> ignore
           arg [-Bdynamic] ==> search dynamic
           arg [-o] ==> ignore
-          arg [cmTC_c30cc.exe] ==> ignore
+          arg [cmTC_1f946.exe] ==> ignore
           arg [D:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../x86_64-w64-mingw32/lib/../lib/crt2.o] ==> obj [D:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../x86_64-w64-mingw32/lib/../lib/crt2.o]
           arg [D:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/crtbegin.o] ==> obj [D:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/crtbegin.o]
           arg [-LD:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0] ==> dir [D:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0]
@@ -2183,9 +2259,9 @@ events:
           arg [-LD:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../x86_64-w64-mingw32/lib] ==> dir [D:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../x86_64-w64-mingw32/lib]
           arg [-LD:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../..] ==> dir [D:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../..]
           arg [-v] ==> ignore
-          arg [CMakeFiles/cmTC_c30cc.dir/CMakeCXXCompilerABI.cpp.obj] ==> ignore
+          arg [CMakeFiles/cmTC_1f946.dir/CMakeCXXCompilerABI.cpp.obj] ==> ignore
           arg [--out-implib] ==> ignore
-          arg [libcmTC_c30cc.dll.a] ==> ignore
+          arg [libcmTC_1f946.dll.a] ==> ignore
           arg [--major-image-version] ==> ignore
           arg [0] ==> ignore
           arg [--minor-image-version] ==> ignore
@@ -2309,6 +2385,9 @@ events:
       - "C:/Program Files/PowerToys/DSCModules/SFML/doc/"
       - "C:/Program Files/PowerToys/DSCModules/share/doc/SFML/"
       - "C:/Program Files/PowerToys/DSCModules/"
+      - "D:/Git/cmd/SFML/doc/"
+      - "D:/Git/cmd/share/doc/SFML/"
+      - "D:/Git/cmd/"
       - "C:/Program Files/MySQL/MySQL Shell 8.0/bin/SFML/doc/"
       - "C:/Program Files/MySQL/MySQL Shell 8.0/bin/share/doc/SFML/"
       - "C:/Program Files/MySQL/MySQL Shell 8.0/bin/"
@@ -2403,6 +2482,9 @@ events:
       - "C:/Program Files/PowerToys/DSCModules/SFML/doc/SFML.tag"
       - "C:/Program Files/PowerToys/DSCModules/share/doc/SFML/SFML.tag"
       - "C:/Program Files/PowerToys/DSCModules/SFML.tag"
+      - "D:/Git/cmd/SFML/doc/SFML.tag"
+      - "D:/Git/cmd/share/doc/SFML/SFML.tag"
+      - "D:/Git/cmd/SFML.tag"
       - "C:/Program Files/MySQL/MySQL Shell 8.0/bin/SFML/doc/SFML.tag"
       - "C:/Program Files/MySQL/MySQL Shell 8.0/bin/share/doc/SFML/SFML.tag"
       - "C:/Program Files/MySQL/MySQL Shell 8.0/bin/SFML.tag"
@@ -2477,6 +2559,7 @@ events:
         - "D:\\apache-maven-3.9.14\\bin"
         - "C:\\Users\\PC\\.jdks\\openjdk-25.0.1\\bin"
         - "C:\\Program Files\\PowerToys\\DSCModules\\"
+        - "D:\\Git\\cmd"
         - "C:\\Program Files\\MySQL\\MySQL Shell 8.0\\bin\\"
         - "C:\\Users\\PC\\AppData\\Local\\Microsoft\\WindowsApps"
         - "D:\\CLion 2025.3.1.1\\bin\\ninja\\win\\x64"

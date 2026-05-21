@@ -46,19 +46,19 @@ CardPileOverlay::CardPileOverlay(sf::Font& font)
           sf::Vector2f(0.0f, 0.0f),
           sf::Vector2f(130.0f, 58.0f),
           font,
-          "Close"
+          "关闭"
       ),
       prevButton_(
           sf::Vector2f(0.0f, 0.0f),
           sf::Vector2f(180.0f, 62.0f),
           font,
-          "Previous"
+          "上一页"
       ),
       nextButton_(
           sf::Vector2f(0.0f, 0.0f),
           sf::Vector2f(180.0f, 62.0f),
           font,
-          "Next"
+          "下一页"
       )
 {
 }
@@ -164,7 +164,7 @@ void CardPileOverlay::draw(
         static_cast<int>(cards_.size());
 
     std::ostringstream titleStream;
-    titleStream << title_ << "    Cards: " << cardCount;
+    titleStream << title_ << "    卡牌: " << cardCount;
 
     sf::Text titleText =
         makeText(font, titleStream.str(), 42);
@@ -181,7 +181,7 @@ void CardPileOverlay::draw(
 
     if (cardCount <= 0) {
         sf::Text emptyText =
-            makeText(font, "No cards.", 32);
+            makeText(font, "无卡牌", 32);
 
         emptyText.setFillColor(sf::Color(230, 230, 230));
         emptyText.setPosition(sf::Vector2f(
@@ -233,7 +233,7 @@ void CardPileOverlay::draw(
 
 
     std::ostringstream pageStream;
-    pageStream << "Page "
+    pageStream << "页数： "
                << page_ + 1
                << " / "
                << getPageCount();

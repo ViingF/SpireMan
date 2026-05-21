@@ -6,216 +6,216 @@
 	"config" : "Debug",
 	"cxx-modules" : {},
 	"database-info" : null,
-	"dir-cur-bld" : "C:/Users/PC/CLionProjects/SpireLike/cmake-build-debug",
-	"dir-cur-src" : "C:/Users/PC/CLionProjects/SpireLike",
-	"dir-top-bld" : "C:/Users/PC/CLionProjects/SpireLike/cmake-build-debug",
-	"dir-top-src" : "C:/Users/PC/CLionProjects/SpireLike",
+	"dir-cur-bld" : "C:/Users/PC/CLionProjects/SpireMan/cmake-build-debug",
+	"dir-cur-src" : "C:/Users/PC/CLionProjects/SpireMan",
+	"dir-top-bld" : "C:/Users/PC/CLionProjects/SpireMan/cmake-build-debug",
+	"dir-top-src" : "C:/Users/PC/CLionProjects/SpireMan",
 	"exports" : [],
 	"forward-modules-from-target-dirs" : [],
 	"include-dirs" : 
 	[
-		"C:\\Users\\PC\\CLionProjects\\SpireLike\\src",
+		"C:\\Users\\PC\\CLionProjects\\SpireMan\\src",
 		"D:\\SFML-3.0.2\\include"
 	],
 	"language" : "CXX",
 	"linked-target-dirs" : [],
-	"module-dir" : "C:/Users/PC/CLionProjects/SpireLike/cmake-build-debug/CMakeFiles/SpireLike.dir",
+	"module-dir" : "C:/Users/PC/CLionProjects/SpireMan/cmake-build-debug/CMakeFiles/SpireLike.dir",
 	"sources" : 
 	{
 		"CMakeFiles/SpireLike.dir/src/core/AudioManager.cpp.obj" : 
 		{
 			"language" : "CXX",
-			"source" : "C:/Users/PC/CLionProjects/SpireLike/src/core/AudioManager.cpp"
+			"source" : "C:/Users/PC/CLionProjects/SpireMan/src/core/AudioManager.cpp"
 		},
 		"CMakeFiles/SpireLike.dir/src/core/Game.cpp.obj" : 
 		{
 			"language" : "CXX",
-			"source" : "C:/Users/PC/CLionProjects/SpireLike/src/core/Game.cpp"
+			"source" : "C:/Users/PC/CLionProjects/SpireMan/src/core/Game.cpp"
 		},
 		"CMakeFiles/SpireLike.dir/src/core/Logger.cpp.obj" : 
 		{
 			"language" : "CXX",
-			"source" : "C:/Users/PC/CLionProjects/SpireLike/src/core/Logger.cpp"
+			"source" : "C:/Users/PC/CLionProjects/SpireMan/src/core/Logger.cpp"
 		},
 		"CMakeFiles/SpireLike.dir/src/core/ResourceManager.cpp.obj" : 
 		{
 			"language" : "CXX",
-			"source" : "C:/Users/PC/CLionProjects/SpireLike/src/core/ResourceManager.cpp"
+			"source" : "C:/Users/PC/CLionProjects/SpireMan/src/core/ResourceManager.cpp"
 		},
 		"CMakeFiles/SpireLike.dir/src/database/CardDatabase.cpp.obj" : 
 		{
 			"language" : "CXX",
-			"source" : "C:/Users/PC/CLionProjects/SpireLike/src/database/CardDatabase.cpp"
+			"source" : "C:/Users/PC/CLionProjects/SpireMan/src/database/CardDatabase.cpp"
 		},
 		"CMakeFiles/SpireLike.dir/src/database/DataLoader.cpp.obj" : 
 		{
 			"language" : "CXX",
-			"source" : "C:/Users/PC/CLionProjects/SpireLike/src/database/DataLoader.cpp"
+			"source" : "C:/Users/PC/CLionProjects/SpireMan/src/database/DataLoader.cpp"
 		},
 		"CMakeFiles/SpireLike.dir/src/database/EncounterDatabase.cpp.obj" : 
 		{
 			"language" : "CXX",
-			"source" : "C:/Users/PC/CLionProjects/SpireLike/src/database/EncounterDatabase.cpp"
+			"source" : "C:/Users/PC/CLionProjects/SpireMan/src/database/EncounterDatabase.cpp"
 		},
 		"CMakeFiles/SpireLike.dir/src/database/EnemyDatabase.cpp.obj" : 
 		{
 			"language" : "CXX",
-			"source" : "C:/Users/PC/CLionProjects/SpireLike/src/database/EnemyDatabase.cpp"
+			"source" : "C:/Users/PC/CLionProjects/SpireMan/src/database/EnemyDatabase.cpp"
 		},
 		"CMakeFiles/SpireLike.dir/src/database/EventDatabase.cpp.obj" : 
 		{
 			"language" : "CXX",
-			"source" : "C:/Users/PC/CLionProjects/SpireLike/src/database/EventDatabase.cpp"
+			"source" : "C:/Users/PC/CLionProjects/SpireMan/src/database/EventDatabase.cpp"
 		},
 		"CMakeFiles/SpireLike.dir/src/database/RelicDatabase.cpp.obj" : 
 		{
 			"language" : "CXX",
-			"source" : "C:/Users/PC/CLionProjects/SpireLike/src/database/RelicDatabase.cpp"
+			"source" : "C:/Users/PC/CLionProjects/SpireMan/src/database/RelicDatabase.cpp"
 		},
 		"CMakeFiles/SpireLike.dir/src/main.cpp.obj" : 
 		{
 			"language" : "CXX",
-			"source" : "C:/Users/PC/CLionProjects/SpireLike/src/main.cpp"
+			"source" : "C:/Users/PC/CLionProjects/SpireMan/src/main.cpp"
 		},
 		"CMakeFiles/SpireLike.dir/src/scene/CampfireScene.cpp.obj" : 
 		{
 			"language" : "CXX",
-			"source" : "C:/Users/PC/CLionProjects/SpireLike/src/scene/CampfireScene.cpp"
+			"source" : "C:/Users/PC/CLionProjects/SpireMan/src/scene/CampfireScene.cpp"
 		},
 		"CMakeFiles/SpireLike.dir/src/scene/CardRemoveScene.cpp.obj" : 
 		{
 			"language" : "CXX",
-			"source" : "C:/Users/PC/CLionProjects/SpireLike/src/scene/CardRemoveScene.cpp"
+			"source" : "C:/Users/PC/CLionProjects/SpireMan/src/scene/CardRemoveScene.cpp"
 		},
 		"CMakeFiles/SpireLike.dir/src/scene/CharacterSelectScene.cpp.obj" : 
 		{
 			"language" : "CXX",
-			"source" : "C:/Users/PC/CLionProjects/SpireLike/src/scene/CharacterSelectScene.cpp"
+			"source" : "C:/Users/PC/CLionProjects/SpireMan/src/scene/CharacterSelectScene.cpp"
 		},
 		"CMakeFiles/SpireLike.dir/src/scene/CombatScene.cpp.obj" : 
 		{
 			"language" : "CXX",
-			"source" : "C:/Users/PC/CLionProjects/SpireLike/src/scene/CombatScene.cpp"
+			"source" : "C:/Users/PC/CLionProjects/SpireMan/src/scene/CombatScene.cpp"
 		},
 		"CMakeFiles/SpireLike.dir/src/scene/EndScene.cpp.obj" : 
 		{
 			"language" : "CXX",
-			"source" : "C:/Users/PC/CLionProjects/SpireLike/src/scene/EndScene.cpp"
+			"source" : "C:/Users/PC/CLionProjects/SpireMan/src/scene/EndScene.cpp"
 		},
 		"CMakeFiles/SpireLike.dir/src/scene/EventScene.cpp.obj" : 
 		{
 			"language" : "CXX",
-			"source" : "C:/Users/PC/CLionProjects/SpireLike/src/scene/EventScene.cpp"
+			"source" : "C:/Users/PC/CLionProjects/SpireMan/src/scene/EventScene.cpp"
 		},
 		"CMakeFiles/SpireLike.dir/src/scene/MapScene.cpp.obj" : 
 		{
 			"language" : "CXX",
-			"source" : "C:/Users/PC/CLionProjects/SpireLike/src/scene/MapScene.cpp"
+			"source" : "C:/Users/PC/CLionProjects/SpireMan/src/scene/MapScene.cpp"
 		},
 		"CMakeFiles/SpireLike.dir/src/scene/MenuScene.cpp.obj" : 
 		{
 			"language" : "CXX",
-			"source" : "C:/Users/PC/CLionProjects/SpireLike/src/scene/MenuScene.cpp"
+			"source" : "C:/Users/PC/CLionProjects/SpireMan/src/scene/MenuScene.cpp"
 		},
 		"CMakeFiles/SpireLike.dir/src/scene/RewardScene.cpp.obj" : 
 		{
 			"language" : "CXX",
-			"source" : "C:/Users/PC/CLionProjects/SpireLike/src/scene/RewardScene.cpp"
+			"source" : "C:/Users/PC/CLionProjects/SpireMan/src/scene/RewardScene.cpp"
 		},
 		"CMakeFiles/SpireLike.dir/src/scene/ShopScene.cpp.obj" : 
 		{
 			"language" : "CXX",
-			"source" : "C:/Users/PC/CLionProjects/SpireLike/src/scene/ShopScene.cpp"
+			"source" : "C:/Users/PC/CLionProjects/SpireMan/src/scene/ShopScene.cpp"
 		},
 		"CMakeFiles/SpireLike.dir/src/system/CardSystem.cpp.obj" : 
 		{
 			"language" : "CXX",
-			"source" : "C:/Users/PC/CLionProjects/SpireLike/src/system/CardSystem.cpp"
+			"source" : "C:/Users/PC/CLionProjects/SpireMan/src/system/CardSystem.cpp"
 		},
 		"CMakeFiles/SpireLike.dir/src/system/CombatSystem.cpp.obj" : 
 		{
 			"language" : "CXX",
-			"source" : "C:/Users/PC/CLionProjects/SpireLike/src/system/CombatSystem.cpp"
+			"source" : "C:/Users/PC/CLionProjects/SpireMan/src/system/CombatSystem.cpp"
 		},
 		"CMakeFiles/SpireLike.dir/src/system/EnemyAISystem.cpp.obj" : 
 		{
 			"language" : "CXX",
-			"source" : "C:/Users/PC/CLionProjects/SpireLike/src/system/EnemyAISystem.cpp"
+			"source" : "C:/Users/PC/CLionProjects/SpireMan/src/system/EnemyAISystem.cpp"
 		},
 		"CMakeFiles/SpireLike.dir/src/system/EventSystem.cpp.obj" : 
 		{
 			"language" : "CXX",
-			"source" : "C:/Users/PC/CLionProjects/SpireLike/src/system/EventSystem.cpp"
+			"source" : "C:/Users/PC/CLionProjects/SpireMan/src/system/EventSystem.cpp"
 		},
 		"CMakeFiles/SpireLike.dir/src/system/MapSystem.cpp.obj" : 
 		{
 			"language" : "CXX",
-			"source" : "C:/Users/PC/CLionProjects/SpireLike/src/system/MapSystem.cpp"
+			"source" : "C:/Users/PC/CLionProjects/SpireMan/src/system/MapSystem.cpp"
 		},
 		"CMakeFiles/SpireLike.dir/src/system/SaveSystem.cpp.obj" : 
 		{
 			"language" : "CXX",
-			"source" : "C:/Users/PC/CLionProjects/SpireLike/src/system/SaveSystem.cpp"
+			"source" : "C:/Users/PC/CLionProjects/SpireMan/src/system/SaveSystem.cpp"
 		},
 		"CMakeFiles/SpireLike.dir/src/ui/Button.cpp.obj" : 
 		{
 			"language" : "CXX",
-			"source" : "C:/Users/PC/CLionProjects/SpireLike/src/ui/Button.cpp"
+			"source" : "C:/Users/PC/CLionProjects/SpireMan/src/ui/Button.cpp"
 		},
 		"CMakeFiles/SpireLike.dir/src/ui/CardPileOverlay.cpp.obj" : 
 		{
 			"language" : "CXX",
-			"source" : "C:/Users/PC/CLionProjects/SpireLike/src/ui/CardPileOverlay.cpp"
+			"source" : "C:/Users/PC/CLionProjects/SpireMan/src/ui/CardPileOverlay.cpp"
 		},
 		"CMakeFiles/SpireLike.dir/src/ui/CardView.cpp.obj" : 
 		{
 			"language" : "CXX",
-			"source" : "C:/Users/PC/CLionProjects/SpireLike/src/ui/CardView.cpp"
+			"source" : "C:/Users/PC/CLionProjects/SpireMan/src/ui/CardView.cpp"
 		},
 		"CMakeFiles/SpireLike.dir/src/ui/EnemyGroupView.cpp.obj" : 
 		{
 			"language" : "CXX",
-			"source" : "C:/Users/PC/CLionProjects/SpireLike/src/ui/EnemyGroupView.cpp"
+			"source" : "C:/Users/PC/CLionProjects/SpireMan/src/ui/EnemyGroupView.cpp"
 		},
 		"CMakeFiles/SpireLike.dir/src/ui/EnergyView.cpp.obj" : 
 		{
 			"language" : "CXX",
-			"source" : "C:/Users/PC/CLionProjects/SpireLike/src/ui/EnergyView.cpp"
+			"source" : "C:/Users/PC/CLionProjects/SpireMan/src/ui/EnergyView.cpp"
 		},
 		"CMakeFiles/SpireLike.dir/src/ui/HealthBar.cpp.obj" : 
 		{
 			"language" : "CXX",
-			"source" : "C:/Users/PC/CLionProjects/SpireLike/src/ui/HealthBar.cpp"
+			"source" : "C:/Users/PC/CLionProjects/SpireMan/src/ui/HealthBar.cpp"
 		},
 		"CMakeFiles/SpireLike.dir/src/ui/IntentView.cpp.obj" : 
 		{
 			"language" : "CXX",
-			"source" : "C:/Users/PC/CLionProjects/SpireLike/src/ui/IntentView.cpp"
+			"source" : "C:/Users/PC/CLionProjects/SpireMan/src/ui/IntentView.cpp"
 		},
 		"CMakeFiles/SpireLike.dir/src/ui/RewardCardView.cpp.obj" : 
 		{
 			"language" : "CXX",
-			"source" : "C:/Users/PC/CLionProjects/SpireLike/src/ui/RewardCardView.cpp"
+			"source" : "C:/Users/PC/CLionProjects/SpireMan/src/ui/RewardCardView.cpp"
 		},
 		"CMakeFiles/SpireLike.dir/src/ui/ShopView.cpp.obj" : 
 		{
 			"language" : "CXX",
-			"source" : "C:/Users/PC/CLionProjects/SpireLike/src/ui/ShopView.cpp"
+			"source" : "C:/Users/PC/CLionProjects/SpireMan/src/ui/ShopView.cpp"
 		},
 		"CMakeFiles/SpireLike.dir/src/ui/StateView.cpp.obj" : 
 		{
 			"language" : "CXX",
-			"source" : "C:/Users/PC/CLionProjects/SpireLike/src/ui/StateView.cpp"
+			"source" : "C:/Users/PC/CLionProjects/SpireMan/src/ui/StateView.cpp"
 		},
 		"CMakeFiles/SpireLike.dir/src/ui/TextUtils.cpp.obj" : 
 		{
 			"language" : "CXX",
-			"source" : "C:/Users/PC/CLionProjects/SpireLike/src/ui/TextUtils.cpp"
+			"source" : "C:/Users/PC/CLionProjects/SpireMan/src/ui/TextUtils.cpp"
 		},
 		"CMakeFiles/SpireLike.dir/src/ui/TopInfoBar.cpp.obj" : 
 		{
 			"language" : "CXX",
-			"source" : "C:/Users/PC/CLionProjects/SpireLike/src/ui/TopInfoBar.cpp"
+			"source" : "C:/Users/PC/CLionProjects/SpireMan/src/ui/TopInfoBar.cpp"
 		}
 	}
 }

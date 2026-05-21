@@ -36,12 +36,8 @@ private:
 
 
     int getRemoveCost() const;
-    int getRemoveCardsPerPage() const;
-    int getRemovePageCount() const;
-    void clampRemovePage();
 
     void startRemoveCard();
-    void removeCardByDeckIndex(int deckIndex);
 
     const sf::Texture& getCardTemplateTexture(CardType type) const;
     const sf::Texture* getCardArtTexture(const CardDef& cardDef) const;

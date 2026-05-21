@@ -141,23 +141,6 @@ void drawBackgroundPart(
     window.draw(sprite);
 }
 
-std::string getNodeTextureId(const MapNode& node)
-{
-    if (node.state == MapNodeState::Completed) {
-        if (node.type == MapNodeType::Event) {
-            return "eventOutline";
-        }
-
-        return "monsterOutline";
-    }
-
-    if (node.type == MapNodeType::Event) {
-        return "event";
-    }
-
-    return "monster";
-}
-
 void setRotationDegrees(sf::Transformable& transformable, float degrees)
 {
     transformable.setRotation(sf::degrees(degrees));
@@ -279,7 +262,7 @@ void MapScene::handleEvent(
         context.audio.playSound("Click");
 
         deckOverlay_.open(
-            "Master Deck",
+            "牌库",
             buildPileViewData(context.runState.masterDeck)
         );
 

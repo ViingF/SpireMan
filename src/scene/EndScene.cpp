@@ -7,13 +7,13 @@ EndScene::EndScene(GameContext& context, BattleResult result)
           sf::Vector2f(760.f, 520.f),
           sf::Vector2f(400.f, 100.f),
           context.resources.getFont("zh-R"),
-          "Menu"
+          "主菜单"
       ),
       quitButton(
           sf::Vector2f(760.f, 660.f),
           sf::Vector2f(400.f, 100.f),
           context.resources.getFont("zh-R"),
-          "Quit"
+          "退出"
       )
 {
     background.setSize({1920,1080});
@@ -51,6 +51,12 @@ void EndScene::draw(sf::RenderWindow& window)
     if (result == BattleResult::Victory)
     {
         window.clear();
+        for (int i=1;i<5;i++) {
+            background.setTexture(&context.resources.getTexture("end"+std::to_string(i)));
+            window.draw(background);
+            sleep(seconds(2));
+        }
+        background.setTexture(&context.resources.getTexture("end5"));
     }
     else
     {
