@@ -2,6 +2,7 @@
 
 #include <SFML/Graphics.hpp>
 
+#include "Logger.hpp"
 #include "ResourceManager.hpp"
 #include "Scene.hpp"
 #include "database/CardDatabase.hpp"
@@ -9,7 +10,6 @@
 #include "database/EventDatabase.hpp"
 #include "model/RunState.hpp"
 
-using namespace sf;
 class Game {
 public:
     Game();

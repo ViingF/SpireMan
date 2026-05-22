@@ -12,6 +12,7 @@ namespace {
         ) {
         return sf::Text(font, TextUtils::fromUtf8(content), size);
     }
+
 }
 
 RewardScene::RewardScene(
@@ -29,11 +30,22 @@ context.resources.getFont("zh-R"),
 );
 
 
-
     for (int i = 0; i < 3; ++i) {
+
+        bool rep=0;
         CardId id = context.cards.chooseRandomRewardCardId(
             context.runState.rng
         );
+
+        for (CardId Id:rewardCardIds_) {
+            if (Id == id) {
+                i--;
+                rep=1;
+                break;
+            }
+        }
+
+        if (rep)continue;
 
         rewardCardIds_.push_back(id);
 
@@ -57,7 +69,7 @@ void RewardScene::handleEvent(
     mapIconButton_.handleEvent(event, window);
 
     if (mapIconButton_.wasClicked()) {
-        context.audio.playSound("Click");
+        
 
         transition.openMapPreview = true;
         transition.target = SceneType::Map;
@@ -68,7 +80,7 @@ void RewardScene::handleEvent(
 
     LeapButton.handleEvent(event, window);
     if (LeapButton.wasClicked()) {
-        context.audio.playSound("Click");
+        
 
         finishRewardAndContinueMap();
 
@@ -88,9 +100,11 @@ void RewardScene::handleEvent(
 
         for (std::size_t i = 0; i < rewardCardViews_.size(); ++i) {
             if (rewardCardViews_[i].contains(mousePos)) {
+                context_.audio.playSound("Click");
                 chooseCard(rewardCardIds_[i]);
                 return;
             }
+
         }
         }
 

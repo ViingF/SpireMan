@@ -8,6 +8,8 @@
 #include <vector>
 #include <SFML/System/Vector2.hpp>
 
+#include "core/Logger.hpp"
+
 namespace {
 
     struct MapNodeTypeCounter {
@@ -238,39 +240,6 @@ bool hasIncomingEdge(
     return false;
 }
 
-MapNodeType chooseMiddleNodeType(
-    RunState& runState,
-    const EventDatabase& eventDatabase
-)
-{
-    std::uniform_int_distribution<int> percentDist(1, 100);
-    const int roll = percentDist(runState.rng);
-
-    if (roll <= MAP_CAMPFIRE_CHANCE_PERCENT) {
-        return MapNodeType::Campfire;
-    }
-
-    if (
-        roll <=
-        MAP_CAMPFIRE_CHANCE_PERCENT +
-        MAP_SHOP_CHANCE_PERCENT
-    ) {
-        return MapNodeType::Shop;
-    }
-
-    if (
-        roll <=
-        MAP_CAMPFIRE_CHANCE_PERCENT +
-        MAP_SHOP_CHANCE_PERCENT +
-        MAP_EVENT_CHANCE_PERCENT &&
-        !eventDatabase.getAllEventIds().empty()
-    ) {
-        return MapNodeType::Event;
-    }
-
-    return MapNodeType::Combat;
-}
-
     int getEventDrawCount(
     const RunState& runState,
     EventId eventId
@@ -353,6 +322,7 @@ void MapSystem::generateRouteMap(
     const EventDatabase& eventDatabase
 ) const
 {
+    LOG_INFO("Generating route map");
     runState.mapNodes.clear();
     runState.currentMapNodeIndex = -1;
     runState.selectedMapNodeIndex = -1;
@@ -704,20 +674,28 @@ ErrorCode MapSystem::selectNode(
     int nodeIndex
 ) const
 {
+    LOG_INFO("Select map node: index=" << nodeIndex);
     refreshNodeStates(runState);
 
     if (
         nodeIndex < 0 ||
         nodeIndex >= static_cast<int>(runState.mapNodes.size())
     ) {
+        LOG_WARN("Select node failed: invalid node index=" << nodeIndex);
         return ErrorCode::INVALID_SCENE_STATE;
     }
 
     if (runState.mapNodes[nodeIndex].state != MapNodeState::Available) {
+        LOG_WARN(
+        "Select node failed: node not available, index="
+         << nodeIndex
+);
         return ErrorCode::INVALID_SCENE_STATE;
     }
 
     runState.selectedMapNodeIndex = nodeIndex;
+
+    LOG_INFO("Complete selected map node: index=" << runState.selectedMapNodeIndex);
 
     return ErrorCode::OK;
 }
@@ -763,6 +741,10 @@ void MapSystem::startAct(
     const EncounterDatabase& encounterDatabase
 ) const
 {
+    LOG_INFO(
+    "Start act: act=" << runState.act
+    << ", bossEncounterId=" << runState.bossEncounterId
+);
     runState.act = std::clamp(act, 1, MAX_ACT);
     runState.floorInAct = 0;
 
@@ -789,6 +771,7 @@ bool MapSystem::advanceToNextActIfPossible(
     const EncounterDatabase& encounterDatabase
 ) const
 {
+    LOG_INFO("Advance to next act: act=" << runState.act);
     if (!isRouteFinished(runState)) {
         return false;
     }

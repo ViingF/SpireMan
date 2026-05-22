@@ -4,6 +4,8 @@
 #include <iostream>
 #include <stdexcept>
 
+#include "Logger.hpp"
+
 AudioManager::AudioManager(ResourceManager& resources)
     : resources_(resources)
 {
@@ -21,6 +23,8 @@ void AudioManager::playMusic(
     const std::string& id,
     bool loop
 ) {
+    LOG_INFO("Request play music: id=" << id << ", loop=" << loop);
+
     if (currentMusicId_ == id && pendingMusicId_.empty()) {
         return;
     }
@@ -58,7 +62,7 @@ void AudioManager::stopMusic()
 void AudioManager::playSound(const std::string& id)
 {
     if (!resources_.hasSoundBuffer(id)) {
-        std::cerr << "SoundBuffer not found: " << id << std::endl;
+        LOG_WARN("SoundBuffer not found: id=" << id);
         return;
     }
 
@@ -154,14 +158,18 @@ void AudioManager::startMusicNow(
     auto it = musicPaths_.find(id);
 
     if (it == musicPaths_.end()) {
+        LOG_ERROR("Music id not found: id=" << id);
         throw std::runtime_error("Music not found: " + id);
     }
 
     music_.stop();
 
     if (!music_.openFromFile(it->second)) {
+        LOG_ERROR("Music load failed: id=" << id << ", path=" << it->second);
         throw std::runtime_error("Music load failed: " + it->second);
     }
+
+    LOG_INFO("Music started: id=" << id << ", path=" << it->second);
 
     music_.setVolume(startVolume);
     music_.setLooping(loop);

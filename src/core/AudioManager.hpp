@@ -64,5 +64,5 @@ private:
     std::vector<sf::Sound> activeSounds_;
 
     float musicVolume_ = 35.0f;
-    float soundVolume_ = 75.0f;
+    float soundVolume_ = 40.0f;
 };

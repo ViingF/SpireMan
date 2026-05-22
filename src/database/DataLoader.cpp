@@ -3,6 +3,8 @@
 #include <sstream>
 #include <cctype>
 
+#include "core/Logger.hpp"
+
 ErrorCode DataLoader::readCsv(
     const std::string& path,
     std::vector<std::vector<std::string>>& rows
@@ -12,8 +14,8 @@ ErrorCode DataLoader::readCsv(
 
     std::ifstream file(path);
 
-    if (!file.is_open())
-    {
+    if (!file.is_open()) {
+        LOG_ERROR("CSV file not found: path=" << path);
         return ErrorCode::FILE_NOT_FOUND;
     }
 

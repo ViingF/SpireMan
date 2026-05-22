@@ -31,9 +31,9 @@ public:
 
 private:
     Button ironcladButton;
-    RectangleShape ironcladPortrait;
+    sf::RectangleShape ironcladPortrait;
 
-    RectangleShape lockedButtons[3];
+    sf::RectangleShape lockedButtons[3];
 
     Button startButton;
     Button backButton;

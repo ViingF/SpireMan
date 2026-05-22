@@ -6,6 +6,8 @@
 #include <cstddef>
 #include <sstream>
 
+#include "core/Logger.hpp"
+
 namespace {
 
 constexpr CardId DEFAULT_CURSE_CARD_ID = 999;
@@ -54,6 +56,12 @@ EventResolveResult EventSystem::resolveChoice(
     const CardDatabase& cardDatabase
 ) const
 {
+
+    LOG_INFO(
+    "Resolve event choice: eventId=" << eventDef.id
+    << ", choiceIndex=" << choiceIndex
+);
+
     EventResolveResult result;
 
     runState.pendingRemoveCardCount = 0;
@@ -63,6 +71,11 @@ EventResolveResult EventSystem::resolveChoice(
         choiceIndex < 0 ||
         choiceIndex >= static_cast<int>(eventDef.choices.size())
     ) {
+        LOG_WARN(
+    "Invalid event choice: eventId=" << eventDef.id
+    << ", choiceIndex=" << choiceIndex
+);
+
         result.error = ErrorCode::INVALID_SCENE_STATE;
         result.message = "Invalid event choice.";
         return result;
@@ -82,6 +95,7 @@ EventResolveResult EventSystem::resolvePendingEventEffects(
     const CardDatabase& cardDatabase
 ) const
 {
+
     EventResolveResult result;
 
     if (runState.pendingRemoveCardCount > 0) {
@@ -105,6 +119,7 @@ ErrorCode EventSystem::removeCardByInstanceId(
     CardInstanceId instanceId
 ) const
 {
+    LOG_INFO("Remove card by instanceId: " << instanceId);
     if (runState.pendingRemoveCardCount <= 0) {
         return ErrorCode::INVALID_SCENE_STATE;
     }
@@ -118,6 +133,7 @@ ErrorCode EventSystem::removeCardByInstanceId(
     );
 
     if (it == runState.masterDeck.end()) {
+        LOG_WARN("Remove card failed: card instance not found, instanceId=" << instanceId);
         return ErrorCode::INVALID_CARD_ID;
     }
 
@@ -137,11 +153,20 @@ EventResolveResult EventSystem::resolveEffects(
     const CardDatabase& cardDatabase
 ) const
 {
+
     EventResolveResult result;
     std::ostringstream message;
 
     for (std::size_t i = 0; i < effects.size(); ++i) {
         const EventEffect& effect = effects[i];
+
+        LOG_DEBUG(
+        "Resolve event effect: type="
+        << static_cast<int>(effect.type)
+        << ", value="
+        << effect.value
+    );
+
 
         switch (effect.type) {
         case EventEffectType::None:

@@ -210,7 +210,7 @@ void EventScene::handleEvent(
     mapIconButton_.handleEvent(event, window);
 
     if (mapIconButton_.wasClicked()) {
-        context.audio.playSound("Click");
+        
 
         transition_.openMapPreview = true;
         transition_.target = SceneType::Map;
@@ -321,7 +321,6 @@ void EventScene::draw(sf::RenderWindow& window)
         const sf::FloatRect rect = getChoiceRect(i);
 
         const EventChoiceDef& choice = eventDef.choices[i];
-        const bool enabled = canChoose(choice);
 
         if (i < static_cast<int>(choiceButtons_.size())) {
             choiceButtons_[i].draw(window);
@@ -514,7 +513,7 @@ void EventScene::resetTransition()
 }
 
 void EventScene::drawBackground(sf::RenderWindow &window) {
-    RectangleShape background;
+    sf::RectangleShape background;
     background.setTexture(&context.resources.getTexture("eventbackground"));
     background.setSize({static_cast<float>(window.getSize().x),static_cast<float>(window.getSize().y)});
     window.draw(background);

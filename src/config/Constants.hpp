@@ -43,6 +43,30 @@ inline int getRouteLengthByAct(int act)
     return ACT3_ROUTE_LENGTH;
 }
 
+constexpr int ENEMY_HP_PERCENT = 30;
+constexpr int ENEMY_ATTACK_PERCENT = 100;
+
+// 额外固定加成
+constexpr int ENEMY_HP_FLAT_BONUS = 0;
+constexpr int ENEMY_ATTACK_FLAT_BONUS = 0;
+
+inline int adjustEnemyValue(
+    int baseValue,
+    int percent,
+    int flatBonus,
+    int minValue
+)
+{
+    int value = static_cast<int>(baseValue * percent / 100.0f + 0.5f);
+    value += flatBonus;
+
+    if (value < minValue) {
+        return minValue;
+    }
+
+    return value;
+}
+
 
 
 #define WINDOWSOULUTION {1920,1080}

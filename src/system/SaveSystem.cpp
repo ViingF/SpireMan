@@ -4,6 +4,8 @@
 #include <fstream>
 #include <iomanip>
 
+#include "core/Logger.hpp"
+
 namespace {
 
     const char* SAVE_MAGIC_V1 = "SPIRELIKE_SAVE_V1";
@@ -63,9 +65,25 @@ bool SaveSystem::saveRun(
     const std::string& path
 )
 {
+    LOG_INFO(
+        "Saving run: path=" << path
+        << ", player=" << runState.playerName
+        << ", act=" << runState.act
+        << ", floor=" << runState.floor
+        << ", hp=" << runState.player.hp
+        << "/" << runState.player.maxHp
+        << ", gold=" << runState.gold
+    );
+
     std::ofstream out(path);
 
     if (!out.is_open()) {
+        LOG_ERROR("Save failed: cannot open file, path=" << path);
+        return false;
+    }
+
+    if (!out.is_open()) {
+        LOG_ERROR("Save failed: cannot open file, path=" << path);
         return false;
     }
 
@@ -138,6 +156,8 @@ bool SaveSystem::saveRun(
             << pair.second << '\n';
     }
 
+    LOG_INFO("Save success: path=" << path);
+
     return true;
 }
 
@@ -146,24 +166,31 @@ bool SaveSystem::loadRun(
     const std::string& path
 )
 {
+    LOG_INFO("Loading run: path=" << path);
+
+    auto fail = [&](const std::string& reason) {
+        LOG_ERROR("Load failed: path=" << path << ", reason=" << reason);
+        return false;
+    };
+
     std::ifstream in(path);
 
     if (!in.is_open()) {
-        return false;
+        return fail("cannot open save file");
     }
 
     std::string magic;
 
     if (!(in >> magic)) {
-        return false;
+        return fail("cannot read save magic");
     }
 
     if (
-    magic != SAVE_MAGIC_V1 &&
-    magic != SAVE_MAGIC_V2
-) {
-        return false;
-}
+        magic != SAVE_MAGIC_V1 &&
+        magic != SAVE_MAGIC_V2
+    ) {
+        return fail("invalid save magic: " + magic);
+    }
 
     RunState loaded;
 
@@ -316,6 +343,16 @@ bool SaveSystem::loadRun(
 
     runState = loaded;
 
+    LOG_INFO(
+        "Load success: path=" << path
+        << ", player=" << runState.playerName
+        << ", act=" << runState.act
+        << ", floor=" << runState.floor
+        << ", hp=" << runState.player.hp
+        << "/" << runState.player.maxHp
+        << ", gold=" << runState.gold
+    );
+
     return true;
 }
 
@@ -331,5 +368,14 @@ bool SaveSystem::deleteSave(
     const std::string& path
 )
 {
-    return std::remove(path.c_str()) == 0;
+    const bool ok = std::remove(path.c_str()) == 0;
+
+    if (ok) {
+        LOG_INFO("Save deleted: path=" << path);
+    } else {
+        LOG_WARN("Delete save failed or save not found: path=" << path);
+    }
+
+    return ok;
 }
+

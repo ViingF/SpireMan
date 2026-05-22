@@ -8,6 +8,7 @@
 #include <string>
 #include <vector>
 
+#include "core/Logger.hpp"
 #include "model/Enemy.hpp"
 
 static std::string trimLocal(const std::string& text)
@@ -285,12 +286,6 @@ static EnemyIntent parseEnemyIntent(const std::string& text)
         }
 
         if (
-            current.type == EnemyIntentType::Block &&
-            best.type != EnemyIntentType::Block
-        ) {
-            best = current;
-        }
-        else if (
             best.type == EnemyIntentType::Buff &&
             best.value == 0
         ) {
@@ -330,6 +325,8 @@ static bool parseBossFlag(const std::string& text)
 
 ErrorCode EnemyDatabase::loadFromCsv(const std::string& path)
 {
+    LOG_INFO("Loading Enemies csv: path=" << path);
+
     enemies.clear();
 
     std::vector<std::vector<std::string>> rows;
@@ -399,6 +396,8 @@ ErrorCode EnemyDatabase::loadFromCsv(const std::string& path)
             return ErrorCode::INVALID_ENUM_VALUE;
         }
     }
+
+    LOG_INFO("Cards loaded: count=" << enemies.size());
 
     return ErrorCode::OK;
 }

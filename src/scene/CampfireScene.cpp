@@ -53,7 +53,6 @@ void CampfireScene::handleEvent(
     mapIconButton_.handleEvent(event, window);
 
     if (mapIconButton_.wasClicked()) {
-        context.audio.playSound("Click");
 
         transition_.openMapPreview = true;
         transition_.target = SceneType::Map;

@@ -10,6 +10,7 @@
 #include <vector>
 
 #include "config/Constants.hpp"
+#include "core/Logger.hpp"
 
 namespace {
 
@@ -91,6 +92,8 @@ ErrorCode EncounterDatabase::loadFromCsv(
     const std::string& path
 )
 {
+    LOG_INFO("Loading encounters csv: path=" << path);
+
     encounters_.clear();
 
     std::vector<std::vector<std::string>> rows;
@@ -151,6 +154,8 @@ ErrorCode EncounterDatabase::loadFromCsv(
             return ErrorCode::DATA_FORMAT_ERROR;
         }
     }
+
+    LOG_INFO("Encounters loaded: count=" << encounters_.size());
 
 
     return ErrorCode::OK;

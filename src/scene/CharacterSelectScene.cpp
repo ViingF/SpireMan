@@ -62,7 +62,6 @@ void CharacterSelectScene::handleEvent(
 
     if (ironcladButton.wasClicked())
     {
-        context.audio.playSound("Click");
 
         ironcladSelected = true;
 
@@ -73,7 +72,6 @@ void CharacterSelectScene::handleEvent(
     {
         if (ironcladSelected)
         {
-            context.audio.playSound("Click");
 
             transition.target = SceneType::Map;
         }
@@ -83,7 +81,6 @@ void CharacterSelectScene::handleEvent(
 
     if (backButton.wasClicked())
     {
-        context.audio.playSound("Click");
         transition.target =
             SceneType::Menu;
 

@@ -35,14 +35,14 @@ void EndScene::handleEvent(
 
     if (menuButton.wasClicked())
     {
-        context.audio.playSound("Click");
+        
         transition.target = SceneType::Menu;
         menuButton.reset();
     }
 
     if (quitButton.wasClicked())
     {
-        context.audio.playSound("Click");
+        
         const_cast<sf::RenderWindow&>(window).close();
         quitButton.reset();
     }

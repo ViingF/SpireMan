@@ -9,20 +9,10 @@
 #include <sstream>
 #include <string>
 
-#include "ui/TextUtils.hpp"
 #include "ui/TopInfoBar.hpp"
 
 namespace {
 
-
-
-    sf::Text makeText(
-        const sf::Font& font,
-        const std::string& content,
-        unsigned int size
-    ) {
-        return sf::Text(font, TextUtils::fromUtf8(content), size);
-    }
 
 bool readLeftClickPosition(
     const sf::Event& event,
@@ -249,7 +239,7 @@ void MapScene::handleEvent(
     settingsIconButton_.handleEvent(event, window);
 
     if (viewOnly_ && mapIconButton_.wasClicked()) {
-        context.audio.playSound("Click");
+        
 
         transition_ = SceneTransition{};
         transition_.closeMapPreview = true;
@@ -259,7 +249,7 @@ void MapScene::handleEvent(
     }
 
     if (deckIconButton_.wasClicked()) {
-        context.audio.playSound("Click");
+        
 
         deckOverlay_.open(
             "牌库",
@@ -271,7 +261,7 @@ void MapScene::handleEvent(
     }
 
     if (settingsIconButton_.wasClicked()) {
-        context.audio.playSound("Click");
+        
 
         transition_.target = SceneType::Menu;
         transition_.saveAndQuit = true;
@@ -298,8 +288,10 @@ void MapScene::handleEvent(
         getNodeIndexAtPosition(mousePos);
 
     if (nodeIndex >= 0) {
+        context.audio.playSound("Click");
         enterNode(nodeIndex);
     }
+
 }
 
 

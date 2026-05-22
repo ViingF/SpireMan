@@ -1,21 +1,38 @@
 #include "ResourceManager.hpp"
 #include <map>
-ErrorCode ResourceManager::loadTexture(const std::string& id, const std::string& path) {
+
+#include "Logger.hpp"
+
+ErrorCode ResourceManager::loadTexture(
+    const std::string& id,
+    const std::string& path
+) {
     if (textureMap.find(id) != textureMap.end()) {
+        LOG_DEBUG("Texture already loaded: id=" << id);
         return ErrorCode::OK;
     }
-    Texture texture;
+
+    sf::Texture texture;
+
     if (!texture.loadFromFile(path)) {
-         return ErrorCode::RESOURCE_LOAD_FAILED;
+        LOG_ERROR("Texture load failed: id=" << id << ", path=" << path);
+        return ErrorCode::RESOURCE_LOAD_FAILED;
     }
+
     textureMap[id] = std::move(texture);
+
+    LOG_DEBUG("Texture loaded: id=" << id << ", path=" << path);
+
     return ErrorCode::OK;
 }
 
-Texture& ResourceManager::getTexture(const std::string& id) {
+
+sf::Texture& ResourceManager::getTexture(const std::string& id) {
     auto it = textureMap.find(id);
     if (it == textureMap.end()) {
+        LOG_ERROR("Texture not found: id=" << id);
         throw std::runtime_error("Texture not found: " + id);
+
     }
     return it->second;
 }
@@ -35,10 +52,12 @@ ErrorCode ResourceManager::loadFont(
     sf::Font font;
 
     if (!font.openFromFile(path)) {
+        LOG_ERROR("Font load failed: id=" << id << ", path=" << path);
         return ErrorCode::RESOURCE_LOAD_FAILED;
     }
 
     fontMap[id] = std::move(font);
+    LOG_DEBUG("Font loaded: id=" << id << ", path=" << path);
 
     return ErrorCode::OK;
 }
@@ -49,9 +68,9 @@ sf::Font& ResourceManager::getFont(
     auto it = fontMap.find(id);
 
     if (it == fontMap.end()) {
-        throw std::runtime_error(
-            "Font not found: " + id
-        );
+        LOG_ERROR("Font not found: id=" << id);
+        throw std::runtime_error("Font not found: " + id);
+
     }
 
     return it->second;
@@ -75,10 +94,13 @@ ErrorCode ResourceManager::loadSoundBuffer(
     sf::SoundBuffer buffer;
 
     if (!buffer.loadFromFile(path)) {
+        LOG_ERROR("SoundBuffer load failed: id=" << id << ", path=" << path);
         return ErrorCode::RESOURCE_LOAD_FAILED;
     }
 
     soundBufferMap[id] = std::move(buffer);
+
+    LOG_DEBUG("SoundBuffer loaded: id=" << id << ", path=" << path);
 
     return ErrorCode::OK;
 }
@@ -89,7 +111,9 @@ sf::SoundBuffer& ResourceManager::getSoundBuffer(
     auto it = soundBufferMap.find(id);
 
     if (it == soundBufferMap.end()) {
+        LOG_ERROR("SoundBuffer not found: id=" << id);
         throw std::runtime_error("SoundBuffer not found: " + id);
+
     }
 
     return it->second;

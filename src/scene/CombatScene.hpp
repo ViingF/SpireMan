@@ -7,12 +7,6 @@
 #include "ui/CardPileOverlay.hpp"
 #include "ui/CardView.hpp"
 #include "ui/EnemyGroupView.hpp"
-#include "ui/EnergyView.hpp"
-#include "ui/HealthBar.hpp"
-#include "ui/IntentView.hpp"
-#include "ui/StateView.hpp"
-
-#include <optional>
 #include <string>
 #include <vector>
 

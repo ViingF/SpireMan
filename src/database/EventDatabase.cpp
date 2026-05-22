@@ -6,6 +6,8 @@
 #include <sstream>
 #include <stdexcept>
 
+#include "core/Logger.hpp"
+
 bool EventDatabase::exists(EventId id) const
 {
     return events_.find(id) != events_.end();
@@ -174,6 +176,8 @@ std::vector<EventEffect> parseEffects(const std::string& text)
 
 ErrorCode EventDatabase::loadFromCsv(const std::string& path)
 {
+    LOG_INFO("Loading events csv: path=" << path);
+
     std::ifstream file(path);
 
     if (!file.is_open()) {
@@ -265,6 +269,8 @@ ErrorCode EventDatabase::loadFromCsv(const std::string& path)
             }
         }
     }
+
+    LOG_INFO("Events loaded: count=" << events_.size());
 
     return ErrorCode::OK;
 }

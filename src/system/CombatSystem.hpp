@@ -25,7 +25,7 @@ public:
     BattleResult getBattleResult() const;
     ErrorCode commitResultToRunState(RunState& runState);
 
-    // Ö»¶Á getter
+    // åªè¯» getter
     const Player& getPlayer() const;
     const std::vector<Enemy>& getEnemies() const;
     const CombatDeck& getDeck() const;
@@ -50,7 +50,7 @@ private:
     void executeEnemyIntents();
     void checkBattleResult();
 
-    // µ¥´ÎĞ§¹ûÓ¦ÓÃ£¨¹© applyCardEffects µ÷ÓÃ£©
+    // å•æ¬¡æ•ˆæœåº”ç”¨ï¼ˆä¾› applyCardEffects è°ƒç”¨ï¼‰
     void dealDamageToEnemy(TargetId targetId, int amount);
     void gainBlock(int amount);
     void drawCards(int count);
@@ -62,9 +62,14 @@ private:
     static void decreaseTimedStatus(int& value);
     void tickPlayerEndTurnStatuses();
     void tickEnemiesEndTurnStatuses();
+    void triggerEndTurnHandCardEffects();
+    void losePlayerHp(int amount);
+    void applyVulnerableToPlayer(int amount);
+    void applyWeakToPlayer(int amount);
 
 
-    // ³ÉÔ±±äÁ¿
+
+    // æˆå‘˜å˜é‡
     CombatPhase phase_ = CombatPhase::Finished;
     Player player_;
     std::vector<Enemy> enemies_;
@@ -78,4 +83,6 @@ private:
     EnemyAISystem enemyAI_;
     CardDatabase* cardDatabase_ = nullptr;
     std::mt19937* rng_ = nullptr;
+    bool isBossEncounter_ = false;
+
 };

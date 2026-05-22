@@ -3,6 +3,8 @@
 
 #include <stdexcept>
 
+#include "core/Logger.hpp"
+
 namespace {
 
     bool isBoolText(const std::string& text)
@@ -87,6 +89,18 @@ namespace {
         return false;
     }
 
+    bool isRewardBannedCard(CardId cardId, const CardDef& card)
+    {
+        return cardId == 1 ||
+               cardId == 2 ||
+               card.name == "Strike" ||
+               card.name == "Defend" ||
+               card.name == "打击" ||
+               card.name == "防御" ||
+               card.textureId == "Strike" ||
+               card.textureId == "Defend";
+    }
+
 }
 
 
@@ -94,6 +108,7 @@ ErrorCode CardDatabase::loadFromCsv(
     const std::string& path
 )
 {
+    LOG_INFO("Loading cards csv: path=" << path);
     cards.clear();
 
     std::vector<std::vector<std::string>> rows;
@@ -225,12 +240,14 @@ ErrorCode CardDatabase::loadFromCsv(
 
             cards[card.id] = card;
 
+
         }
         catch (...)
         {
             return ErrorCode::DATA_FORMAT_ERROR;
         }
     }
+    LOG_INFO("Cards loaded: count=" << cards.size());
 
     return ErrorCode::OK;
 }
@@ -317,15 +334,18 @@ std::vector<CardId> CardDatabase::getRewardCardIds() const
 CardId CardDatabase::chooseRandomRewardCardId(std::mt19937& rng) const
 {
     std::vector<CardId> ids = getRewardCardIds();
-
     if (ids.empty()) {
-        return 0;
+        throw("No cards found");
     }
 
-    std::uniform_int_distribution<std::size_t> dist(
-        0,
-        ids.size() - 1
-    );
+    std::uniform_int_distribution<std::size_t> dist(0, ids.size() - 1);
 
-    return ids[dist(rng)];
+    std::size_t idx;
+    CardId id;
+    do {
+        idx = dist(rng);
+        id = ids[idx];
+    } while (isRewardBannedCard(id, cards.at(id)));
+
+    return id;
 }

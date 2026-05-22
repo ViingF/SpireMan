@@ -1,4 +1,3 @@
-// ui/HealthBar.cpp
 #include "HealthBar.hpp"
 
 #include "TextUtils.hpp"

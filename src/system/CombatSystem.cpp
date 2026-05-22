@@ -1,15 +1,38 @@
 #include "CombatSystem.hpp"
 #include <random>
 
+#include "config/Constants.hpp"
+#include "core/Logger.hpp"
+
 namespace {
     constexpr int kVictoryGoldMin = 10;
     constexpr int kVictoryGoldMax = 20;
+
+    EnemyIntent adjustEnemyIntent(EnemyIntent intent)
+    {
+        if (intent.type == EnemyIntentType::Attack) {
+            intent.value = adjustEnemyValue(
+                intent.value,
+                ENEMY_ATTACK_PERCENT,
+                ENEMY_ATTACK_FLAT_BONUS,
+                0
+            );
+        }
+
+        return intent;
+    }
 }
 
 
 ErrorCode CombatSystem::startCombat(RunState& runState, const EncounterDef& encounterDef,
     const EnemyDatabase& enemyDatabase, CardDatabase& cardDatabase) {
-    // ÖØÖÃ×´Ì¬£¨Í¬Ç°£©
+
+    LOG_INFO(
+    "Combat started: encounterId=" << encounterDef.id
+    << ", isBoss=" << encounterDef.isBoss
+);
+
+    // é‡ç½®çŠ¶æ€ï¼ˆåŒå‰ï¼‰
     phase_ = CombatPhase::Finished;
     player_ = Player{};
     enemies_.clear();
@@ -18,21 +41,23 @@ ErrorCode CombatSystem::startCombat(RunState& runState, const EncounterDef& enco
     turnIndex_ = 0;
     result_ = BattleResult::Ongoing;
     resultCommitted_ = false;
+    isBossEncounter_ = encounterDef.isBoss;
+
 
     cardDatabase_ = &cardDatabase;
     rng_ = &runState.rng;
 
-    // Íæ¼Ò×´Ì¬¸´ÖÆ
+    // ç©å®¶çŠ¶æ€å¤åˆ¶
     player_.maxHp = runState.player.maxHp;
     player_.hp = runState.player.hp;
-    // ... ÆäËûÊôĞÔ
+    // ... å…¶ä»–å±æ€§
 
-    // ¸ù¾İ EncounterDef ´´½¨¶à¸öµĞÈË
+    // æ ¹æ® EncounterDef åˆ›å»ºå¤šä¸ªæ•Œäºº
     int enemyCount = 0;
 
     for (const auto& slot : encounterDef.enemies)
     {
-        // ×î¶àÖ»ÔÊĞí 3 ¸öµĞÈË
+        // æœ€å¤šåªå…è®¸ 3 ä¸ªæ•Œäºº
         if (enemyCount >= 3)
         {
             break;
@@ -40,32 +65,51 @@ ErrorCode CombatSystem::startCombat(RunState& runState, const EncounterDef& enco
 
         if (!enemyDatabase.exists(slot.enemyId))
         {
+            LOG_WARN("Enemy id not found in encounter: enemyId=" << slot.enemyId);
             continue;
         }
+
 
         const EnemyDef& def = enemyDatabase.get(slot.enemyId);
 
         Enemy enemy;
         enemy.id = def.id;
         enemy.name = def.name;
-        enemy.maxHp = def.maxHp;
-        enemy.hp = def.maxHp;
+        enemy.maxHp = adjustEnemyValue(
+    def.maxHp,
+    ENEMY_HP_PERCENT,
+    ENEMY_HP_FLAT_BONUS,
+    1
+);
+
+        enemy.hp = enemy.maxHp;
         enemy.block = 0;
         enemy.strength = 0;
         enemy.vulnerable = 0;
         enemy.weak = 0;
-        enemy.movePattern = def.movePattern;
+
+        enemy.movePattern.clear();
+        enemy.movePattern.reserve(def.movePattern.size());
+
+        for (const EnemyIntent& intent : def.movePattern) {
+            enemy.movePattern.push_back(adjustEnemyIntent(intent));
+        }
+
 
         enemies_.push_back(enemy);
 
         enemyCount++;
     }
 
-    if (enemies_.empty()) return ErrorCode::INVALID_SCENE_STATE; // Ã»ÓĞµĞÈË£¬±¨´í
+    if (enemies_.empty()) {
+        LOG_ERROR("Combat start failed: no valid enemies");
+        return ErrorCode::INVALID_SCENE_STATE;
+    }
+
 
     cardSystem_.buildCombatDeck(deck_, runState.masterDeck);
     cardSystem_.shuffleDrawPile(deck_, *rng_);
-    startPlayerTurn();  // ÄÚ²¿»á³éÅÆ¡¢Éú³ÉµĞÈËÒâÍ¼µÈ
+    startPlayerTurn();  // å†…éƒ¨ä¼šæŠ½ç‰Œã€ç”Ÿæˆæ•Œäººæ„å›¾ç­‰
     return ErrorCode::OK;
 }
 bool CombatSystem::hasCommittedResult() const
@@ -104,6 +148,7 @@ ErrorCode CombatSystem::playCard(int handIndex, TargetId targetId)
 {
     if (phase_ != CombatPhase::PlayerTurn)
     {
+        LOG_WARN("Play card failed: not player turn");
         return ErrorCode::INVALID_SCENE_STATE;
     }
     if (result_ != BattleResult::Ongoing)
@@ -112,6 +157,7 @@ ErrorCode CombatSystem::playCard(int handIndex, TargetId targetId)
     }
     if (handIndex < 0 || handIndex >= static_cast<int>(deck_.hand.size()))
     {
+        LOG_WARN("Play card failed: invalid handIndex=" << handIndex);
         return ErrorCode::CARD_NOT_IN_HAND;
     }
     const CardInstance& inst = deck_.hand[handIndex];
@@ -125,7 +171,7 @@ ErrorCode CombatSystem::playCard(int handIndex, TargetId targetId)
         return targetCheck;
     }
 
-    // ¿Û·Ñ
+    // æ‰£è´¹
     if (energy_ < card.cost) {
         return ErrorCode::NOT_ENOUGH_ENERGY;
     }
@@ -134,11 +180,19 @@ ErrorCode CombatSystem::playCard(int handIndex, TargetId targetId)
 
     applyCardEffects(card, targetId);
 
-    // ÒÆ³ı´ò³öµÄÅÆ
+    // ç§»é™¤æ‰“å‡ºçš„ç‰Œ
     movePlayedCardAfterResolve(inst, card);
 
-    // ¼ì²éµĞÈËÊÇ·ñËÀÍö
+    // æ£€æŸ¥æ•Œäººæ˜¯å¦æ­»äº¡
     checkBattleResult();
+
+    LOG_INFO(
+    "Card played: cardId=" << card.id
+    << ", name=" << card.name
+    << ", targetId=" << targetId
+    << ", energyLeft=" << energy_
+);
+
 
     return ErrorCode::OK;
 }
@@ -146,6 +200,10 @@ ErrorCode CombatSystem::canPlayCard(int handIndex, TargetId targetId) const
 {
     const CardInstance& inst = deck_.hand[handIndex];
     const CardDef& card = cardDatabase_->get(inst.cardId);
+
+    if (card.cost < 0) {
+        return ErrorCode::CARD_UNPLAYABLE;
+    }
 
     switch (card.target)
     {
@@ -171,7 +229,6 @@ ErrorCode CombatSystem::canPlayCard(int handIndex, TargetId targetId) const
 }
 ErrorCode CombatSystem::endPlayerTurn()
 {
-    //ÒÀ¾É¼ì²éÒ»±é
     if (phase_ != CombatPhase::PlayerTurn)
     {
         return ErrorCode::INVALID_SCENE_STATE;
@@ -180,11 +237,21 @@ ErrorCode CombatSystem::endPlayerTurn()
     {
         return ErrorCode::INVALID_SCENE_STATE;
     }
-    //ÆúÅÆ½×¶Î
-    cardSystem_.discardAllHand(deck_);
 
-    // Íæ¼ÒÉíÉÏµÄÒ×ÉË¡¢ĞéÈõµÈ£¬ÔÚÍæ¼Ò»ØºÏ½áÊøÊ±¼õÉÙ
+    // å…ˆç»“ç®—æœ¬å›åˆå·²æœ‰çš„ç©å®¶æ˜“ä¼¤ã€è™šå¼±è¡°å‡
     tickPlayerEndTurnStatuses();
+
+    // å†è§¦å‘â€œå›åˆç»“æŸæ—¶ï¼Œå¦‚æœæ­¤ç‰Œåœ¨æ‰‹ç‰Œä¸­â€çš„è¯…å’’æ•ˆæœ
+    triggerEndTurnHandCardEffects();
+
+    checkBattleResult();
+    if (result_ != BattleResult::Ongoing)
+    {
+        return ErrorCode::OK;
+    }
+
+    // æœ€åå¼ƒç‰Œ
+    cardSystem_.discardAllHand(deck_);
 
     phase_ = CombatPhase::EnemyTurn;
 
@@ -198,12 +265,10 @@ ErrorCode CombatSystem::endPlayerTurn()
 
     executeEnemyIntents();
 
-    // µĞÈËĞĞ¶¯ºó£¬µĞÈËÉíÉÏµÄÒ×ÉË¡¢ĞéÈõµÈ¼õÉÙ
     tickEnemiesEndTurnStatuses();
 
     checkBattleResult();
 
-    // Èç¹ûÕ½¶·Î´½áÊø£¬¿ªÊ¼ÏÂÒ»Íæ¼Ò»ØºÏ
     if (result_ == BattleResult::Ongoing) {
         startPlayerTurn();
     }
@@ -211,8 +276,11 @@ ErrorCode CombatSystem::endPlayerTurn()
     {
         phase_ = CombatPhase::Finished;
     }
+    LOG_INFO("Player turn ended: turnIndex=" << turnIndex_);
+
     return ErrorCode::OK;
 }
+
 ErrorCode CombatSystem::commitResultToRunState(RunState& runState)
 {
     if (result_ == BattleResult::Ongoing)
@@ -221,13 +289,22 @@ ErrorCode CombatSystem::commitResultToRunState(RunState& runState)
     }
     if (resultCommitted_) 
     {
-        return ErrorCode::OK;  // ÒÑÌá½»¹ı£¬ÃİµÈ·µ»Ø
+        return ErrorCode::OK;  // å·²æäº¤è¿‡ï¼Œå¹‚ç­‰è¿”å›
     }
     if (result_ == BattleResult::Victory)
     {
-        runState.player.hp = std::min(player_.maxHp, player_.hp + 6);
-
         runState.player.maxHp = player_.maxHp;
+
+        if (isBossEncounter_) {
+            // å‡»è´¥ Boss åå›æ»¡è¡€
+            runState.player.hp = runState.player.maxHp;
+        } else {
+            // æ™®é€šæˆ˜æ–—ä»ç„¶å›å¤ 6 ç‚¹è¡€
+            runState.player.hp = std::min(
+                runState.player.maxHp,
+                player_.hp + 6
+            );
+        }
 
         std::uniform_int_distribution<int> goldDist(
             kVictoryGoldMin,
@@ -238,11 +315,20 @@ ErrorCode CombatSystem::commitResultToRunState(RunState& runState)
         runState.gold += goldReward;
     }
 
+
     if (result_ == BattleResult::Defeat)
     {
         runState.player.hp = 0;
     }
     resultCommitted_ = true;
+
+    LOG_INFO(
+    "Combat result committed: result=" << toString(result_)
+    << ", hp=" << runState.player.hp
+    << "/" << runState.player.maxHp
+    << ", gold=" << runState.gold
+);
+
     return ErrorCode::OK;
 }
 void CombatSystem::gainBlock(int amount)
@@ -371,10 +457,16 @@ void CombatSystem::applyCardEffects(const CardDef& card, TargetId targetId)
                     for (TargetId i = 0; i < static_cast<TargetId>(enemies_.size()); ++i) {
                         dealDamageToEnemy(i, effect.value);
                     }
-                } else {
+                }
+                else if (card.target == TargetType::Self) {
+                    // ç”¨äºâ€œå¤±å»ç”Ÿå‘½â€çš„è¯…å’’æ•ˆæœï¼Œä¸ç»è¿‡æ ¼æŒ¡
+                    losePlayerHp(effect.value);
+                }
+                else {
                     dealDamageToEnemy(targetId, effect.value);
                 }
                 break;
+
 
             case EffectType::GainBlock:
                 gainBlock(effect.value);
@@ -389,24 +481,34 @@ void CombatSystem::applyCardEffects(const CardDef& card, TargetId targetId)
                 break;
 
             case EffectType::ApplyVulnerable:
-                if (targetAllEnemies) {
+                if (card.target == TargetType::Self) {
+                    applyVulnerableToPlayer(effect.value);
+                }
+                else if (targetAllEnemies) {
                     for (TargetId i = 0; i < static_cast<TargetId>(enemies_.size()); ++i) {
                         applyVulnerableToEnemy(i, effect.value);
                     }
-                } else {
+                }
+                else {
                     applyVulnerableToEnemy(targetId, effect.value);
                 }
                 break;
 
+
             case EffectType::ApplyWeak:
-                if (targetAllEnemies) {
+                if (card.target == TargetType::Self) {
+                    applyWeakToPlayer(effect.value);
+                }
+                else if (targetAllEnemies) {
                     for (TargetId i = 0; i < static_cast<TargetId>(enemies_.size()); ++i) {
                         applyWeakToEnemy(i, effect.value);
                     }
-                } else {
+                }
+                else {
                     applyWeakToEnemy(targetId, effect.value);
                 }
                 break;
+
 
             case EffectType::GainStrength:
                 gainStrength(effect.value);
@@ -426,7 +528,7 @@ void CombatSystem::movePlayedCardAfterResolve(const CardInstance& playedCard, co
         });
     if (it == deck_.hand.end()) return;
 
-    // ¸ù¾İ¿¨ÅÆÊÇ·ñÏûºÄ£¬¾ö¶¨·ÅÈëÆúÅÆ¶Ñ»¹ÊÇÏûºÄ¶Ñ
+    // æ ¹æ®å¡ç‰Œæ˜¯å¦æ¶ˆè€—ï¼Œå†³å®šæ”¾å…¥å¼ƒç‰Œå †è¿˜æ˜¯æ¶ˆè€—å †
     if (card.exhaust) {
         deck_.exhaustPile.push_back(*it);
     }
@@ -457,10 +559,12 @@ void CombatSystem::executeEnemyIntents()
 void CombatSystem::checkBattleResult()
 {
     if (player_.hp <= 0) {
+        LOG_INFO("Battle result changed: " << toString(result_));
         result_ = BattleResult::Defeat;
         phase_ = CombatPhase::Finished;
     }
     else if (areAllEnemiesDefeated()) {
+        LOG_INFO("Battle result changed: " << toString(result_));
         result_ = BattleResult::Victory;
         phase_ = CombatPhase::Finished;
     }
@@ -485,4 +589,59 @@ void CombatSystem::tickEnemiesEndTurnStatuses()
         decreaseTimedStatus(enemy.vulnerable);
         decreaseTimedStatus(enemy.weak);
     }
+}
+
+void CombatSystem::triggerEndTurnHandCardEffects()
+{
+    std::vector<CardId> triggeredCardIds;
+    triggeredCardIds.reserve(deck_.hand.size());
+
+    for (const CardInstance& inst : deck_.hand) {
+        if (!cardDatabase_->exists(inst.cardId)) {
+            continue;
+        }
+
+        const CardDef& card = cardDatabase_->get(inst.cardId);
+
+        // å½“å‰è§„åˆ™ï¼šè´Ÿè´¹ç”¨è¯…å’’ç‰Œä¸å¯æ‰“å‡ºï¼Œä½†å›åˆç»“æŸæ—¶å¯è§¦å‘è‡ªèº«æ•ˆæœ
+        if (card.type == CardType::Curse && card.cost < 0 && !card.effects.empty()) {
+            triggeredCardIds.push_back(inst.cardId);
+        }
+    }
+
+    for (CardId cardId : triggeredCardIds) {
+        const CardDef& card = cardDatabase_->get(cardId);
+        applyCardEffects(card, NoTarget);
+    }
+}
+
+void CombatSystem::losePlayerHp(int amount)
+{
+    if (amount <= 0) {
+        return;
+    }
+
+    player_.hp -= amount;
+
+    if (player_.hp < 0) {
+        player_.hp = 0;
+    }
+}
+
+void CombatSystem::applyVulnerableToPlayer(int amount)
+{
+    if (amount <= 0) {
+        return;
+    }
+
+    player_.vulnerable += amount;
+}
+
+void CombatSystem::applyWeakToPlayer(int amount)
+{
+    if (amount <= 0) {
+        return;
+    }
+
+    player_.weak += amount;
 }

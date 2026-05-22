@@ -133,7 +133,6 @@ void CardRemoveScene::handleEvent(
     mapIconButton_.handleEvent(event, window);
 
     if (mapIconButton_.wasClicked()) {
-        context.audio.playSound("Click");
 
         if (mode_ == CardRemoveSceneMode::Embedded) {
             finished_ = true;
@@ -162,16 +161,19 @@ void CardRemoveScene::handleEvent(
         window.mapPixelToCoords(pixelPosition);
 
     if (getPrevPageRect().contains(mousePos)) {
+        context.audio.playSound("Click");
         page_ -= 1;
         clampPage();
         return;
     }
 
     if (getNextPageRect().contains(mousePos)) {
+        context.audio.playSound("Click");
         page_ += 1;
         clampPage();
         return;
     }
+
 
     const int cardsPerPage = getCardsPerPage();
     const int startIndex = page_ * cardsPerPage;
@@ -201,9 +203,11 @@ void CardRemoveScene::handleEvent(
         );
 
         if (cardView.contains(mousePos)) {
+            context.audio.playSound("Click");
             chooseCardByDeckIndex(deckIndex);
             return;
         }
+
 
     }
 }

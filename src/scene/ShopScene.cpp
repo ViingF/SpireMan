@@ -157,7 +157,7 @@ void ShopScene::handleEvent(
     mapIconButton_.handleEvent(event, window);
 
     if (mapIconButton_.wasClicked()) {
-        context.audio.playSound("Click");
+        
         transition_.openMapPreview = true;
         transition_.target = SceneType::Map;
         mapIconButton_.reset();
@@ -195,13 +195,14 @@ void ShopScene::handleEvent(
     int clickedIndex = -1;
 
     if (shopView_.handleCardClick(
-            mousePos,
-            static_cast<int>(cardOffers_.size()),
-            clickedIndex
-        )) {
+        mousePos,
+        static_cast<int>(cardOffers_.size()),
+        clickedIndex
+    )) {
+        context.audio.playSound("Click");
         buyCard(clickedIndex);
-        return;
     }
+
 }
 
 
@@ -251,7 +252,6 @@ void ShopScene::draw(sf::RenderWindow& window)
 
     if (removingCard_ && removeCardScene_) {
         removeCardScene_->draw(window);
-        return;
     }
 }
 

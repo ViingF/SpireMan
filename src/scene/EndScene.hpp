@@ -38,7 +38,7 @@ private:
 
     SceneTransition transition;
 
-    RectangleShape background;
+    sf::RectangleShape background;
 
 
     float victoryElapsed = 0.0f;

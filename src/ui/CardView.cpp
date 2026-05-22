@@ -3,7 +3,6 @@
 #include "TextUtils.hpp"
 
 #include <algorithm>
-#include <sstream>
 #include <vector>
 
 namespace {
@@ -55,40 +54,6 @@ namespace {
         return lines;
     }
 
-
-std::vector<std::string> wrapText(
-    const std::string& text,
-    std::size_t maxCharsPerLine
-)
-{
-    std::vector<std::string> lines;
-    std::istringstream input(text);
-
-    std::string word;
-    std::string line;
-
-    while (input >> word) {
-        if (
-            !line.empty() &&
-            line.size() + word.size() + 1 > maxCharsPerLine
-        ) {
-            lines.push_back(line);
-            line.clear();
-        }
-
-        if (!line.empty()) {
-            line += " ";
-        }
-
-        line += word;
-    }
-
-    if (!line.empty()) {
-        lines.push_back(line);
-    }
-
-    return lines;
-}
 
     void setTextCenterX(sf::Text& text, float centerX)
 {
@@ -405,7 +370,7 @@ void CardView::draw(
 
     centerText(nameText, {
         drawPosition.x + size_.x * 0.5f,
-        drawPosition.y + size_.y * 0.115f
+        drawPosition.y + size_.y * 0.111f
     });
 
     setTextCenterX(nameText, drawPosition.x + size_.x * 0.5f);

@@ -94,7 +94,7 @@ MenuScene::MenuScene(GameContext& context)
             "title"
         ))
 {
-    Vector2u size = context.resources.getTexture(
+    sf::Vector2u size = context.resources.getTexture(
             "title"
         ).getSize();
     float targetWidth = 1920;
@@ -126,7 +126,7 @@ void MenuScene::handleEvent(
 
     if (nameButton.wasClicked())
     {
-        context.audio.playSound("Click");
+        
 
         editingName = true;
         nameInput = context.runState.playerName.empty()
@@ -150,7 +150,7 @@ void MenuScene::handleEvent(
 
     if (startButton.wasClicked())
     {
-        context.audio.playSound("Click");
+        
 
         transition.target = SceneType::CharacterSelect;
 
@@ -159,7 +159,7 @@ void MenuScene::handleEvent(
 
     if (quitButton.wasClicked())
     {
-        context.audio.playSound("Click");
+        
 
         const_cast<sf::RenderWindow&>(window).close();
 
@@ -168,7 +168,7 @@ void MenuScene::handleEvent(
 
     if (loadButton.wasClicked())
     {
-        context.audio.playSound("Click");
+        
 
         if (SaveSystem::hasSave()) {
             transition.target = SceneType::Map;

@@ -13,6 +13,7 @@
 #include <string>
 #include <vector>
 
+#include "ui/HealthBar.hpp"
 #include "ui/TopInfoBar.hpp"
 
 namespace {
@@ -81,9 +82,6 @@ void drawStatusIcons(
 const float kDesignWidth = 1920.f;
 const float kDesignHeight = 1080.f;
 const float kPileButtonDesignSize = 128.f;
-const float kDrawPileDesignY = 943.f;
-const float kDiscardPileDesignY = 943.f;
-const float kExhaustPileDesignY = 743.f;
 
 const float kHandCardWidth = 190.f;
 const float kHandCardHeight = 268.f;
@@ -267,7 +265,6 @@ void CombatScene::handleEvent(
     mapIconButton_.handleEvent(event, window);
 
     if (mapIconButton_.wasClicked()) {
-        context.audio.playSound("Click");
 
         transition_ = SceneTransition{};
         transition_.openMapPreview = true;
@@ -352,6 +349,7 @@ void CombatScene::handleEvent(
         if (!cardViews_[i].contains(mousePos)) {
             continue;
         }
+        context_.audio.playSound("Click");
 
         const CardInstance& inst = hand[i];
 
@@ -490,7 +488,6 @@ void CombatScene::updateBattleTransition()
 
     if (result == BattleResult::Defeat) {
         transition_.target = SceneType::End;
-        return;
     }
 }
 

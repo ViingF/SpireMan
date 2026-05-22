@@ -30,8 +30,6 @@ add_executable(SpireMan src/main.cpp
         src/database/CardDatabase.hpp
         src/database/EnemyDatabase.cpp
         src/database/EnemyDatabase.hpp
-        src/database/RelicDatabase.cpp
-        src/database/RelicDatabase.hpp
         src/config/Constants.hpp
         src/config/Paths.hpp
         src/model/Types.hpp

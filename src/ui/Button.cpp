@@ -3,6 +3,12 @@
 
 #include "TextUtils.hpp"
 
+std::function<void()> Button::clickSoundCallback_;
+
+void Button::setClickSoundCallback(std::function<void()> callback)
+{
+    clickSoundCallback_ = std::move(callback);
+}
 
 Button::Button(
     sf::Vector2f position,
@@ -52,7 +58,12 @@ void Button::handleEvent(
 
             if (shape.getGlobalBounds().contains(clickPos)) {
                 clicked = true;
+
+                if (clickSoundCallback_) {
+                    clickSoundCallback_();
+                }
             }
+
         }
     }
 }

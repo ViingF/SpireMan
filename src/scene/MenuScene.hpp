@@ -36,7 +36,7 @@ private:
     Button nameButton;
 
     SceneTransition transition;
-    Sprite background;
+    sf::Sprite background;
     bool editingName = false;
     std::string nameInput = "Player";
     std::string menuMessage;

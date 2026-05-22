@@ -1,6 +1,7 @@
 #include "Game.hpp"
 #include <SFML/Window.hpp>
 
+#include "Logger.hpp"
 #include "model/CardInstance.hpp"
 #include "model/Enemy.hpp"
 #include "model/RunState.hpp"
@@ -43,6 +44,7 @@ gameContext{
 
 
 {
+    LOG_INFO("Game initializing");
     window.setFramerateLimit(60);
 
     //其他
@@ -206,6 +208,11 @@ gameContext{
 
     resources.loadSoundBuffer("Click",FILEPATH+"/assets/audio/sound/click.ogg");
 
+    Button::setClickSoundCallback([this]() {
+        audio.playSound("Click");
+    });
+
+
     audio.loadMusic("Menu",FILEPATH+"/assets/audio/music/menu.ogg");
     audio.loadMusic("Act1Map",FILEPATH+"/assets/audio/music/act1map.ogg");
     audio.loadMusic("Act1Combat",FILEPATH+"/assets/audio/music/act1combat.ogg");
@@ -219,6 +226,12 @@ gameContext{
     auto cardCode=cardDatabase.loadFromCsv(FILEPATH+"/data/cards.csv");
     auto encounterCode = encounterDatabase.loadFromCsv(FILEPATH+"/data/encounters.csv");
 
+    LOG_INFO(
+        "Database load result: events=" << toString(eventCode)
+        << ", enemies=" << toString(enemyCode)
+        << ", encounters=" << toString(encounterCode)
+        << ", cards=" << toString(cardCode)
+    );
 
     if (
     eventCode != ErrorCode::OK ||
@@ -226,6 +239,7 @@ gameContext{
     encounterCode != ErrorCode::OK ||
     cardCode != ErrorCode::OK
 ) {
+        LOG_FATAL("Database load failed");
         throw std::runtime_error(
             "Database load failed. events=" +
             std::to_string(static_cast<int>(eventCode)) +
@@ -239,6 +253,7 @@ gameContext{
 }
 
 
+    LOG_INFO("Game initialized successfully");
 
 }
 
@@ -249,6 +264,7 @@ void Game::processEvents()
     {
         if (event->is<sf::Event::Closed>())
         {
+            LOG_INFO("Window close requested");
             window.close();
             return;
         }
@@ -261,7 +277,10 @@ void Game::processEvents()
 
 void Game::run()
 {
+    LOG_INFO("Game loop started");
+
     Clock clock;
+
     while (window.isOpen())
     {
         float dt = clock.restart().asSeconds();
@@ -269,7 +288,10 @@ void Game::run()
         update(dt);
         render();
     }
+
+    LOG_INFO("Game loop stopped");
 }
+
 
 
 void Game::update(float dt)
@@ -323,6 +345,7 @@ void Game::switchSceneIfNeeded()
     SceneTransition transition =
     currentScene->getTransition();
 
+
     if (transition.closeMapPreview)
     {
         currentScene->resetTransition();
@@ -369,11 +392,24 @@ void Game::switchSceneIfNeeded()
         return;
     }
 
-
+    LOG_INFO(
+        "Scene transition requested: from="
+        << toString(currentSceneType_)
+        << ", to="
+        << toString(transition.target)
+        << ", encounterId="
+        << transition.encounterId
+        << ", eventId="
+        << transition.eventId
+    );
 
     if (transition.saveAndQuit)
     {
-        SaveSystem::saveRun(runState);
+        LOG_INFO("Save and quit requested");
+
+        if (!SaveSystem::saveRun(runState)) {
+            LOG_ERROR("Save failed during save and quit");
+        }
 
         suspendedScene_.reset();
         suspendedSceneType_ = SceneType::None;
@@ -392,7 +428,9 @@ void Game::switchSceneIfNeeded()
 
     if (transition.loadGame)
     {
+        LOG_INFO("Load game requested");
         if (SaveSystem::loadRun(runState)) {
+            LOG_INFO("Load game success");
             currentScene =
                 std::make_unique<MapScene>(
                     gameContext
@@ -400,6 +438,7 @@ void Game::switchSceneIfNeeded()
             currentSceneType_ = SceneType::Map;
             playMusicForScene(SceneType::Map);
         } else {
+            LOG_INFO("Load game failed");
             currentScene =
                 std::make_unique<MenuScene>(
                     gameContext
@@ -545,6 +584,7 @@ void Game::switchSceneIfNeeded()
 
 void Game::startNewRun()
 {
+    LOG_INFO("Starting new run");
     const std::string keepPlayerName =
         runState.playerName.empty()
             ? "Player"
@@ -602,6 +642,7 @@ void Game::startNewRun()
 
 void Game::playMusicForScene(SceneType sceneType)
 {
+    LOG_INFO("Play music for scene: " << toString(sceneType));
     switch (sceneType) {
         case SceneType::Menu:
         case SceneType::CharacterSelect:

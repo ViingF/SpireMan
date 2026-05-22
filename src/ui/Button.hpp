@@ -1,6 +1,7 @@
 #ifndef SPIRELIKE_BUTTON_HPP
 #define SPIRELIKE_BUTTON_HPP
 
+#include <functional>
 #include <SFML/Graphics.hpp>
 #include <string>
 
@@ -39,7 +40,10 @@ public:
     void setPosition(sf::Vector2f position);
     void setSize(sf::Vector2f size);
     void setDescription(const std::string& description);
+    static void setClickSoundCallback(std::function<void()> callback);
+
 private:
+    static std::function<void()> clickSoundCallback_;
     void centerText();
     void applyVisualState();
     void setHovered(bool hovered);
