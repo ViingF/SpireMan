@@ -8,8 +8,12 @@ Button::Button(
     sf::Vector2f position,
     sf::Vector2f size,
     sf::Font& font,
-    const std::string& text
-) : content(font, TextUtils::fromUtf8(text))
+    const std::string& text,
+    const std::string& description
+) : content(font, TextUtils::fromUtf8(text)),
+    font_(&font),
+    description_(description)
+
 {
     shape.setPosition(position);
     shape.setSize(size);
@@ -62,6 +66,8 @@ void Button::draw(
 {
     window.draw(shape);
     window.draw(content);
+    drawDescription(window);
+
 }
 
 bool Button::wasClicked() const
@@ -194,4 +200,71 @@ void Button::setSize(sf::Vector2f size)
 {
     shape.setSize(size);
     centerText();
+}
+
+void Button::setDescription(const std::string& description)
+{
+    description_ = description;
+}
+
+void Button::drawDescription(sf::RenderWindow& window) const
+{
+    if (!hovered_ || description_.empty() || font_ == nullptr) {
+        return;
+    }
+
+    constexpr float padding = 8.0f;
+    constexpr float gap = 8.0f;
+    constexpr float margin = 4.0f;
+
+    sf::Text tip(*font_, TextUtils::fromUtf8(description_));
+    tip.setCharacterSize(22);
+    tip.setFillColor(sf::Color::White);
+
+    const sf::FloatRect textBounds = tip.getLocalBounds();
+
+    const sf::Vector2f tipSize(
+        textBounds.size.x + padding * 2.0f,
+        textBounds.size.y + padding * 2.0f
+    );
+
+    const sf::Vector2f buttonPos = shape.getPosition();
+    const sf::Vector2f buttonSize = shape.getSize();
+
+    sf::Vector2f tipPos(
+        buttonPos.x + buttonSize.x / 2.0f - tipSize.x / 2.0f,
+        buttonPos.y - tipSize.y - gap
+    );
+
+    const sf::Vector2u windowSize = window.getSize();
+
+    float maxX = static_cast<float>(windowSize.x) - tipSize.x - margin;
+    if (maxX < margin) {
+        maxX = margin;
+    }
+
+    if (tipPos.x < margin) {
+        tipPos.x = margin;
+    } else if (tipPos.x > maxX) {
+        tipPos.x = maxX;
+    }
+
+    if (tipPos.y < margin) {
+        tipPos.y = buttonPos.y + buttonSize.y + gap;
+    }
+
+    sf::RectangleShape background(tipSize);
+    background.setPosition(tipPos);
+    background.setFillColor(sf::Color(20, 20, 30, 230));
+    background.setOutlineColor(sf::Color(255, 220, 120));
+    background.setOutlineThickness(1.0f);
+
+    tip.setOrigin(textBounds.position);
+    tip.setPosition({
+        tipPos.x + padding,
+        tipPos.y + padding
+    });
+
+    window.draw(background);
+    window.draw(tip);
 }

@@ -92,37 +92,6 @@ const float CARD_START_X = 350.f;
 const float CARD_START_Y = 650.f + 215.f - 20.f;
 const float CARD_SPACING = 198.f;
 
-void addMissingCardsFromDatabase(
-    RunState& runState,
-    CardDatabase& cardDb
-)
-{
-    for (CardId cardId : cardDb.getAllCardIds()) {
-        const CardDef& def = cardDb.get(cardId);
-
-        if (def.type == CardType::Curse) {
-            continue;
-        }
-
-        const bool alreadyInDeck = std::any_of(
-            runState.masterDeck.begin(),
-            runState.masterDeck.end(),
-            [cardId](const CardInstance& inst) {
-                return inst.cardId == cardId;
-            }
-        );
-
-        if (alreadyInDeck) {
-            continue;
-        }
-
-        runState.masterDeck.push_back({
-            runState.nextCardInstanceId++,
-            cardId
-        });
-    }
-}
-
     const sf::Texture* getIntentTexture(
         ResourceManager& resources,
         EnemyIntentType type
@@ -232,11 +201,6 @@ CombatScene::CombatScene(
 
         enemyTextureIds_.push_back(enemyDef.textureId);
     }
-
-    addMissingCardsFromDatabase(
-        context.runState,
-        context.cards
-    );
 
     combatSystem_.startCombat(
         context.runState,
@@ -473,11 +437,12 @@ void CombatScene::draw(sf::RenderWindow& window)
     window,
     context,
     font,
-    std::nullopt,
+    std::optional<int>{combatSystem_.getPlayer().hp},
     true,
     true,
     false // map 图标由按钮绘制
 );
+
 
     TopInfoBar::layoutMapButton(mapIconButton_, window);
     mapIconButton_.draw(window);

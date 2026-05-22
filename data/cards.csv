@@ -12,5 +12,8 @@ id,name,type,cost,target,effect1,value1,effect2,value2,description,textureid,exh
 11,盛怒,Skill,1,Self,GainEnergy,2,None,0,获得2点能量。消耗。,SeeingRed,1
 12,重锤,Attack,3,Enemy,DealDamage,32,None,0,造成32点伤害。,Bludgeon,0
 13,坚不可摧,Skill,2,Self,GainBlock,30,None,0,获得30点格挡。消耗。,Impervious,1
-1001,死灵诅咒,Curse,-1,Self,DealDamage,1,None,0,"不能被打出。在你的回合结束时，如果此牌在你的手牌中，失去1点生命。",Necronomicurse,0
+14,顺劈斩,Attack,1,AllEnemies,DealDamage,8,None,0,对所有敌人造成8点伤害。,Cleave,0
+15,雷霆一击,Attack,1,AllEnemies,DealDamage,4,ApplyVulnerable,1,对所有敌人造成4点伤害。施加1层易伤。,Thunderclap,0
+16,震荡波,Skill,2,AllEnemies,ApplyWeak,3,ApplyVulnerable,3,对所有敌人施加3层虚弱和3层易伤。消耗。,Shockwave,1
+1001,死灵诅咒,Curse,-1,Self,DealDamage,1,None,0,不能被打出。在你的回合结束时，如果此牌在你的手牌中，失去1点生命。,Necronomicurse,0
 1002,苦恼,Curse,-1,Self,ApplyWeak,1,None,0,不能被打出。每当你抽到这张牌时，获得1层虚弱。,Writhe,0

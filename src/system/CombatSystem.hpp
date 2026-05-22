@@ -59,6 +59,11 @@ private:
     void applyWeakToEnemy(TargetId targetId, int amount);
     void gainStrength(int amount);
 
+    static void decreaseTimedStatus(int& value);
+    void tickPlayerEndTurnStatuses();
+    void tickEnemiesEndTurnStatuses();
+
+
     // 成员变量
     CombatPhase phase_ = CombatPhase::Finished;
     Player player_;

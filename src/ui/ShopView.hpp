@@ -15,8 +15,10 @@ struct ShopCardViewData {
     CardId cardId = 0;
     const CardDef* cardDef = nullptr;
     CardRenderTextures textures;
+    int price = 0;
     bool sold = false;
 };
+
 
 struct ShopRemoveCardViewData {
     CardInstanceId instanceId = 0;

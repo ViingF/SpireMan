@@ -196,6 +196,9 @@ gameContext{
     resources.loadTexture("Impervious",FILEPATH+"/assets/images/cards/impervious.png");
     resources.loadTexture("Necronomicurse",FILEPATH+"/assets/images/cards/necronomicurse.png");
     resources.loadTexture("Writhe",FILEPATH+"/assets/images/cards/writhe.png");
+    resources.loadTexture("Cleave",FILEPATH+"/assets/images/cards/cleave.png");
+    resources.loadTexture("Thunderclap",FILEPATH+"/assets/images/cards/thunder_clap.png");
+    resources.loadTexture("Shockwave",FILEPATH+"/assets/images/cards/shockwave.png");
 
     resources.loadFont("zh-B",FILEPATH+"/assets/fonts/NotoSansCJKtc-Bold.otf");
     resources.loadFont("zh-M",FILEPATH+"/assets/fonts/NotoSansCJKtc-Medium.otf");
@@ -571,14 +574,15 @@ void Game::startNewRun()
 
     runState.masterDeck.clear();
 
-    runState.masterDeck.push_back({runState.nextCardInstanceId++, 1});
-    runState.masterDeck.push_back({runState.nextCardInstanceId++, 1});
-    runState.masterDeck.push_back({runState.nextCardInstanceId++, 1});
-    runState.masterDeck.push_back({runState.nextCardInstanceId++, 1});
-    runState.masterDeck.push_back({runState.nextCardInstanceId++, 2});
-    runState.masterDeck.push_back({runState.nextCardInstanceId++, 2});
-    runState.masterDeck.push_back({runState.nextCardInstanceId++, 2});
-    runState.masterDeck.push_back({runState.nextCardInstanceId++, 2});
+    // 1 = 打击 / Strike，2 = 防御 / Defend，3 = 痛击 / Bash
+    for (int i = 0; i < 5; ++i) {
+        runState.masterDeck.push_back({runState.nextCardInstanceId++, 1});
+    }
+
+    for (int i = 0; i < 4; ++i) {
+        runState.masterDeck.push_back({runState.nextCardInstanceId++, 2});
+    }
+
     runState.masterDeck.push_back({runState.nextCardInstanceId++, 3});
 
     MapSystem mapSystem;

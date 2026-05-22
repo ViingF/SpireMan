@@ -188,6 +188,30 @@ void ShopView::draw(
             font
         );
 
+        sf::Text priceText = TextUtils::createWhiteText(
+    font,
+    std::to_string(data.price) + " 金币",
+    26,
+    {0.f, 0.f}
+);
+        priceText.setFillColor(sf::Color(255, 220, 90));
+        priceText.setOutlineColor(sf::Color::Black);
+        priceText.setOutlineThickness(2.f);
+
+        const sf::FloatRect priceBounds = priceText.getLocalBounds();
+        priceText.setOrigin({
+            priceBounds.position.x + priceBounds.size.x * 0.5f,
+            priceBounds.position.y
+        });
+
+        priceText.setPosition({
+            rect.position.x + rect.size.x * 0.5f,
+            rect.position.y + rect.size.y + 12.f
+        });
+
+        window.draw(priceText);
+
+
         if (data.sold) {
             sf::RectangleShape overlay;
             overlay.setSize(rect.size);

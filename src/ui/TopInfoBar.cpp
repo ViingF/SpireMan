@@ -187,6 +187,7 @@ void TopInfoBar::layoutDeckButton(
     const sf::RenderWindow& window
 )
 {
+    button.setDescription("查看牌堆");
     layoutIconButton(button, window, 1773.0f);
 }
 
@@ -195,6 +196,7 @@ void TopInfoBar::layoutSettingsButton(
     const sf::RenderWindow& window
 )
 {
+    button.setDescription("保存并回到主菜单");
     layoutIconButton(button, window, 1846.0f);
 }
 
@@ -203,5 +205,6 @@ void TopInfoBar::layoutMapButton(
     const sf::RenderWindow& window
 )
 {
+    button.setDescription("切换地图");
     layoutIconButton(button, window, 1700.0f);
 }

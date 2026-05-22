@@ -49,31 +49,31 @@ ShopScene::ShopScene(GameContext& context)
           sf::Vector2f(1180.0f, 710.0f),
           sf::Vector2f(420.0f, 80.0f),
           context.resources.getFont("zh-R"),
-          "Remove Card"
+          "丢弃卡牌"
       ),
       leaveButton_(
           sf::Vector2f(1180.0f, 820.0f),
           sf::Vector2f(420.0f, 90.0f),
           context.resources.getFont("zh-R"),
-          "Leave"
+          "离开"
       ),
       cancelRemoveButton_(
           sf::Vector2f(1540.0f, 125.0f),
           sf::Vector2f(250.0f, 70.0f),
           context.resources.getFont("zh-R"),
-          "Cancel"
+          "取消"
       ),
       removePrevPageButton_(
           sf::Vector2f(620.0f, 930.0f),
           sf::Vector2f(210.0f, 70.0f),
           context.resources.getFont("zh-R"),
-          "Previous"
+          "上一页"
       ),
       removeNextPageButton_(
           sf::Vector2f(1090.0f, 930.0f),
           sf::Vector2f(210.0f, 70.0f),
           context.resources.getFont("zh-R"),
-          "Next"
+          "下一页"
           ),
     mapIconButton_(
         sf::Vector2f(0.0f, 0.0f),
@@ -418,7 +418,9 @@ std::vector<ShopCardViewData> ShopScene::buildShopCardViewData() const
         data.cardId = cardId;
         data.cardDef = &def;
         data.textures = getCardRenderTextures(def);
+        data.price = SHOP_CARD_COST;
         data.sold = sold_[i];
+
 
         result.push_back(data);
     }

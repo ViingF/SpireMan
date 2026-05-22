@@ -53,6 +53,8 @@ private:
     Button LeapButton;
 
     GameContext context_;
+    bool rewardResolved_ = false;
+
 };
 
 #endif //SPIRELIKE_REWARDSCENE_HPP

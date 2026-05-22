@@ -82,13 +82,13 @@ MenuScene::MenuScene(GameContext& context)
           sf::Vector2f(76.f, 960.f),
           sf::Vector2f(400.f, 100.f),
           context.resources.getFont("zh-R"),
-          "Quit"
+          "退出游戏"
       ) ,
     loadButton(
           sf::Vector2f(76.f, 670.f),
           sf::Vector2f(400.f, 90.f),
           context.resources.getFont("zh-R"),
-          "Load"
+          "加载存档"
       ),
         background(context.resources.getTexture(
             "title"

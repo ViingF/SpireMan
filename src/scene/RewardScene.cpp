@@ -156,22 +156,28 @@ SceneTransition RewardScene::getTransition() const
 
 void RewardScene::chooseCard(CardId cardId)
 {
-    if (!context.cards.exists(cardId)) {
+    if (rewardResolved_ || !context.cards.exists(cardId)) {
         return;
     }
 
     CardInstance newCard;
-    newCard.instanceId = context.runState.nextCardInstanceId;
+    newCard.instanceId = context.runState.nextCardInstanceId++;
     newCard.cardId = cardId;
 
-    context.runState.nextCardInstanceId += 1;
     context.runState.masterDeck.push_back(newCard);
 
     finishRewardAndContinueMap();
 }
 
+
 void RewardScene::finishRewardAndContinueMap()
 {
+    if (rewardResolved_) {
+        return;
+    }
+
+    rewardResolved_ = true;
+
     MapSystem mapSystem;
 
     if (!context.runState.mapNodes.empty()) {

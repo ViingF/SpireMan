@@ -10,7 +10,8 @@ public:
         sf::Vector2f position,
         sf::Vector2f size,
         sf::Font& font,
-        const std::string& text
+        const std::string& text,
+        const std::string& description = ""
     );
 
     void handleEvent(
@@ -33,13 +34,16 @@ public:
     void setEnabled(bool enabled);
 
     bool isEnabled() const;
+
     void setPlaceholderStyle();
     void setPosition(sf::Vector2f position);
     void setSize(sf::Vector2f size);
+    void setDescription(const std::string& description);
 private:
     void centerText();
     void applyVisualState();
     void setHovered(bool hovered);
+
 
     sf::RectangleShape shape;
     sf::Text content;
@@ -51,6 +55,11 @@ private:
     bool usesPlaceholder_ = false;
     sf::Color normalFill_ = sf::Color(80, 80, 120);
     sf::Color hoverFill_ = sf::Color(110, 110, 170);
+
+    void drawDescription(sf::RenderWindow& window) const;
+
+    const sf::Font* font_ = nullptr;
+    std::string description_;
 };
 
 #endif

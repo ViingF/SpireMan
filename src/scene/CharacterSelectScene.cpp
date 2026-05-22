@@ -1,5 +1,7 @@
 #include "CharacterSelectScene.hpp"
 
+#include "ui/TextUtils.hpp"
+
 CharacterSelectScene::CharacterSelectScene(
     GameContext& context
 )
@@ -104,6 +106,42 @@ void CharacterSelectScene::draw(
         sf::Color(25, 25, 35)
     );
     window.draw(ironcladPortrait);
+
+    sf::Font& font = context.resources.getFont("zh-R");
+
+    const float scaleX =
+        static_cast<float>(window.getSize().x) / 1920.f;
+    const float scaleY =
+        static_cast<float>(window.getSize().y) / 1080.f;
+
+
+
+    sf::Text nameText = TextUtils::createText(
+        font,
+        "铁甲战士",
+        80,
+        sf::Color(255, 220, 120),
+        {
+            80.f * scaleX,
+            35.f * scaleY
+        }
+    );
+
+    window.draw(nameText);
+
+    sf::Text descText = TextUtils::createWhiteText(
+        font,
+        "铁甲军团残留下的士兵。\n他出卖自己的灵魂，获得了恶魔的力量。",
+        40,
+        {
+            80.f * scaleX,
+            255.f * scaleY
+        }
+    );
+    descText.setLineSpacing(1.35f);
+
+    window.draw(descText);
+
     for (int i = 0; i < 3; i++) {
         window.draw(lockedButtons[i]);
     }

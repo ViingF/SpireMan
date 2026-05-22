@@ -1,4 +1,12 @@
 #include "CombatSystem.hpp"
+#include <random>
+
+namespace {
+    constexpr int kVictoryGoldMin = 10;
+    constexpr int kVictoryGoldMax = 20;
+}
+
+
 ErrorCode CombatSystem::startCombat(RunState& runState, const EncounterDef& encounterDef,
     const EnemyDatabase& enemyDatabase, CardDatabase& cardDatabase) {
     // 重置状态（同前）
@@ -174,18 +182,27 @@ ErrorCode CombatSystem::endPlayerTurn()
     }
     //弃牌阶段
     cardSystem_.discardAllHand(deck_);
+
+    // 玩家身上的易伤、虚弱等，在玩家回合结束时减少
+    tickPlayerEndTurnStatuses();
+
     phase_ = CombatPhase::EnemyTurn;
+
     for (auto& enemy : enemies_)
     {
         if (enemy.hp > 0)
         {
             enemy.block = 0;
         }
-    }//设计文档里说明只有一个敌人，因此直接清空格挡即可
+    }
+
     executeEnemyIntents();
 
-    // 检查战斗结果
+    // 敌人行动后，敌人身上的易伤、虚弱等减少
+    tickEnemiesEndTurnStatuses();
+
     checkBattleResult();
+
     // 如果战斗未结束，开始下一玩家回合
     if (result_ == BattleResult::Ongoing) {
         startPlayerTurn();
@@ -208,9 +225,19 @@ ErrorCode CombatSystem::commitResultToRunState(RunState& runState)
     }
     if (result_ == BattleResult::Victory)
     {
-        runState.player.hp = player_.hp;//战士被动回六血
+        runState.player.hp = std::min(player_.maxHp, player_.hp + 6);
+
         runState.player.maxHp = player_.maxHp;
+
+        std::uniform_int_distribution<int> goldDist(
+            kVictoryGoldMin,
+            kVictoryGoldMax
+        );
+
+        const int goldReward = goldDist(runState.rng);
+        runState.gold += goldReward;
     }
+
     if (result_ == BattleResult::Defeat)
     {
         runState.player.hp = 0;
@@ -436,5 +463,26 @@ void CombatSystem::checkBattleResult()
     else if (areAllEnemiesDefeated()) {
         result_ = BattleResult::Victory;
         phase_ = CombatPhase::Finished;
+    }
+}
+
+void CombatSystem::decreaseTimedStatus(int& value)
+{
+    if (value > 0) {
+        --value;
+    }
+}
+
+void CombatSystem::tickPlayerEndTurnStatuses()
+{
+    decreaseTimedStatus(player_.vulnerable);
+    decreaseTimedStatus(player_.weak);
+}
+
+void CombatSystem::tickEnemiesEndTurnStatuses()
+{
+    for (auto& enemy : enemies_) {
+        decreaseTimedStatus(enemy.vulnerable);
+        decreaseTimedStatus(enemy.weak);
     }
 }

@@ -204,6 +204,17 @@ void EnemyGroupView::draw(
     const float scaleX = static_cast<float>(window.getSize().x) / kDesignWidth;
     const float scaleY = static_cast<float>(window.getSize().y) / kDesignHeight;
 
+    struct PendingIntentView {
+        sf::Vector2f position;
+        IntentViewData data;
+    };
+
+    std::vector<PendingIntentView> pendingIntents;
+    pendingIntents.reserve(slotCount);
+
+
+
+
     for (int enemyIndex = 0; enemyIndex < slotCount; ++enemyIndex) {
         const Enemy& enemy = enemies[enemyIndex];
 
@@ -239,11 +250,11 @@ void EnemyGroupView::draw(
         const float designStateY =
         designHealthY + kHealthBarHeight + kStateGapBelowHealthBar - 110.f;
 
-        IntentView intentView(
-            {designIntentX * scaleX, designIntentY * scaleY},
-            kIntentSize
-        );
-        intentView.draw(window, font, data.intent);
+        pendingIntents.push_back({
+    {designIntentX * scaleX, designIntentY * scaleY},
+    data.intent
+    });
+
 
         const sf::FloatRect enemyScreenRect =
             getEnemyScreenRect(window, enemyIndex, slotCount);
@@ -277,6 +288,62 @@ void EnemyGroupView::draw(
         StateView stateView({designHealthX * scaleX, designStateY * scaleY});
         stateView.draw(window, font, data.states);
     }
+    for (const PendingIntentView& pendingIntent : pendingIntents) {
+        IntentView intentView(
+            pendingIntent.position,
+            kIntentSize
+        );
+
+        intentView.draw(
+            window,
+            font,
+            pendingIntent.data
+        );
+    }
+
+    const sf::Vector2f mousePos = window.mapPixelToCoords(
+        sf::Mouse::getPosition(window)
+    );
+
+    for (int enemyIndex = slotCount - 1; enemyIndex >= 0; --enemyIndex) {
+        const Enemy& enemy = enemies[enemyIndex];
+
+        if (enemy.hp <= 0) {
+            continue;
+        }
+
+        const sf::FloatRect hitRect =
+            getEnemyHitRect(window, enemyIndex, slotCount);
+
+        if (!hitRect.contains(mousePos)) {
+            continue;
+        }
+
+        sf::Text nameText = TextUtils::createWhiteText(
+            font,
+            enemy.name,
+            24,
+            {0.f, 0.f}
+        );
+        nameText.setFillColor(sf::Color(255, 240, 180));
+        nameText.setOutlineColor(sf::Color::Black);
+        nameText.setOutlineThickness(2.f);
+
+        const sf::FloatRect nameBounds = nameText.getLocalBounds();
+        nameText.setOrigin({
+            nameBounds.position.x + nameBounds.size.x * 0.5f,
+            nameBounds.position.y + nameBounds.size.y * 0.5f
+        });
+
+        nameText.setPosition({
+            hitRect.position.x + hitRect.size.x * 0.5f,
+            hitRect.position.y - 18.f
+        });
+
+        window.draw(nameText);
+        break;
+    }
+
 }
 
 int EnemyGroupView::getEnemyIndexAtPosition(
