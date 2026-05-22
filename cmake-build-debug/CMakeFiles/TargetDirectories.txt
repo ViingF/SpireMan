@@ -1,3 +1,0 @@
-C:/Users/PC/CLionProjects/SpireMan/cmake-build-debug/CMakeFiles/SpireMan.dir
-C:/Users/PC/CLionProjects/SpireMan/cmake-build-debug/CMakeFiles/edit_cache.dir
-C:/Users/PC/CLionProjects/SpireMan/cmake-build-debug/CMakeFiles/rebuild_cache.dir
