@@ -4,8 +4,6 @@ project(SpireMan)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-set(SFML_DIR "D:/SFML-3.0.2/lib/cmake/SFML")
-
 find_package(SFML 3 REQUIRED COMPONENTS Graphics Window System Audio)
 
 add_executable(SpireMan src/main.cpp
@@ -88,7 +86,9 @@ add_executable(SpireMan src/main.cpp
         src/ui/TopInfoBar.cpp
         src/ui/TopInfoBar.hpp
         src/ui/FailureToast.cpp
-        src/ui/FailureToast.hpp)
+        src/ui/FailureToast.hpp
+        )
+
 
 target_link_libraries(SpireMan
         SFML::Graphics

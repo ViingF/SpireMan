@@ -3,6 +3,6 @@
 #define SPIRELIKE_PATHS_HPP
 #include <string>
 
-const std::string FILEPATH="C:/Users/PC/CLionProjects/SpireMan";
+const std::string FILEPATH="";
 
 #endif //SPIRELIKE_PATHS_HPP

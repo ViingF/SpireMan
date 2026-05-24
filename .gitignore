@@ -1,2 +1,7 @@
 /cmake-build-debug
+/cmake-build-release
 /.idea
+/assets
+/data
+/logs
+/save.txt
